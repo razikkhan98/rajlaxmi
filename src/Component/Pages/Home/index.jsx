@@ -1,167 +1,64 @@
 import React from "react";
 
+// Home inside the common
+import About from "./about";
+import ShopCategory from "./shopCategory";
+import WhyChoose from "./whyChoose";
+
 // Common
 import Navbar from "../../Common/Navbar";
-import AddtoCard from "../../Common/Addtocard";
 
 // Images
-import About from "../../Assets/img/About/about.png";
-import Images1 from "../../Assets/img/Shopcategory/Rectangle 55.png";
-import Images2 from "../../Assets/img/Shopcategory/Soyabean chunk small size.png";
-import Images3 from "../../Assets/img/Shopcategory/Organic Jaggery Powder.png";
-import Images4 from "../../Assets/img/Shopcategory/Hing Powder.png";
-import Images5 from "../../Assets/img/Shopcategory/Organic Barley Atta.png";
-import Images6 from "../../Assets/img/Shopcategory/Organic Maize whole.png";
-import Images7 from "../../Assets/img/Shopcategory/Organic Black sesame.png";
-import Images8 from "../../Assets/img/Shopcategory/Organic Idli Rice.png";
-import Images9 from "../../Assets/img/Shopcategory/Organic Coriander powder.png";
-import Images10 from "../../Assets/img/Shopcategory/Organic nutmeg whole.png";
-import Images11 from "../../Assets/img/Shopcategory/Organic Chaach Masala.png";
-import Images12 from "../../Assets/img/Shopcategory/Organic Brown Sugar.png";
-
-// Data Import
-const BestSellers = [
-  {
-    title: "Best Sellers",
-    products: [
-      {
-        id: 1,
-        name: "Organic Kabuli Chana",
-        price: "180.00",
-        qty: "500 gm",
-        image: Images1,
-        rating: 3.5,
-        reviews: 312,
-      },
-      {
-        id: 2,
-        name: "Soyabean Chunk Small Size",
-        price: "58.00",
-        qty: "500 gm",
-        image: Images2,
-        rating: 4.0,
-        reviews: 210,
-      },
-      {
-        id: 3,
-        name: "Organic Jaggery Powder",
-        price: "54.00",
-        qty: "500 gm",
-        image: Images3,
-        rating: 5,
-        reviews: 210,
-      },
-      {
-        id: 4,
-        name: "Hing Powder",
-        price: "1200.00",
-        qty: "500 gm",
-        image: Images4,
-        rating: 5,
-        reviews: 210,
-      },
-    ],
-  },
-];
-
-const SeasonalHarvest = [
-  {
-    title: "Seasonal Harvest",
-    products: [
-      {
-        id: 5,
-        name: "Organic Barley Atta",
-        price: "70.00",
-        qty: "500 gm",
-        image: Images5,
-        rating: 4.5,
-        reviews: 210,
-      },
-      {
-        id: 6,
-        name: "Organic Maize whole",
-        price: "35.00",
-        qty: "500 gm",
-        image: Images6,
-        rating: 4.5,
-        reviews: 210,
-      },
-      {
-        id: 7,
-        name: "Organic Black sesame",
-        price: "240.00",
-        qty: "500 gm",
-        image: Images7,
-        rating: 4.5,
-        reviews: 210,
-      },
-      {
-        id: 8,
-        name: "Organic Idli Rice",
-        price: "75.00",
-        qty: "500 gm",
-        image: Images8,
-        rating: 4.5,
-        reviews: 210,
-      },
-    ],
-  },
-];
-
-const EcoEssentials = [
-  {
-    title: "Eco Essentials",
-    products: [
-      {
-        id: 9,
-        name: "Organic Coriander powder",
-        price: "125.00",
-        qty: "500 gm",
-        image: Images9,
-        rating: 4.5,
-        reviews: 210,
-      },
-      {
-        id: 10,
-        name: "Organic Nutmeg Whole",
-        price: "1,150.00",
-        qty: "500 gm",
-        image: Images10,
-        rating: 4.5,
-        reviews: 210,
-      },
-      {
-        id: 11,
-        name: "Organic Chaach Masala",
-        price: "35.00",
-        qty: "500 gm",
-        image: Images11,
-        rating: 4.5,
-        reviews: 210,
-      },
-      {
-        id: 12,
-        name: "Organic Brown Sugar",
-        price: "240.00",
-        qty: "500 gm",
-        image: Images12,
-        rating: 4.5,
-        reviews: 210,
-      },
-    ],
-  },
-];
+import AboutImg from "../../Assets/img/About/about.png";
+import Home1 from "../../Assets/img/Home/homeimg1.png";
+import Home2 from "../../Assets/img/Home/homeimg2.png";
+import Home3 from "../../Assets/img/Home/homeimg3.png";
+import Home4 from "../../Assets/img/Home/homeimg4.png";
+import Home5 from "../../Assets/img/Home/homeimg5.png";
+import Home6 from "../../Assets/img/Home/homeimg6.png";
+import OurProducts from "./ourProducts";
+import ProudlyCertified from "./proudlyCertified";
+import Footer from "../../Common/Footer";
 
 const Home = () => {
   return (
     <React.Fragment>
       {/* Start Hero */}
       <section>
-        <div className="bg-custom-gradient">
+        <div className="home bg-custom-gradient">
           <Navbar />
 
           <div className="container">
-            <h1>Welcome to Rajlaxmi Organic Farm</h1>
+            <div className="row py-5">
+              <div className="col-lg-3 col-md-12 px-0 home-col1">
+                <p className="home-para1 mb-0 pb-1">Organic Product</p>
+                <div className="img1">
+                  <img src={Home1} alt="Loading" />
+                </div>
+                <div className="img2 mt-4">
+                  <img src={Home2} alt="Loading" />
+                </div>
+              </div>
+              <div className="col-lg-4 me-4 px-0">
+                <div className="img3">
+                  <img src={Home3} alt="Loading" />
+                </div>
+              </div>
+              <div className="col-lg-4 px-0">
+                <div className="image45">
+                  <div className="img4">
+                    <img src={Home4} alt="Loading" />
+                  </div>
+                  <div className="img5">
+                    <img src={Home5} alt="Loading" />
+                  </div>
+                </div>
+                <div className="img6 mt-4">
+                  <p className="home-para2">100% Vegeterian</p>
+                  <img src={Home6} alt="Loading" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -169,135 +66,30 @@ const Home = () => {
       {/* End Hero */}
 
       {/* Start About */}
-      <section className="background-color-gleeful-opacity d-flex justify-content-center align-items-center py-5">
-        <div className="container">
-          <div className="row d-flex align-items-center">
-            <div className="col-md-7 col-sm-12">
-              <div>
-                <div className="josefin-sans-font-family font-size-40 text-color-dark-ashy-blue">
-                  About Us
-                </div>
-                <div className="inter-font-family font-size-24 text-capitalize text-color-dark-ashy-blue py-4">
-                  quam dui. ex. elit quis dui. Morbi ac placerat Cras Nullam
-                  ultrices vehicula, lacus tincidunt id viverra nulla, dui. leo.
-                  urna at, sit lacus faucibus placerat
-                </div>
-                <div className="inter-font-family font-size-24 text-capitalize text-color-dark-ashy-blue">
-                  sollicitudin. Sed placerat sapien placerat. Ut venenatis quam
-                  felis, nisi viverra nisl. quis placerat.
-                </div>
-              </div>
-            </div>
-            <div className="col-md-5 col-sm-12">
-              <img src={About} alt="About Us" className="img-fluid" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <About img={AboutImg} />
       {/* End About */}
 
       {/*Start Shop By Category Card */}
-      <section className="background-color-light-grayish-yellow category-padding" >
-        <div className="container">
-          <div className="josefin-sans-font-family font-size-40 text-color-dark-grayish-blue pb-4">
-            Shop By Category
-          </div>
-          {/*Start Best Sellers */}
-          <div className="row">
-            {BestSellers.map((category, index) => (
-              <>
-                <div
-                  className="col-md-1 col-sm-12 d-flex justify-content-start align-items-center text-rotate pb-4"
-                  key={index}
-                >
-                  <div className="josefin-sans-font-family-500 font-size-30 text-color-dark-grayish-blue">
-                    {category.title}
-                  </div>
-                </div>
-                <div className="col-md-11 col-sm-12">
-                  <div className="row">
-                    {category.products.map((product, index) => (
-                      <div key={index} className="col-md-3 col-sm-12">
-                        <AddtoCard key={product.id} product={product} />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="col-md-12 py-5">
-                    <div className="horizontal-line"> </div>
-                  </div>
-                </div>
-              </>
-            ))}
-          </div>
-          {/* End Best Sellers */}
-
-          {/* Start Seasonal Harvest */}
-          <div className="row">
-            {SeasonalHarvest.map((category, index) => (
-              <>
-                <div
-                  className="col-md-1 col-sm-12 d-flex justify-content-start align-items-center text-rotate pb-4"
-                  key={index}
-                >
-                  <div className="josefin-sans-font-family-500 font-size-30 text-color-dark-grayish-blue">
-                    {category.title}
-                  </div>
-                </div>
-                <div className="col-md-11 col-sm-12">
-                  <div className="row">
-                    {category.products.map((product, index) => (
-                      <div key={index} className="col-md-3 col-sm-12">
-                        <AddtoCard key={product.id} product={product} />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="col-md-12 py-5">
-                    <div className="horizontal-line"> </div>
-                  </div>
-                </div>
-              </>
-            ))}
-          </div>
-
-          {/* End Seasonal Harvest */}
-
-          {/* Start EcoEssentials*/}
-          <div className="row">
-            {EcoEssentials.map((category, index) => (
-              <>
-                <div
-                  className="col-md-1 col-sm-12 d-flex justify-content-start align-items-center text-rotate pb-4"
-                  key={index}
-                >
-                  <div className="josefin-sans-font-family-500 font-size-30 text-color-dark-grayish-blue">
-                    {category.title}
-                  </div>
-                </div>
-                <div className="col-md-11 col-sm-12">
-                  <div className="row">
-                    {category.products.map((product, index) => (
-                      <div key={index} className="col-md-3 col-sm-12">
-                        <AddtoCard key={product.id} product={product} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <ShopCategory />
       {/*End Shop By Category Card */}
 
       {/* Start Why Choose Us  */}
-      <section className="py-5 background-color-blue">
-        <div className="container">
-          <div className="josefin-sans-font-family font-size-40 text-center">
-            Why Choose us?
-          </div>
-        </div>
-      </section>
+      <WhyChoose />
+      {/* End Why Choose Us  */}
+
+      {/*Start Explore Our Products */}
+      <OurProducts />
+      {/*End Explore Our Products */}
+
+      {/* Start Proudly certified */}
+
+      <ProudlyCertified />
+
+      {/* End Proudly certified */}
+
+      {/* Start Footer  */}
+      <Footer/>
+      {/* Start End */}
     </React.Fragment>
   );
 };

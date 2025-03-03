@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
 // Images
-import Images1 from "../../Assets/img/Shopcategory/Rectangle 55.png";
 
 // Icons
-import { FaStar } from "react-icons/fa6";
 import { MdCurrencyRupee } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
 import { PiShareFatBold } from "react-icons/pi";
@@ -14,6 +12,7 @@ import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
 
 const AddtoCard = ({ product }) => {
+  
   console.log(product);
   // ===========
   // useState
