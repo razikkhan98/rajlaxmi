@@ -82,7 +82,7 @@ const OurProducts = () => {
     <>
       <section className="background-color-light-grayish-yellow padding-top-100 padding-bottom-60">
         <div className="container py-2">
-          <div className="josefin-sans-font-family-600 font-size-40 text-start">
+          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-start">
             Explore Our Products
           </div>
           <div className="row">
@@ -92,15 +92,15 @@ const OurProducts = () => {
               </div>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 mb-4 py-3">
-              <div className="josefin-sans-font-family-500 font-size-40 text-start mt-2">
+              <div className="josefin-sans-font-family-500 font-size-40 heading-title text-start mt-2">
                 Natural and Nutritious dry Fruits
               </div>
-              <div className="inter-font-family-400 font-size-24 text-capitalize text-color-dark-ashy-blue py-3">
+              <div className="inter-font-family-400 font-size-24 text-capitalize text-description text-color-dark-ashy-blue py-3">
                 quam dui. ex. elit quis dui. Morbi ac placerat Cras Nullam
                 ultrices vehicula, lacus tincidunt id viverra nulla, dui. leo.
                 urna at, sit lacus faucibus placerat
               </div>
-              <div className="inter-font-family-400 font-size-24 text-capitalize text-color-dark-ashy-blue">
+              <div className="inter-font-family-400 font-size-24 text-capitalize text-description text-color-dark-ashy-blue">
                 sollicitudin. Sed placerat sapien placerat. Ut venenatis quam
                 felis, nisi viverra nisl. quis placerat.
               </div>
@@ -121,20 +121,20 @@ const OurProducts = () => {
             </div>
             {CardData.map((item, index) => (
               <>
-                <div className="col-lg-3 col-md-6 col-sm-12">
+                <div className="natural-cards col-lg-3 col-md-6 col-sm-6 col-6 my-1">
                   <div className={item.class}>
-                    <div className="py-2 d-flex justify-content-center">
+                    <div className="py-2 d-flex  natural-icons justify-content-center">
                       <img
                         src={item.image}
                         alt="Loading"
-                        className="img-fluid  background-color-white p-2 "
-                        style={{ borderRadius: "8px" }}
+                        className="img-fluid background-color-white rounded-3 p-2"
+                        // style={{ borderRadius: "8px" }}
                       />
                     </div>
-                    <div className="inter-font-family-500 font-size-16 text-center py-1">
+                    <div className="inter-font-family-500 font-size-16 text-description text-center py-1">
                       {item.title}
                     </div>
-                    <div className="inter-font-family-400 font-size-14 text-capitalize text-center py-2">
+                    <div className="inter-font-family-400 font-size-14 font-sm-8 text-capitalize text-center py-2">
                       {item.description}
                     </div>
                   </div>
@@ -145,12 +145,12 @@ const OurProducts = () => {
         </div>
       </section>
       <section>
-        <div className="container-fluid">
+        {/* <div className="container-fluid"> */}
           <div className="back-ground-img py-4">
             <div className="container">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="josefin-sans-font-family-500 font-size-40 text-color-white pt-5 pb-4">
+                  <div className="josefin-sans-font-family-500 heading-title font-size-40 text-color-white pt-5 pb-4">
                     Have questions about our organic products?
                   </div>
                   <div className="py-2">
@@ -159,7 +159,7 @@ const OurProducts = () => {
                       alt="Loading"
                       className="background-color-white p-2 rounded-circle"
                     />
-                    <span className="inter-font-family-500 font-size-16 text-color-white ms-3">
+                    <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
                       rajlaxmiorganicfoods@gmail.com
                     </span>
                   </div>
@@ -169,7 +169,7 @@ const OurProducts = () => {
                       alt="Loading"
                       className="background-color-white p-2 rounded-circle"
                     />
-                    <span className="inter-font-family-500 font-size-16 text-color-white ms-3">
+                    <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
                       +91-8769115905
                     </span>
                   </div>
@@ -179,14 +179,14 @@ const OurProducts = () => {
                       alt="Loading"
                       className="background-color-white p-2 rounded-circle"
                     />
-                    <span className="inter-font-family-500 font-size-16 text-color-white px-2 text-capitalize ms-3">
+                    <span className="inter-font-family-500 font-size-16 text-description text-color-white px-2 text-capitalize ms-3">
                       Address: 11, manish bagh colony, Sapna sangeeta road,
                       indore, madhya pradesh, 452001
                     </span>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 p-5 d-flex justify-content-end">
-                  <div className="background-from">
+                <div className="col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-center">
+                  <div className="background-from  p-2">
                     <form onSubmit={handleSubmit}>
                       <div className="mb-3">
                         {/* <label htmlFor="name" className="form-label">
@@ -264,9 +264,9 @@ const OurProducts = () => {
                 </div>
               </div>
             </div>
-            <div className="together py-2 inter-font-family-500 font-size-24 text-color-white text-center">Let’s grow greener together!!!</div>
+            <div className="together py-2 inter-font-family-500 font-size-24 heading-title text-color-white text-center">Let’s grow greener together!!!</div>
           </div>
-        </div>
+        {/* </div> */}
       </section>
     </>
   );

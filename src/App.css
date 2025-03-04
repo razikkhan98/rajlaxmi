@@ -777,7 +777,7 @@ body {
 }
 .background-from {
   background-color: rgba(255, 255, 255, 0.4);
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 12px;
   width: 442px;
 }
@@ -934,3 +934,113 @@ body {
 }
 
 /* Center the arrows below the slider */
+
+
+/* Media Query */
+@media (max-width : 760px) {
+  /* Shop by Category card Responsive Css Start */
+  .shop-by-category{
+    height: 270px;
+    width: 210px;
+  }
+  .shop-by-category img {
+    height: 161px;
+    width: 198px;
+  }
+  .font-size-16{
+    font-size: 12px;
+  }
+  .button-addtocard{
+    width: 100px;
+    height: 39px;
+    font-size: 12px;
+  }
+  .gm{
+    width: 97px;
+    height: 26px;
+    position: absolute;
+    top: 131px;
+    right: 18px;
+  }
+  .rating-height{
+    width: 69px !important;
+    height: 30px !important;
+  }
+  /* Why-us Css */
+.why-us{
+  text-align: center;
+}
+.why-us-img{
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+/* Text css responsive */
+  .heading-text{
+    font-size: 18px;
+  }
+  .heading-title{
+    font-size: 14px;
+  }
+.card-heading{
+  font-size: 12px !important;
+}
+  .text-description{
+    font-size: 10px;
+  }
+  /* Slider Css */
+  .center-slider .slide{
+    width: 224px;
+    height: 200px;
+  }
+ .slide img{
+  width: 30px !important;
+  height: 30px !important;
+ }
+
+.slick-prev,
+.slick-next {
+  width: 30px !important;
+  height: 30px !important;
+}
+.slick-next {
+  right: -10px !important;
+}
+
+.slick-prev {
+  left: -10px !important;
+}
+.padding-top-100{
+  padding-top: 30px;
+}
+.font-sm-8{
+  font-size: 8px;
+}
+.background-from{
+  width: 100%;
+}
+/* .natural-icons{
+  height: 28px;
+  width: 28px;
+} */
+/* .goodness, .treats, .choices {
+  width: 140px;
+  height: 120px;
+} */
+}
+
+/* Filter Popup */
+.dropdown-menu{
+  width: 350px !important;
+  height: 515px !important;
+  padding-bottom: 0px !important;
+  background-color: #FEFBE9 !important;
+  border: 1.5px solid #A4BE7B !important;
+  border-radius: 10px !important;
+}
+.filter-heading{
+  color: #A4BE7B !important;
+}
+.filter-btn{
+  background-color: #A4BE7B;
+}

@@ -19,6 +19,7 @@ import { FaAngleLeft } from "react-icons/fa6";
 import Footer from "../../Common/Footer";
 import { FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import FilterDropDown from "../../Common/Filter/filter";
 
 const categories = [
   { name: "Ghee", image: Imge },
@@ -78,6 +79,7 @@ const Products = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
     responsive: [
@@ -99,14 +101,14 @@ const Products = () => {
       <section>
         <div className="bg-custom-gradient-product">
           <Navbar />
-          <div className="josefin-sans-font-family-500 font-size-30 text-center pt-3">
+          <div className="josefin-sans-font-family-500 heading-text font-size-30 text-center pt-3">
             Pure & Natural Choices
           </div>
           <div className="d-flex justify-content-center py-4">
             <div className="px-2">
               <img src={Love} alt="Loading" />
             </div>
-            <div className="inter-font-family-400 font-size-24">
+            <div className="inter-font-family-400 heading-title font-size-24">
               Shop by Category or Explore Our Full Range
             </div>
             <div className="px-2">
@@ -151,15 +153,16 @@ const Products = () => {
                 <div className="text-center text-color-terracotta">Sort</div>
               </div>
               <div className="px-3">
-                <img src={Funnel} alt="Filter" className="sort-icon" />
-                <div className="text-center text-color-terracotta">Filter</div>
+                <FilterDropDown/>
+                {/* <img src={Funnel} alt="Filter" className="sort-icon" />
+                <div className="text-center text-color-terracotta">Filter</div> */}
               </div>
             </div>
 
             {categoriesWithProducts.map((category, index) => (
               <div key={index}>
                 <div className="d-flex justify-content-between align-items-center px-5">
-                  <div className="josefin-sans-font-family-500 font-size-30 text-start py-2 text-color-dark-grayish-blue">
+                  <div className="josefin-sans-font-family-500 font-size-30 heading-title text-start py-2 text-color-dark-grayish-blue">
                     {category.title}
                   </div>
                   <div>
