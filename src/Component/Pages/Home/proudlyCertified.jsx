@@ -10,23 +10,23 @@ const ProudlyCertified = () => {
   return (
     <>
       <section className="padding-top-100 padding-bottom-60 background-color-light-grayish-yellow">
-        <div className="container">
-          <div className="row">
+        <div className="container pb-5">
+          <div className="row pb-5">
             <div className="col-lg-12 col-md-12 col-sm-12 text-center pb-5">
-              <div className="josefin-sans-font-family-600 font-size-40 text-color-dark-grayish-blue">
+              <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-grayish-blue">
                 Proudly Certified
               </div>
             </div>
-            <div className="col-lg-3 col-md-16 col-sm-12">
+            <div className="col-lg-3 col-md-6 col-sm-6 col-6">
               <img src={Images1} alt="Loading" className="img-fluid" />
             </div>
-            <div className="col-lg-3 col-md-16 col-sm-12">
+            <div className="col-lg-3 col-md-6 col-sm-6 col-6">
               <img src={Images2} alt="Loading" className="img-fluid" />
             </div>
-            <div className="col-lg-3 col-md-16 col-sm-12">
+            <div className="col-lg-3 col-md-6 col-sm-6 col-6">
               <img src={Images3} alt="Loading" className="img-fluid" />
             </div>
-            <div className="col-lg-3 col-md-16 col-sm-12">
+            <div className="col-lg-3 col-md-6 col-sm-6 col-6">
               <img src={Images4} alt="Loading" className="img-fluid" />
             </div>
           </div>

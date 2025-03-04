@@ -158,8 +158,3 @@ const ProductInner = () => {
 
 export default ProductInner;
 
-{
-  /* <div  key={index} className="col-md-3 col-sm-12">
-                    
-</div> */
-}

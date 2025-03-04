@@ -44,15 +44,15 @@ const AddtoCard = ({ product }) => {
     for (let i = 1; i <= 5; i++) {
       if (i <= Math.floor(rating)) {
         stars.push(
-          <TiStarFullOutline key={i} className="start-gleeful" fontSize={19} />
+          <TiStarFullOutline key={i} className="start-gleeful" fontSize={15} />
         );
       } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
         stars.push(
-          <TiStarHalfOutline key={i} className="start-gleeful" fontSize={19} />
+          <TiStarHalfOutline key={i} className="start-gleeful" fontSize={15} />
         );
       } else {
         stars.push(
-          <TiStarOutline key={i} className="start-gleeful" fontSize={19} />
+          <TiStarOutline key={i} className="start-gleeful" fontSize={15} />
         );
       }
     }
@@ -61,7 +61,7 @@ const AddtoCard = ({ product }) => {
 
   return (
     <React.Fragment>
-      <div className="shop-by-category background-color-white position-relative">
+      <div className="shop-by-category background-color-white position-relative my-2">
         <div className="d-flex justify-content-center pt-2">
           <div>
             {/* Icons (Heart & Share) */}
@@ -82,7 +82,7 @@ const AddtoCard = ({ product }) => {
                 {product.qty}
               </span>
               <MdOutlineArrowDropDown
-                fontSize={20}
+                // fontSize={20}
                 className="text-color-terracotta"
               />
             </div>
@@ -93,17 +93,17 @@ const AddtoCard = ({ product }) => {
         {/* Product Name & Ratings */}
 
         <div className="d-flex justify-content-between px-2 pt-2">
-          <div className="inter-font-family-500 font-size-16 pt-2 text-color-dark-grayish-blue">
+          <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
             {product.name}
           </div>
-          <div className="w-50 d-flex justify-content-center" style={{height:"59px"}}>
+          <div className="w-50 d-flex justify-content-center rating-height" style={{height:"59px"}}>
             <div>
               <div className="pt-1">
                 <span className="start-gleeful">
                   {renderStars(product.rating)}
                 </span>
               </div>
-              <div className="inter-font-family-500 font-size-10 start-gleeful pt-2">
+              <div className="inter-font-family-500 font-size-10 font-sm-8 start-gleeful pt-2">
                 {product.rating} ({product.reviews} Reviews)
               </div>
             </div>
