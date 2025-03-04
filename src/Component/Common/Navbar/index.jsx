@@ -79,6 +79,7 @@ import { RiSearch2Line } from "react-icons/ri";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import AddToCartProccess from "../AddToCartProccess/AddToCartProccess";
 
 const DataNavbar = [
   {
@@ -96,6 +97,12 @@ const DataNavbar = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  // Functions
+
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,6 +116,7 @@ const Navbar = () => {
   }, []);
 
   return (
+    <>
     <nav className={`navbar navbar-expand-lg navbar-background ${scrolled ? "scrolled" : ""}`}>
       <div className="container">
         <a className="navbar-brand" href="/">
@@ -143,7 +151,7 @@ const Navbar = () => {
             <button className="nav-search-btn rounded-circle border-0 px-2 d-flex align-items-center justify-content-around">
               <RiSearch2Line className="nav-search-icon" />
             </button>
-            <button className="cart-btn rounded-circle border-0 px-2">
+            <button onClick={()=>handleShow()} className="cart-btn rounded-circle border-0 px-2">
               <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
               <span className="cart-quantity translate-middle rounded-pill">0</span>
             </button>
@@ -151,6 +159,8 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+      <AddToCartProccess showModal={showModal}  handleClose={handleClose}/>
+      </>
   );
 };
 
