@@ -1357,9 +1357,9 @@ body {
 .slick-prev {
   left: -10px !important;
 }
-.padding-top-100{
+/* .padding-top-100{
   padding-top: 30px;
-}
+} */
 .font-sm-8{
   font-size: 8px;
 }
@@ -1390,4 +1390,33 @@ body {
 }
 .filter-btn{
   background-color: #A4BE7B;
+}
+.text-heading{
+  font-size: 18px !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: rgba(164, 190, 123, 0.15) !important;
+}
+.accordion-item{
+  background-color: rgba(164, 190, 123, 0.15) !important;
+}
+.accordion-button{
+  background-color: rgba(164, 190, 123, 0.15) !important;
+}
+.form-check-input:checked {
+  background-color: rgba(224, 122, 95, 1) !important;
+  border-color: rgba(224, 122, 95, 1) !important;
+}
+.form-check-input{
+  background-color: rgba(224, 122, 95, 0.1) !important;
+  border: 1px solid rgba(224, 122, 95, 1) !important;
+}
+
+/* sort Css */
+.sort-menu{
+  width: 297px !important;
+  height: 360px !important;
+}
+.sort-red-text{
+  color: #E07A5F;
 }
