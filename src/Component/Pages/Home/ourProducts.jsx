@@ -204,7 +204,7 @@ const OurProducts = () => {
                         />
                       </div>
                       <div className="d-flex justify-content-between">
-                        <div className="mb-3" style={{ width: "197px" }}>
+                        <div className="mb-3 mx-1" style={{ width: "197px" }}>
                           {/* <label htmlFor="email" className="form-label">
                           Email
                         </label> */}
@@ -220,7 +220,7 @@ const OurProducts = () => {
                           />
                         </div>
 
-                        <div className="mb-3" style={{ width: "197px" }}>
+                        <div className="mb-3 mx-1" style={{ width: "197px" }}>
                           {/* <label htmlFor="phone" className="form-label">
                           Phone
                         </label> */}

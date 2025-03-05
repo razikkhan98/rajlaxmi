@@ -115,17 +115,19 @@ const Navbar = () => {
     setInputBar(false);
   };
 
+  const mobNav = window?.screen?.width;
+
   //   =========
   // useEffect
   // ===========
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (event?.target?.closest(".automodal")) {
-        return true
+        return true;
       }
-       if (!event?.target?.closest(".autosuggest-nav")) {
+      if (!event?.target?.closest(".autosuggest-nav")) {
         handleCloseSearchBar();
-        setautoSearchFillValue()
+        setautoSearchFillValue();
       }
     };
     if (inputBar) {
@@ -178,9 +180,15 @@ const Navbar = () => {
             className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}
             id="navbarNav"
           >
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-4">
+            <ul
+              className={`navbar-nav ms-auto mb-2 mb-lg-0 ${
+                mobNav < 992
+                  ? "d-flex justify-content-center align-items-center gap-0"
+                  : "gap-4"
+              }`}
+            >
               {DataNavbar.map((link, i) => (
-                <li className="nav-item" key={i}>
+                <li className={`nav-item ${inputBar ? "d-none" : ""}`} key={i}>
                   {/* <a className="nav-link" href=>{link.title}</a> */}
                   <Link className="nav-link" to={link.url}>
                     {link.title}
@@ -188,19 +196,30 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            <div className="d-flex gap-4">
-              <button className="login-btn rounded-pill mx-3" type="button">
+            <div
+              className={`d-flex gap-4 ${
+                mobNav < 992
+                  ? "d-flex justify-content-center align-items-center gap-0"
+                  : ""
+              }`}
+            >
+              <button
+                className={`login-btn rounded-pill mx-3 ${
+                  inputBar ? "d-none" : ""
+                }`}
+                type="button"
+              >
                 Login
               </button>
 
-              {/* ------------------ */}
+              {/* -------- nav search section ---------- */}
               <div
                 onClick={() => handleOpenSearchBar()} // Set focus on click
                 className={`d-flex align-items-center  autosuggest-nav background-color-gleeful  p-2 ${
                   inputBar
                     ? "autosuggest-nav-active rounded-3"
                     : "rounded-circle justify-content-center"
-                }`}
+                } ${mobNav < 992 ? "d-none" : ""}`}
               >
                 <RiSearch2Line
                   className={`nav-search-icon autosuggest-icon ${
@@ -224,7 +243,9 @@ const Navbar = () => {
 
               <button
                 onClick={() => handleShow()}
-                className="cart-btn rounded-circle border-0 px-2"
+                className={`cart-btn rounded-circle border-0 px-2 ${
+                  mobNav < 992 ? "d-none" : ""
+                }`}
               >
                 <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
                 <span className="cart-quantity translate-middle rounded-pill">
@@ -235,9 +256,48 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      {/* -------- nav search on mobile screen section ---------- */}
+      <div className="d-flex justify-content-around">
+        <div
+          onClick={() => handleOpenSearchBar()} // Set focus on click
+          className={`d-flex align-items-center autosuggest-nav-active rounded-5 bg-white  p-2 ${
+            inputBar
+              ? "autosuggest-nav-active rounded-3"
+              : ""
+          } ${mobNav < 992 ? "" : "d-none"}`}
+        >
+          <RiSearch2Line
+            className={`nav-search-icon autosuggest-icon bg-white ${
+              inputBar ? "me-3 ms-2" : "me-3 ms-2"
+            }`}
+          />
+          {/* {inputBar ? ( */}
+            <>
+              <div className="autosuggest-input w-100">
+                <input
+                  type="text"
+                  placeholder="Search for Oil, Ghee and other products  "
+                  onChange={HandleAutoSearchInp}
+                  className={`  h-100  ${autoSearchFillValue ? "" : ""}`}
+                />
+              </div>
+            </>
+          {/* // ) : null} */}
+        </div>
+        <button
+          onClick={() => handleShow()}
+          className={`cart-btn rounded-circle border-0 px-2 bg-white ${
+            mobNav < 992 ? "" : "d-none"
+          }`}
+        >
+          <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
+          <span className="cart-quantity translate-middle rounded-pill">0</span>
+        </button>
+      </div>
+      {/* ----------------- */}
       {inputBar && (
         <AutoSuggestSearch
-        modalClass={"automodal"}
+          modalClass={"automodal"}
           inputValue={autoSearchFillValue}
           handleClose={handleCloseSearchBar}
         />

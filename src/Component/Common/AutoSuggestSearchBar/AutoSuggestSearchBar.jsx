@@ -8,49 +8,46 @@ import AddtoCard from "../Addtocard";
 import cross from "../../Assets/img/Product/cross.svg";
 import SearchAddToCart from "../AutoSuggestModalCards/SearchAddToCart";
 
+const BestSellers = [
+  {
+    id: 1,
+    name: "Organic Kabuli Chana",
+    price: "180.00",
+    qty: "500 gm",
+    image: Images1,
+    rating: 3.5,
+    reviews: 312,
+  },
+  {
+    id: 2,
+    name: "Soyabean Chunk Small Size",
+    price: "58.00",
+    qty: "500 gm",
+    image: Images1,
+    rating: 4.0,
+    reviews: 210,
+  },
+  {
+    id: 3,
+    name: "Organic Jaggery Powder",
+    price: "54.00",
+    qty: "500 gm",
+    image: Images1,
+    rating: 5,
+    reviews: 210,
+  },
+  {
+    id: 4,
+    name: "Hing Powder",
+    price: "1200.00",
+    qty: "500 gm",
+    image: Images1,
+    rating: 5,
+    reviews: 210,
+  },
+];
 
-const BestSellers = 
-// [
-    {
-      id: 1,
-      name: "Organic Kabuli Chana",
-      price: "180.00",
-      qty: "500 gm",
-      image: Images1,
-      rating: 3.5,
-      reviews: 312,
-    }
-//     {
-//       id: 2,
-//       name: "Soyabean Chunk Small Size",
-//       price: "58.00",
-//       qty: "500 gm",
-//       image: Images1,
-//       rating: 4.0,
-//       reviews: 210,
-//     },
-//     {
-//       id: 3,
-//       name: "Organic Jaggery Powder",
-//       price: "54.00",
-//       qty: "500 gm",
-//       image: Images1,
-//       rating: 5,
-//       reviews: 210,
-//     },
-//     {
-//       id: 4,
-//       name: "Hing Powder",
-//       price: "1200.00",
-//       qty: "500 gm",
-//       image: Images1,
-//       rating: 5,
-//       reviews: 210,
-//     },
-//   ];
-
-const AutoSuggestSearch = ({ inputValue, modalClass,handleClose }) => {
-
+const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
   // ========
   // States
   // ==========
@@ -63,10 +60,10 @@ const AutoSuggestSearch = ({ inputValue, modalClass,handleClose }) => {
   // =========
   // Functions
   // =========
-//   const options = [];
-//   MenuItemsJson.map((item) => {
-//     item?.subcategories?.map((foodName) => options?.push(foodName));
-//   });
+  //   const options = [];
+  //   MenuItemsJson.map((item) => {
+  //     item?.subcategories?.map((foodName) => options?.push(foodName));
+  //   });
 
   // Function to handle Add FOOD Item
   const HandleItemAdd = (item) => {
@@ -92,17 +89,17 @@ const AutoSuggestSearch = ({ inputValue, modalClass,handleClose }) => {
     // dispatch(AddMenuRedux(payload));
   };
 
-//   useEffect(() => {
-//     const value = inputValue;
-//     if (value?.length > 0) {
-//       const filtered = options?.filter((option) =>
-//         option?.name?.toLowerCase()?.includes(value?.toLowerCase())
-//       );
-//       setFilteredOptions(filtered);
-//     } else {
-//       setFilteredOptions();
-//     }
-//   }, [inputValue]);
+  //   useEffect(() => {
+  //     const value = inputValue;
+  //     if (value?.length > 0) {
+  //       const filtered = options?.filter((option) =>
+  //         option?.name?.toLowerCase()?.includes(value?.toLowerCase())
+  //       );
+  //       setFilteredOptions(filtered);
+  //     } else {
+  //       setFilteredOptions();
+  //     }
+  //   }, [inputValue]);
 
   // Function to handle outside clicks
   useEffect(() => {
@@ -125,7 +122,9 @@ const AutoSuggestSearch = ({ inputValue, modalClass,handleClose }) => {
 
   return (
     <>
-      <div className={`d-flex flex-column align-items-center justify-content-center mx-5 ${modalClass} `}>
+      <div
+        className={`d-flex flex-column align-items-center justify-content-center mx-5 ${modalClass} `}
+      >
         {/* Search bar */}
         <div className="position-relative w-100">
           {/* Suggestions dropdown */}
@@ -138,44 +137,69 @@ const AutoSuggestSearch = ({ inputValue, modalClass,handleClose }) => {
             style={{ zIndex: 10 }}
           >
             <div className="d-flex align-items-center justify-content-between">
-            <h3 className="font-size-24 inter-font-family-600 mt-3 ms-3">
-              Trending searches{" "}
-            </h3>
-            <img onClick={handleClose} src={cross} width={36} height={36} className="together rounded-circle p-2 me-3 mt-3" alt="" />
-            </div>
-            
-              {!inputValue?.length > 0 ? <div className=" d-flex mx-3">
-                <div className=" auto-search-trend-box">
-                  <div className="mx-3">
-                    <img src={trendImg} className="rounded-3" alt="" />
-                    <h5 className="font-size-14 inter-font-family-500 mt-2">
-                      Gir Cow ghee
-                    </h5>
-                  </div>
-                </div>
-                <div className=" auto-search-trend-box">
-                  <div className="mx-3">
-                    <img src={trendImg} className="rounded-3" alt="" />
-                    <h5 className="font-size-14 inter-font-family-500 mt-2">
-                      Gir Cow ghee
-                    </h5>
-                  </div>
-                </div>
-                <div className=" auto-search-trend-box">
-                  <div className="mx-3">
-                    <img src={trendImg} className="rounded-3" alt="" />
-                    <h5 className="font-size-14 inter-font-family-500 mt-2">
-                      Gir Cow ghee
-                    </h5>
-                  </div>
-                </div>
-              </div> : 
-              <SearchAddToCart className='login-modal-shadow' product={BestSellers} />}
-             
               <h3 className="font-size-24 inter-font-family-600 mt-3 ms-3">
+                Trending searches{" "}
+              </h3>
+              <img
+                onClick={handleClose}
+                src={cross}
+                width={36}
+                height={36}
+                className="together rounded-circle p-2 me-3 mt-3"
+                alt=""
+              />
+            </div>
+
+            {!inputValue?.length > 0 ? (
+              <div className=" d-flex overflow-auto mt-2 mx-3">
+                <div className=" auto-search-trend-box">
+                  <div className="mx-3">
+                    <img src={trendImg} className="rounded-3" alt="" />
+                    <h5 className="font-size-14 inter-font-family-500 mt-2">
+                      Gir Cow ghee
+                    </h5>
+                  </div>
+                </div>
+                <div className=" auto-search-trend-box">
+                  <div className="mx-3">
+                    <img src={trendImg} className="rounded-3" alt="" />
+                    <h5 className="font-size-14 inter-font-family-500 mt-2">
+                      Gir Cow ghee
+                    </h5>
+                  </div>
+                </div>
+                <div className=" auto-search-trend-box">
+                  <div className="mx-3">
+                    <img src={trendImg} className="rounded-3" alt="" />
+                    <h5 className="font-size-14 inter-font-family-500 mt-2">
+                      Gir Cow ghee
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="d-flex overflow-auto py-2">
+              {BestSellers?.map((i) => (
+                <span>
+                <SearchAddToCart
+                className="login-modal-shadow"
+                product={i}
+                />
+                </span>
+              ))}
+              </div>
+            )}
+
+            <h3 className="font-size-24 inter-font-family-600 mt-3 ms-3">
               Recommendations For you
             </h3>
-            <RecommendNavSearchCard product={BestSellers} />
+            <div className="d-flex overflow-auto">
+              {BestSellers?.map((i) => (
+                <span>
+                <RecommendNavSearchCard product={i} />
+                </span>
+              ))}
+            </div>
             <li className="h-1"></li>
             {/* {filteredOptions?.map((option, index) => (
               <>
