@@ -11,8 +11,9 @@ import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
 
-const AddtoCard = ({ product }) => {
+const RecommendNavSearchCard = ({ product }) => {
   
+  console.log(product);
   // ===========
   // useState
   // ===========
@@ -60,20 +61,20 @@ const AddtoCard = ({ product }) => {
 
   return (
     <React.Fragment>
-      <div className="shop-by-category background-color-white m-auto md:m-auto position-relative my-2 ">
+      <div className="shop-by-category background-color-white position-relative my-2">
         <div className="d-flex justify-content-center pt-2">
           <div>
             {/* Icons (Heart & Share) */}
-            <div className="heart">
+            {/* <div className="heart">
               <FaRegHeart className="text-color-terracotta" />
-            </div>
-            <div className="share">
+            </div> */}
+            {/* <div className="share">
               <PiShareFatBold className="text-color-terracotta" />
-            </div>
+            </div> */}
 
             {/* Product Image & Qty Selector */}
 
-            <div className="gm">
+            {/* <div className="gm">
               <span className="inter-font-family-500 font-size-10 text-color-dark-grayish-blue ml-3">
                 Qty
               </span>
@@ -84,7 +85,7 @@ const AddtoCard = ({ product }) => {
                 // fontSize={20}
                 className="text-color-terracotta"
               />
-            </div>
+            </div> */}
             <img src={product.image} alt="Loading" className="img-fluid" />
           </div>
         </div>
@@ -95,19 +96,20 @@ const AddtoCard = ({ product }) => {
           <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
             {product.name}
           </div>
-          <div className="w-50 d-flex justify-content-center rating-height" style={{height:"59px"}}>
+          {/* <div className="w-50 d-flex justify-content-center rating-height" style={{height:"59px"}}>
             <div>
-              <div className="pt-1">
-                <span className="start-gleeful">
-                  {renderStars(product.rating)}
-                </span>
-              </div>
-              <div className="inter-font-family-500 font-size-10 font-sm-8 start-gleeful pt-2">
-                {product.rating} ({product.reviews} Reviews)
-              </div>
+            <div className="pt-1">
+            <span className="start-gleeful">
+            {renderStars(product.rating)}
+            </span>
             </div>
-          </div>
+            <div className="inter-font-family-500 font-size-10 font-sm-8 start-gleeful pt-2">
+            {product.rating} ({product.reviews} Reviews)
+            </div>
+            </div>
+            </div> */}
         </div>
+            <h5 className="inter-font-family-400 font-size-14 login-text px-2 pt-2">(500 gm)</h5>
 
         {/* Price & Add to Cart Button */}
 
@@ -164,4 +166,4 @@ const AddtoCard = ({ product }) => {
   );
 };
 
-export default AddtoCard;
+export default RecommendNavSearchCard;

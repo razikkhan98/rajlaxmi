@@ -28,6 +28,7 @@ body {
   --terracotta: rgba(224, 122, 95, 1);
   --black: rgba(17, 17, 17, 1);
   --blue: rgba(221, 236, 239, 1);
+  --add-modal: rgba(236, 239, 211, 1);
 }
 
 ::-webkit-scrollbar {
@@ -67,6 +68,9 @@ body {
 
 .background-color-white {
   background-color: var(--white);
+}
+.background-color-add-modal {
+  background-color: var(--add-modal);
 }
 
 /* 
@@ -158,6 +162,9 @@ body {
 .font-size-10 {
   font-size: 10px;
 }
+.font-size-12 {
+  font-size: 12px;
+}
 
 .font-size-14 {
   font-size: 14px;
@@ -212,11 +219,9 @@ body {
  ==========================
 */
 
-
 .login-modal-shadow {
   box-shadow: 0px 4px 16px 1px rgba(0, 0, 0, 0.15);
   /* background: white; */
-  
 }
 
 .login-text {
@@ -237,8 +242,8 @@ body {
   height: 48px;
   border-radius: 6px;
 }
-.hover-button:hover{
-  color:form-resignation var(--gleeful);
+.hover-button:hover {
+  color: form-resignation var(--gleeful);
   text-decoration: underline;
 }
 
@@ -247,16 +252,12 @@ body {
   .form-login .input-style {
     width: 100%;
     height: 48px;
-    
   }
   .form-login button {
     width: 100%;
     height: 48px;
-    
   }
-
 }
-
 
 /* 
  ========================== 
@@ -290,12 +291,10 @@ body {
   border-radius: 6px;
 }
 
-.hover-button:hover{
-  color:form-resignation var(--gleeful);
+.hover-button:hover {
+  color: form-resignation var(--gleeful);
   text-decoration: underline;
 }
-
-
 
 /* 
  ========================== 
@@ -777,7 +776,7 @@ body {
 }
 .background-from {
   background-color: rgba(255, 255, 255, 0.4);
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 12px;
   width: 442px;
 }
@@ -824,7 +823,6 @@ body {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-
 /* 
  ========================== 
 
@@ -838,11 +836,9 @@ body {
     to bottom,
     rgba(164, 190, 123, 1) 0%,
     rgba(254, 251, 233, 1) 50%,
-     rgba(254, 251, 233, 1) 100%
+    rgba(254, 251, 233, 1) 100%
   );
-  
 }
-
 
 .category-container {
   background: var(--gleeful-opacity);
@@ -889,16 +885,14 @@ body {
 
   font-size: 14px;
 }
-.sort-icon{
+.sort-icon {
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--gleeful-opacity);
-  padding: 10px
+  padding: 10px;
 }
-
-
 
 .slider-btn {
   border-radius: 50%;
@@ -907,7 +901,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FEFBE9;
+  background-color: #fefbe9;
   border: 1px solid var(--gleeful);
   color: var(--gleeful);
   font-size: 18px;
@@ -918,19 +912,591 @@ body {
 
 .slider-btn:hover {
   background-color: var(--gleeful);
-  color: #FEFBE9;
+  color: #fefbe9;
 }
 
-
 .slick-slide {
-  display: flex !important;  /* Ensure all slides flex properly */
+  display: flex !important; /* Ensure all slides flex properly */
   justify-content: center;
 }
 
 .product-card {
-  width: 100%;  /* Ensure full width in the slider */
+  width: 100%; /* Ensure full width in the slider */
   max-width: 300px; /* Optional: Adjust as needed */
-  margin: 0 auto;  /* Center alignment */
+  margin: 0 auto; /* Center alignment */
 }
 
 /* Center the arrows below the slider */
+
+/*======================== Add To Cart Modal CSS ==================== */
+.modal-dialog-box .modal-dialog {
+  margin: 0 auto !important;
+  max-width: 100vw !important;
+}
+.modal-dialog-box .modal-content {
+  background-color: transparent !important;
+  height: 685px !important;
+}
+
+.AddToCartModal-modal {
+  border-radius: 28px 28px 0px 0px !important;
+}
+.AddToCartModal-header {
+  background-color: rgba(236, 239, 211, 1);
+  border-radius: 28px 28px 0px 0px !important;
+  height: 112px;
+}
+.AddToCartModal .tick-box {
+  border-radius: 50%;
+  border: 2px dashed var(--terracotta);
+  width: 32px;
+  height: 32px;
+}
+.AddToCartModal .tick-box-active {
+  background-color: var(--terracotta);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.AddToCartModal .tick-progress-bar {
+  color: var(--terracotta);
+  opacity: 100% !important;
+  width: 430px;
+  height: 3px;
+  border: 2px dashed var(--terracotta);
+  background-color: transparent;
+}
+.AddToCartModal .tick-progress-bar-active {
+  color: var(--terracotta);
+  opacity: 100% !important;
+  width: 430px;
+  height: 3px;
+  /* border: 3px solid var(--terracotta); */
+  /* background-color: transparent; */
+}
+.AddToCartModal .product-cards img {
+  /* border-radius: 8px; */
+  width: 100px;
+  height: 100px;
+}
+
+.AddToCartModal .product-cards {
+  background-color: rgba(236, 239, 211, 1);
+  border-radius: 8px;
+  width: 414px;
+  height: 116px;
+}
+.AddToCartModal .button-addtocard {
+  /* padding: 10px 55px; */
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0px !important;
+  text-decoration: none;
+  color: var(--white);
+  border: none;
+}
+.AddToCartModal-delete-button {
+  border-radius: 1px 8px 8px 1px;
+}
+.AddToCartModal-delete-button span {
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+}
+.AddToCartModal .address-heading {
+  color: rgba(47, 62, 70, 0.4);
+}
+.AddToCartModal .address-box-section {
+  width: 18px;
+  height: 18px;
+}
+.AddToCartModal .address-section {
+  background-color: rgba(236, 239, 211, 1);
+  box-shadow: 0px 4px 16px 1px rgba(0, 0, 0, 0.15);
+  width: 120px;
+  height: 120px;
+}
+.text-trunc-class {
+  display: -webkit-box; /* Create a flexible box layout */
+  -webkit-box-orient: vertical; /* Set the box to be vertical */
+  -webkit-line-clamp: 2; /* Limit the box to 2 lines */
+  overflow: hidden; /* Hide any text that goes beyond the box */
+  text-overflow: ellipsis;
+}
+.address-sect-hr {
+  border: 1px dashed rgba(232, 232, 232, 1);
+}
+.address-section-form input {
+  background-color: rgba(236, 239, 211, 1) !important;
+}
+.payment-section-button {
+  background-color: rgba(112, 112, 112, 0.4) !important;
+  width: 300px;
+  height: 48px;
+}
+.payment-section-button-active {
+  background-color: var(--terracotta) !important;
+  width: 300px;
+  height: 48px;
+}
+.product-cards-end {
+  width: 42px !important;
+  height: 116px;
+}
+.product-cards-center {
+  width: 212px;
+}
+.AddToCartModal-modal-grid-1 {
+  width: 446px !important;
+}
+.AddToCartModal-modal-grid-2 {
+  width: 546px !important;
+}
+
+.vertical-hr {
+  display: block !important;
+  width: 1px !important;
+  height: 100vh !important;
+  padding: 0px !important;
+}
+.apply-coupon input {
+  border: 0;
+  background: transparent;
+}
+/* paymode active black screen  */
+.AddToCartModal .payModeBlackScreenActive {
+  filter: brightness(0.1);
+  backdrop-filter: brightness(0.5);
+}
+.AddToCartModal .payModeBlackScreenLineActive {
+  filter: brightness(0.5);
+  backdrop-filter: brightness(0.5);
+  width: 0px !important;
+}
+.AddToCartModal .form-check-input:checked[type="radio"] {
+  background-color: var(--terracotta) !important;
+  border: 1px solid white !important;
+  --bs-form-check-bg-image: var(--terracotta) !important;
+  outline: 1px solid var(--terracotta) !important;
+  background-image: unset !important;
+}
+.AddToCartModal .form-check-input:focus {
+  outline: 1px solid var(--terracotta) !important;
+  box-shadow: unset !important;
+}
+.addToCartModalButton {
+  border: 1px solid var(--terracotta);
+  color: var(--terracotta);
+  background-color: transparent;
+  /* width: 200px; */
+  height: 48px;
+}
+.addToCartModalButton:hover {
+  background-color: var(--terracotta);
+  color: white;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1500px) {
+  .AddToCartModal-modal-grid-1 {
+    width: 400px !important;
+  }
+  .AddToCartModal-modal-grid-2 {
+    width: 400px !important;
+  }
+  .AddToCartModal .product-cards {
+    background-color: rgba(236, 239, 211, 1);
+    border-radius: 8px;
+    width: 370px !important;
+    height: 116px;
+  }
+  .coupon-input {
+    width: 130px;
+  }
+}
+
+/*======================== Add To Cart Modal CSS ==================== */
+.modal-dialog-box .modal-dialog {
+  margin: 0 auto !important;
+  max-width: 100vw !important;
+}
+.modal-dialog-box .modal-content {
+  background-color: transparent !important;
+  height: 685px !important;
+}
+
+.AddToCartModal-modal {
+  border-radius: 28px 28px 0px 0px !important;
+}
+.AddToCartModal-header {
+  background-color: rgba(236, 239, 211, 1);
+  border-radius: 28px 28px 0px 0px !important;
+  height: 112px;
+}
+.AddToCartModal .tick-box {
+  border-radius: 50%;
+  border: 2px dashed var(--terracotta);
+  width: 32px;
+  height: 32px;
+}
+.AddToCartModal .tick-box-active {
+  background-color: var(--terracotta);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.AddToCartModal .tick-progress-bar {
+  color: var(--terracotta);
+  opacity: 100% !important;
+  width: 430px;
+  height: 3px;
+  border: 2px dashed var(--terracotta);
+  background-color: transparent;
+}
+.AddToCartModal .tick-progress-bar-active {
+  color: var(--terracotta);
+  opacity: 100% !important;
+  width: 430px;
+  height: 3px;
+  /* border: 3px solid var(--terracotta); */
+  /* background-color: transparent; */
+}
+.AddToCartModal .product-cards img {
+  /* border-radius: 8px; */
+  width: 100px;
+  height: 100px;
+}
+
+.AddToCartModal .product-cards {
+  background-color: rgba(236, 239, 211, 1);
+  border-radius: 8px;
+  width: 414px;
+  height: 116px;
+}
+.AddToCartModal .button-addtocard {
+  /* padding: 10px 55px; */
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0px !important;
+  text-decoration: none;
+  color: var(--white);
+  border: none;
+}
+.AddToCartModal-delete-button {
+  border-radius: 1px 8px 8px 1px;
+}
+.AddToCartModal-delete-button span {
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+}
+.AddToCartModal .address-heading {
+  color: rgba(47, 62, 70, 0.4);
+}
+.AddToCartModal .address-box-section {
+  width: 18px;
+  height: 18px;
+}
+.AddToCartModal .address-section {
+  background-color: rgba(236, 239, 211, 1);
+  box-shadow: 0px 4px 16px 1px rgba(0, 0, 0, 0.15);
+  width: 120px;
+  height: 120px;
+}
+.text-trunc-class {
+  display: -webkit-box; /* Create a flexible box layout */
+  -webkit-box-orient: vertical; /* Set the box to be vertical */
+  -webkit-line-clamp: 2; /* Limit the box to 2 lines */
+  overflow: hidden; /* Hide any text that goes beyond the box */
+  text-overflow: ellipsis;
+}
+.address-sect-hr {
+  border: 1px dashed rgba(232, 232, 232, 1);
+}
+.address-section-form input {
+  background-color: rgba(236, 239, 211, 1) !important;
+}
+.payment-section-button {
+  background-color: rgba(112, 112, 112, 0.4) !important;
+  width: 300px;
+  height: 48px;
+}
+.payment-section-button-active {
+  background-color: var(--terracotta) !important;
+  width: 300px;
+  height: 48px;
+}
+.product-cards-end {
+  width: 42px !important;
+  height: 116px;
+}
+.product-cards-center {
+  width: 212px;
+}
+.AddToCartModal-modal-grid-1 {
+  width: 446px !important;
+}
+.AddToCartModal-modal-grid-2 {
+  width: 546px !important;
+}
+
+.vertical-hr {
+  display: block !important;
+  width: 1px !important;
+  height: 100vh !important;
+  padding: 0px !important;
+}
+.apply-coupon input {
+  border: 0;
+  background: transparent;
+}
+/* paymode active black screen  */
+.AddToCartModal .payModeBlackScreenActive {
+  filter: brightness(0.1);
+  backdrop-filter: brightness(0.5);
+}
+.AddToCartModal .payModeBlackScreenLineActive {
+  filter: brightness(0.5);
+  backdrop-filter: brightness(0.5);
+  width: 0px !important;
+}
+.AddToCartModal .form-check-input:checked[type="radio"] {
+  background-color: var(--terracotta) !important;
+  border: 1px solid white !important;
+  --bs-form-check-bg-image: var(--terracotta) !important;
+  outline: 1px solid var(--terracotta) !important;
+  background-image: unset !important;
+}
+.AddToCartModal .form-check-input:focus {
+  outline: 1px solid var(--terracotta) !important;
+  box-shadow: unset !important;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1500px) {
+  .AddToCartModal-modal-grid-1 {
+    width: 400px !important;
+  }
+  .AddToCartModal-modal-grid-2 {
+    width: 400px !important;
+  }
+  .AddToCartModal .product-cards {
+    background-color: rgba(236, 239, 211, 1);
+    border-radius: 8px;
+    width: 370px !important;
+    height: 116px;
+  }
+  .coupon-input {
+    width: 130px;
+  }
+}
+
+/* Media Query */
+@media (max-width: 760px) {
+  /* Shop by Category card Responsive Css Start */
+  .shop-by-category {
+    height: 270px;
+    width: 220px;
+  }
+  .shop-by-category img {
+    height: 161px;
+    width: 198px;
+  }
+  .font-size-16 {
+    font-size: 12px;
+  }
+  .button-addtocard {
+    width: 100px;
+    height: 39px;
+    font-size: 12px;
+  }
+  .gm {
+    width: 97px;
+    height: 26px;
+    position: absolute;
+    top: 131px;
+    right: 18px;
+  }
+  .rating-height {
+    width: 69px !important;
+    height: 30px !important;
+  }
+  /* Why-us Css */
+  .why-us {
+    text-align: center;
+  }
+  .why-us-img {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+  }
+  /* Text css responsive */
+  .heading-text {
+    font-size: 18px;
+  }
+  .heading-title {
+    font-size: 14px;
+  }
+  .card-heading {
+    font-size: 12px !important;
+  }
+  .text-description {
+    font-size: 10px;
+  }
+  /* Slider Css */
+  .center-slider .slide {
+    width: 224px;
+    height: 200px;
+  }
+  .slide img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .slick-prev,
+  .slick-next {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .slick-next {
+    right: -10px !important;
+  }
+
+  .slick-prev {
+    left: -10px !important;
+  }
+  /* .padding-top-100{
+  padding-top: 30px;
+} */
+  .font-sm-8 {
+    font-size: 8px;
+  }
+  .background-from {
+    width: 100%;
+  }
+  /* .natural-icons{
+  height: 28px;
+  width: 28px;
+} */
+  /* .goodness, .treats, .choices {
+  width: 140px;
+  height: 120px;
+} */
+.autosuggest-input input {
+  width: 200px !important;
+}
+.autosuggest-nav-active {
+  width: 300px !important;
+}
+.AddToCartModal .tick-progress-bar {
+  width: 120px !important;
+}
+.AddToCartModal .tick-progress-bar-active {
+  width: 120px !important;
+}
+.AddToCartModal .product-cards {
+  width: 360px !important;
+}
+.vertical-hr {
+  display: none !important;
+}
+.coupon-input{
+  width: 107px !important;
+}
+.payment-section-button {
+  width: 240px !important;
+}
+
+}
+
+/* Filter Popup */
+.dropdown-menu {
+  width: 350px !important;
+  height: 515px !important;
+  padding-bottom: 0px !important;
+  background-color: #fefbe9 !important;
+  border: 1.5px solid #a4be7b !important;
+  border-radius: 10px !important;
+}
+.filter-heading {
+  color: #a4be7b !important;
+}
+.filter-btn {
+  background-color: #a4be7b;
+}
+
+/* ===================== Auto Suggest Search Bar Start ====================== */
+
+.autosuggest-nav {
+  height: 40px;
+  width: 40px;
+}
+.autosuggest-nav-active {
+  height: 40px;
+  width: 452px;
+}
+.autosuggest-input {
+  position: relative;
+}
+.autosuggest-input input {
+  background: transparent;
+  border: 0px;
+  width: 300px;
+}
+.autosuggest-input input:focus-visible {
+  background: transparent;
+  border: 0px;
+  outline: 0;
+}
+
+/* width: 40px;
+height: 40px; */
+.autosuggest-icon {
+  background: #a4be7b;
+  color: #e07a5f;
+}
+
+.menu-nav-search {
+  transition: background-color 0.2s ease;
+}
+
+.menu-nav-search:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--cashier-main-color);
+}
+.auto-search-trend-box img {
+  width: 100px;
+  height: 100px;
+}
+
+.auto-search-modal {
+  border: 1px solid rgba(224, 122, 95, 1);
+  box-shadow: 0px 4px 16px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================== Auto Suggest Search Bar END ====================== */
+.text-heading {
+  font-size: 18px !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: rgba(164, 190, 123, 0.15) !important;
+}
+.accordion-item {
+  background-color: rgba(164, 190, 123, 0.15) !important;
+}
+.accordion-button {
+  background-color: rgba(164, 190, 123, 0.15) !important;
+}
+.form-check-input:checked {
+  background-color: rgba(224, 122, 95, 1) !important;
+  border-color: rgba(224, 122, 95, 1) !important;
+}
+.form-check-input {
+  background-color: rgba(224, 122, 95, 0.1) !important;
+  border: 1px solid rgba(224, 122, 95, 1) !important;
+}
+
+/* sort Css */
+.sort-menu {
+  width: 297px !important;
+  height: 360px !important;
+}
+.sort-red-text {
+  color: #e07a5f;
+}

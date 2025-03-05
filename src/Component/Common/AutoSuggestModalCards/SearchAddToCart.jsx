@@ -11,7 +11,7 @@ import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
 
-const AddtoCard = ({ product }) => {
+const SearchAddToCart = ({ product }) => {
   
   // ===========
   // useState
@@ -60,7 +60,7 @@ const AddtoCard = ({ product }) => {
 
   return (
     <React.Fragment>
-      <div className="shop-by-category background-color-white m-auto md:m-auto position-relative my-2 ">
+      <div className="shop-by-category background-color-white position-relative my-2 login-modal-shadow">
         <div className="d-flex justify-content-center pt-2">
           <div>
             {/* Icons (Heart & Share) */}
@@ -164,4 +164,4 @@ const AddtoCard = ({ product }) => {
   );
 };
 
-export default AddtoCard;
+export default SearchAddToCart;

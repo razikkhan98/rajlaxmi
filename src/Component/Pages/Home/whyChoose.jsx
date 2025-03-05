@@ -70,6 +70,30 @@ const WhyChoose = () => {
     infinite: true,
     // autoplaySpeed: 2000,
     // autoplay: true,
+
+    // Make it responsive
+  responsive: [
+    {
+      breakpoint: 1024, // Tablets
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 768, // Mobile landscape
+      settings: {
+        slidesToShow: 1,
+        centerMode: false, // Avoid cutting off images
+      },
+    },
+    {
+      breakpoint: 480, // Small mobile screens
+      settings: {
+        slidesToShow: 1,
+        centerMode: false,
+      },
+    },
+  ],
   };
 
   const renderStars = (rating) => {
@@ -101,29 +125,31 @@ const WhyChoose = () => {
         <div className="vector2">
           <img src={Vector2} alt="Loading" />
         </div>
-        <div className="container">
-          <div className="josefin-sans-font-family-600 font-size-40 text-center">
+        <div className="container why-us">
+          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-center">
             Why Choose Us?
           </div>
           <div className="row py-5">
             {WhyChooseUs.map((iteam, i) => (
               <div className="col-md-4 col-sm-12 px-4" key={i}>
+                <div className="why-us-img">
                 <div className="chemical">
                   <img src={iteam.image} alt="Loading" className="img-fluid" />
                 </div>
-                <div className="font-size-24 inter-font-family-600 py-4">
+                </div>
+                <div className="font-size-24 heading-title inter-font-family-600 py-4">
                   {iteam.title}
                 </div>
                 <div className="whychoose-line"></div>
-                <div className="pt-3">{iteam.description}</div>
+                <div className="pt-3 text-description">{iteam.description}</div>
               </div>
             ))}
           </div>
           <div className="testimonial-section">
-            <div className="font-size-40 josefin-sans-font-family-600 text-center">
+            <div className="font-size-40 josefin-sans-font-family-600 heading-text text-center">
               Why Our Customers Love Rajlaxmi Jaivik
             </div>
-            <div className="font-size-16 inter-font-family-400 text-center py-2">
+            <div className="font-size-16 inter-font-family-400 text-description text-center py-2">
               We provide assurance to consumers about quality and trust with
               <br />
               compliance and regulations.
@@ -147,7 +173,7 @@ const WhyChoose = () => {
                       </div>
                       <div className="mt-4">
                         <p
-                          className="mb-0"
+                          className="mb-0 card-heading"
                           style={{ fontSize: "18px", fontWeight: "400" }}
                         >
                           {testimonial.name}
@@ -155,7 +181,7 @@ const WhyChoose = () => {
                         <div className="start-gleeful py-2">
                           {renderStars(testimonial.rating)}
                         </div>
-                        <p className="slick-para pt-0">{testimonial.review}</p>
+                        <p className="slick-para pt-0 text-description">{testimonial.review}</p>
                       </div>
                     </div>
                   ))}
