@@ -60,7 +60,7 @@ const Footer = () => {
                 style={{ width: "92px" }}
                 className="ms-3"
               />
-              <div className="mt-3 josefin-sans-font-family-500 font-size-24">
+              <div className="mt-3 josefin-sans-font-family-500 heading-title font-size-24">
                 Rajlaxmi Jaiviks International
               </div>
             </div>
@@ -68,13 +68,13 @@ const Footer = () => {
 
           {/* Navigate Our Site */}
           <Col xs={6} md={3}>
-            <div className="josefin-sans-font-family-500 font-size-24 pt-4 pb-2">
+            <div className="josefin-sans-font-family-500 font-size-24 heading-title pt-4 pb-2">
               Navigate Our Site
             </div>
             <ul className="list-unstyled">
               {navLinks.map((link, index) => (
                 <li key={index} className="pb-2">
-                  <a href="/#" className="inter-font-family-400 font-size-16">
+                  <a href="/#" className="inter-font-family-400 text-description font-size-16">
                     {link}
                   </a>
                 </li>
@@ -84,13 +84,13 @@ const Footer = () => {
 
           {/* Categories */}
           <Col xs={6} md={2}>
-            <div className="josefin-sans-font-family-500 font-size-24 pt-4 pb-2">
+            <div className="josefin-sans-font-family-500 font-size-24 heading-title pt-4 pb-2">
               Categories
             </div>
             <ul className="list-unstyled">
               {categories.map((category, index) => (
                 <li key={index} className="pb-2">
-                  <a href="/#" className="inter-font-family-400 font-size-16">
+                  <a href="/#" className="inter-font-family-400 text-description font-size-16">
                     {category}
                   </a>
                 </li>
@@ -101,13 +101,13 @@ const Footer = () => {
           {/* General Links */}
           <Col xs={6} md={2}>
             {/* <h6 className="fw-bold">General</h6> */}
-            <div className="josefin-sans-font-family-500 font-size-24 pt-4 pb-2">
+            <div className="josefin-sans-font-family-500 font-size-24 heading-title pt-4 pb-2">
               General
             </div>
             <ul className="list-unstyled">
               {generalLinks.map((item, index) => (
                 <li key={index} className="pb-2">
-                  <a href="/#" className="inter-font-family-400 font-size-16">
+                  <a href="/#" className="inter-font-family-400 text-description font-size-16">
                     {item}
                   </a>
                 </li>
@@ -116,9 +116,9 @@ const Footer = () => {
           </Col>
 
           {/* Contact Us */}
-          <Col xs={6} md={3}>
+          <Col xs={12} md={3}>
             {/* <h6 className="fw-bold">Contact Us</h6> */}
-            <div className="josefin-sans-font-family-500 font-size-24 pt-4 pb-2">
+            <div className="josefin-sans-font-family-500 font-size-24 heading-title pt-4 pb-2">
               Contact Us
             </div>
             <ul className="list-unstyled">
@@ -126,8 +126,8 @@ const Footer = () => {
                 {/* <FaMapMarkerAlt className="me-2 inter-font-family-400 font-size-16"/> Address: 11, Manish Bagh Colony,
                 <br /> Sapna Sangeeta Road, Indore,
                 <br /> Madhya Pradesh, 452001 */}
-                <div className="py-2 d-flex">
-                  <div className="">
+                <div className="py-2 d-flex ">
+                  <div className="text-description">
                     <img
                       src={Email}
                       alt="Loading"
@@ -135,7 +135,7 @@ const Footer = () => {
                     />
                   </div>
                   <div className="ms-3">
-                    <span className="inter-font-family-400 font-size-16">
+                    <span className="inter-font-family-400 text-description font-size-16">
                       Address: 11, Manish Bagh Colony,
                       <br className="ms-2" /> Sapna Sangeeta Road, Indore,
                       <br className="ms-2" /> Madhya Pradesh, 452001
@@ -153,7 +153,7 @@ const Footer = () => {
                     className="footer-icon-background p-2 rounded-circle shadows"
                     s
                   />
-                  <span className="inter-font-family-400 font-size-16  ms-3">
+                  <span className="inter-font-family-400  text-description font-size-16  ms-3">
                     +91-8769115905
                   </span>
                 </div>
@@ -167,7 +167,7 @@ const Footer = () => {
                     alt="Loading"
                     className="footer-icon-background p-2 rounded-circle shadows"
                   />
-                  <span className="inter-font-family-400 font-size-16  ms-3">
+                  <span className="inter-font-family-400 font-size-16 text-description ms-3">
                     rajlaxmiorganicfoods@gmail.com
                   </span>
                 </div>
@@ -178,20 +178,20 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <Row className="mt-4 align-items-center footer-icon-background p-3 rounded text-center">
-          <Col xs={3} md={3}>
+          <Col xs={12} md={3}>
             <p className="mb-0 ">
-              <span className="inter-font-family-400 font-size-16">
+              <span className="inter-font-family-400 text-description font-size-16">
                 &copy; 2024 Rajlaxmi Jaiviks International{" "}
               </span>
               <br />
-              <span className="inter-font-family-500 font-size-16">
+              <span className="inter-font-family-500 text-description font-size-16">
                 All Rights Reserved
               </span>
             </p>
           </Col>
 
           {/* Social Media Icons */}
-          <Col md={6}>
+          <Col xs={12} md={6}>
             {socialIcons.map((item, index) => (
               <a
                 href={item.link}
@@ -204,12 +204,12 @@ const Footer = () => {
           </Col>
 
           {/* Powered By */}
-          <Col xs={3} md={3}>
+          <Col xs={12} md={3}>
             <p className="mb-0">
-              <span className="inter-font-family-400 font-size-16">
+              <span className="inter-font-family-400 font-size-16 text-description">
                 Powered By
               </span>
-              <div className="inter-font-family-500 font-size-16">
+              <div className="inter-font-family-500 font-size-16 text-description">
                 Intelligence Fusion Technologies
               </div>
             </p>

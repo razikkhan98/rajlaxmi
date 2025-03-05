@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
-// Common
-import { CartContext } from "../../Context/UserContext"; // Import Cart Context
+// Images
 
 // Icons
 import { MdCurrencyRupee } from "react-icons/md";
@@ -12,33 +11,26 @@ import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
 
-const AddtoCard = ({ product }) => {
+const SearchAddToCart = ({ product }) => {
+  
   // ===========
   // useState
   // ===========
 
   // useState for Add to Cart Button
-  const { addToCart, removeFromCart } = useContext(CartContext);
 
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
-  const [selectedWeight, setSelectedWeight] = useState("500gm");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const weightOptions = ["500gm", "1kg", "2kg"]; // Available sizes
 
   // ==============
   // function
   // ================
 
   // Handle Quantity Changes
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-    addToCart(product, 1, selectedWeight); // Add to cart
-  };
+  const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      removeFromCart(product.id, selectedWeight);
     } else {
       setIsAdded(false); // Reset if quantity reaches 0
       setQuantity(0);
@@ -68,7 +60,7 @@ const AddtoCard = ({ product }) => {
 
   return (
     <React.Fragment>
-      <div className="shop-by-category background-color-white m-auto md:m-auto position-relative my-2 ">
+      <div className="shop-by-category background-color-white position-relative my-2 login-modal-shadow">
         <div className="d-flex justify-content-center pt-2">
           <div>
             {/* Icons (Heart & Share) */}
@@ -81,38 +73,17 @@ const AddtoCard = ({ product }) => {
 
             {/* Product Image & Qty Selector */}
 
-            <div className="gm" onClick={() => setDropdownOpen(!dropdownOpen)}>
-              <div>
-                <span className="inter-font-family-500 font-size-14 text-color-dark-grayish-blue ml-3">
-                  Qty
-                </span>
-                <span className="inter-font-family-500 font-size-14 ms-2">
-                  {selectedWeight}
-                </span>
-                <MdOutlineArrowDropDown className="text-color-terracotta" />
-              </div>
-              {dropdownOpen && (
-                <div
-                  className="position-absolute bg-white border rounded mt-1"
-                  style={{ width: "120px", zIndex: 1000 }}
-                >
-                  {weightOptions.map(
-                    (weight) =>
-                      weight !== selectedWeight && ( // Hide selected weight
-                        <div
-                          key={weight}
-                          className="p-2 cursor-pointer hover-bg-light"
-                          onClick={() => {
-                            setSelectedWeight(weight);
-                            setDropdownOpen(false);
-                          }}
-                        >
-                          {weight}
-                        </div>
-                      )
-                  )}
-                </div>
-              )}
+            <div className="gm">
+              <span className="inter-font-family-500 font-size-10 text-color-dark-grayish-blue ml-3">
+                Qty
+              </span>
+              <span className="inter-font-family-500 font-size-14 ms-2">
+                {product.qty}
+              </span>
+              <MdOutlineArrowDropDown
+                // fontSize={20}
+                className="text-color-terracotta"
+              />
             </div>
             <img src={product.image} alt="Loading" className="img-fluid" />
           </div>
@@ -124,10 +95,7 @@ const AddtoCard = ({ product }) => {
           <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
             {product.name}
           </div>
-          <div
-            className="w-50 d-flex justify-content-center rating-height"
-            style={{ height: "59px" }}
-          >
+          <div className="w-50 d-flex justify-content-center rating-height" style={{height:"59px"}}>
             <div>
               <div className="pt-1">
                 <span className="start-gleeful">
@@ -150,7 +118,9 @@ const AddtoCard = ({ product }) => {
               {product.price}
             </span>
           </div>
+
           {/* Add to Cart / Quantity Controls */}
+
           {!isAdded ? (
             <div>
               <button
@@ -158,7 +128,6 @@ const AddtoCard = ({ product }) => {
                 onClick={() => {
                   setIsAdded(true);
                   setQuantity(1); // Set initial quantity to 1
-                  addToCart(product, 1, selectedWeight);
                 }}
               >
                 Add
@@ -195,4 +164,4 @@ const AddtoCard = ({ product }) => {
   );
 };
 
-export default AddtoCard;
+export default SearchAddToCart;
