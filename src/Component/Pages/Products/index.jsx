@@ -97,6 +97,24 @@ const Products = () => {
     { title: "Rice And Wheat", products: BestSellers },
   ];
 
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 10,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000000,
+    arrows: true,
+    responsive: [
+      { breakpoint: 1280, settings: { slidesToShow: 7, slidesToScroll: 1 } },
+      { breakpoint: 992, settings: { slidesToShow: 5, slidesToScroll: 1 } },
+      { breakpoint: 768, settings: { slidesToShow: 4, slidesToScroll: 1 } },
+      { breakpoint: 552, settings: { slidesToShow: 4, slidesToScroll: 1 } },
+      { breakpoint: 445, settings: { slidesToShow: 4, slidesToScroll: 1 } },
+    ],
+  };
+
   return (
     <React.Fragment>
       <section>
@@ -119,41 +137,29 @@ const Products = () => {
         </div>
         <div className="background-color-light-grayish-yellow py-5">
           <div className="container">
-            <div className="category-container">
+            <div className="category-container shop-category-slider overflow-hidden">
               <div className="category-label">Categories</div>
-              <Swiper
-                modules={[Navigation]}
-                slidesPerView={4}
-                spaceBetween={15}
-                navigation
-                breakpoints={{
-                  200: { slidesPerView: 1 },
-                  320: { slidesPerView: 2 },
-                  768: { slidesPerView: 3 },
-                  1024: { slidesPerView: 7 },
-                }}
-              >
+
+              <Slider {...sliderSettings}>
                 {categories.map((item, index) => (
-                  <SwiperSlide key={index} className="category-slide">
-                    <div className="category-card">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="category-image"
-                      />
-                      <div className="category-name">{item.name}</div>
-                    </div>
-                  </SwiperSlide>
+                  <div className="category-card">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="category-image"
+                    />
+                    <div className="category-name">{item.name}</div>
+                  </div>
                 ))}
-              </Swiper>
+              </Slider>
             </div>
 
             <div className="d-flex justify-content-center py-5">
               <div className="px-3">
-                <SortDropdown/>
+                <SortDropdown />
               </div>
               <div className="px-3">
-                <FilterDropDown/>
+                <FilterDropDown />
                 {/* <img src={Funnel} alt="Filter" className="sort-icon" />
                 <div className="text-center text-color-terracotta">Filter</div> */}
               </div>
@@ -166,7 +172,10 @@ const Products = () => {
                     {category.title}
                   </div>
                   <div>
-                    <Link to="/products-inner" className="text-color-dark-grayish-blue text-decoration-none">
+                    <Link
+                      to="/products-inner"
+                      className="text-color-dark-grayish-blue text-decoration-none"
+                    >
                       <span>View all</span> <FiChevronRight fontSize={20} />
                     </Link>
                   </div>
