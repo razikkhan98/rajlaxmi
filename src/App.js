@@ -11,6 +11,7 @@ import ProductInner from "./Component/Pages/Products/productinner";
 import ProductDescription from "./Component/Pages/ProductDescription/productdescription";
 
 import { ToastContainer } from "react-toastify";
+import WishList from "./Component/Pages/Wishlist/wishlist";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/products" element={<Product />} />
           <Route path="/products-inner" element={<ProductInner />} />
           <Route path="/productdescription/:id" element={<ProductDescription />} />
+          <Route path="/wishlist" element={<WishList />} />
 
         </Routes>
       </Router>
