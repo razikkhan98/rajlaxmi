@@ -7,8 +7,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import Sort from "../../Assets/img/Product/SlidersHorizontal.svg";
-import Funnel from "../../Assets/img/Product/Funnel.svg";
+// import Sort from "../../Assets/img/Product/SlidersHorizontal.svg";
+// import Funnel from "../../Assets/img/Product/Funnel.svg";
 import AddtoCard from "../../Common/Addtocard";
 import Images1 from "../../Assets/img/Shopcategory/Rectangle 55.png";
 import Slider from "react-slick";
@@ -20,6 +20,7 @@ import Footer from "../../Common/Footer";
 import { FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import FilterDropDown from "../../Common/Filter/filter";
+import SortDropdown from "../../Common/Sort/sort";
 
 const categories = [
   { name: "Ghee", image: Imge },
@@ -149,8 +150,7 @@ const Products = () => {
 
             <div className="d-flex justify-content-center py-5">
               <div className="px-3">
-                <img src={Sort} alt="Sort" className="sort-icon" />
-                <div className="text-center text-color-terracotta">Sort</div>
+                <SortDropdown/>
               </div>
               <div className="px-3">
                 <FilterDropDown/>

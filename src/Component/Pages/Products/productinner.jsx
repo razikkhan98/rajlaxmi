@@ -8,6 +8,8 @@ import Images3 from "../../Assets/img/Shopcategory/Organic Jaggery Powder.png";
 import Images4 from "../../Assets/img/Shopcategory/Hing Powder.png";
 import AddtoCard from "../../Common/Addtocard";
 import Footer from "../../Common/Footer";
+import FilterDropDown from "../../Common/Filter/filter";
+import SortDropdown from "../../Common/Sort/sort";
 
 const BestSellers = [
   {
@@ -127,12 +129,10 @@ const ProductInner = () => {
           <Navbar />
           <div className="d-flex justify-content-center py-5">
             <div className="px-3">
-              <img src={Sort} alt="Sort" className="sort-icon" />
-              <div className="text-center text-color-terracotta">Sort</div>
+              <SortDropdown/>
             </div>
             <div className="px-3">
-              <img src={Funnel} alt="Filter" className="sort-icon" />
-              <div className="text-center text-color-terracotta">Filter</div>
+              <FilterDropDown/>
             </div>
           </div>
         </div>
