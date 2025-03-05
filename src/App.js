@@ -18,9 +18,9 @@ function App() {
      <ToastContainer position="top-right" autoClose={2000} />
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/products" element={<Product />} />
           <Route path="/products-inner" element={<ProductInner />} />
         </Routes>

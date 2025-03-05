@@ -129,10 +129,10 @@ const ProductInner = () => {
           <Navbar />
           <div className="d-flex justify-content-center py-5">
             <div className="px-3">
-              <SortDropdown/>
+              <SortDropdown />
             </div>
             <div className="px-3">
-              <FilterDropDown/>
+              <FilterDropDown />
             </div>
           </div>
         </div>
@@ -157,4 +157,3 @@ const ProductInner = () => {
 };
 
 export default ProductInner;
-
