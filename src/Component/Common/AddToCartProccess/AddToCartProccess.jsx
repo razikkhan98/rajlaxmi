@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // images
 import rightTick from "../../Assets/img/ourProducts/rightTick.svg";
@@ -6,8 +6,13 @@ import prdimg from "../../Assets/img/Product/image 66.svg";
 import trash from "../../Assets/img/ourProducts/TrashSimple.svg";
 import cross from "../../Assets/img/Product/cross.svg";
 import { Modal } from "react-bootstrap";
+import { CartContext } from "../../Context/UserContext";
 
 const AddToCartProccess = ({ showModal, handleClose }) => {
+  const { cartItems } = useContext(CartContext);
+  console.log(cartItems)
+
+
   // States
   const [step, setStep] = useState(0);
   const [Paymode, setPaymode] = useState(false);
@@ -36,7 +41,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                 onClick={() => handleClose()}
                 className="mx-4 mt-3 mb-2 "
                 src={cross}
-                alt=""
+                alt="Loading"
               />
             </div>
           </div>
@@ -48,7 +53,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     step >= 1 ? "-active" : ""
                   } d-flex justify-content-center align-items-center`}
                 >
-                  {step >= 1 && <img src={rightTick} alt="" />}
+                  {step >= 1 && <img src={rightTick} alt="Loading" />}
                 </div>
                 <span>Cart</span>
               </div>
@@ -101,20 +106,20 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                   </div>
                   <hr />
 
-                  {[1, 2, 3]?.map((i, index) => (
+                  {cartItems?.map((i, index) => (
                     <div className="d-flex  align-items-center product-cards my-3">
                       <div className=" p-0">
-                        <img src={prdimg} className="rounded m-2" alt="" />
+                        <img src={i.image} className="rounded m-2" alt="" />
                       </div>
                       <div className="ms-2 product-cards-center p-0">
                         <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-16 pt-1">
-                          Hing Powder
+                          {i.name}                        
                         </div>
                         <div className="text-color-dark-grayish-blue inter-font-family-400 font-size-14 pt-1">
-                          Qty: 500 gm
+                          Qty: {i.qty}
                         </div>
                         <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-24 pt-2">
-                          ₹ 1200
+                          ₹ {i.price}
                         </div>
                       </div>
                       <div className=" product-cards-end p-0 background-color-gleeful d-flex justify-content-center align-items-center">
@@ -126,7 +131,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                               </button>
                             </div>
                             <div className="text-center">
-                              <span className="font-size-24">1</span>
+                              <span className="font-size-24">{i.quantity}</span>
                             </div>
                             <div>
                               <button className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center">
@@ -136,7 +141,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           </div>
                         </div>
                       </div>
-                      <div className=" product-cards-end p-0 background-color-terracotta AddToCartModal-delete-button d-flex justify-content-center align-items-center">
+                      <div className=" product-cards-end p-0 background-color-terracotta AddToCartModal-delete-button d-flex justify-content-center align-items-center" style={{cursor:"pointer"}}>
                         <span className="text-white inter-font-family-600 font-size-16">
                           Delete
                         </span>
