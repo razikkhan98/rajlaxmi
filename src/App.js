@@ -8,6 +8,7 @@ import Product from "./Component/Pages/Products/index";
 import "react-toastify/dist/ReactToastify.css";
 
 import ProductInner from "./Component/Pages/Products/productinner";
+import ProductDescription from "./Component/Pages/ProductDescription/productdescription";
 
 import { ToastContainer } from "react-toastify";
 import WishList from "./Component/Pages/Wishlist/wishlist";
@@ -25,6 +26,8 @@ function App() {
           <Route path="/products" element={<Product />} />
           <Route path="/products-inner" element={<ProductInner />} />
           <Route path="/wishlist" element={<WishList />} />
+          <Route path="/productdescription" element={<ProductDescription />} />
+
         </Routes>
       </Router>
     </>
