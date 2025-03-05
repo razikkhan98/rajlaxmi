@@ -1083,6 +1083,17 @@ body {
   outline: 1px solid var(--terracotta) !important;
   box-shadow: unset !important;
 }
+.addToCartModalButton{
+  border:1px solid var(--terracotta);
+  color: var(--terracotta);
+  background-color: transparent;
+  /* width: 200px; */
+  height: 48px;
+}
+.addToCartModalButton:hover{
+  background-color: var(--terracotta);
+  color: white;
+}
 
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
   .AddToCartModal-modal-grid-1 {
@@ -1261,6 +1272,7 @@ body {
   box-shadow: unset !important;
 }
 
+
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
   .AddToCartModal-modal-grid-1 {
     width: 400px !important;
@@ -1391,3 +1403,55 @@ body {
 .filter-btn{
   background-color: #A4BE7B;
 }
+
+/* ===================== Auto Suggest Search Bar Start ====================== */
+
+.autosuggest-nav{
+height: 40px;
+width: 40px;
+}
+.autosuggest-nav-active{
+  height: 40px;
+  width: 452px;
+  }
+.autosuggest-input{
+   position:relative;
+}
+.autosuggest-input input{
+  background: transparent;
+  border: 0px;
+  width: 300px;
+}
+.autosuggest-input input:focus-visible{
+  background: transparent;
+  border: 0px;
+  outline: 0;
+}
+
+/* width: 40px;
+height: 40px; */
+.autosuggest-icon{
+  background: #a4be7b;
+  color: #e07a5f;
+}
+
+.menu-nav-search {
+  transition: background-color 0.2s ease;
+}
+
+.menu-nav-search:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--cashier-main-color);
+}
+.auto-search-trend-box img{
+width: 100px;
+height: 100px;
+}
+
+.auto-search-modal{
+  border: 1px solid rgba(224, 122, 95, 1);
+  box-shadow: 0px 4px 16px 1px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ===================== Auto Suggest Search Bar END ====================== */

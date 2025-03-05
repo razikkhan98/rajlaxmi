@@ -143,6 +143,10 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       </div>
                     </div>
                   ))}
+                  <div className="d-flex justify-content-between mt-5">
+                    <button className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Add more item</button>
+                    <button className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Proceed</button>
+                  </div>
                 </div>
                 <hr className={`vertical-hr ${Paymode ? "d-none" : ""}`} />
                 {/* Detail Form */}
@@ -218,7 +222,56 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       </label>
                       <input type="text" className="form-control" />
                     </div>
+                    <div className="col-lg-4 address-section-form form-group pt-3">
+                      <label
+                        className="font-size-12 inter-font-family-400"
+                        for=""
+                      >
+                        Country
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                    <div className="col-lg-8 address-section-form form-group pt-3">
+                      <label
+                        className="font-size-12 inter-font-family-400"
+                        for=""
+                      >
+                        Contact No
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+
+                    <div className="col-lg-4 address-section-form form-group pt-3">
+                      <label
+                        className="font-size-12 inter-font-family-400"
+                        for=""
+                      >
+                        State
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                    <div className="col-lg-4 address-section-form form-group pt-3">
+                      <label
+                        className="font-size-12 inter-font-family-400"
+                        for=""
+                      >
+                        City
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                    <div className="col-lg-4 address-section-form form-group pt-3">
+                      <label
+                        className="font-size-12 inter-font-family-400"
+                        for=""
+                      >
+                        Pincode
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
                   </form>
+                  <div className=" mt-5">
+                    <button className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Proceed with this address</button>
+                  </div>
                 </div>
                 <hr
                   className={`vertical-hr ${
@@ -272,7 +325,12 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                         </span>
                         {/* <span className="font-size-16 inter-font-family-500">₹ 1200</span> */}
                         <div className="background-color-add-modal apply-coupon p-2  rounded">
-                          <input className="coupon-input" type="text"  name="" id="" />{" "}
+                          <input
+                            className="coupon-input"
+                            type="text"
+                            name=""
+                            id=""
+                          />{" "}
                           <button className=" background-color-terracotta text-white border-0 rounded py-1 font-size-12 inter-font-family-500 px-3">
                             Apply
                           </button>
@@ -366,7 +424,6 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
               </div>
             </div>
           </Modal.Body>
-
         </div>
       </Modal>
     </div>
