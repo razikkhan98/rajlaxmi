@@ -29,7 +29,7 @@ const Home = () => {
           <Navbar />
 
           <div className="container">
-            {/* <div className="row py-5">
+            <div className="row py-5">
               <div className="col-lg-3 col-md-12 px-0 home-col1">
                 <p className="home-para1 mb-0 pb-1">Organic Product</p>
                 <div className="img1">
@@ -58,7 +58,7 @@ const Home = () => {
                   <img src={Home6} alt="Loading" />
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </section>

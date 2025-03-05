@@ -1,118 +1,162 @@
+
+
 import React from "react";
+
+// Images
 import Logi from "../../Assets/img/Login/Frame 1261158478.png";
 import Arro from "../../Assets/img/Login/Vector (1).svg";
+
+// Common
+import { postData } from "../../../services/apiService";
+
+
+// Third party libraries
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form"; 
+import { useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
+
 
 const Resignation = () => {
+  const navigate = useNavigate();
+
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors } 
+  } = useForm();  // Initialize react-hook-form
+
+
+  // API endpoint
+  const userEndpoint = "register";
+
+  // Handle form submission
+  const onSubmit = async (data) => {
+    try {
+      const response = await postData(userEndpoint, data);
+      toast.success(response.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      setTimeout(() => navigate("/login"), 1000);
+    } catch (error) {
+      toast.error(error || "Failed to create account!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
+
   return (
     <>
       <section className="background-color-light-grayish-yellow d-flex justify-content-center align-items-center min-vh-100">
-        <div className="container py-4">
+        <div className="container py-2">
           <div className="login-modal-shadow rounded position-relative">
             <div className="position-absolute top-0 end-0">
               <img src={Arro} alt="Loading" className="img-fluid" />
             </div>
             <div className="row">
               <div className="col-lg-6 col-sm-12 d-flex">
-                <img src={Logi} alt="Loding" className="img-fluid" />
+                <img src={Logi} alt="Loading" className="img-fluid" />
               </div>
               <div className="col-lg-6 col-sm-12 px-5">
                 <div className="text-start josefin-sans-font-family-600 font-size-30 py-3 text-color-dark-grayish-blue pt-4">
-                Create An account
+                  Create An Account
                 </div>
                 <p className="inter-font-family-400 font-size-16 text-color-dark-grayish-blue">
-                Please fill the details below to create an account                </p>
-                <div>
-                  <form action="" className="form-resignation">
-                    <div className="pt-4 d-flex">
-                      <div>
-                        <label
-                          htmlFor=""
-                          className="inter-font-family-400 font-size-14 login-text py-2"
-                        >
-                          First Name
-                        </label>
-                        <div className="">
-                          <input
-                            type="text"
-                            name="email"
-                            className="input-stylee"
-                          />
-                        </div>
-                      </div>
+                  Please fill the details below to create an account
+                </p>
 
-                      <div>
-                        <label
-                          htmlFor=""
-                          className="inter-font-family-400 font-size-14 login-text py-2 ms-3"
-                        >
-                          Last Name
-                        </label>
-                        <div className="">
-                          <input
-                            type="text"
-                            name="email"
-                            className="input-stylee ms-3"
-                          />
-                        </div>
-                      </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="form-resignation">
+                  <div className="pt-3 d-flex">
+                    <div>
+                      <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        {...register("firstName", { required: "First name is required" })}
+                        className="input-stylee"
+                      />
+                      {errors.firstName && <p className="text-danger">{errors.firstName.message}</p>}
                     </div>
-                    <div className="pt-4">
-                      <div>
-                        <label
-                          htmlFor=""
-                          className="inter-font-family-400 font-size-14 login-text py-2"
-                        >
-                          Email/Contact No
-                        </label>
-                      </div>
-                      <div className="">
-                        <input
-                          type="password"
-                          name="password"
-                          className="input-style"
-                        />
-                      </div>
+                    <div className="ms-3">
+                      <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        {...register("lastName", { required: "Last name is required" })}
+                        className="input-stylee"
+                      />
+                      {errors.lastName && <p className="text-danger">{errors.lastName.message}</p>}
                     </div>
-                    <div className="py-4">
-                      <div>
-                        <label
-                          htmlFor=""
-                          className="inter-font-family-400 font-size-14 login-text py-2"
-                        >
-                          Password
-                        </label>
-                      </div>
-                      <div className="">
-                        <input
-                          type="password"
-                          name="password"
-                          className="input-style"
-                        />
-                      </div>
-                    </div>
-                    <div className="py-4">
-                      <button
-                        type="submit"
-                        className="background-color-terracotta text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0 "
-                      >
-                        Create account
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                <div className="py-4 w-75 text-center">
+                  </div>
+
+                  <div className="pt-3">
+                    <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                      Mobile Number
+                    </label>
+                    <input
+                      type="tel"
+                      {...register("mobileNumber", { required: "Mobile number is required" })}
+                      className="input-style"
+                    />
+                    {errors.mobileNumber && <p className="text-danger">{errors.mobileNumber.message}</p>}
+                  </div>
+
+                  <div className="pt-3">
+                    <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Enter a valid email" } })}
+                      className="input-style"
+                    />
+                    {errors.email && <p className="text-danger">{errors.email.message}</p>}
+                  </div>
+
+                  <div className="py-2">
+                    <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be at least 6 characters" } })}
+                      className="input-style"
+                    />
+                    {errors.password && <p className="text-danger">{errors.password.message}</p>}
+                  </div>
+
+                  <div className="py-2">
+                    <button type="submit" className="background-color-terracotta text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0">
+                      Create Account
+                    </button>
+                  </div>
+                </form>
+
+                <div className="py-3 w-75 text-center">
                   <span className="inter-font-family-400 font-size-14 ps-4">
-                  Already a user?
+                    Already a user?
                   </span>
-                  <span>
-                    <Link
-                      to="/"
-                      className="px-2 text-decoration-none inter-font-family-500 font-size-14 text-color-terracotta hover-button"
-                    >
-                      Login
-                    </Link>
-                  </span>
+                  <Link to="/" className="px-2 text-decoration-none inter-font-family-500 font-size-14 text-color-terracotta hover-button">
+                    Login
+                  </Link>
                 </div>
               </div>
             </div>
