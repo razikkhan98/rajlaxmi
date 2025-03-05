@@ -7,6 +7,7 @@ import Home from "./Component/Pages/Home";
 import Product from "./Component/Pages/Products/index";
 
 import ProductInner from "./Component/Pages/Products/productinner";
+import ProductDescription from "./Component/Pages/ProductDescription/productdescription";
 
 
 
@@ -21,6 +22,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/products" element={<Product />} />
           <Route path="/products-inner" element={<ProductInner />} />
+          <Route path="/productdescription" element={<ProductDescription />} />
+
         </Routes>
       </Router>
     </>
