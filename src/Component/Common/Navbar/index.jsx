@@ -83,11 +83,15 @@ import AutoSuggestSearch from "../AutoSuggestSearchBar/AutoSuggestSearchBar";
 const DataNavbar = [
   {
     title: "Home",
-    url: "/home",
+    url: "/",
   },
   {
     title: "Products",
     url: "/products",
+  },
+  {
+    title: "Wishlist",
+    url: "/home",
   },
 ];
 

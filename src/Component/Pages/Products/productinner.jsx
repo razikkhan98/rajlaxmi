@@ -162,4 +162,3 @@ const ProductInner = () => {
 };
 
 export default ProductInner;
-

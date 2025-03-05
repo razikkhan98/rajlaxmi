@@ -862,7 +862,7 @@ body {
   background: #d66a50;
   color: white;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 0px 0px 8px 8px;
 
   font-size: 14px;
 }
@@ -1415,31 +1415,30 @@ height: 100px;
   width: 140px;
   height: 120px;
 } */
-.autosuggest-input input {
-  width: 200px !important;
-}
-.autosuggest-nav-active {
-  width: 300px !important;
-}
-.AddToCartModal .tick-progress-bar {
-  width: 120px !important;
-}
-.AddToCartModal .tick-progress-bar-active {
-  width: 120px !important;
-}
-.AddToCartModal .product-cards {
-  width: 360px !important;
-}
-.vertical-hr {
-  display: none !important;
-}
-.coupon-input{
-  width: 107px !important;
-}
-.payment-section-button {
-  width: 240px !important;
-}
-
+  .autosuggest-input input {
+    width: 200px !important;
+  }
+  .autosuggest-nav-active {
+    width: 300px !important;
+  }
+  .AddToCartModal .tick-progress-bar {
+    width: 120px !important;
+  }
+  .AddToCartModal .tick-progress-bar-active {
+    width: 120px !important;
+  }
+  .AddToCartModal .product-cards {
+    width: 360px !important;
+  }
+  .vertical-hr {
+    display: none !important;
+  }
+  .coupon-input {
+    width: 107px !important;
+  }
+  .payment-section-button {
+    width: 240px !important;
+  }
 }
 
 /* Filter Popup */
@@ -1871,3 +1870,54 @@ margin-right: 32px;
  .text-light-gray-color{
   color: #A1A1A1;
  }
+
+/* -==================== shop-category-slider========== */
+.shop-category-slider .swiper-button-lock {
+  display: block !important;
+}
+.shop-category-slider .slick-list {
+  width: 100vw;
+}
+.shop-category-slider .slick-prev {
+  /* left: -50px; */
+  background-color: white !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+
+.shop-category-slider .slick-next {
+  /* right: -50px; */
+  background-color: white !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
+.shop-category-slider .slick-next {
+  right: 20% !important;
+  width: 36px !important;
+  height: 36px !important;
+  background-color: #fefbe9 !important;
+  border: 1px solid var(--gleeful) !important;
+  font-size: 0px !important;
+  cursor: pointer !important;
+}
+.shop-category-slider .slick-prev {
+  right: 20% !important;
+  width: 36px !important;
+  height: 36px !important;
+  background-color: #fefbe9 !important;
+  border: 1px solid var(--gleeful) !important;
+  font-size: 0px !important;
+  cursor: pointer !important;
+}
+.shop-category-slider .slick-next:hover {
+  background-color: var(--gleeful) !important;
+  color: #fefbe9 !important;
+  font-size: 0;
+}
+
+.shop-category-slider .slick-prev {
+  left: 0px !important;
+  border: 2px solid black;
+}
