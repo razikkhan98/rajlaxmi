@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 
 // images
 import rightTick from "../../Assets/img/ourProducts/rightTick.svg";
-import prdimg from "../../Assets/img/Product/image 66.svg";
 import trash from "../../Assets/img/ourProducts/TrashSimple.svg";
 import cross from "../../Assets/img/Product/cross.svg";
 import { Modal } from "react-bootstrap";

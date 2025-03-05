@@ -1620,11 +1620,11 @@ height: 40px; */
 
 .rating-text {
   display: flex;
+  align-items: center;
   font-size: 1.2rem;
   color: #333;
   line-height: 20px;
-  font-size: 12px;
-  margin-left: 16px;
+
 }
 
 .rating-value {
@@ -1869,6 +1869,10 @@ margin-right: 32px;
  }
  .text-light-gray-color{
   color: #A1A1A1;
+ }
+ .card-img-top{
+  width: 40px;
+  height: 40px;
  }
 
 /* -==================== shop-category-slider========== */

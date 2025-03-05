@@ -11,24 +11,26 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
+import { useNavigate } from "react-router-dom"; 
+
 
 const AddtoCard = ({ product }) => {
-  // ===========
-  // useState
-  // ===========
+  // UseState
 
   // useState for Add to Cart Button
   const { addToCart, removeFromCart } = useContext(CartContext);
-
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [selectedWeight, setSelectedWeight] = useState("500gm");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const weightOptions = ["500gm", "1kg", "2kg"]; // Available sizes
 
-  // ==============
-  // function
-  // ================
+  const navigate = useNavigate(); 
+
+
+ 
+  // Function
+  
 
   // Handle Quantity Changes
   const increaseQuantity = () => {
@@ -114,7 +116,7 @@ const AddtoCard = ({ product }) => {
                 </div>
               )}
             </div>
-            <img src={product.image} alt="Loading" className="img-fluid" />
+            <img src={product.image} alt="Loading" className="img-fluid" onClick={() => navigate(`/productdescription/${product.id}`, { state: { product } })}/>
           </div>
         </div>
 

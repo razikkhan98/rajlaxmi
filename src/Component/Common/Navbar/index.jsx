@@ -69,7 +69,7 @@
 
 // export default Navbar;
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Logo from "../../Assets/img/Logo/RAJLAXMI JAVIK PNG.png";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
@@ -79,6 +79,7 @@ import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import AddToCartProccess from "../AddToCartProccess/AddToCartProccess";
 import AutoSuggestSearch from "../AutoSuggestSearchBar/AutoSuggestSearchBar";
+import { CartContext } from "../../Context/UserContext";
 
 const DataNavbar = [
   {
@@ -96,12 +97,15 @@ const DataNavbar = [
 ];
 
 const Navbar = () => {
+  const { cartItems } = useContext(CartContext);
+
+  const size = cartItems?.length;
+
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [autoSearchFillValue, setautoSearchFillValue] = useState();
   const [inputBar, setInputBar] = useState(false);
-  const [NavSortModal, setNavSortModal] = useState(false);
 
   // Functions
 
@@ -121,9 +125,8 @@ const Navbar = () => {
 
   const mobNav = window?.screen?.width;
 
-  //   =========
   // useEffect
-  // ===========
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (event?.target?.closest(".automodal")) {
@@ -253,7 +256,7 @@ const Navbar = () => {
               >
                 <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
                 <span className="cart-quantity translate-middle rounded-pill">
-                  0
+                  {size}
                 </span>
               </button>
             </div>
@@ -265,9 +268,7 @@ const Navbar = () => {
         <div
           onClick={() => handleOpenSearchBar()} // Set focus on click
           className={`d-flex align-items-center autosuggest-nav-active rounded-5 bg-white  p-2 ${
-            inputBar
-              ? "autosuggest-nav-active rounded-3"
-              : ""
+            inputBar ? "autosuggest-nav-active rounded-3" : ""
           } ${mobNav < 992 ? "" : "d-none"}`}
         >
           <RiSearch2Line
@@ -276,16 +277,16 @@ const Navbar = () => {
             }`}
           />
           {/* {inputBar ? ( */}
-            <>
-              <div className="autosuggest-input w-100">
-                <input
-                  type="text"
-                  placeholder="Search for Oil, Ghee and other products  "
-                  onChange={HandleAutoSearchInp}
-                  className={`  h-100  ${autoSearchFillValue ? "" : ""}`}
-                />
-              </div>
-            </>
+          <>
+            <div className="autosuggest-input w-100">
+              <input
+                type="text"
+                placeholder="Search for Oil, Ghee and other products  "
+                onChange={HandleAutoSearchInp}
+                className={`  h-100  ${autoSearchFillValue ? "" : ""}`}
+              />
+            </div>
+          </>
           {/* // ) : null} */}
         </div>
         <button
