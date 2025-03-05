@@ -91,7 +91,7 @@ const DataNavbar = [
   },
   {
     title: "Wishlist",
-    url: "/home",
+    url: "/wishlist",
   },
 ];
 

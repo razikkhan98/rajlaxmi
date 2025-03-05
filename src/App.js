@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProductInner from "./Component/Pages/Products/productinner";
 
 import { ToastContainer } from "react-toastify";
+import WishList from "./Component/Pages/Wishlist/wishlist";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Product />} />
           <Route path="/products-inner" element={<ProductInner />} />
+          <Route path="/wishlist" element={<WishList />} />
         </Routes>
       </Router>
     </>
