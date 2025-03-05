@@ -89,6 +89,10 @@ const DataNavbar = [
     title: "Products",
     url: "/products",
   },
+  {
+    title: "Wishlist",
+    url: "/home",
+  },
 ];
 
 const Navbar = () => {
