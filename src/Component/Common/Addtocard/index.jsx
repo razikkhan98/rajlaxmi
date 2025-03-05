@@ -60,7 +60,7 @@ const AddtoCard = ({ product }) => {
 
   return (
     <React.Fragment>
-      <div className="shop-by-category background-color-white position-relative my-2 ">
+      <div className="shop-by-category background-color-white m-auto md:m-auto position-relative my-2 ">
         <div className="d-flex justify-content-center pt-2">
           <div>
             {/* Icons (Heart & Share) */}
