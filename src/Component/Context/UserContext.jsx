@@ -43,8 +43,13 @@ export const CartProvider = ({ children }) => {
   // Add to WishList Functions
   const AddToWishList = (product) => {
     const isProductInWishList = WishListItems.some(item => item?.id === product?.id);
-    if (!isProductInWishList) {
-      setWishListItems([...WishListItems, product]); 
+    if (isProductInWishList) {
+      // Remove product from WishList
+      const updatedWishList = WishListItems.filter(item => item?.id !== product?.id);
+      setWishListItems(updatedWishList);
+    } else {
+      // Add product to WishList
+      setWishListItems([...WishListItems, product]);
     }
   };
 

@@ -1447,6 +1447,10 @@ padding-left: 0px;
     width: 224px;
     height: 200px;
   }
+  #explore-slider-img {
+    width: unset !important;;
+    height: unset !important;
+  }
   .slide img {
     width: 30px !important;
     height: 30px !important;
@@ -1931,9 +1935,9 @@ height: 40px; */
     height: 112px;
     padding: 0px 0px !important;
   }
-  .circle-cut {
-    width: 172px;
-    height: 112px;
+  #circle-cut {
+    width: 172px !important;
+    height: 112px !important;
     --r: 7px;
     mask: radial-gradient(
         var(--r) at var(--r) calc(100% - 45px),
