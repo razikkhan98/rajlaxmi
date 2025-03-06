@@ -52,7 +52,7 @@ const Footer = () => {
        
         <Row>
           {/* Logo and Company Name */}
-          <Col xs={6} md={2} className="ps-2">
+          <Col xs={6} lg={2} md={4} className="ps-2">
             <div className="mb-4">
               <img
                 src={Logo}
@@ -67,7 +67,7 @@ const Footer = () => {
           </Col>
 
           {/* Navigate Our Site */}
-          <Col xs={6} md={3}>
+          <Col xs={6} lg={3} md={4}>
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               Navigate Our Site
             </div>
@@ -83,7 +83,7 @@ const Footer = () => {
           </Col>
 
           {/* Categories */}
-          <Col xs={6} md={2}>
+          <Col xs={6} lg={2} md={4}>
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               Categories
             </div>
@@ -99,7 +99,7 @@ const Footer = () => {
           </Col>
 
           {/* General Links */}
-          <Col xs={6} md={2}>
+          <Col xs={6} lg={2} md={6}>
             {/* <h6 className="fw-bold">General</h6> */}
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               General
@@ -116,7 +116,7 @@ const Footer = () => {
           </Col>
 
           {/* Contact Us */}
-          <Col xs={12} md={3}>
+          <Col xs={12} lg={3} md={6}>
             {/* <h6 className="fw-bold">Contact Us</h6> */}
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               Contact Us
@@ -178,7 +178,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <Row className="mt-4 align-items-center footer-icon-background p-3 rounded text-center">
-          <Col xs={12} md={3}>
+          <Col xs={12} lg={3} md={3}>
             <p className="mb-0 ">
               <span className="inter-font-family-400 text-description font-size-12">
                 &copy; 2024 Rajlaxmi Jaiviks International{" "}
@@ -191,7 +191,7 @@ const Footer = () => {
           </Col>
 
           {/* Social Media Icons */}
-          <Col xs={12} md={6}>
+          <Col xs={12} lg={6} md={6}>
             {socialIcons.map((item, index) => (
               <a
                 href={item.link}
