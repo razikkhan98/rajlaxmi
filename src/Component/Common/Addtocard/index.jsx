@@ -97,7 +97,7 @@ const AddtoCard = ({ product }) => {
                 <span className="inter-font-family-500 font-size-14 text-color-dark-grayish-blue ml-3">
                   Qty
                 </span>
-                <span className="inter-font-family-500 font-size-14 ms-2">
+                <span className="inter-font-family-500 font-size-14 ms-2 text-color-dark-grayish-blue">
                   {selectedWeight}
                 </span>
                 <MdOutlineArrowDropDown className="text-color-terracotta" />
