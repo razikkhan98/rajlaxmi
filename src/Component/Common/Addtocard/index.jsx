@@ -12,13 +12,15 @@ import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
 
+import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
 const AddtoCard = ({ product }) => {
   // ===========
   // useState
   // ===========
 
   // useState for Add to Cart Button
-  const { addToCart, removeFromCart } = useContext(CartContext);
+  const { addToCart, removeFromCart, AddToWishList, WishListItems } =
+    useContext(CartContext);
 
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -44,6 +46,11 @@ const AddtoCard = ({ product }) => {
       setQuantity(0);
     }
   };
+
+  // Add to Wishlist Function
+  // const handleAddToWishList = () => {
+  //   AddToWishList(product); // Use the context method to handle adding to wishlist
+  // };
 
   //   Rating Change
   const renderStars = (rating) => {
@@ -72,8 +79,12 @@ const AddtoCard = ({ product }) => {
         <div className="d-flex justify-content-center pt-2">
           <div>
             {/* Icons (Heart & Share) */}
-            <div className="heart">
-              <FaRegHeart className="text-color-terracotta" />
+            <div className="heart" onClick={() => AddToWishList(product)}>
+              {!WishListItems.some((item) => item?.id === product?.id) ? (
+                <FaRegHeart className="text-color-terracotta" />
+              ) : (
+                <img src={FillHeart} alt="" />
+              )}
             </div>
             <div className="share">
               <PiShareFatBold className="text-color-terracotta" />
