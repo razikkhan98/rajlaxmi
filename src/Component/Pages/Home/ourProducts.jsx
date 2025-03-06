@@ -82,7 +82,7 @@ const OurProducts = () => {
     <>
       <section className="background-color-light-grayish-yellow padding-top-100 padding-bottom-60">
         <div className="container py-2">
-          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-start">
+          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-start text-color-dark-ashy-blue">
             Explore Our Products
           </div>
           <div className="row">
@@ -92,7 +92,7 @@ const OurProducts = () => {
               </div>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 mb-4 py-3">
-              <div className="josefin-sans-font-family-500 font-size-40 heading-title text-start mt-2">
+              <div className="josefin-sans-font-family-500 font-size-40 heading-title text-start mt-2 text-color-dark-ashy-blue">
                 Natural and Nutritious dry Fruits
               </div>
               <div className="inter-font-family-400 font-size-24 text-capitalize text-description text-color-dark-ashy-blue py-3">
@@ -146,11 +146,11 @@ const OurProducts = () => {
       </section>
       <section>
         {/* <div className="container-fluid"> */}
-          <div className="back-ground-img py-4">
+          <div className="back-ground-img py-5">
             <div className="container">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="josefin-sans-font-family-500 heading-title font-size-40 text-color-white pt-5 pb-4">
+                  <div className="josefin-sans-font-family-500 heading-title font-size-40 mt-3 text-color-white pb-4">
                     Have questions about our organic products?
                   </div>
                   <div className="py-2">
@@ -173,20 +173,22 @@ const OurProducts = () => {
                       +91-8769115905
                     </span>
                   </div>
-                  <div className="py-2">
-                    <img
+                  <div className="py-2 d-flex">
+                   <div>
+                   <img
                       src={Map}
                       alt="Loading"
                       className="background-color-white p-2 rounded-circle"
                     />
+                   </div>
                     <span className="inter-font-family-500 font-size-16 text-description text-color-white px-2 text-capitalize ms-3">
                       Address: 11, manish bagh colony, Sapna sangeeta road,
-                      indore, madhya pradesh, 452001
+                       indore, madhya pradesh, 452001
                     </span>
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-center">
-                  <div className="background-from  p-2">
+                  <div className="background-from  p-3">
                     <form onSubmit={handleSubmit}>
                       <div className="mb-3">
                         {/* <label htmlFor="name" className="form-label">
@@ -204,7 +206,7 @@ const OurProducts = () => {
                         />
                       </div>
                       <div className="d-flex justify-content-between">
-                        <div className="mb-3 mx-1" style={{ width: "197px" }}>
+                        <div className="mb-3" style={{ width: "197px" }}>
                           {/* <label htmlFor="email" className="form-label">
                           Email
                         </label> */}
@@ -220,7 +222,7 @@ const OurProducts = () => {
                           />
                         </div>
 
-                        <div className="mb-3 mx-1" style={{ width: "197px" }}>
+                        <div className="mb-3 ms-2" style={{ width: "197px" }}>
                           {/* <label htmlFor="phone" className="form-label">
                           Phone
                         </label> */}
@@ -264,7 +266,7 @@ const OurProducts = () => {
                 </div>
               </div>
             </div>
-            <div className="together py-2 inter-font-family-500 font-size-24 heading-title text-color-white text-center">Let’s grow greener together!!!</div>
+            <div className="together py-2 inter-font-family-500 font-size-20 heading-title text-color-white text-center text-capitalize">Let’s Grow Greener Together!!!</div>
           </div>
         {/* </div> */}
       </section>
