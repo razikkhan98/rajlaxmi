@@ -97,9 +97,11 @@ const DataNavbar = [
 ];
 
 const Navbar = () => {
-  const { cartItems } = useContext(CartContext);
 
-  const size = cartItems?.length;
+  const [cartCount, setCartCount] = useState(0);
+  const uid = sessionStorage.getItem("uid");
+
+  
 
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -155,6 +157,30 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const updateCartCount = () => {
+    const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+    let totalItems = 0;
+
+    Object.values(storedCart).forEach((product) => {
+      Object.values(product).forEach((weight) => {
+        totalItems += weight.quantity;
+      });
+    });
+
+    setCartCount(totalItems);
+  };
+
+  useEffect(() => {
+    updateCartCount(); // Initial load
+
+    // 🔥 Listen for the "cartUpdated" event
+    window.addEventListener("cartUpdated", updateCartCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+    };
+  }, [uid]);
 
   return (
     <>
@@ -256,7 +282,7 @@ const Navbar = () => {
               >
                 <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
                 <span className="cart-quantity translate-middle rounded-pill">
-                  {size}
+                  {cartCount}
                 </span>
               </button>
             </div>
