@@ -10,7 +10,6 @@ import { CartContext } from "../../Context/UserContext";
 
 const AddToCartProccess = ({ showModal, handleClose }) => {
   const { cartItems } = useContext(CartContext);
-  console.log(cartItems)
 
 
   // States
@@ -150,7 +149,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                   ))}
                   <div className="d-flex justify-content-between mt-5">
                     <button className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Add more item</button>
-                    <button className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Proceed</button>
+                    <button onClick={()=>handleTapSteps()} className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Proceed</button>
                   </div>
                 </div>
                 <hr className={`vertical-hr ${Paymode ? "d-none" : ""}`} />
@@ -166,7 +165,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     </span>
                     <hr />
                   </div>
-                  <div className="row">
+                  <div className={`row ${step >= 1 ? '' :'d-none' }`}>
                     {[1, 2, 3]?.map((i, index) => (
                       <div className="col-lg-3 ps-2 me-4 mb-3 address-section p-0 rounded-3">
                         <div className="d-flex justify-content-end align-items-center">
@@ -186,11 +185,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       </div>
                     ))}
                   </div>
-                  <hr className="address-sect-hr" />
-                  <div className="login-text font-size-14 inter-font-family-500">
+                  <hr className={`address-sect-hr ${step >= 1 ? '' :'d-none' }`} />
+                  <div className={`login-text font-size-14 inter-font-family-500 ${step >= 1 ? '' :'d-none' }`}>
                     Add New Address
                   </div>
-                  <form className="row" action="">
+                  <form className={`row ${step >= 1 ? '' :'d-none' }`} action="">
                     <div className="col-lg-6 address-section-form form-group pt-3">
                       <label
                         className="font-size-12 inter-font-family-400"
@@ -274,8 +273,8 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       <input type="text" className="form-control" />
                     </div>
                   </form>
-                  <div className=" mt-5">
-                    <button className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Proceed with this address</button>
+                  <div className= {`mt-5 ${step >= 1 ? '' :'d-none' }`}>
+                    <button onClick={()=>handleTapSteps()} className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}>Proceed with this address</button>
                   </div>
                 </div>
                 <hr
@@ -295,7 +294,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     </span>
                     <hr />
                   </div>
-                  <div className="">
+                  <div className={`${step >= 2 ? '' :'d-none' }`}>
                     <ul>
                       <li className="d-flex justify-content-between py-2">
                         <span className="login-text font-size-14 inter-font-family-500">

@@ -10,6 +10,7 @@ import AddtoCard from "../../Common/Addtocard";
 import Footer from "../../Common/Footer";
 import FilterDropDown from "../../Common/Filter/filter";
 import SortDropdown from "../../Common/Sort/sort";
+import ArrowDark from "../../Assets/img/ProductDescription/arror-dark.png"
 
 const BestSellers = [
   {
@@ -127,18 +128,23 @@ const ProductInner = () => {
       <section>
         <div className="bg-custom-gradient-product">
           <Navbar />
-          <div className="d-flex justify-content-center py-5">
-            <div className="px-3">
-              <SortDropdown />
-            </div>
-            <div className="px-3">
-              <FilterDropDown />
+          <div className="container pt-5 text-light-gray-color font-size-14 inter-font-family-400">
+          <span> Back</span> <img src={ArrowDark} className="mx-2" alt="Loading" /> <span className=" text-color-dark-grayish-blue">Spices</span>
+          
+            <div className="d-flex justify-content-end pt-3">
+              <div className="px-3">
+                <SortDropdown />
+              </div>
+              <div className="px-3">
+                <FilterDropDown />
+              </div>
             </div>
           </div>
         </div>
         <div className="background-color-light-grayish-yellow padding-bottom-60">
           <div className="container">
             <div className="row">
+              <h2 className="ms-3 text-color-dark-grayish-blue font-size-32 inter-font-family-500">Spices</h2>
               {BestSellers.map((product, index) => (
                 <>
                   <div key={index} className="col-md-3 col-sm-12  py-3">

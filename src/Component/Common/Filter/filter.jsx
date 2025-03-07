@@ -25,7 +25,7 @@
 
 // export default FilterDropDown
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Funnel from "../../Assets/img/Product/Funnel.svg";
@@ -40,6 +40,13 @@ const FilterDropDown = () => {
     const handleAccordionClick = (event) => {
         event.stopPropagation(); // Prevents dropdown from closing
     };
+    const [value, setValue] = useState(50);
+
+    const handleChange = (e) => {
+      setValue(e.target.value);
+      e.target.style.backgroundSize = `${e.target.value}% 100%`;
+    };
+  
 
     const CategoryData = [
         { id: "checkbox1", value: "ghee", label: "Ghee" },
@@ -101,8 +108,10 @@ const FilterDropDown = () => {
                         <Accordion.Item eventKey="1" onClick={handleAccordionClick} className="my-3 mx-2 rounded-3 border-0">
                             <Accordion.Header>Price</Accordion.Header>
                             <Accordion.Body>
-                                <label for="customRange1" class="form-label"></label>
-                                <input type="range" class="form-range" id="customRange1" />
+                                {/* <label for="customRange1" class="form-label"></label> */}
+                                <input type="range" min="0" value={value}
+                                    onChange={handleChange}
+                                    max="100" class="customRange1" id="customRange1" />
                                 <div className="d-flex justify-content-between">
                                     <p> ₹ 0</p>
                                     <p> ₹ 2999</p>

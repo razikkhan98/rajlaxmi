@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // Images
-
+import FillHeart from '../../Assets/img/slickimg/fillheart.svg'
 // Icons
 import { MdCurrencyRupee } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
+import { CartContext } from "../../Context/UserContext";
 
 const SearchAddToCart = ({ product }) => {
   
@@ -21,6 +22,7 @@ const SearchAddToCart = ({ product }) => {
 
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
+  const { AddToWishList ,WishListItems} = useContext(CartContext);
 
   // ==============
   // function
@@ -64,8 +66,11 @@ const SearchAddToCart = ({ product }) => {
         <div className="d-flex justify-content-center pt-2">
           <div>
             {/* Icons (Heart & Share) */}
-            <div className="heart">
-              <FaRegHeart className="text-color-terracotta" />
+            <div className="heart" onClick={()=>AddToWishList(product)}>
+              {!WishListItems.some(item => item?.id === product?.id) ?
+                <FaRegHeart className="text-color-terracotta" />:
+                <img src={FillHeart} alt="" />
+              }
             </div>
             <div className="share">
               <PiShareFatBold className="text-color-terracotta" />
