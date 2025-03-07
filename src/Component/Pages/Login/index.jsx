@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // Images
 import Logi from "../../Assets/img/Login/Frame 1261158478.png";
@@ -12,8 +12,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import { CartContext } from "../../Context/UserContext";
 
 const Login = () => {
+  const { setuid } = useContext(CartContext);
+
   const navigate = useNavigate();
   const {
     register,
@@ -28,7 +31,17 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await postData(userEndpoint, data);
-      console.log('response: ', response);
+
+      if (response?.uid) {
+        setuid(response.uid);
+        sessionStorage.setItem("userId", response.uid);
+      }
+
+      if (response?.token) {
+        sessionStorage.setItem("token", response.token);
+      }
+
+      // store data in session for  later use
       toast.success("Login successful!", {
         position: "top-right",
         autoClose: 3000,
@@ -40,7 +53,7 @@ const Login = () => {
         theme: "light",
         transition: Bounce,
       });
-      setTimeout(() => navigate("/home"), 1000);
+      setTimeout(() => navigate("/"), 1000);
     } catch (error) {
       toast.error(error?.message || "Login failed!", {
         position: "top-right",
@@ -76,7 +89,10 @@ const Login = () => {
                   Please fill the details below to login to your account
                 </p>
                 <div>
-                  <form onSubmit={handleSubmit(onSubmit)} className="form-login">
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="form-login"
+                  >
                     {/* Email/Mobile Field */}
                     <div className="pt-4">
                       <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
@@ -84,11 +100,15 @@ const Login = () => {
                       </label>
                       <input
                         type="text"
-                        {...register("emailmobile", { required: "Email or Mobile is required" })}
+                        {...register("emailmobile", {
+                          required: "Email or Mobile is required",
+                        })}
                         className="input-style"
                       />
                       {errors.emailmobile && (
-                        <p className="text-danger font-size-12">{errors.emailmobile.message}</p>
+                        <p className="text-danger font-size-12">
+                          {errors.emailmobile.message}
+                        </p>
                       )}
                     </div>
 
@@ -99,11 +119,15 @@ const Login = () => {
                       </label>
                       <input
                         type="password"
-                        {...register("password", { required: "Password is required" })}
+                        {...register("password", {
+                          required: "Password is required",
+                        })}
                         className="input-style"
                       />
                       {errors.password && (
-                        <p className="text-danger font-size-12">{errors.password.message}</p>
+                        <p className="text-danger font-size-12">
+                          {errors.password.message}
+                        </p>
                       )}
                     </div>
 
@@ -143,4 +167,3 @@ const Login = () => {
 };
 
 export default Login;
- 

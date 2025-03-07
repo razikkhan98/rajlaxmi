@@ -1901,11 +1901,11 @@ height: 40px; */
 
 .rating-text {
   display: flex;
+  align-items: center;
   font-size: 1.2rem;
   color: #333;
   line-height: 20px;
-  font-size: 12px;
-  margin-left: 16px;
+
 }
 
 .rating-value {
@@ -2232,15 +2232,17 @@ height: 40px; */
   /* position: absolute;
   left: 351.56px; */
   /* top: 1349.76px; */
-}
-
-.feedbak-btn {
-  background-color: #e07a5f;
-}
-
-.text-light-gray-color {
-  color: #a1a1a1;
-}
+ }
+ .feedbak-btn{
+  background-color: #E07A5F;
+ }
+ .text-light-gray-color{
+  color: #A1A1A1;
+ }
+ .card-img-top{
+  width: 40px;
+  height: 40px;
+ }
 
 /* -==================== shop-category-slider========== */
 .shop-category-slider .swiper-button-lock {
@@ -2298,4 +2300,7 @@ height: 40px; */
   border: 2px solid black;
 }
 
-/* ------------ */
+.custom-modal-width .modal-dialog {
+  max-width: 800px; /* Adjust the width as needed */
+  width: 90%; /* Make it responsive */
+}
