@@ -14,6 +14,7 @@ import Footer from "../../Common/Footer";
 import ProductCard from "../../Common/ProductDescriptionCard/ProductCard";
 import ArrowLight from "../../Assets/img/ProductDescription/arrow-light.png"
 import ArrowDark from "../../Assets/img/ProductDescription/arror-dark.png"
+import { NavLink } from "react-router-dom";
 
 
 const Tab = ({ label, isActive, onClick, className }) => {
@@ -334,7 +335,9 @@ const ProductDescription = () => {
 
             <div className="position-absolute top-50 text-center z-3 mt-5">
               <p className="font-size-24 inter-font-family-400">Want to share your Product or Delivery experience with us?</p>
+              <NavLink to={"/feedback"}>
               <button className="text-white feedbak-btn px-4 py-2 mt-2 font-size-16 inter-font-family-400 rounded-3 border-0">Submit Feedback</button>
+              </NavLink>
             </div>
           </div>
         </div>
