@@ -301,7 +301,7 @@ body {
 
 .form-resignation .input-style {
   background-color: rgba(236, 239, 211, 1);
-  width: 430px;
+  width: 100%;
   height: 48px;
   border: none;
   border-radius: 6px;
@@ -310,7 +310,7 @@ body {
 
 .form-resignation .input-stylee {
   background-color: rgba(236, 239, 211, 1);
-  /* width: 360px; */
+  /* width: 100%; */
   height: 48px;
   border: none;
   border-radius: 6px;
@@ -318,7 +318,7 @@ body {
 }
 
 .form-resignation button {
-  width: 430px;
+  width: 100%;
   height: 48px;
   border-radius: 6px;
 }
@@ -1714,6 +1714,30 @@ body {
 .filter-btn {
   background-color: #a4be7b;
 }
+
+#customRange1 {
+  /* accent-color: red !important; */
+  width: 100%;
+  appearance: none;
+  height: 3px !important;
+  /* border-radius: 5px; */
+  background-color: rgb(241, 195, 195);
+  outline: none;
+  transition: background 0.3s;
+}
+
+#customRange1::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: red;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+
+
 
 /* ===================== Auto Suggest Search Bar Start ====================== */
 
