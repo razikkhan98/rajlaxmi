@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 // Common
 import { CartContext } from "../../Context/UserContext"; // Import Cart Context
@@ -11,12 +11,23 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
+import { Bounce, toast } from "react-toastify";
+
+// Generate or Retrieve Unique User ID for session
+const getSessionUID = () => {
+  let uid = sessionStorage.getItem("uid");
+  if (!uid) {
+    uid = `user_${Math.random().toString(36).substr(2, 9)}`;
+    sessionStorage.setItem("uid", uid);
+  }
+  return uid;
+};
+
 const AddtoCard = ({ product }) => {
-  // ===========
-  // useState
-  // ===========
+  // UseState
 
   // useState for Add to Cart Button
   const { addToCart, removeFromCart, AddToWishList, WishListItems } =
@@ -28,29 +39,105 @@ const AddtoCard = ({ product }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const weightOptions = ["500gm", "1kg", "2kg"]; // Available sizes
 
-  // ==============
-  // function
-  // ================
+  const navigate = useNavigate();
 
-  // Handle Quantity Changes
+  const uid = getSessionUID(); // Get UID for session
+  const isAuthenticated = !!sessionStorage.getItem("token"); // Check if user is logged in
+
+  // Function
+
+  useEffect(() => {
+    const fetchCartData = () => {
+      const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+      if (storedCart[product.id] && storedCart[product.id][selectedWeight]) {
+        setIsAdded(true);
+        setQuantity(storedCart[product.id][selectedWeight].quantity);
+      } else {
+        setIsAdded(false);
+        setQuantity(0);
+      }
+    };
+  
+    fetchCartData();
+  
+    // 🔥 Listen for cart updates globally
+    window.addEventListener("cartUpdated", fetchCartData);
+  
+    return () => {
+      window.removeEventListener("cartUpdated", fetchCartData);
+    };
+  }, [product.id, selectedWeight, uid]);
+  
+
+  // Add to Cart
   const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-    addToCart(product, 1, selectedWeight); // Add to cart
-  };
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-      removeFromCart(product.id, selectedWeight);
-    } else {
-      setIsAdded(false); // Reset if quantity reaches 0
-      setQuantity(0);
+    if (!isAuthenticated) {
+      navigate("/login");
+      toast.warning("⚠️ Please login to add items!", { position: "top-right", autoClose: 3000 });
+      return;
     }
-  };
+  
+    let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+  
+    if (!storedCart[product.id]) {
+      storedCart[product.id] = {};
+    }
+  
+    if (!storedCart[product.id][selectedWeight]) {
+      storedCart[product.id][selectedWeight] = {
+        productDetails: product,
+        quantity: 1,
+      };
+      toast.success(`${product.name} added to cart!`, { position: "top-right", autoClose: 2000 });
+    } else {
+      storedCart[product.id][selectedWeight].quantity += 1;
+      toast.info(`Increased quantity of ${product.name}`, { position: "top-right", autoClose: 2000 });
 
-  // Add to Wishlist Function
-  // const handleAddToWishList = () => {
-  //   AddToWishList(product); // Use the context method to handle adding to wishlist
-  // };
+    }
+  
+    sessionStorage.setItem(`cart_${uid}`, JSON.stringify(storedCart));
+  
+    // 🔄 Update UI immediately
+    setIsAdded(true);
+    setQuantity(storedCart[product.id][selectedWeight].quantity);
+  
+    // 🔥 Notify all components
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
+  
+
+  // Remove from Cart
+  const decreaseQuantity = () => {
+    let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+  
+    if (
+      storedCart[product.id] &&
+      storedCart[product.id][selectedWeight]?.quantity > 1
+    ) {
+      storedCart[product.id][selectedWeight].quantity -= 1;
+      toast.info(`Decreased quantity of ${product.name}`, { position: "top-right", autoClose: 2000 });
+    } else {
+      delete storedCart[product.id][selectedWeight];
+  
+      if (Object.keys(storedCart[product.id]).length === 0) {
+        delete storedCart[product.id]; // Remove entire product if no sizes left
+      }
+      toast.error(`Removed ${product.name} from cart!`, { position: "top-right", autoClose: 2000 });
+      setIsAdded(false);
+    }
+  
+    sessionStorage.setItem(`cart_${uid}`, JSON.stringify(storedCart));
+  
+    // 🔄 Update UI immediately
+    setQuantity(storedCart[product.id]?.[selectedWeight]?.quantity || 0);
+    // setIsAdded(
+    //   storedCart[product.id] && Object.keys(storedCart[product.id]).length > 0
+    // );
+  
+    // 🔥 Notify all components
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
+  
 
   //   Rating Change
   const renderStars = (rating) => {
@@ -125,7 +212,16 @@ const AddtoCard = ({ product }) => {
                 </div>
               )}
             </div>
-            <img src={product.image} alt="Loading" className="img-fluid" />
+            <img
+              src={product.image}
+              alt="Loading"
+              className="img-fluid"
+              onClick={() =>
+                navigate(`/productdescription/${product.id}`, {
+                  state: { product },
+                })
+              }
+            />
           </div>
         </div>
 
@@ -164,13 +260,19 @@ const AddtoCard = ({ product }) => {
           {/* Add to Cart / Quantity Controls */}
           {!isAdded ? (
             <div>
-              <button
+              {/* <button
                 className="background-color-terracotta button-addtocard inter-font-family-500 font-size-16"
                 onClick={() => {
                   setIsAdded(true);
                   setQuantity(1); // Set initial quantity to 1
                   addToCart(product, 1, selectedWeight);
                 }}
+              >
+                Add
+              </button> */}
+              <button
+                className="background-color-terracotta button-addtocard inter-font-family-500 font-size-16"
+                onClick={increaseQuantity}
               >
                 Add
               </button>

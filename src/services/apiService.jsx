@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000/rajlaxmi"; // Replace with your actual base URL
+const API_BASE_URL = "http://localhost:5001/rajlaxmi"; // Replace with your actual base URL
 
 // 🔹 GET: Fetch data from a dynamic endpoint
 export const getData = async (endpoint) => {

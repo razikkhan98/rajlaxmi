@@ -91,7 +91,7 @@ const OurProducts = () => {
             Explore Our Products
           </div>
           <div className="row">
-            <div className="col-lg-6 col-md-6 col-sm-12 mb-4">
+            <div className="col-lg-6 col-md-6 col-sm-12 mb-4 ">
               <div className="py-3">
                 <Carousel
                   className="explore-slider"
@@ -101,10 +101,10 @@ const OurProducts = () => {
                   interval={3000}
                 >
                   <Carousel.Item>
-                    <img src={Mask} alt="Loading" className="img-fluid" />
+                    <img src={Mask} alt="Loading" id="explore-slider-img" className=" img-fluid" />
                   </Carousel.Item>
                   <Carousel.Item>
-                    <img src={second} alt="Loading" className="img-fluid" />
+                    <img src={second} alt="Loading" id="explore-slider-img" className=" img-fluid" />
                   </Carousel.Item>
                 </Carousel>
               </div>
@@ -151,7 +151,7 @@ const OurProducts = () => {
             {CardData.map((item, index) => (
               <>
                 {index <= 2 ? (
-                  <div className="natural-cards col-lg-3 col-md-6 col-sm-6 col-6 my-1">
+                  <div className="natural-cards col-lg-3 col-md-6 col-sm-6 col-6 my-2">
                     <div className={item.class}>
                       <div className="py-2 sm:py-0 d-flex explore-img  natural-icons justify-content-center">
                         <img
@@ -170,7 +170,7 @@ const OurProducts = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="natural-cards circle-section col-lg-3 col-md-6 col-sm-6 col-6 my-1">
+                  <div className="natural-cards circle-section col-lg-3 col-md-6 col-sm-6 col-6 my-2">
                     <span className="inter-font-family-500 font-size-16 background-color-gleeful d-flex justify-content-center text-white align-items-center circle-section-off">
                       15% Off
                     </span>
@@ -182,10 +182,10 @@ const OurProducts = () => {
                   interval={3000}
                 >
                   <Carousel.Item>
-                  <img class="circle-cut " src={Mask} alt=""></img>
+                  <img id="circle-cut" class="circle-cut " src={Mask} alt=""></img>
                   </Carousel.Item>
                   <Carousel.Item>
-                  <img class="circle-cut " src={slid} alt=""></img>
+                  <img id="circle-cut" class="circle-cut " src={slid} alt=""></img>
                   </Carousel.Item>
                 </Carousel>
                     

@@ -1619,7 +1619,10 @@ body {
     width: 224px;
     height: 200px;
   }
-
+  #explore-slider-img {
+    width: unset !important;;
+    height: unset !important;
+  }
   .slide img {
     width: 30px !important;
     height: 30px !important;
@@ -1921,11 +1924,11 @@ height: 40px; */
 
 .rating-text {
   display: flex;
+  align-items: center;
   font-size: 1.2rem;
   color: #333;
   line-height: 20px;
-  font-size: 12px;
-  margin-left: 16px;
+
 }
 
 .rating-value {
@@ -2188,10 +2191,9 @@ height: 40px; */
     height: 112px;
     padding: 0px 0px !important;
   }
-
-  .circle-cut {
-    width: 172px;
-    height: 112px;
+  #circle-cut {
+    width: 172px !important;
+    height: 112px !important;
     --r: 7px;
     mask: radial-gradient(var(--r) at var(--r) calc(100% - 45px),
         #0000 calc(100% - 1px),
@@ -2253,15 +2255,17 @@ height: 40px; */
   /* position: absolute;
   left: 351.56px; */
   /* top: 1349.76px; */
-}
-
-.feedbak-btn {
-  background-color: #e07a5f;
-}
-
-.text-light-gray-color {
-  color: #a1a1a1;
-}
+ }
+ .feedbak-btn{
+  background-color: #E07A5F;
+ }
+ .text-light-gray-color{
+  color: #A1A1A1;
+ }
+ .card-img-top{
+  width: 40px;
+  height: 40px;
+ }
 
 /* -==================== shop-category-slider========== */
 .shop-category-slider .swiper-button-lock {
