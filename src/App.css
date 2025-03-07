@@ -203,7 +203,6 @@ body {
 .font-size-30 {
   font-size: 30px;
 }
-
 .font-size-40 {
   font-size: 40px;
 }
@@ -2322,6 +2321,25 @@ height: 40px; */
 .shop-category-slider .slick-prev {
   left: 0px !important;
   border: 2px solid black;
+}
+
+/* ------FeedBack Css------ */
+.feedback-heading{
+  color: #2F3E46;
+  font-size: 32px;
+}
+.feedback-rating{
+  color: #E07A5F;
+  font-size: 29px;
+}
+.feedback-input{
+  background-color: rgba(164, 190, 123, 0.1);
+}
+.feedback-bg-img{
+  background-image: url(./Component/Assets/img//ProductDescription//writing_7591101\ 1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .custom-modal-width .modal-dialog {

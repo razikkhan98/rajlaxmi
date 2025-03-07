@@ -12,6 +12,7 @@ import ProductDescription from "./Component/Pages/ProductDescription/productdesc
 
 import { ToastContainer } from "react-toastify";
 import WishList from "./Component/Pages/Wishlist/wishlist";
+import Feedback from "./Component/Pages/Feedback/feedback.jsx";
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
           <Route path="/products-inner" element={<ProductInner />} />
           <Route path="/productdescription/:id" element={<ProductDescription />} />
           <Route path="/wishlist" element={<WishList />} />
-
+          <Route path="/feedback" element={<Feedback />} />
         </Routes>
       </Router>
     </>
