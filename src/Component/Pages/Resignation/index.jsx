@@ -12,7 +12,7 @@ import { postData } from "../../../services/apiService";
 
 // Third party libraries
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form"; 
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 
@@ -20,10 +20,10 @@ import { Bounce, toast } from "react-toastify";
 const Resignation = () => {
   const navigate = useNavigate();
 
-  const { 
-    register, 
-    handleSubmit, 
-    formState: { errors } 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
   } = useForm();  // Initialize react-hook-form
 
 
@@ -74,7 +74,7 @@ const Resignation = () => {
                 <img src={Logi} alt="Loading" className="img-fluid" />
               </div>
               <div className="col-lg-6 col-sm-12 px-5">
-                <div className="text-start josefin-sans-font-family-600 font-size-30 py-3 text-color-dark-grayish-blue pt-4">
+                <div className="text-start josefin-sans-font-family-600 font-size-30 py-3 heading-text text-color-dark-grayish-blue pt-4">
                   Create An Account
                 </div>
                 <p className="inter-font-family-400 font-size-16 text-color-dark-grayish-blue">
@@ -82,71 +82,73 @@ const Resignation = () => {
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="form-resignation">
-                  <div className="pt-3 d-flex">
-                    <div>
+                  <div className="pt-3 row">
+                    <div className="col-lg-5 col-md-6">
                       <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
                         First Name
                       </label>
                       <input
                         type="text"
                         {...register("firstName", { required: "First name is required" })}
-                        className="input-stylee"
+                        className="input-stylee w-100"
                       />
                       {errors.firstName && <p className="text-danger">{errors.firstName.message}</p>}
                     </div>
-                    <div className="ms-3">
+                    <div className="col-lg-5 col-md-6">
                       <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
                         Last Name
                       </label>
                       <input
                         type="text"
                         {...register("lastName", { required: "Last name is required" })}
-                        className="input-stylee"
+                        className="input-stylee w-100"
                       />
                       {errors.lastName && <p className="text-danger">{errors.lastName.message}</p>}
                     </div>
                   </div>
 
-                  <div className="pt-3">
-                    <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
-                      Mobile Number
-                    </label>
-                    <input
-                      type="tel"
-                      {...register("mobileNumber", { required: "Mobile number is required" })}
-                      className="input-style"
-                    />
-                    {errors.mobileNumber && <p className="text-danger">{errors.mobileNumber.message}</p>}
-                  </div>
+                  <div className="row gap-2">
+                    <div className="pt-3 col-lg-10">
+                      <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                        Mobile Number
+                      </label>
+                      <input
+                        type="tel"
+                        {...register("mobileNumber", { required: "Mobile number is required" })}
+                        className="input-style"
+                      />
+                      {errors.mobileNumber && <p className="text-danger">{errors.mobileNumber.message}</p>}
+                    </div>
 
-                  <div className="pt-3">
-                    <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Enter a valid email" } })}
-                      className="input-style"
-                    />
-                    {errors.email && <p className="text-danger">{errors.email.message}</p>}
-                  </div>
+                    <div className="pt-3 col-lg-10">
+                      <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Enter a valid email" } })}
+                        className="input-style"
+                      />
+                      {errors.email && <p className="text-danger">{errors.email.message}</p>}
+                    </div>
 
-                  <div className="py-2">
-                    <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be at least 6 characters" } })}
-                      className="input-style"
-                    />
-                    {errors.password && <p className="text-danger">{errors.password.message}</p>}
-                  </div>
+                    <div className="py-2 col-lg-10">
+                      <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be at least 6 characters" } })}
+                        className="input-style"
+                      />
+                      {errors.password && <p className="text-danger">{errors.password.message}</p>}
+                    </div>
 
-                  <div className="py-2">
-                    <button type="submit" className="background-color-terracotta text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0">
-                      Create Account
-                    </button>
+                    <div className="py-2 col-lg-10">
+                      <button type="submit" className="background-color-terracotta text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0">
+                        Create Account
+                      </button>
+                    </div>
                   </div>
                 </form>
 

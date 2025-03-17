@@ -25,26 +25,26 @@ const Home = () => {
     <React.Fragment>
       {/* Start Hero */}
       <section>
-        <div className="home bg-custom-gradient">
+        <div className="home bg-custom-gradient padding-bottom-60">
           <Navbar />
 
           <div className="container">
-            <div className="row py-5">
-              <div className="col-lg-3 col-md-12 px-0 home-col1">
-                <p className="home-para1 mb-0 pb-1">Organic Product</p>
+            <div className="row py-5 d-flex justify-content-center">
+              <div className="col-lg-3 col-md-3 col-3 px-0 home-col1">
+                <p className="home-para1 mb-0 pb-1 px-2">Organic Product</p>
                 <div className="img1">
                   <img src={Home1} alt="Loading" />
                 </div>
-                <div className="img2 mt-4">
+                <div className="img2">
                   <img src={Home2} alt="Loading" />
                 </div>
               </div>
-              <div className="col-lg-4 me-4 px-0">
+              <div className="col-lg-4 col-md-4 center-img px-0 col-4">
                 <div className="img3">
                   <img src={Home3} alt="Loading" />
                 </div>
               </div>
-              <div className="col-lg-4 px-0">
+              <div className="col-lg-4 px-0 col-4">
                 <div className="image45">
                   <div className="img4">
                     <img src={Home4} alt="Loading" />
@@ -53,7 +53,7 @@ const Home = () => {
                     <img src={Home5} alt="Loading" />
                   </div>
                 </div>
-                <div className="img6 mt-4">
+                <div className="img6">
                   <p className="home-para2">100% Vegeterian</p>
                   <img src={Home6} alt="Loading" />
                 </div>
