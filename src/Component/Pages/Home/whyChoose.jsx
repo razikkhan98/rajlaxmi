@@ -68,6 +68,10 @@ const WhyChoose = () => {
     speed: 800,
     centerPadding: "0px",
     infinite: true,
+    // autoplaySpeed: 2000,
+    // autoplay: true,
+
+    // Make it responsive
   responsive: [
     {
       breakpoint: 1024, // Tablets
@@ -78,7 +82,7 @@ const WhyChoose = () => {
     {
       breakpoint: 768, // Mobile landscape
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
         centerMode: false, // Avoid cutting off images
       },
     },
@@ -122,7 +126,7 @@ const WhyChoose = () => {
           <img src={Vector2} alt="Loading" />
         </div>
         <div className="container why-us">
-          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-center text-color-dark-ashy-blue">
+          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-center">
             Why Choose Us?
           </div>
           <div className="row py-5">
@@ -133,19 +137,19 @@ const WhyChoose = () => {
                   <img src={iteam.image} alt="Loading" className="img-fluid" />
                 </div>
                 </div>
-                <div className="font-size-24 heading-title inter-font-family-600 text-chinese-black-color py-4">
+                <div className="font-size-24 heading-title inter-font-family-600 py-4">
                   {iteam.title}
                 </div>
                 <div className="whychoose-line"></div>
-                <div className="pt-3 text-description font-size-18 inter-font-family-400 text-chinese-black-color">{iteam.description}</div>
+                <div className="pt-3 text-description">{iteam.description}</div>
               </div>
             ))}
           </div>
           <div className="testimonial-section">
-            <div className="font-size-40 josefin-sans-font-family-600 heading-text text-center text-color-dark-ashy-blue">
+            <div className="font-size-40 josefin-sans-font-family-600 heading-text text-center">
               Why Our Customers Love Rajlaxmi Jaivik
             </div>
-            <div className="font-size-18 inter-font-family-400 text-description text-chinese-black-color text-center py-2">
+            <div className="font-size-16 inter-font-family-400 text-description text-center py-2">
               We provide assurance to consumers about quality and trust with
               <br />
               compliance and regulations.
@@ -169,14 +173,15 @@ const WhyChoose = () => {
                       </div>
                       <div className="mt-4">
                         <p
-                          className="mb-0 card-heading text-chinese-black-color font-size-18 inter-font-family-400"
+                          className="mb-0 card-heading"
+                          style={{ fontSize: "18px", fontWeight: "400" }}
                         >
                           {testimonial.name}
                         </p>
                         <div className="start-gleeful py-2">
                           {renderStars(testimonial.rating)}
                         </div>
-                        <p className="slick-para pt-0 text-description text-color-dark-ashy-blue font-size-14 inter-font-family-400">{testimonial.review}</p>
+                        <p className="slick-para pt-0 text-description">{testimonial.review}</p>
                       </div>
                     </div>
                   ))}

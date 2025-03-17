@@ -97,12 +97,14 @@ const DataNavbar = [
 ];
 
 const Navbar = () => {
+ const {  cart } =useContext(CartContext);
+
+ const size = cart.length
+ console.log('size: ', size);
+
 
   const [cartCount, setCartCount] = useState(0);
   const uid = sessionStorage.getItem("uid");
-
-  
-
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -322,7 +324,7 @@ const Navbar = () => {
           }`}
         >
           <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
-          <span className="cart-quantity translate-middle rounded-pill">0</span>
+          <span className="cart-quantity translate-middle rounded-pill">{size}</span>
         </button>
       </div>
       {/* ----------------- */}

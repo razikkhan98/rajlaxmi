@@ -25,7 +25,7 @@ const BestSellers = [
         id: 1,
         name: "Organic Kabuli Chana",
         price: "180.00",
-        qty: "500 gm",
+
         image: Images1,
         rating: 3.5,
         reviews: 312,
@@ -34,7 +34,7 @@ const BestSellers = [
         id: 2,
         name: "Soyabean Chunk Small Size",
         price: "58.00",
-        qty: "500 gm",
+
         image: Images2,
         rating: 4.0,
         reviews: 210,
@@ -43,7 +43,7 @@ const BestSellers = [
         id: 3,
         name: "Organic Jaggery Powder",
         price: "54.00",
-        qty: "500 gm",
+
         image: Images3,
         rating: 5,
         reviews: 210,
@@ -52,7 +52,7 @@ const BestSellers = [
         id: 4,
         name: "Hing Powder",
         price: "1200.00",
-        qty: "500 gm",
+
         image: Images4,
         rating: 5,
         reviews: 210,
@@ -162,9 +162,8 @@ const ShopCategory = () => {
       { breakpoint: 1280, settings: { slidesToShow: 3, slidesToScroll: 1 } },
       { breakpoint: 992, settings: { slidesToShow: 2, slidesToScroll: 1 } },
       { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-      { breakpoint: 552, settings: { slidesToShow: 1.2, slidesToScroll: 1} },
+      { breakpoint: 552, settings: { slidesToShow: 1.2, slidesToScroll: 1 } },
       { breakpoint: 445, settings: { slidesToShow: 1.1, slidesToScroll: 1 } },
-
     ],
   };
   return (
@@ -191,12 +190,14 @@ const ShopCategory = () => {
                     <div className=" row">
                       <Slider {...sliderSettings}>
                         {category.products.map((product, index) => (
-                          <div key={index} className="col-lg-3 col-md-6 col-sm-12">
+                          <div
+                            key={index}
+                            className="col-lg-3 col-md-6 col-sm-12"
+                          >
                             <AddtoCard key={product.id} product={product} />
                           </div>
                         ))}
                       </Slider>
-
                     </div>
                   </div>
                   <div className="col-md-12 py-5">
@@ -222,13 +223,16 @@ const ShopCategory = () => {
                 </div>
                 <div className="col-lg-11 col-md-10 col-sm-10 col-10">
                   <div className="row">
-                   <Slider {...sliderSettings}>
-                   {category.products.map((product, index) => (
-                      <div key={index} className="col-lg-3 col-md-6 col-sm-12">
-                        <AddtoCard key={product.id} product={product} />
-                      </div>
-                    ))}
-                   </Slider>
+                    <Slider {...sliderSettings}>
+                      {category.products.map((product, index) => (
+                        <div
+                          key={index}
+                          className="col-lg-3 col-md-6 col-sm-12"
+                        >
+                          <AddtoCard key={product.id} product={product} />
+                        </div>
+                      ))}
+                    </Slider>
                   </div>
                   <div className="col-md-12 py-5">
                     <div className="horizontal-line"> </div>
@@ -254,13 +258,16 @@ const ShopCategory = () => {
                 </div>
                 <div className="col-lg-11 col-md-10 col-sm-10 col-10">
                   <div className="row">
-                   <Slider {...sliderSettings}>
-                   {category.products.map((product, index) => (
-                      <div key={index} className="col-lg-3 col-md-6 col-sm-12">
-                        <AddtoCard key={product.id} product={product} />
-                      </div>
-                    ))}
-                   </Slider>
+                    <Slider {...sliderSettings}>
+                      {category.products.map((product, index) => (
+                        <div
+                          key={index}
+                          className="col-lg-3 col-md-6 col-sm-12"
+                        >
+                          <AddtoCard key={product.id} product={product} />
+                        </div>
+                      ))}
+                    </Slider>
                   </div>
                 </div>
               </>

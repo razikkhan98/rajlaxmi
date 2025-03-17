@@ -25,13 +25,13 @@ const Home = () => {
     <React.Fragment>
       {/* Start Hero */}
       <section>
-        <div className="home bg-custom-gradient padding-bottom-60">
+        <div className="home bg-custom-gradient">
           <Navbar />
 
           <div className="container">
-            <div className="row py-5 d-flex justify-content-center">
-              <div className="col-lg-3 col-md-3 col-3 px-0 home-col1">
-                <p className="home-para1 mb-0 pb-1 px-2">Organic Product</p>
+            <div className="row py-5">
+              <div className="col-lg-3 col-md-12 col-3 px-0 home-col1">
+                <p className="home-para1 mb-0 pb-1">Organic Product</p>
                 <div className="img1">
                   <img src={Home1} alt="Loading" />
                 </div>
@@ -39,7 +39,7 @@ const Home = () => {
                   <img src={Home2} alt="Loading" />
                 </div>
               </div>
-              <div className="col-lg-4 col-md-4 center-img px-0 col-4">
+              <div className="col-lg-4 center-img px-0 col-4">
                 <div className="img3">
                   <img src={Home3} alt="Loading" />
                 </div>
