@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,11 +17,16 @@ import {
   TiStarHalfOutline,
   TiStarOutline,
 } from "react-icons/ti";
+import { FaRegHeart } from "react-icons/fa";
+import { PiShareFatBold } from "react-icons/pi";
+import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
 
 import CheckMark from "../../Assets/img/ProductDescription/check-mark_5290058 1.svg";
+import { CartContext } from "../../Context/UserContext";
 
 
 const Tab = ({ label, isActive, onClick, className }) => {
+
   return (
     <button
       className={`${className} ${
@@ -84,6 +89,7 @@ const TabComponent = () => {
         "Savor the richness of 100% Organic Anjeer (Dried Figs)—pure, natural, and free from additives or preservatives. Handpicked from the finest farms, our Anjeer is sun-dried to perfection, retaining its natural sweetness and essential nutrients. Soft, chewy, and delicious, it makes for a guilt-free snack or a versatile ingredient in your favorite recipes.",
     },
     { label: "Benefits", content: <BenefitsCards /> },
+    { label: "Customer Reviews", content:'' },
   ];
 
   return (
@@ -109,12 +115,15 @@ const TabComponent = () => {
 };
 
 const ProductDescription = () => {
+  // ============
+  // States
+  // ==========
   const location = useLocation();
-
   const [selectedOption, setSelectedOption] = useState("");
   const [activeImage, setActiveImage] = useState(productFullNew); // Main Image State
   // const smallImages = [product.image, product.smallImage1, product.smallImage2, product.smallImage3];
   const smallImages = [productSmall1, productSmall2, productSmall3];
+    const {AddToWishList,  WishListItems } = useContext(CartContext);
 
   const product = location.state?.product;
 
@@ -157,11 +166,14 @@ const ProductDescription = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    autoplay: true,
+    speed: 200000,
+    autoplaySpeed: 200000,
     slidesToShow: 3, // Show 3 thumbnails
     slidesToScroll: 1,
     focusOnSelect: true,
-    arrows: false, 
+    arrows: false,
+
   };
 
   //   Rating Change
@@ -202,11 +214,11 @@ const ProductDescription = () => {
       <div className="bg-custom-gradient-product productDescription-section">
         <Navbar />
         <div className="container pt-5 text-light-gray-color font-size-14 inter-font-family-500">
-          <span> Back</span>{" "}
+          <span className=" inter-font-family-400"> Back</span>{" "}
           <img src={ArrowLight} className="mx-2" alt="Loading" />{" "}
-          <span>Dry Fruits</span>{" "}
+          <span className=" inter-font-family-400">Dry Fruits</span>{" "}
           <img src={ArrowDark} className="mx-2" alt="Loading" />{" "}
-          <span className="text-dark">Anjeer</span>
+          <span className="text-color-dark-grayish-blue font-size-14 inter-font-family-400">Anjeer</span>
         </div>
       </div>
 
@@ -259,6 +271,17 @@ const ProductDescription = () => {
               {/* Full-size Image */}
               <div className="slider-fullsize-image-div">
                 <div className="slider-fullsize-img-inner">
+                  {/* Icons (Heart & Share) */}
+                              <div className="heart" onClick={() => AddToWishList(product)}>
+                                {!WishListItems.some((item) => item?.id === product?.id) ? (
+                                  <FaRegHeart className="text-color-terracotta" />
+                                ) : (
+                                  <img className="h-auto" src={FillHeart} alt="" />
+                                )}
+                              </div>
+                              <div className="share">
+                                <PiShareFatBold className="text-color-terracotta" />
+                              </div>
                   <img
                     className="w-100 slider-fullimage"
                     src={activeImage}
@@ -287,10 +310,10 @@ const ProductDescription = () => {
             {/*------------ slider section End------------ */}
             {/*------------ Product detail start----------- */}
             <div className="col-12 col-md-6">
-              <h1 className="heading-product-name text-color-black inter-font-family-500 mb-3 mt-3 mt-md-0">
+              <h1 className="heading-product-name text-color-dark-grayish-blue inter-font-family-500 mb-3 mt-3 mt-md-0">
                 {product.name}
               </h1>
-              <p className="mb-3 product-description inter-font-family-400 text-color-black">
+              <p className="mb-3 product-description inter-font-family-400 text-color-dark-grayish-blue">
                 Organic Lorem Ipsum cia doer la fansco anjeer la bela
               </p>
               {/*------------ Product rating-------------- */}
@@ -306,10 +329,10 @@ const ProductDescription = () => {
               </div>
               {/*-----------Product Price----------  */}
               <div className="product-value">
-                <span className="product-real-value inter-font-family-400">
+                <span className="product-real-value inter-font-family-400 text-color-black">
                   <del>₹ 1080.00</del>
                 </span>
-                <span className="product-discount-value inter-font-family-500">
+                <span className="product-discount-value inter-font-family-500 text-color-black">
                   ₹ 980.00
                 </span>
               </div>
@@ -417,7 +440,7 @@ const ProductDescription = () => {
           </div>
 
           <div className="pt-5">
-            <p className="font-size-24 fw-bold">Recommendations For you</p>
+            <p className="font-size-24 inter-font-family-600 text-color-dark-grayish-blue">Recommendations For you</p>
             <ProductCard />
           </div>
         </div>

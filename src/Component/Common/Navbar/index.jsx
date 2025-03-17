@@ -221,9 +221,9 @@ const Navbar = () => {
               }`}
             >
               {DataNavbar.map((link, i) => (
-                <li className={`nav-item ${inputBar ? "d-none" : ""}`} key={i}>
+                <li className={`nav-item nav-text-deco ${inputBar ? "d-none" : ""}`} key={i}>
                   {/* <a className="nav-link" href=>{link.title}</a> */}
-                  <Link className="nav-link" to={link.url}>
+                  <Link className="nav-link nav-text" to={link.url}>
                     {link.title}
                   </Link>
                 </li>

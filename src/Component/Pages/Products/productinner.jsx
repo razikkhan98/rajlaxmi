@@ -141,9 +141,9 @@ const ProductInner = () => {
             </div>
           </div>
         </div>
-        <div className="background-color-light-grayish-yellow padding-bottom-60">
-          <div className="container">
-            <div className="row">
+        <div className="background-color-light-grayish-yellow padding-bottom-60 pb-5">
+          <div className="container pb-5 mb-5">
+            <div className="row mb-5">
               <h2 className="ms-3 text-color-dark-grayish-blue font-size-32 inter-font-family-500">Spices</h2>
               {BestSellers.map((product, index) => (
                 <>

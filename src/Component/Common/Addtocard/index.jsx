@@ -227,7 +227,7 @@ const AddtoCard = ({ product }) => {
 
         {/* Product Name & Ratings */}
 
-        <div className="d-flex justify-content-between px-2 pt-2">
+        <div className="d-flex justify-content-between shop-by-category-detail px-2 pt-2">
           <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
             {product.name}
           </div>

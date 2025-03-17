@@ -172,7 +172,7 @@ const ShopCategory = () => {
       <section className="background-color-light-grayish-yellow category-padding">
         <div className="container">
           <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-grayish-blue pb-4">
-            Shop By Category in
+            Shop By Category
           </div>
           {/*Start Best Sellers */}
           <div className="row px-1">

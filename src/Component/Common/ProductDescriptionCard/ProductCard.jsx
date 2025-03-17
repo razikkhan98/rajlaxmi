@@ -81,7 +81,7 @@ const ProductCard = () => {
                                     <img src={product.image} alt="Loading" className="img-fluid" />
                                 </div>
                                 <div className='pt-2 pb-1 d-flex flex-column'>
-                                    <span className='font-size-14 ms-2'>{product.name}</span>
+                                    <span className='font-size-14 inter-font-family-600 text-color-dark-grayish-blue ms-2'>{product.name}</span>
                                     <span className="inter-font-family-400 product-qty font-size-14 ms-2 my-1">
                                        ({product.qty})
                                     </span>

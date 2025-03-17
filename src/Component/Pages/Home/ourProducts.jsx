@@ -91,7 +91,7 @@ const OurProducts = () => {
             Explore Our Products
           </div>
           <div className="row">
-            <div className="col-lg-6 col-md-6 col-sm-12 mb-4 ">
+            <div className="col-lg-6 col-md-6 col-sm-12  ">
               <div className="py-3">
                 <Carousel
                   className="explore-slider"
@@ -109,7 +109,7 @@ const OurProducts = () => {
                 </Carousel>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6 col-sm-12 mb-4 py-3">
+            <div className="col-lg-6 col-md-6 col-sm-12  py-3">
             <Carousel
                   className="explore-slider"
                   slide={false}
@@ -124,7 +124,7 @@ const OurProducts = () => {
               </div>
                   </Carousel.Item>
                   <Carousel.Item>
-                  <div className="josefin-sans-font-family-500 font-size-40 heading-title text-start mt-2">
+                  <div className="josefin-sans-font-family-500 font-size-40 heading-title text-start mt-2 text-color-dark-ashy-blue">
                   A2 Gir Cow Ghee
               </div>
                   </Carousel.Item>
@@ -140,7 +140,7 @@ const OurProducts = () => {
                 felis, nisi viverra nisl. quis placerat.
               </div>
               <div className="py-4">
-                <button className="background-color-terracotta explore-button d-flex align-items-center font-size-20 inter-font-family-500 rounded-pill text-color-white py-2 px-4 border-0">
+                <button className="background-color-terracotta explore-button d-flex align-items-center inter-font-family-500 rounded-pill text-color-white py-2 px-4 border-0">
                   Explore Product
                   <span className="d-flex">
                     <img className="ms-2" src={threerightarrow} alt="Loading" />
@@ -161,10 +161,10 @@ const OurProducts = () => {
                           // style={{ borderRadius: "8px" }}
                         />
                       </div>
-                      <div className="inter-font-family-500 font-size-16 text-description text-center py-1">
+                      <div className="inter-font-family-500 font-size-16 text-description text-dark text-center py-1">
                         {item.title}
                       </div>
-                      <div className="inter-font-family-400 font-size-14  explore-descp font-sm-8 text-capitalize text-center py-2">
+                      <div className="inter-font-family-400 font-size-14  explore-descp font-sm-8 text-capitalize text-center py-2 text-color-dark-ashy-blue">
                         {item.description}
                       </div>
                     </div>
@@ -194,7 +194,7 @@ const OurProducts = () => {
                       type="submit"
                       class="background-color-terracotta circle-section-btn text-color-white  w-75 inter-font-family-500 font-size-16 rounded border-0"
                     >
-                      Submit
+                      Redeem
                     </button>
                   </div>
                 )}
@@ -205,12 +205,12 @@ const OurProducts = () => {
       </section>
       <section>
         {/* <div className="container-fluid"> */}
-          <div className="back-ground-img py-5">
-            <div className="container">
-              <div className="row">
+          <div className="back-ground-img pt-5 pb-2">
+            <div className="container-fluid">
+              <div className="row mx-lg-5 px-lg-3">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="josefin-sans-font-family-500 heading-title font-size-40 mt-3 text-color-white pb-4">
-                    Have questions about our organic products?
+                    Have Questions About Our Organic Products?
                   </div>
                   <div className="py-2">
                     <img
@@ -240,22 +240,22 @@ const OurProducts = () => {
                       className="background-color-white p-2 rounded-circle"
                     />
                    </div>
-                    <span className="inter-font-family-500 font-size-16 text-description text-color-white px-2 text-capitalize ms-3">
+                    <span className="inter-font-family-500 font-size-16 text-description text-color-white text-capitalize ms-3 w-75">
                       Address: 11, manish bagh colony, Sapna sangeeta road,
                        indore, madhya pradesh, 452001
                     </span>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-center">
+                <div className="col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-end">
                   <div className="background-from  p-3">
-                    <form onSubmit={handleSubmit}>
+                    <form className="" onSubmit={handleSubmit}>
                       <div className="mb-3">
                         {/* <label htmlFor="name" className="form-label">
                           Name
                         </label> */}
                         <input
                           type="text"
-                          className="form-control"
+                          className="form-control contact-us-form"
                           id="name"
                           name="name"
                           value={formData.name}
@@ -271,7 +271,7 @@ const OurProducts = () => {
                         </label> */}
                         <input
                           type="email"
-                          className="form-control"
+                          className="form-control contact-us-form"
                           id="email"
                           name="email"
                           value={formData.email}
@@ -287,7 +287,7 @@ const OurProducts = () => {
                         </label> */}
                         <input
                           type="tel"
-                          className="form-control"
+                          className="form-control contact-us-form"
                           id="phone"
                           name="phone"
                           value={formData.phone}
@@ -325,7 +325,7 @@ const OurProducts = () => {
                 </div>
               </div>
             </div>
-            <div className="together py-2 inter-font-family-500 font-size-20 heading-title text-color-white text-center text-capitalize">Let’s Grow Greener Together!!!</div>
+            <div className="together py-2 inter-font-family-500 font-size-20 heading-title text-color-white text-center text-capitalize my-4">Let’s Grow Greener Together!!!</div>
           </div>
         {/* </div> */}
       </section>

@@ -120,7 +120,7 @@ const Products = () => {
       <section>
         <div className="bg-custom-gradient-product">
           <Navbar />
-          <div className="josefin-sans-font-family-500 heading-text font-size-30 text-center pt-3">
+          <div className="josefin-sans-font-family-500 heading-text font-size-32 text-color-dark-grayish-blue text-center pt-3">
             Pure & Natural Choices
           </div>
           <div className="d-flex justify-content-center py-4">
@@ -136,8 +136,8 @@ const Products = () => {
           </div>
         </div>
         <div className="background-color-light-grayish-yellow py-5">
-          <div className="container">
-            <div className="category-container shop-category-slider overflow-hidden">
+          <div className="container mb-5 pb-5">
+            <div className="category-container shop-category-slider overflow-hidden mb-5">
               <div className="category-label">Categories</div>
 
               <Slider {...sliderSettings}>
@@ -181,7 +181,7 @@ const Products = () => {
                   </div>
                 </div>
 
-                <div className="slider-container position-relative text-center">
+                <div className="slider-container category-page-sliders position-relative text-center">
                   <Slider ref={sliderRef} {...settings}>
                     {category.products.map((product) => (
                       <div key={product.id} className="product-card">
