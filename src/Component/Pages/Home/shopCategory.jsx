@@ -188,7 +188,7 @@ const ShopCategory = () => {
                 </div>
                 <div className="col-lg-11 col-md-10 col-10 col-sm-10">
                   <div className="slider-container">
-                    <div className=" row">
+                    <div className=" row home-shop-category">
                       <Slider {...sliderSettings}>
                         {category.products.map((product, index) => (
                           <div key={index} className="col-lg-3 col-md-6 col-sm-12">
@@ -221,7 +221,7 @@ const ShopCategory = () => {
                   </div>
                 </div>
                 <div className="col-lg-11 col-md-10 col-sm-10 col-10">
-                  <div className="row">
+                  <div className="row home-shop-category">
                    <Slider {...sliderSettings}>
                    {category.products.map((product, index) => (
                       <div key={index} className="col-lg-3 col-md-6 col-sm-12">
@@ -253,7 +253,7 @@ const ShopCategory = () => {
                   </div>
                 </div>
                 <div className="col-lg-11 col-md-10 col-sm-10 col-10">
-                  <div className="row">
+                  <div className="row home-shop-category">
                    <Slider {...sliderSettings}>
                    {category.products.map((product, index) => (
                       <div key={index} className="col-lg-3 col-md-6 col-sm-12">

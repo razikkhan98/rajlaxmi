@@ -101,35 +101,45 @@ const OurProducts = () => {
                   interval={3000}
                 >
                   <Carousel.Item>
-                    <img src={Mask} alt="Loading" id="explore-slider-img" className=" img-fluid" />
+                    <img
+                      src={Mask}
+                      alt="Loading"
+                      id="explore-slider-img"
+                      className=" img-fluid"
+                    />
                   </Carousel.Item>
                   <Carousel.Item>
-                    <img src={second} alt="Loading" id="explore-slider-img" className=" img-fluid" />
+                    <img
+                      src={second}
+                      alt="Loading"
+                      id="explore-slider-img"
+                      className=" img-fluid"
+                    />
                   </Carousel.Item>
                 </Carousel>
               </div>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12  py-3">
-            <Carousel
-                  className="explore-slider"
-                  slide={false}
-                  controls={false}
-                  indicators={false}
-                  interval={3000}
-                  onAnimationEnd={false}
-                >
-                  <Carousel.Item>
+              <Carousel
+                className="explore-slider"
+                slide={false}
+                controls={false}
+                indicators={false}
+                interval={3000}
+                onAnimationEnd={false}
+              >
+                <Carousel.Item>
                   <div className="josefin-sans-font-family-500 font-size-40 heading-title text-start mt-2 text-color-dark-ashy-blue">
-                Natural and Nutritious dry Fruits
-              </div>
-                  </Carousel.Item>
-                  <Carousel.Item>
+                    Natural and Nutritious dry Fruits
+                  </div>
+                </Carousel.Item>
+                <Carousel.Item>
                   <div className="josefin-sans-font-family-500 font-size-40 heading-title text-start mt-2 text-color-dark-ashy-blue">
-                  A2 Gir Cow Ghee
-              </div>
-                  </Carousel.Item>
-                </Carousel>
-              
+                    A2 Gir Cow Ghee
+                  </div>
+                </Carousel.Item>
+              </Carousel>
+
               <div className="inter-font-family-400 font-size-24 text-capitalize text-description text-color-dark-ashy-blue py-3">
                 quam dui. ex. elit quis dui. Morbi ac placerat Cras Nullam
                 ultrices vehicula, lacus tincidunt id viverra nulla, dui. leo.
@@ -170,26 +180,28 @@ const OurProducts = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="natural-cards circle-section col-lg-3 col-md-6 col-sm-6 col-6 my-2">
+                  <div className="natural-cards circle-section col-lg-3 col-md-6 col-sm-6 col-6 my-2 position-relative">
                     <span className="inter-font-family-500 font-size-16 background-color-gleeful d-flex justify-content-center text-white align-items-center circle-section-off">
                       15% Off
                     </span>
                     <Carousel
-                  className="explore-slider"
-                  fade
-                  controls={false}
-                  indicators={false}
-                  interval={3000}
-                >
-                  <Carousel.Item>
-                  <img id="circle-cut" class="circle-cut " src={Mask} alt=""></img>
-                  </Carousel.Item>
-                  <Carousel.Item>
-                  <img id="circle-cut" class="circle-cut " src={slid} alt=""></img>
-                  </Carousel.Item>
-                </Carousel>
+                      className="explore-slider"
+                      fade
+                      controls={false}
+                      indicators={false}
+                      interval={3000}
+                    >
+                      <Carousel.Item className="redem-slider">
+                      <img className="w-100 redem-img" src={Mask} alt="" />
+                      </Carousel.Item>
+                      <Carousel.Item className="redem-slider">
+                        <img className="w-100 redem-img" src={slid} alt="" />
+                      </Carousel.Item>
+                    </Carousel>
                     
                     <img className="circle-section-hr" src={dashLine} alt="" />
+                    <span className="redem-cirlce-left"></span>
+                    <span className="redem-cirlce-right"></span>
                     <button
                       type="submit"
                       class="background-color-terracotta circle-section-btn text-color-white  w-75 inter-font-family-500 font-size-16 rounded border-0"
@@ -205,68 +217,68 @@ const OurProducts = () => {
       </section>
       <section>
         {/* <div className="container-fluid"> */}
-          <div className="back-ground-img pt-5 pb-2">
-            <div className="container-fluid">
-              <div className="row mx-lg-5 px-lg-3">
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="josefin-sans-font-family-500 heading-title font-size-40 mt-3 text-color-white pb-4">
-                    Have Questions About Our Organic Products?
-                  </div>
-                  <div className="py-2">
+        <div className="back-ground-img pt-5 pb-2">
+          <div className="container-fluid">
+            <div className="row mx-lg-5 px-lg-3">
+              <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="josefin-sans-font-family-500 heading-title font-size-40 mt-3 text-color-white pb-4">
+                  Have Questions About Our Organic Products?
+                </div>
+                <div className="py-2">
+                  <img
+                    src={Email}
+                    alt="Loading"
+                    className="background-color-white p-2 rounded-circle"
+                  />
+                  <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
+                    rajlaxmiorganicfoods@gmail.com
+                  </span>
+                </div>
+                <div className="py-2">
+                  <img
+                    src={Phone}
+                    alt="Loading"
+                    className="background-color-white p-2 rounded-circle"
+                  />
+                  <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
+                    +91-8769115905
+                  </span>
+                </div>
+                <div className="py-2 d-flex">
+                  <div>
                     <img
-                      src={Email}
-                      alt="Loading"
-                      className="background-color-white p-2 rounded-circle"
-                    />
-                    <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
-                      rajlaxmiorganicfoods@gmail.com
-                    </span>
-                  </div>
-                  <div className="py-2">
-                    <img
-                      src={Phone}
-                      alt="Loading"
-                      className="background-color-white p-2 rounded-circle"
-                    />
-                    <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
-                      +91-8769115905
-                    </span>
-                  </div>
-                  <div className="py-2 d-flex">
-                   <div>
-                   <img
                       src={Map}
                       alt="Loading"
                       className="background-color-white p-2 rounded-circle"
                     />
-                   </div>
-                    <span className="inter-font-family-500 font-size-16 text-description text-color-white text-capitalize ms-3 w-75">
-                      Address: 11, manish bagh colony, Sapna sangeeta road,
-                       indore, madhya pradesh, 452001
-                    </span>
                   </div>
+                  <span className="inter-font-family-500 font-size-16 text-description text-color-white text-capitalize ms-3 w-75">
+                    Address: 11, manish bagh colony, Sapna sangeeta road,
+                    indore, madhya pradesh, 452001
+                  </span>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-end">
-                  <div className="background-from  p-3">
-                    <form className="" onSubmit={handleSubmit}>
-                      <div className="mb-3">
-                        {/* <label htmlFor="name" className="form-label">
+              </div>
+              <div className="col-lg-6 col-md-6 col-sm-12 p-3 d-flex justify-content-end">
+                <div className="background-from  p-3">
+                  <form className="" onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                      {/* <label htmlFor="name" className="form-label">
                           Name
                         </label> */}
-                        <input
-                          type="text"
-                          className="form-control contact-us-form"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="Name"
-                          required
-                        />
-                      </div>
-                      <div className="d-flex justify-content-between">
-                        <div className="mb-3" style={{ width: "197px" }}>
-                          {/* <label htmlFor="email" className="form-label">
+                      <input
+                        type="text"
+                        className="form-control contact-us-form"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Name"
+                        required
+                      />
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <div className="mb-3" style={{ width: "197px" }}>
+                        {/* <label htmlFor="email" className="form-label">
                           Email
                         </label> */}
                         <input
@@ -281,8 +293,8 @@ const OurProducts = () => {
                         />
                       </div>
 
-                        <div className="mb-3 ms-2" style={{ width: "197px" }}>
-                          {/* <label htmlFor="phone" className="form-label">
+                      <div className="mb-3 ms-2" style={{ width: "197px" }}>
+                        {/* <label htmlFor="phone" className="form-label">
                           Phone
                         </label> */}
                         <input
@@ -314,19 +326,21 @@ const OurProducts = () => {
                       ></textarea>
                     </div>
 
-                      <button
-                        type="submit"
-                        className="background-color-terracotta text-color-white py-2 w-100 inter-font-family-500 font-size-16 rounded border-0"
-                      >
-                        Submit
-                      </button>
-                    </form>
-                  </div>
+                    <button
+                      type="submit"
+                      className="background-color-terracotta text-color-white py-2 w-100 inter-font-family-500 font-size-16 rounded border-0"
+                    >
+                      Submit
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
-            <div className="together py-2 inter-font-family-500 font-size-20 heading-title text-color-white text-center text-capitalize my-4">Let’s Grow Greener Together!!!</div>
           </div>
+          <div className="together py-2 inter-font-family-500 font-size-20 heading-title text-color-white text-center text-capitalize my-4">
+            Let’s Grow Greener Together!!!
+          </div>
+        </div>
         {/* </div> */}
       </section>
     </>

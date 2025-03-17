@@ -50,17 +50,17 @@ const Footer = () => {
         </div>
       <Container style={{zIndex:"999"}}>
        
-        <Row>
+        <Row className="pt-5 mt-5 pt-lg-0 mt-lg-0 mx-2 mx-lg-0">
           {/* Logo and Company Name */}
           <Col xs={6} lg={2} md={4} className="ps-2">
-            <div className="mb-4">
+            <div className="mb-4 text-center">
               <img
                 src={Logo}
                 alt="Rajlaxmi Jaiviks International"
                 style={{ width: "92px" }}
                 className="ms-3"
               />
-              <div className="mt-3 josefin-sans-font-family-500 heading-title text-color-dark-ashy-blue font-size-22">
+              <div className="mt-3 josefin-sans-font-family-500 heading-title text-color-dark-ashy-blue text-center font-size-22">
                 Rajlaxmi Jaiviks International
               </div>
             </div>
