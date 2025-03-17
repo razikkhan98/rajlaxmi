@@ -446,11 +446,11 @@ const ProductDescription = () => {
           </div>
         </div>
         <div className="row d-flex justify-content-center align-items-center padding-top-100 position-relative">
-          <div className="col-lg-5">
+          <div className="col-lg-5 col-md-5">
             <div className="product-description-img ms-5"></div>
 
-            <div className="position-absolute top-50 text-center z-3 mt-5">
-              <p className="font-size-24 inter-font-family-400">
+            <div className="position-absolute top-50 start-50 translate-middle text-center z-3 mt-5">
+              <p className="font-size-24 feedback-text font-sm-size-18 text-center">
                 Want to share your Product or Delivery experience with us?
               </p>
               <NavLink to={"/feedback"}>

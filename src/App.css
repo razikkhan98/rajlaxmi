@@ -994,7 +994,7 @@ z-index: 1;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-size: 28px;
-  font-weight: 500;
+  /* font-weight: 500; */
   padding: 10px;
   color: #2F3E46;
 }
@@ -1704,7 +1704,9 @@ z-index: 1;
   .font-size-16 {
     font-size: 12px;
   }
-
+.font-sm-size-18{
+  font-size: 18px;
+}
   .button-addtocard {
     width: 100px;
     height: 39px;
@@ -1876,7 +1878,11 @@ z-index: 1;
   border-radius: 50%;
   cursor: pointer;
 }
-
+/* Feedback Css */
+.feedback-text {
+  color: #2F3E46;
+  font-weight: 400;
+}
 
 
 
