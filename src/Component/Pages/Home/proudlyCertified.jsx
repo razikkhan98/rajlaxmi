@@ -11,9 +11,9 @@ const ProudlyCertified = () => {
     <>
       <section className="padding-top-100 padding-bottom-60 background-color-light-grayish-yellow">
         <div className="container pb-5">
-          <div className="row pb-5 px-5  d-flex align-items-center justify-content-center">
+          <div className="row pb-5">
             <div className="col-lg-12 col-md-12 col-sm-12 text-center pb-5">
-              <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-ashy-blue">
+              <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-grayish-blue">
                 Proudly Certified
               </div>
             </div>
