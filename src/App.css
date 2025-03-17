@@ -429,11 +429,12 @@ body {
 }
 .nav-text:hover{
   font-weight: 600;
-  font-size: 15.3px !important;
+  font-size: 16px !important;
 }
 .nav-text{
   color: var(--chinese-black) !important;
   font-size: 16px !important;
+  width: 70px;
 }
 .nav-text-deco:hover{
 text-decoration: underline;
@@ -1032,6 +1033,21 @@ text-decoration: underline;
   margin: 0 auto;
   /* Center alignment */
 }
+
+/* ================================================================= */
+
+/* ====================== CONTACT US CSS ========================= */
+
+/* ============================================================== */
+.contact-section{
+  background-image: url(../src/Component/Assets/img/Contact/contactbg.png);
+  background-position: center;
+  background-size: cover;
+  height: 537px;
+}
+
+
+
 
 /* Center the arrows below the slider */
 

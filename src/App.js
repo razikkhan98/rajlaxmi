@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import WishList from "./Component/Pages/Wishlist/wishlist";
 import Feedback from "./Component/Pages/Feedback/feedback.jsx";
 import ScrollToTop from "./Component/Common/Scroll-to-Top/index.jsx";
+import ContactUs from "./Component/Pages/ContactUs/contactUs.jsx";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/feedback" element={<Feedback />} />
+          <Route path="/contact" element={<ContactUs />} />
         </Routes>
       </Router>
     </>

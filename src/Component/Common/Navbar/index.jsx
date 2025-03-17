@@ -94,6 +94,11 @@ const DataNavbar = [
     title: "Wishlist",
     url: "/wishlist",
   },
+  {
+    title: "Contact",
+    url: "/contact",
+  },
+  
 ];
 
 const Navbar = () => {
