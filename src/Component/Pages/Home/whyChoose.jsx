@@ -68,10 +68,6 @@ const WhyChoose = () => {
     speed: 800,
     centerPadding: "0px",
     infinite: true,
-    // autoplaySpeed: 2000,
-    // autoplay: true,
-
-    // Make it responsive
   responsive: [
     {
       breakpoint: 1024, // Tablets

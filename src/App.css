@@ -304,7 +304,7 @@ body {
 
 .form-resignation .input-style {
   background-color: rgba(236, 239, 211, 1);
-  width: 430px;
+  width: 100%;
   height: 48px;
   border: none;
   border-radius: 6px;
@@ -313,7 +313,7 @@ body {
 
 .form-resignation .input-stylee {
   background-color: rgba(236, 239, 211, 1);
-  /* width: 360px; */
+  /* width: 100%; */
   height: 48px;
   border: none;
   border-radius: 6px;
@@ -321,7 +321,7 @@ body {
 }
 
 .form-resignation button {
-  width: 430px;
+  width: 100%;
   height: 48px;
   border-radius: 6px;
 }
@@ -1762,6 +1762,30 @@ text-decoration: underline;
   background-color: #a4be7b;
 }
 
+#customRange1 {
+  /* accent-color: red !important; */
+  width: 100%;
+  appearance: none;
+  height: 3px !important;
+  /* border-radius: 5px; */
+  background-color: rgb(241, 195, 195);
+  outline: none;
+  transition: background 0.3s;
+}
+
+#customRange1::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: red;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+
+
+
 /* ===================== Auto Suggest Search Bar Start ====================== */
 
 .autosuggest-nav {
@@ -2351,6 +2375,25 @@ height: 40px; */
 .shop-category-slider .slick-prev {
   left: 0px !important;
   border: 2px solid black;
+}
+
+/* ------FeedBack Css------ */
+.feedback-heading{
+  color: #2F3E46;
+  font-size: 32px;
+}
+.feedback-rating{
+  color: #E07A5F;
+  font-size: 29px;
+}
+.feedback-input{
+  background-color: rgba(164, 190, 123, 0.1);
+}
+.feedback-bg-img{
+  background-image: url(./Component/Assets/img//ProductDescription//writing_7591101\ 1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .custom-modal-width .modal-dialog {
