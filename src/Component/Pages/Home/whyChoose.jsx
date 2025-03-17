@@ -56,6 +56,19 @@ const testimonials = [
     rating: 4,
     image: Choose,
   },
+  {
+    name: "Jivika Tiwary",
+    review:
+      "Finally, a brand I can trust for 100% organic essentials. Healthy, wholesome, and absolutely worth it!",
+    rating: 5, // Number of stars
+    image: Choose, // Replace with the appropriate image import
+  },
+   {
+    name: "John Doe",
+    review: "Amazing quality and great service. Highly recommend!",
+    rating: 4,
+    image: Choose,
+  },
   // Add more testimonials as needed
 ];
 const WhyChoose = () => {
