@@ -31,16 +31,14 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await postData(userEndpoint, data);
-      console.log('response: ', response);
 
-      if (response?.data?.uid) {
-        setuid(response?.data?.uid);
-        // local storage data setItem
-        sessionStorage.setItem("uid", response?.data?.uid);
+      if (response?.uid) {
+        setuid(response.uid);
+        sessionStorage.setItem("userId", response.uid);
       }
 
-      if (response?.data?.token) {
-        sessionStorage.setItem("token", response?.data?.token);
+      if (response?.token) {
+        sessionStorage.setItem("token", response.token);
       }
 
       // store data in session for  later use
