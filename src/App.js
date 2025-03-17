@@ -19,19 +19,15 @@ import ContactUs from "./Component/Pages/ContactUs/contactUs.jsx";
 function App() {
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
+     <ToastContainer position="top-right" autoClose={2000} />
       <Router>
-        <ScrollToTop />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Product />} />
           <Route path="/products-inner" element={<ProductInner />} />
-          <Route
-            path="/productdescription/:id"
-            element={<ProductDescription />}
-          />
+          <Route path="/productdescription/:id" element={<ProductDescription />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/contact" element={<ContactUs />} />
