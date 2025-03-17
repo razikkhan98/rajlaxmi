@@ -138,7 +138,7 @@ const Products = () => {
         <div className="background-color-light-grayish-yellow py-5">
           <div className="container mb-5 pb-5">
             <div className="category-container shop-category-slider overflow-hidden mb-5">
-              <div className="category-label">Categories</div>
+              <div className="category-label josefin-sans-font-family-500">Categories</div>
 
               <Slider {...sliderSettings}>
                 {categories.map((item, index) => (
@@ -168,7 +168,7 @@ const Products = () => {
             {categoriesWithProducts.map((category, index) => (
               <div key={index}>
                 <div className="d-flex justify-content-between align-items-center px-5">
-                  <div className="josefin-sans-font-family-500 font-size-30 heading-title text-start py-2 text-color-dark-grayish-blue">
+                  <div className="josefin-sans-font-family-500 font-size-30 text-start py-2 text-color-dark-grayish-blue">
                     {category.title}
                   </div>
                   <div>
@@ -176,7 +176,7 @@ const Products = () => {
                       to="/products-inner"
                       className="text-color-dark-grayish-blue text-decoration-none"
                     >
-                      <span>View all</span> <FiChevronRight fontSize={20} />
+                      <span className="font-size-16 inter-font-family-400">View all</span> <FiChevronRight fontSize={18} />
                     </Link>
                   </div>
                 </div>
