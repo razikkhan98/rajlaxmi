@@ -212,16 +212,20 @@ const AddtoCard = ({ product }) => {
                 </div>
               )}
             </div>
+            <div>
             <img
               src={product.image}
               alt="Loading"
               className="img-fluid"
+              style={{cursor: "pointer"}}
               onClick={() =>
                 navigate(`/productdescription/${product.id}`, {
                   state: { product },
                 })
               }
             />
+            </div>
+           
           </div>
         </div>
 
