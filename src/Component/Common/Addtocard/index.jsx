@@ -871,27 +871,28 @@ const AddtoCard = ({ product }) => {
         </div>
       </div>
 
-      {/* Product Details */}
-      <div className="d-flex justify-content-between px-2 pt-2">
-        <div className="inter-font-family-500 font-size-16 text-color-dark-grayish-blue">
-          {product.name}
-        </div>
-        <div
-          className="w-50 d-flex justify-content-center"
-          style={{ height: "59px" }}
-        >
-          <div>
-            <div className="pt-1">
-              <span className="start-gleeful">
-                {renderStars(product.rating)}
-              </span>
-            </div>
-            <div className="inter-font-family-500 font-size-10 start-gleeful pt-2">
-              {product.rating} ({product.reviews} Reviews)
+        {/* Product Name & Ratings */}
+
+        <div className="d-flex justify-content-between shop-by-category-detail px-2 pt-2">
+          <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
+            {product.name}
+          </div>
+          <div
+            className="w-50 d-flex justify-content-center rating-height"
+            style={{ height: "59px" }}
+          >
+            <div>
+              <div className="pt-1">
+                <span className="start-gleeful">
+                  {renderStars(product.rating)}
+                </span>
+              </div>
+              <div className="inter-font-family-500 font-size-10 font-sm-8 start-gleeful pt-2">
+                {product.rating} ({product.reviews} Reviews)
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
       {/* Price & Add to Cart */}
       <div className="d-flex justify-content-between pt-2">
