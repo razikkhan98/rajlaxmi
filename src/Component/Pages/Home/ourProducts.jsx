@@ -15,7 +15,7 @@ import { Carousel } from "react-bootstrap";
 
 const CardData = [
   {
-    title: "Nutrient-Rich Goodness",
+    title: "Nutrient-Rich Goodness ",
     description:
       "quam dui. ex. elit quis dui. Morbi ac placerat Cras Nullam ultrices vehicula, lacus.",
     image: Group,
