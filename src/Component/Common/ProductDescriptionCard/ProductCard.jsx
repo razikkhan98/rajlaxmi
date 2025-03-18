@@ -73,7 +73,7 @@ const ProductCard = () => {
         <>
             <div className='row d-flex justify-content-center align-items-center'>
                 {ProductCardData.map((product, index) => (
-                    <div className='col-lg-2 col-md-4 col-sm-12'>
+                    <div className='col-lg-2 col-md-4 col-sm-12 d-lg-block d-flex justify-content-lg-start justify-content-center'>
                         <div className="product-recommedation-cards background-color-white my-2 pb-0">
                             {/* <div className="d-flex  justify-content-center pt-2"> */}
                                 <div className='d-flex justify-content-center pt-2'>

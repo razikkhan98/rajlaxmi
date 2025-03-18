@@ -52,7 +52,7 @@ const Footer = () => {
        
         <Row className="pt-5 mt-5 pt-lg-0 mt-lg-0 mx-2 mx-lg-0">
           {/* Logo and Company Name */}
-          <Col xs={6} lg={2} md={4} className="ps-2">
+          <Col xs={12} lg={2} md={4} className="ps-2">
             <div className="mb-4 text-center">
               <img
                 src={Logo}
@@ -99,7 +99,7 @@ const Footer = () => {
           </Col>
 
           {/* General Links */}
-          <Col xs={6} lg={2} md={6}>
+          <Col xs={4} lg={2} md={6}>
             {/* <h6 className="fw-bold">General</h6> */}
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               General
@@ -116,7 +116,7 @@ const Footer = () => {
           </Col>
 
           {/* Contact Us */}
-          <Col xs={12} lg={3} md={6}>
+          <Col xs={8} lg={3} md={6}>
             {/* <h6 className="fw-bold">Contact Us</h6> */}
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               Contact Us
@@ -136,9 +136,9 @@ const Footer = () => {
                   </div>
                   <div className="ms-3">
                     <span className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16">
-                      Address: 11, Manish Bagh Colony,
-                      <br className="ms-2" /> Sapna Sangeeta Road, Indore,
-                      <br className="ms-2" /> Madhya Pradesh, 452001
+                       11, Manish Bagh Colony,
+                       Sapna Sangeeta Road, Indore,
+                       Madhya Pradesh, 452001
                     </span>
                   </div>
                 </div>

@@ -74,30 +74,30 @@ const FilterDropDown = () => {
                     aria-expanded="false"
                 >
                     <img src={Funnel} alt="Filter" className="sort-icon" />
-                    <div className="text-center text-color-terracotta">Filter</div>
+                    <div className="text-center  text-color-terracotta">Filter</div>
                 </button>
 
                 {/* Dropdown Menu (Popup) */}
                 <ul className="dropdown-menu border-green" aria-labelledby="dropdownMenuButton" data-bs-auto-close="outside">
                     <li>
-                        <p className="ms-2 mb-3 mt-1 fw-medium text-heading filter-heading text-start">FILTERS</p>
+                        <p className="ms-2 mb-3 mt-1 fw-medium inter-font-family-500 text-heading filter-heading text-start">FILTERS</p>
                     </li>
 
                     {/* Accordion for Filters */}
-                    <Accordion>
+                    <Accordion className="px-2">
                         <Accordion.Item eventKey="0" onClick={handleAccordionClick} className="my-3 mx-2 rounded-3 border-0">
-                            <Accordion.Header className="text-heading">Availability</Accordion.Header>
+                            <Accordion.Header className="text-heading "><span className="inter-font-family-500 font-size-18 text-color-dark-grayish-blue">Availability</span></Accordion.Header>
                             <Accordion.Body>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="checkbox1" value="option1" />
-                                    <label class="form-check-label fs-6" for="checkbox1">
+                                    <label class="form-check-label inter-font-family-400 font-size-14 text-color-dark-grayish-blue" for="checkbox1">
                                         In Stock
                                     </label>
                                 </div>
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="checkbox2" value="option2" />
-                                    <label class="form-check-label" for="checkbox2">
+                                    <label class="form-check-label inter-font-family-400 font-size-14 text-color-dark-grayish-blue" for="checkbox2">
                                         Out Of Stock
                                     </label>
                                 </div>
@@ -106,22 +106,30 @@ const FilterDropDown = () => {
                         </Accordion.Item>
 
                         <Accordion.Item eventKey="1" onClick={handleAccordionClick} className="my-3 mx-2 rounded-3 border-0">
-                            <Accordion.Header>Price</Accordion.Header>
+                            <Accordion.Header>
+                                <span className="inter-font-family-500 font-size-18 text-color-dark-grayish-blue">
+                                Price
+                                </span>
+                                </Accordion.Header>
                             <Accordion.Body>
                                 {/* <label for="customRange1" class="form-label"></label> */}
                                 <input type="range" min="0" value={value}
                                     onChange={handleChange}
                                     max="100" class="customRange1" id="customRange1" />
                                 <div className="d-flex justify-content-between">
-                                    <p> ₹ 0</p>
-                                    <p> ₹ 2999</p>
+                                    <p className="inter-font-family-500 font-size-14 text-color-terracotta "> ₹ 0</p>
+                                    <p className="inter-font-family-500 font-size-14 text-color-terracotta "> ₹ 2999</p>
                                 </div>
 
                             </Accordion.Body>
                         </Accordion.Item>
 
                         <Accordion.Item eventKey="2" onClick={handleAccordionClick} className="my-3 mx-2 rounded-3 border-0">
-                            <Accordion.Header>Category</Accordion.Header>
+                            <Accordion.Header>
+                                <span  className="inter-font-family-500 font-size-18 text-color-dark-grayish-blue">
+                                Category
+                                </span>
+                                </Accordion.Header>
                             <Accordion.Body>
                                 <div>
                                     {CategoryData.map((checkbox) => (
@@ -132,7 +140,7 @@ const FilterDropDown = () => {
                                                 id={checkbox.id}
                                                 value={checkbox.value}
                                             />
-                                            <label className="form-check-label fs-6" htmlFor={checkbox.id}>
+                                            <label className="form-check-label inter-font-family-400 font-size-14 text-color-dark-grayish-blue" htmlFor={checkbox.id}>
                                                 {checkbox.label}
                                             </label>
                                         </div>
@@ -143,7 +151,11 @@ const FilterDropDown = () => {
                         </Accordion.Item>
 
                         <Accordion.Item eventKey="3" onClick={handleAccordionClick} className="my-3 mx-2 rounded-3 border-0">
-                            <Accordion.Header>Variants</Accordion.Header>
+                            <Accordion.Header>
+                                <span className="inter-font-family-500 font-size-18 text-color-dark-grayish-blue">
+                                Variants
+                                </span>
+                                </Accordion.Header>
                             <Accordion.Body>
                                 <div>
                                     {VarientData.map((checkbox) => (
@@ -154,7 +166,7 @@ const FilterDropDown = () => {
                                                 id={checkbox.id}
                                                 value={checkbox.value}
                                             />
-                                            <label className="form-check-label fs-6" htmlFor={checkbox.id}>
+                                            <label className="form-check-label inter-font-family-400 font-size-14 text-color-dark-grayish-blue" htmlFor={checkbox.id}>
                                                 {checkbox.label}
                                             </label>
                                         </div>

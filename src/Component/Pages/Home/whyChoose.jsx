@@ -69,6 +69,12 @@ const testimonials = [
     rating: 4,
     image: Choose,
   },
+  {
+    name: "John Doe",
+    review: "Amazing quality and great service. Highly recommend!",
+    rating: 4,
+    image: Choose,
+  },
   // Add more testimonials as needed
 ];
 const WhyChoose = () => {
@@ -156,7 +162,7 @@ const WhyChoose = () => {
           </div>
           <div className="testimonial-section">
             <div className="font-size-40 josefin-sans-font-family-600 heading-text text-center text-color-dark-ashy-blue">
-              Why Our Customers Love Rajlaxmi Jaivik
+              Why Our Customers Love <span className="text-dark">Rajlaxmi Jaivik</span>
             </div>
             <div className="font-size-18 inter-font-family-400 text-description text-chinese-black-color text-center py-2">
               We provide assurance to consumers about quality and trust with
@@ -170,7 +176,7 @@ const WhyChoose = () => {
           <div className="row pt-5">
             <div className="col-lg-10 col10 m-auto">
               <div className="wrapper py-0">
-                <Slider {...settings} className="center-slider">
+                <Slider {...settings} className="center-slider why-choose-slider">
                   {testimonials.map((testimonial, index) => (
                     <div className="slide" key={index}>
                       <div style={{ width: "48px", height: "48px" }}>

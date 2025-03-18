@@ -171,7 +171,7 @@ const ShopCategory = () => {
     <>
       <section className="background-color-light-grayish-yellow category-padding">
         <div className="container">
-          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-grayish-blue pb-4">
+          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-grayish-blue pb-4 ps-lg-0 ps-3">
             Shop By Category
           </div>
           {/*Start Best Sellers */}
@@ -179,7 +179,7 @@ const ShopCategory = () => {
             {BestSellers.map((category, index) => (
               <>
                 <div
-                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex align-items-center text-rotate pb-4"
+                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex align-items-center text-rotate pb-4 pt-lg-0 pt-4"
                   key={index}
                 >
                   <div className="josefin-sans-font-family-500 heading-text font-size-30 text-color-dark-grayish-blue">
@@ -213,7 +213,7 @@ const ShopCategory = () => {
             {SeasonalHarvest.map((category, index) => (
               <>
                 <div
-                  className="col-md-1 col-sm-1 col-2 d-flex justify-content-start align-items-center text-rotate pb-4"
+                  className="col-md-1 col-sm-1 col-2 d-flex justify-content-start align-items-center text-rotate pb-4 pt-lg-0 pt-4"
                   key={index}
                 >
                   <div className="josefin-sans-font-family-500 heading-text font-size-30 text-color-dark-grayish-blue">
@@ -245,7 +245,7 @@ const ShopCategory = () => {
             {EcoEssentials.map((category, index) => (
               <>
                 <div
-                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-start align-items-center text-rotate pb-4"
+                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-start align-items-center text-rotate pb-4 pt-lg-0 pt-4"
                   key={index}
                 >
                   <div className="josefin-sans-font-family-500 heading-text font-size-30 text-color-dark-grayish-blue">

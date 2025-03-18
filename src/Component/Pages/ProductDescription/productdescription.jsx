@@ -441,7 +441,7 @@ const ProductDescription = () => {
           </div>
 
           <div className="pt-5">
-            <p className="font-size-24 inter-font-family-600 text-color-dark-grayish-blue">Recommendations For you</p>
+            <p className="font-size-24 josefin-sans-font-family-600 text-color-dark-grayish-blue text-lg-start text-center">Recommendations For you</p>
             <ProductCard />
           </div>
         </div>

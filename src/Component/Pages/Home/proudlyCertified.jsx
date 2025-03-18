@@ -18,16 +18,16 @@ const ProudlyCertified = () => {
               </div>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
-              <img  src={Images1} alt="Loading" className="img-fluid apeda-img" />
+              <img  src={Images1} alt="Loading" className="img-fluid apeda-img-1" />
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
-              <img  src={Images2} alt="Loading" className="img-fluid apeda-img" />
+              <img  src={Images2} alt="Loading" className="img-fluid apeda-img-2" />
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
-              <img  src={Images3} alt="Loading" className="img-fluid apeda-img" />
+              <img  src={Images3} alt="Loading" className="img-fluid apeda-img-3" />
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
-              <img  src={Images4} alt="Loading" className="img-fluid apeda-img" />
+              <img  src={Images4} alt="Loading" className="img-fluid apeda-img-4" />
             </div>
           </div>
         </div>

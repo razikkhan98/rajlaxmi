@@ -161,7 +161,7 @@ const OurProducts = () => {
             {CardData.map((item, index) => (
               <>
                 {index <= 2 ? (
-                  <div className="natural-cards col-lg-3 col-md-6 col-sm-6 col-6 my-2">
+                  <div className="natural-cards d-flex justify-content-center col-lg-3 col-md-6 col-sm-6 col-6 my-2">
                     <div className={item.class}>
                       <div className="py-2 sm:py-0 d-flex explore-img  natural-icons justify-content-center">
                         <img
@@ -180,12 +180,14 @@ const OurProducts = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="natural-cards circle-section col-lg-3 col-md-6 col-sm-6 col-6 my-2 position-relative">
+                  <div className="natural-cards d-flex justify-content-center circle-section col-lg-3 col-md-6 col-sm-6 col-6 my-2">
+                    <div className="explore-section position-relative">
+
                     <span className="inter-font-family-500 font-size-16 background-color-gleeful d-flex justify-content-center text-white align-items-center circle-section-off">
                       15% Off
                     </span>
                     <Carousel
-                      className="explore-slider"
+                      className="explore-slider "
                       fade
                       controls={false}
                       indicators={false}
@@ -206,8 +208,9 @@ const OurProducts = () => {
                       type="submit"
                       class="background-color-terracotta circle-section-btn text-color-white  w-75 inter-font-family-500 font-size-16 rounded border-0"
                     >
-                      Redeem
+                      REDEEM
                     </button>
+                  </div>
                   </div>
                 )}
               </>

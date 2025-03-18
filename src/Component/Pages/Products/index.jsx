@@ -87,7 +87,7 @@ const Products = () => {
       { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
       { breakpoint: 992, settings: { slidesToShow: 2, slidesToScroll: 1 } },
       { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-      { breakpoint: 576, settings: { slidesToShow: 1.2, slidesToScroll: 1 } },
+      { breakpoint: 576, settings: { slidesToShow: 1, slidesToScroll: 1 } },
     ],
   };
 
@@ -104,7 +104,7 @@ const Products = () => {
     slidesToShow: 10,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000000,
+    autoplaySpeed: 2000,
     arrows: true,
     responsive: [
       { breakpoint: 1280, settings: { slidesToShow: 7, slidesToScroll: 1 } },
@@ -140,7 +140,7 @@ const Products = () => {
             <div className="category-container shop-category-slider overflow-hidden mb-5">
               <div className="category-label josefin-sans-font-family-500">Categories</div>
 
-              <Slider {...sliderSettings}>
+              <Slider className="w-100" {...sliderSettings}>
                 {categories.map((item, index) => (
                   <div className="category-card">
                     <img
@@ -174,7 +174,7 @@ const Products = () => {
                   <div>
                     <Link
                       to="/products-inner"
-                      className="text-color-dark-grayish-blue text-decoration-none"
+                      className="text-color-dark-grayish-blue text-decoration-none d-flex align-items-center"
                     >
                       <span className="font-size-16 inter-font-family-400">View all</span> <FiChevronRight fontSize={18} />
                     </Link>
@@ -190,7 +190,7 @@ const Products = () => {
                     ))}
                   </Slider>
 
-                  <div className="d-flex justify-content-center align-items-center position-relative my-4">
+                  <div className="d-lg-flex d-none justify-content-center align-items-center position-relative my-4 ">
                     <button
                       className="slider-btn me-3"
                       onClick={() => sliderRef.current.slickPrev()}

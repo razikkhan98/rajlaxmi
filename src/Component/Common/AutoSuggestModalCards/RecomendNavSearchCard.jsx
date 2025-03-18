@@ -101,7 +101,7 @@ const RecommendNavSearchCard = ({ product }) => {
 
   return (
     <React.Fragment>
-  <div className='d-flex overflow-auto '>
+  <div className='d-flex overflow-auto me-4'>
                  {ProductCardData.map((product, index) => (
                      <div className='col-lg-2 mx-2'>
                          <div className="product-recommedation-cards  nav-Recommend-card background-color-white my-2 pb-0">
