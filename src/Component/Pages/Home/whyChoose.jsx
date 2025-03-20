@@ -56,6 +56,25 @@ const testimonials = [
     rating: 4,
     image: Choose,
   },
+  {
+    name: "Jivika Tiwary",
+    review:
+      "Finally, a brand I can trust for 100% organic essentials. Healthy, wholesome, and absolutely worth it!",
+    rating: 5, // Number of stars
+    image: Choose, // Replace with the appropriate image import
+  },
+   {
+    name: "John Doe",
+    review: "Amazing quality and great service. Highly recommend!",
+    rating: 4,
+    image: Choose,
+  },
+  {
+    name: "John Doe",
+    review: "Amazing quality and great service. Highly recommend!",
+    rating: 4,
+    image: Choose,
+  },
   // Add more testimonials as needed
 ];
 const WhyChoose = () => {
@@ -68,10 +87,6 @@ const WhyChoose = () => {
     speed: 800,
     centerPadding: "0px",
     infinite: true,
-    // autoplaySpeed: 2000,
-    // autoplay: true,
-
-    // Make it responsive
   responsive: [
     {
       breakpoint: 1024, // Tablets
@@ -82,7 +97,7 @@ const WhyChoose = () => {
     {
       breakpoint: 768, // Mobile landscape
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
         centerMode: false, // Avoid cutting off images
       },
     },
@@ -126,7 +141,7 @@ const WhyChoose = () => {
           <img src={Vector2} alt="Loading" />
         </div>
         <div className="container why-us">
-          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-center">
+          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-center text-color-dark-ashy-blue">
             Why Choose Us?
           </div>
           <div className="row py-5">
@@ -137,19 +152,19 @@ const WhyChoose = () => {
                   <img src={iteam.image} alt="Loading" className="img-fluid" />
                 </div>
                 </div>
-                <div className="font-size-24 heading-title inter-font-family-600 py-4">
+                <div className="font-size-24 heading-title inter-font-family-600 text-chinese-black-color py-4">
                   {iteam.title}
                 </div>
                 <div className="whychoose-line"></div>
-                <div className="pt-3 text-description">{iteam.description}</div>
+                <div className="pt-3 text-description font-size-18 inter-font-family-400 text-chinese-black-color">{iteam.description}</div>
               </div>
             ))}
           </div>
           <div className="testimonial-section">
-            <div className="font-size-40 josefin-sans-font-family-600 heading-text text-center">
-              Why Our Customers Love Rajlaxmi Jaivik
+            <div className="font-size-40 josefin-sans-font-family-600 heading-text text-center text-color-dark-ashy-blue">
+              Why Our Customers Love <span className="text-dark">Rajlaxmi Jaivik</span>
             </div>
-            <div className="font-size-16 inter-font-family-400 text-description text-center py-2">
+            <div className="font-size-18 inter-font-family-400 text-description text-chinese-black-color text-center py-2">
               We provide assurance to consumers about quality and trust with
               <br />
               compliance and regulations.
@@ -161,7 +176,7 @@ const WhyChoose = () => {
           <div className="row pt-5">
             <div className="col-lg-10 col10 m-auto">
               <div className="wrapper py-0">
-                <Slider {...settings} className="center-slider">
+                <Slider {...settings} className="center-slider why-choose-slider">
                   {testimonials.map((testimonial, index) => (
                     <div className="slide" key={index}>
                       <div style={{ width: "48px", height: "48px" }}>
@@ -173,15 +188,14 @@ const WhyChoose = () => {
                       </div>
                       <div className="mt-4">
                         <p
-                          className="mb-0 card-heading"
-                          style={{ fontSize: "18px", fontWeight: "400" }}
+                          className="mb-0 card-heading text-chinese-black-color font-size-18 inter-font-family-400"
                         >
                           {testimonial.name}
                         </p>
                         <div className="start-gleeful py-2">
                           {renderStars(testimonial.rating)}
                         </div>
-                        <p className="slick-para pt-0 text-description">{testimonial.review}</p>
+                        <p className="slick-para pt-0 text-description text-color-dark-ashy-blue font-size-14 inter-font-family-400">{testimonial.review}</p>
                       </div>
                     </div>
                   ))}

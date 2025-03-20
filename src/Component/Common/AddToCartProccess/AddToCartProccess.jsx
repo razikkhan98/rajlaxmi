@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // images
 import rightTick from "../../Assets/img/ourProducts/rightTick.svg";
@@ -9,13 +9,12 @@ import { CartContext } from "../../Context/UserContext";
 import CardEmpty from "../../Assets/img/Product/cart.png";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { deleteData, updateData } from "../../../services/apiService";
-
+import axios from "axios";
 const AddToCartProccess = ({ showModal, handleClose }) => {
- const {  cart } = useContext(CartContext);
- const uid = sessionStorage.getItem("uid");
+  // const {  clearCart } = useContext(CartContext);
 
-
+  const [cartItems, setCartItems] = useState([]);
+  const uid = sessionStorage.getItem("uid");
   // States
   const [step, setStep] = useState(0);
   const [Paymode, setPaymode] = useState(false);
@@ -27,98 +26,116 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
       return setPaymode(!Paymode);
     }
 
-   
+    const uid = sessionStorage.getItem("uid");
+    const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+  
+    if (Object.keys(storedCart).length === 0) {
+      toast.warning("Your cart is empty!", { position: "top-right" });
+      return;
+    }
+
+    const payload = {
+      uid: uid,
+      cartItems: Object.keys(storedCart).map((productId) => ({
+        productId,
+        items: Object.entries(storedCart[productId]).map(([weight, data]) => ({
+          weight,
+          quantity: data.quantity,
+        })),
+      })),
+    };
+    console.log(payload);
+  
+    try {
+      const response = await axios.post("https://your-backend-api.com/checkout", payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.status === 200) {
+        toast.success("Order placed successfully!", { position: "top-right" });
+        clearCart(); // Clear cart after order
+      }
+    } catch (error) {
+      toast.error("Failed to place order. Try again.", { position: "top-right" });
+      console.error("Order Error:", error);
+    }
   
   
   };
 
-  // Increase Quantity
-const increaseQuantity = async (item) => {
-  const newQuantity = item.quantity + 1;
-  const newTotalAmount = (item.price * newQuantity).toFixed(2);
+  const fetchCartItems = () => {
+    const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+    const itemsArray = [];
 
-  try {
-    const response = await updateData("updatecart", item.id, {
-      uid,
-      product_id: item.id,
-      product_name: item.name,
-      product_quantity: newQuantity,
-      product_weight: item.selectedWeight,
-      product_price: item.price,
-      product_total_amount: newTotalAmount,
-    });
-    console.log(response);
-
-    if (response.status === 200) {
-      toast.success("Quantity increased successfully!");
-    } else {
-      toast.error("Failed to update quantity");
-    }
-  } catch (error) {
-    toast.error("Failed to update quantity");
-    console.error(error);
-  }
-};
-  
-
-// Decrease Quantity
-const decreaseQuantity = async (item) => {
-  if (item.quantity > 1) {
-    const newQuantity = item.quantity - 1;
-    const newTotalAmount = (item.price * newQuantity).toFixed(2);
-
-    try {
-      const response = await updateData("updatecart", item.id, {
-        uid,
-        product_id: item.id,
-        product_name: item.name,
-        product_quantity: newQuantity,
-        product_weight: item.selectedWeight,
-        product_price: item.price,
-        product_total_amount: newTotalAmount,
+    Object.keys(storedCart).forEach((productId) => {
+      Object.keys(storedCart[productId]).forEach((weight) => {
+        itemsArray.push({
+          id: productId,
+          weight,
+          quantity: storedCart[productId][weight].quantity,
+          productDetails: storedCart[productId][weight].productDetails,
+        });
       });
-      console.log(response);
+    });
 
-      if (response.status === 200) {
-        toast.success("Quantity decreased successfully!");
-      } else {
-        toast.error("Failed to update quantity");
+    setCartItems(itemsArray);
+  };
+
+  useEffect(() => {
+    fetchCartItems(); // Fetch on initial render
+
+    // 🔥 Listen for cart updates
+    window.addEventListener("cartUpdated", fetchCartItems);
+
+    return () => {
+      window.removeEventListener("cartUpdated", fetchCartItems);
+    };
+  }, [uid]);
+
+  const updateQuantity = (productId, weight, newQuantity) => {
+    if (newQuantity < 1) {
+      removeFromCart(productId, weight);
+      return;
+    }
+
+    const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+    if (storedCart[productId] && storedCart[productId][weight]) {
+      storedCart[productId][weight].quantity = newQuantity;
+      sessionStorage.setItem(`cart_${uid}`, JSON.stringify(storedCart));
+      fetchCartItems(); // 🔄 Update UI immediately
+      window.dispatchEvent(new Event("cartUpdated")); // Notify all components
+    }
+  };
+
+  const removeFromCart = (productId, weight) => {
+    const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+    if (storedCart[productId] && storedCart[productId][weight]) {
+      delete storedCart[productId][weight];
+      if (Object.keys(storedCart[productId]).length === 0) {
+        delete storedCart[productId];
       }
-    } catch (error) {
-      toast.error("Failed to update quantity");
-      console.error(error);
+      sessionStorage.setItem(`cart_${uid}`, JSON.stringify(storedCart));
+      fetchCartItems(); // 🔄 Update UI immediately
+      window.dispatchEvent(new Event("cartUpdated"));
     }
-  } else {
-    deleteItem(item);
-  }
-};
+  };
 
 
-// Delete Item
-const deleteItem = async (item) => {
-  try {
-    const response = await deleteData("deletecart", item.id);
-
-    if (response.status === 200) {
-      toast.success("Item removed from cart!");
-    } else {
-      toast.error("Failed to remove item");
-    }
-  } catch (error) {
-    toast.error("Failed to remove item");
-    console.error(error);
-  }
-};
-
-  
-
-
+  const clearCart = () => {
+    const uid = sessionStorage.getItem("uid");
+    sessionStorage.removeItem(`cart_${uid}`);
+    
+    fetchCartItems(); // 🔄 Update UI immediately
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
 
  
 
   return (
     <div>
-      {cart.length > 0 ? (
+      {cartItems.length > 0 ? (
         <Modal
           show={showModal}
           onHide={handleClose}
@@ -198,28 +215,28 @@ const deleteItem = async (item) => {
                   >
                     <div className="d-flex justify-content-between">
                       <span className="text-color-terracotta font-size-14 inter-font-family-500">
-                        {cart?.length} Products
+                        {cartItems.length} Products
                       </span>
-                      <span style={{ cursor: "pointer" }}>
+                      <span onClick={clearCart} style={{ cursor: "pointer" }}>
                         Clear all
                       </span>
                     </div>
                     <hr />
 
-                    {cart?.map((i, index) => (
+                    {cartItems?.map((i, index) => (
                       <div className="d-flex  align-items-center product-cards my-3">
                         <div className=" p-0">
-                          <img src={i?.image} className="rounded m-2" alt="" />
+                          <img src={i.productDetails.image} className="rounded m-2" alt="" />
                         </div>
                         <div className="ms-2 product-cards-center p-0">
                           <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-16 pt-1">
-                            {i?.name}
+                            {i.productDetails.name}
                           </div>
                           <div className="text-color-dark-grayish-blue inter-font-family-400 font-size-14 pt-1">
                             Qty: {i.weight}
                           </div>
                           <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-24 pt-2">
-                            ₹ {i?.price}
+                            ₹ {i.productDetails.price}
                           </div>
                         </div>
                         <div className=" product-cards-end p-0 background-color-gleeful d-flex justify-content-center align-items-center">
@@ -228,20 +245,32 @@ const deleteItem = async (item) => {
                               <div>
                                 <button
                                   className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                                  onClick={() => decreaseQuantity(i)}
+                                  onClick={() =>
+                                    updateQuantity(
+                                      i.id,
+                                      i.weight,
+                                      i.quantity - 1
+                                    )
+                                  }
                                 >
                                   -
                                 </button>
                               </div>
                               <div className="text-center">
                                 <span className="font-size-24">
-                                  {i?.quantity}
+                                  {i.quantity}
                                 </span>
                               </div>
                               <div>
                                 <button
                                   className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                                  onClick={() => increaseQuantity(i)}
+                                  onClick={() =>
+                                    updateQuantity(
+                                      i.id,
+                                      i.weight,
+                                      i.quantity + 1
+                                    )
+                                  }
                                 >
                                   +
                                 </button>
@@ -255,7 +284,7 @@ const deleteItem = async (item) => {
                         >
                           <span
                             className="text-white inter-font-family-600 font-size-16"
-                            
+                            onClick={() => removeFromCart(i.id, i.weight)}
                           >
                             Delete
                           </span>

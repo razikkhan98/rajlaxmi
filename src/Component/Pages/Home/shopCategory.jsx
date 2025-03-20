@@ -25,7 +25,7 @@ const BestSellers = [
         id: 1,
         name: "Organic Kabuli Chana",
         price: "180.00",
-
+        qty: "500 gm",
         image: Images1,
         rating: 3.5,
         reviews: 312,
@@ -34,7 +34,7 @@ const BestSellers = [
         id: 2,
         name: "Soyabean Chunk Small Size",
         price: "58.00",
-
+        qty: "500 gm",
         image: Images2,
         rating: 4.0,
         reviews: 210,
@@ -43,7 +43,7 @@ const BestSellers = [
         id: 3,
         name: "Organic Jaggery Powder",
         price: "54.00",
-
+        qty: "500 gm",
         image: Images3,
         rating: 5,
         reviews: 210,
@@ -52,7 +52,7 @@ const BestSellers = [
         id: 4,
         name: "Hing Powder",
         price: "1200.00",
-
+        qty: "500 gm",
         image: Images4,
         rating: 5,
         reviews: 210,
@@ -162,23 +162,24 @@ const ShopCategory = () => {
       { breakpoint: 1280, settings: { slidesToShow: 3, slidesToScroll: 1 } },
       { breakpoint: 992, settings: { slidesToShow: 2, slidesToScroll: 1 } },
       { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-      { breakpoint: 552, settings: { slidesToShow: 1.2, slidesToScroll: 1 } },
+      { breakpoint: 552, settings: { slidesToShow: 1.2, slidesToScroll: 1} },
       { breakpoint: 445, settings: { slidesToShow: 1.1, slidesToScroll: 1 } },
+
     ],
   };
   return (
     <>
       <section className="background-color-light-grayish-yellow category-padding">
         <div className="container">
-          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-grayish-blue pb-4">
-            Shop By Category in
+          <div className="josefin-sans-font-family-600 heading-text font-size-40 text-color-dark-grayish-blue pb-4 ps-lg-0 ps-3">
+            Shop By Category
           </div>
           {/*Start Best Sellers */}
           <div className="row px-1">
             {BestSellers.map((category, index) => (
               <>
                 <div
-                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex align-items-center text-rotate pb-4"
+                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex align-items-center text-rotate pb-4 pt-lg-0 pt-4"
                   key={index}
                 >
                   <div className="josefin-sans-font-family-500 heading-text font-size-30 text-color-dark-grayish-blue">
@@ -187,17 +188,15 @@ const ShopCategory = () => {
                 </div>
                 <div className="col-lg-11 col-md-10 col-10 col-sm-10">
                   <div className="slider-container">
-                    <div className=" row">
+                    <div className=" row home-shop-category">
                       <Slider {...sliderSettings}>
                         {category.products.map((product, index) => (
-                          <div
-                            key={index}
-                            className="col-lg-3 col-md-6 col-sm-12"
-                          >
+                          <div key={index} className="col-lg-3 col-md-6 col-sm-12">
                             <AddtoCard key={product.id} product={product} />
                           </div>
                         ))}
                       </Slider>
+
                     </div>
                   </div>
                   <div className="col-md-12 py-5">
@@ -214,7 +213,7 @@ const ShopCategory = () => {
             {SeasonalHarvest.map((category, index) => (
               <>
                 <div
-                  className="col-md-1 col-sm-1 col-2 d-flex justify-content-start align-items-center text-rotate pb-4"
+                  className="col-md-1 col-sm-1 col-2 d-flex justify-content-start align-items-center text-rotate pb-4 pt-lg-0 pt-4"
                   key={index}
                 >
                   <div className="josefin-sans-font-family-500 heading-text font-size-30 text-color-dark-grayish-blue">
@@ -222,17 +221,14 @@ const ShopCategory = () => {
                   </div>
                 </div>
                 <div className="col-lg-11 col-md-10 col-sm-10 col-10">
-                  <div className="row">
-                    <Slider {...sliderSettings}>
-                      {category.products.map((product, index) => (
-                        <div
-                          key={index}
-                          className="col-lg-3 col-md-6 col-sm-12"
-                        >
-                          <AddtoCard key={product.id} product={product} />
-                        </div>
-                      ))}
-                    </Slider>
+                  <div className="row home-shop-category">
+                   <Slider {...sliderSettings}>
+                   {category.products.map((product, index) => (
+                      <div key={index} className="col-lg-3 col-md-6 col-sm-12">
+                        <AddtoCard key={product.id} product={product} />
+                      </div>
+                    ))}
+                   </Slider>
                   </div>
                   <div className="col-md-12 py-5">
                     <div className="horizontal-line"> </div>
@@ -249,7 +245,7 @@ const ShopCategory = () => {
             {EcoEssentials.map((category, index) => (
               <>
                 <div
-                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-start align-items-center text-rotate pb-4"
+                  className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-start align-items-center text-rotate pb-4 pt-lg-0 pt-4"
                   key={index}
                 >
                   <div className="josefin-sans-font-family-500 heading-text font-size-30 text-color-dark-grayish-blue">
@@ -257,17 +253,14 @@ const ShopCategory = () => {
                   </div>
                 </div>
                 <div className="col-lg-11 col-md-10 col-sm-10 col-10">
-                  <div className="row">
-                    <Slider {...sliderSettings}>
-                      {category.products.map((product, index) => (
-                        <div
-                          key={index}
-                          className="col-lg-3 col-md-6 col-sm-12"
-                        >
-                          <AddtoCard key={product.id} product={product} />
-                        </div>
-                      ))}
-                    </Slider>
+                  <div className="row home-shop-category">
+                   <Slider {...sliderSettings}>
+                   {category.products.map((product, index) => (
+                      <div key={index} className="col-lg-3 col-md-6 col-sm-12">
+                        <AddtoCard key={product.id} product={product} />
+                      </div>
+                    ))}
+                   </Slider>
                   </div>
                 </div>
               </>

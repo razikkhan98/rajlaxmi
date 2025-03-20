@@ -87,7 +87,7 @@ const Products = () => {
       { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
       { breakpoint: 992, settings: { slidesToShow: 2, slidesToScroll: 1 } },
       { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-      { breakpoint: 576, settings: { slidesToShow: 1.7, slidesToScroll: 1 } },
+      { breakpoint: 576, settings: { slidesToShow: 1, slidesToScroll: 1 } },
     ],
   };
 
@@ -104,7 +104,7 @@ const Products = () => {
     slidesToShow: 10,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000000,
+    autoplaySpeed: 2000,
     arrows: true,
     responsive: [
       { breakpoint: 1280, settings: { slidesToShow: 7, slidesToScroll: 1 } },
@@ -120,7 +120,7 @@ const Products = () => {
       <section>
         <div className="bg-custom-gradient-product">
           <Navbar />
-          <div className="josefin-sans-font-family-500 heading-text font-size-30 text-center pt-3">
+          <div className="josefin-sans-font-family-500 heading-text font-size-32 text-color-dark-grayish-blue text-center pt-3">
             Pure & Natural Choices
           </div>
           <div className="d-flex justify-content-center py-4">
@@ -136,11 +136,11 @@ const Products = () => {
           </div>
         </div>
         <div className="background-color-light-grayish-yellow py-5">
-          <div className="container">
-            <div className="category-container shop-category-slider overflow-hidden">
-              <div className="category-label">Categories</div>
+          <div className="container mb-5 pb-5">
+            <div className="category-container shop-category-slider overflow-hidden mb-5">
+              <div className="category-label josefin-sans-font-family-500">Categories</div>
 
-              <Slider {...sliderSettings}>
+              <Slider className="w-100" {...sliderSettings}>
                 {categories.map((item, index) => (
                   <div className="category-card">
                     <img
@@ -168,20 +168,20 @@ const Products = () => {
             {categoriesWithProducts.map((category, index) => (
               <div key={index}>
                 <div className="d-flex justify-content-between align-items-center px-5">
-                  <div className="josefin-sans-font-family-500 font-size-30 heading-title text-start py-2 text-color-dark-grayish-blue">
+                  <div className="josefin-sans-font-family-500 font-size-30 text-start py-2 text-color-dark-grayish-blue">
                     {category.title}
                   </div>
                   <div>
                     <Link
                       to="/products-inner"
-                      className="text-color-dark-grayish-blue text-decoration-none"
+                      className="text-color-dark-grayish-blue text-decoration-none d-flex align-items-center"
                     >
-                      <span>View all</span> <FiChevronRight fontSize={20} />
+                      <span className="font-size-16 inter-font-family-400">View all</span> <FiChevronRight fontSize={18} />
                     </Link>
                   </div>
                 </div>
 
-                <div className="slider-container position-relative text-center">
+                <div className="slider-container category-page-sliders position-relative text-center">
                   <Slider ref={sliderRef} {...settings}>
                     {category.products.map((product) => (
                       <div key={product.id} className="product-card">
@@ -190,7 +190,7 @@ const Products = () => {
                     ))}
                   </Slider>
 
-                  <div className="d-flex justify-content-center align-items-center position-relative my-4">
+                  <div className="d-lg-flex d-none justify-content-center align-items-center position-relative my-4 ">
                     <button
                       className="slider-btn me-3"
                       onClick={() => sliderRef.current.slickPrev()}

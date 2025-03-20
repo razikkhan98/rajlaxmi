@@ -71,9 +71,9 @@ const ProductCard = () => {
     };
     return (
         <>
-            <div className='row'>
+            <div className='row d-flex justify-content-center align-items-center'>
                 {ProductCardData.map((product, index) => (
-                    <div className='col-lg-2'>
+                    <div className='col-lg-2 col-md-4 col-sm-12 d-lg-block d-flex justify-content-lg-start justify-content-center'>
                         <div className="product-recommedation-cards background-color-white my-2 pb-0">
                             {/* <div className="d-flex  justify-content-center pt-2"> */}
                                 <div className='d-flex justify-content-center pt-2'>
@@ -81,7 +81,7 @@ const ProductCard = () => {
                                     <img src={product.image} alt="Loading" className="img-fluid" />
                                 </div>
                                 <div className='pt-2 pb-1 d-flex flex-column'>
-                                    <span className='font-size-14 ms-2'>{product.name}</span>
+                                    <span className='font-size-14 inter-font-family-600 text-color-dark-grayish-blue ms-2'>{product.name}</span>
                                     <span className="inter-font-family-400 product-qty font-size-14 ms-2 my-1">
                                        ({product.qty})
                                     </span>
