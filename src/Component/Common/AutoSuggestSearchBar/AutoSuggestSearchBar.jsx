@@ -134,10 +134,10 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
             className={`position-absolute top-0 start-0 w-100 auto-search-modal  rounded-4 shadow-lg overflow-auto px-0 background-color-light-grayish-yellow ${
               showDropdown ? "" : ""
             }`}
-            style={{ zIndex: 10 }}
+            style={{ zIndex: 100 }}
           >
             <div className="d-flex align-items-center justify-content-between">
-              <h3 className="font-size-24 inter-font-family-600 mt-3 ms-3">
+              <h3 className="font-size-24 josefin-sans-font-family-600 text-color-dark-grayish-blue mt-3 ms-4">
                 Trending searches{" "}
               </h3>
               <img
@@ -155,7 +155,7 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
                 <div className=" auto-search-trend-box">
                   <div className="mx-3">
                     <img src={trendImg} className="rounded-3" alt="" />
-                    <h5 className="font-size-14 inter-font-family-500 mt-2">
+                    <h5 className="font-size-14 text-color-dark-ashy-blue inter-font-family-500 mt-2">
                       Gir Cow ghee
                     </h5>
                   </div>
@@ -163,7 +163,7 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
                 <div className=" auto-search-trend-box">
                   <div className="mx-3">
                     <img src={trendImg} className="rounded-3" alt="" />
-                    <h5 className="font-size-14 inter-font-family-500 mt-2">
+                    <h5 className="font-size-14 text-color-dark-ashy-blue inter-font-family-500 mt-2">
                       Gir Cow ghee
                     </h5>
                   </div>
@@ -171,7 +171,7 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
                 <div className=" auto-search-trend-box">
                   <div className="mx-3">
                     <img src={trendImg} className="rounded-3" alt="" />
-                    <h5 className="font-size-14 inter-font-family-500 mt-2">
+                    <h5 className="font-size-14 text-color-dark-ashy-blue inter-font-family-500 mt-2">
                       Gir Cow ghee
                     </h5>
                   </div>
@@ -190,15 +190,15 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
               </div>
             )}
 
-            <h3 className="font-size-24 inter-font-family-600 mt-3 ms-3">
+            <h3 className="font-size-24 josefin-sans-font-family-600 text-color-dark-grayish-blue mt-3 ms-4">
               Recommendations For you
             </h3>
-            <div className="d-flex overflow-auto">
-              {BestSellers?.map((i) => (
-                <span>
-                <RecommendNavSearchCard product={i} />
-                </span>
-              ))}
+            <div className="d-flex  ms-3">
+              {/* {BestSellers?.map((i) => ( */}
+                {/* <span> */}
+                <RecommendNavSearchCard  />
+                {/* </span> */}
+              {/* ))} */}
             </div>
             <li className="h-1"></li>
             {/* {filteredOptions?.map((option, index) => (

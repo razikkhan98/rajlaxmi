@@ -72,14 +72,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Logo from "../../Assets/img/Logo/RAJLAXMI JAVIK PNG.png";
+import mappin from "../../Assets/img/Login/MapPin.svg";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { RiSearch2Line } from "react-icons/ri";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AddToCartProccess from "../AddToCartProccess/AddToCartProccess";
 import AutoSuggestSearch from "../AutoSuggestSearchBar/AutoSuggestSearchBar";
 import { CartContext } from "../../Context/UserContext";
+import { Dropdown } from "react-bootstrap";
 
 const DataNavbar = [
   {
@@ -94,17 +96,21 @@ const DataNavbar = [
     title: "Wishlist",
     url: "/wishlist",
   },
+  {
+    title: "Contact",
+    url: "/contact",
+  },
+  
 ];
 
 const Navbar = () => {
- const {  cart } =useContext(CartContext);
-
- const size = cart.length
- console.log('size: ', size);
-
 
   const [cartCount, setCartCount] = useState(0);
   const uid = sessionStorage.getItem("uid");
+  const location = useLocation()
+
+  
+
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -192,13 +198,29 @@ const Navbar = () => {
         }`}
       >
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand d-lg-block d-none" href="/">
             <img
               src={Logo}
               alt="Logo"
               style={{ height: "42px", width: "44px" }}
             />
           </a>
+          <div className="d-flex justify-content-center align-items-center">
+            <hr className="nav-location-section-hr d-lg-block d-none" />
+            <img className="mx-2" src={mappin} alt="" />
+          <Dropdown className="nav-location-section">
+      <Dropdown.Toggle type="text"  className="inter-font-family-400 font-size-10 text-chinese-black-color text-dark p-0" id="dropdown-basic-nav">
+        Location
+      </Dropdown.Toggle>
+      <p className="inter-font-family-500 font-size-12 m-0 text-color-terracotta w-50 text-truncate">Indore, Madhya Pradesh</p>
+
+      <Dropdown.Menu>
+        <Dropdown.Item >Action</Dropdown.Item>
+        <Dropdown.Item >Another action</Dropdown.Item>
+        <Dropdown.Item >Something else</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+          </div>
 
           {/* Toggle Button */}
           <button
@@ -216,30 +238,30 @@ const Navbar = () => {
             id="navbarNav"
           >
             <ul
-              className={`navbar-nav ms-auto mb-2 mb-lg-0 ${
+              className={`navbar-nav nav-section ms-auto mb-2 mb-lg-0 ${
                 mobNav < 992
                   ? "d-flex justify-content-center align-items-center gap-0"
                   : "gap-4"
               }`}
             >
               {DataNavbar.map((link, i) => (
-                <li className={`nav-item nav-text-deco ${inputBar ? "d-none" : ""}`} key={i}>
+                <li className={`nav-item nav-text-deco inter-font-family nav-text-deco-${String(location?.pathname) === String(link.url) ? 'active' :'' } ${inputBar ? "d-none" : ""}`} key={i}>
                   {/* <a className="nav-link" href=>{link.title}</a> */}
-                  <Link className="nav-link nav-text" to={link.url}>
+                  <Link className={`nav-link nav-text nav-text-${String(location?.pathname) === String(link.url) ? 'active' :'' }`} to={link.url}>
                     {link.title}
                   </Link>
                 </li>
               ))}
             </ul>
             <div
-              className={`d-flex gap-4 ${
+              className={`d-flex nav-section align-items-center gap-4 ${
                 mobNav < 992
                   ? "d-flex justify-content-center align-items-center gap-0"
                   : ""
               }`}
             >
               <button
-                className={`login-btn rounded-pill mx-3 ${
+                className={`login-btn rounded-pill mx-3 josefin-sans-font-family-500 ${
                   inputBar ? "d-none" : ""
                 }`}
                 type="button"
@@ -324,7 +346,7 @@ const Navbar = () => {
           }`}
         >
           <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
-          <span className="cart-quantity translate-middle rounded-pill">{size}</span>
+          <span className="cart-quantity translate-middle rounded-pill">0</span>
         </button>
       </div>
       {/* ----------------- */}

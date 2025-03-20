@@ -16,7 +16,7 @@ export const getData = async (endpoint) => {
 export const postData = async (endpoint, data) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/${endpoint}`, data);
-    return response;
+    return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
   }
@@ -26,7 +26,7 @@ export const postData = async (endpoint, data) => {
 export const updateData = async (endpoint, id, data) => {
   try {
     const response = await axios.put(`${API_BASE_URL}/${endpoint}/${id}`, data);
-    return response;
+    return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
   }

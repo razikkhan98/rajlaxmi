@@ -43,7 +43,7 @@ const SortDropdown = () => {
                     {sortOptions.map((option) => (
                         <li key={option.id} className="d-flex align-items-center my-2 justify-content-between px-2">
                             <label
-                                className="form-check-label"
+                                className="form-check-label text-color-dark-ashy-blue"
                                 // style={{ color: option.color, fontWeight: "500" }}
                             >
                                 {option.label} {" "}

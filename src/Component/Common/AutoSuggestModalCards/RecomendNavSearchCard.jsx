@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Images
-
+import Product1 from "../../Assets/img/ProductDescription/Rectangle 55.png";
 // Icons
 import { MdCurrencyRupee } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
@@ -11,6 +11,46 @@ import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import { TiStarFullOutline } from "react-icons/ti";
 
+
+// Json
+const ProductCardData = [
+  {
+      image: Product1,
+      name: "Organic Kabuli Chana",
+      qty: "500gm",
+      price: 2355,
+  },
+  {
+      image: Product1,
+      name: "Organic Kabuli Chana",
+      qty: "500gm",
+      price: 2355,
+  },
+  {
+      image: Product1,
+      name: "Organic Kabuli Chana",
+      qty: "500gm",
+      price: 2355,
+  },
+  {
+      image: Product1,
+      name: "Organic Kabuli Chana",
+      qty: "500gm",
+      price: 2355,
+  },
+  {
+      image: Product1,
+      name: "Organic Kabuli Chana",
+      qty: "500gm",
+      price: 2355,
+  },
+  {
+      image: Product1,
+      name: "Organic Kabuli Chana",
+      qty: "500gm",
+      price: 2355,
+  },
+]
 const RecommendNavSearchCard = ({ product }) => {
   
   console.log(product);
@@ -61,107 +101,80 @@ const RecommendNavSearchCard = ({ product }) => {
 
   return (
     <React.Fragment>
-      <div className="shop-by-category background-color-white position-relative my-2">
-        <div className="d-flex justify-content-center pt-2">
-          <div>
-            {/* Icons (Heart & Share) */}
-            {/* <div className="heart">
-              <FaRegHeart className="text-color-terracotta" />
-            </div> */}
-            {/* <div className="share">
-              <PiShareFatBold className="text-color-terracotta" />
-            </div> */}
-
-            {/* Product Image & Qty Selector */}
-
-            {/* <div className="gm">
-              <span className="inter-font-family-500 font-size-10 text-color-dark-grayish-blue ml-3">
-                Qty
-              </span>
-              <span className="inter-font-family-500 font-size-14 ms-2">
-                {product.qty}
-              </span>
-              <MdOutlineArrowDropDown
-                // fontSize={20}
-                className="text-color-terracotta"
-              />
-            </div> */}
-            <img src={product.image} alt="Loading" className="img-fluid" />
-          </div>
-        </div>
-
-        {/* Product Name & Ratings */}
-
-        <div className="d-flex justify-content-between px-2 pt-2">
-          <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
-            {product.name}
-          </div>
-          {/* <div className="w-50 d-flex justify-content-center rating-height" style={{height:"59px"}}>
-            <div>
-            <div className="pt-1">
-            <span className="start-gleeful">
-            {renderStars(product.rating)}
-            </span>
-            </div>
-            <div className="inter-font-family-500 font-size-10 font-sm-8 start-gleeful pt-2">
-            {product.rating} ({product.reviews} Reviews)
-            </div>
-            </div>
-            </div> */}
-        </div>
-            <h5 className="inter-font-family-400 font-size-14 login-text px-2 pt-2">(500 gm)</h5>
-
-        {/* Price & Add to Cart Button */}
-
-        <div className="d-flex justify-content-between pt-2">
-          <div className="ms-4 d-flex align-items-center">
-            <MdCurrencyRupee className="" />
-            <span className="inter-font-family-500 font-size-16 text-color-black">
-              {product.price}
-            </span>
-          </div>
-
-          {/* Add to Cart / Quantity Controls */}
-
-          {!isAdded ? (
-            <div>
-              <button
-                className="background-color-terracotta button-addtocard inter-font-family-500 font-size-16"
-                onClick={() => {
-                  setIsAdded(true);
-                  setQuantity(1); // Set initial quantity to 1
-                }}
-              >
-                Add
-              </button>
-            </div>
-          ) : (
-            <div>
-              <div className="background-color-gleeful button-addtocard d-flex justify-content-around align-items-center">
-                <div>
-                  <button
-                    className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                    onClick={decreaseQuantity}
-                  >
-                    -
-                  </button>
-                </div>
-                <div>
-                  <span className="font-size-24">{quantity}</span>
-                </div>
-                <div>
-                  <button
-                    className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                    onClick={increaseQuantity}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+  <div className='d-flex overflow-auto me-4'>
+                 {ProductCardData.map((product, index) => (
+                     <div className='col-lg-2 mx-2'>
+                         <div className="product-recommedation-cards  nav-Recommend-card background-color-white my-2 pb-0">
+                             {/* <div className="d-flex  justify-content-center pt-2"> */}
+                                 <div className='d-flex justify-content-center pt-2'>
+                                     {/* Product Image & Qty Selector */}
+                                     <img src={product.image} alt="Loading" className="img-fluid" />
+                                 </div>
+                                 <div className='pt-2 pb-1 d-flex flex-column'>
+                                     <span className='font-size-14 inter-font-family-600 text-color-dark-grayish-blue ms-2'>{product.name}</span>
+                                     <span className="inter-font-family-400 product-qty font-size-14 ms-2 my-1">
+                                        ({product.qty})
+                                     </span>
+                                 </div>
+                             {/* </div> */}
+ 
+ 
+                             {/* Price & Add to Cart Button */}
+ 
+                             <div className="d-flex justify-content-between">
+                                 <div className="ms-2 d-flex align-items-center">
+                                     <MdCurrencyRupee className="" />
+                                     <span className="inter-font-family-500 font-size-14 text-color-black">
+                                         {product.price}
+                                     </span>
+                                 </div>
+ 
+                                 {/* Add to Cart / Quantity Controls */}
+ 
+                                 {!isAdded ? (
+                                     <div>
+                                         <button
+                                             className="background-color-terracotta button-addtocard btn-add-recommendation inter-font-family-500 font-size-16"
+                                             onClick={() => {
+                                                 setIsAdded(true);
+                                                 setQuantity(1); // Set initial quantity to 1
+                                             }}
+                                         >
+                                             Add
+                                         </button>
+                                     </div>
+                                 ) : (
+                                     <div>
+                                         <div className="background-color-gleeful button-addtocard d-flex justify-content-around align-items-center">
+                                             <div>
+                                                 <button
+                                                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
+                                                     onClick={decreaseQuantity}
+                                                 >
+                                                     -
+                                                 </button>
+                                             </div>
+                                             <div>
+                                                 <span className="font-size-24">{quantity}</span>
+                                             </div>
+                                             <div>
+                                                 <button
+                                                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
+                                                     onClick={increaseQuantity}
+                                                 >
+                                                     +
+                                                 </button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 )}
+                             </div>
+                         </div>
+                     </div>
+ 
+                 ))}
+ 
+             </div>
     </React.Fragment>
   );
 };
