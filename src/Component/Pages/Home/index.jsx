@@ -28,8 +28,8 @@ const Home = () => {
         <div className="home bg-custom-gradient padding-bottom-60">
           <Navbar />
 
-          <div className="container">
-            <div className="row py-5 d-flex justify-content-center">
+          <div className="container-fluid">
+            <div className="row py-5 d-flex justify-content-center mx-lg-5 px-lg-3">
               <div className="col-lg-3 col-md-3 col-3 px-0 home-col1">
                 <p className="home-para1 mb-0 pb-1 px-2">Organic Product</p>
                 <div className="img1">
