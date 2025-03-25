@@ -131,11 +131,11 @@ const ProductInner = () => {
           <div className="container pt-5 text-light-gray-color font-size-14 inter-font-family-400">
           <span> Back</span> <img src={ArrowDark} className="mx-2" alt="Loading" /> <span className=" text-color-dark-grayish-blue">Spices</span>
           
-            <div className="d-flex justify-content-end pt-3">
-              <div className="px-3">
+            <div className="d-flex product-inner-page-filter justify-content-end pt-3">
+              <div className="px-3 product-page-sort-filter">
                 <SortDropdown />
               </div>
-              <div className="px-3">
+              <div className="px-3 product-page-filter-filter">
                 <FilterDropDown />
               </div>
             </div>
@@ -143,11 +143,11 @@ const ProductInner = () => {
         </div>
         <div className="background-color-light-grayish-yellow padding-bottom-60 pb-5">
           <div className="container pb-5 mb-5">
-            <div className="row mb-5">
+            <div className="row mb-5 justify-content-center">
               <h2 className="ms-3 text-color-dark-grayish-blue font-size-32 josefin-sans-font-family-500">Spices</h2>
               {BestSellers.map((product, index) => (
                 <>
-                  <div key={index} className="col-md-4 col-lg-3 col-sm-12  py-3">
+                  <div key={index} className="col-md-5 col-lg-3 col-sm-12  py-3">
                     <AddtoCard key={product.id} product={product} />
                   </div>
                 </>

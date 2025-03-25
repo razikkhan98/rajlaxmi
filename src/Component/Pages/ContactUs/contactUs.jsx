@@ -10,6 +10,7 @@ import facebook from "../../Assets/img/Contact/icons8-facebook.svg";
 import instagram from "../../Assets/img/Contact/icons8-instagram.svg";
 import linkedin from "../../Assets/img/Contact/icons8-linkedin.svg";
 import youtube from "../../Assets/img/Contact/icons8-youtube.svg";
+import inlarge from '../../Assets/img/Contact/inlarge.svg'
 
 const ContactUs = () => {
   // State
@@ -45,16 +46,16 @@ const ContactUs = () => {
             <div className="padding-bottom-100 mb-5">
               <div className="container contact-section Delivery-status-div">
                 <div className="row contact-section-row">
-                  <div className="col-lg-7 d-grid">
-                    <div className="mt-3 pt-lg-3 pt-sm-0 mx-1 mb-3  ">
+                  <div className="col-lg-7 d-lg-grid">
+                    <div className="mt-3 pt-lg-3 pt-sm-0 mx-1 mb-3 d-lg-block d-md-flex justify-content-md-center">
                       <img className="mx-3" src={facebook} alt="" />
                       <img className="mx-3" src={instagram} alt="" />
                       <img className="mx-3" src={youtube} alt="" />
                       <img className="mx-3" src={linkedin} alt="" />
                     </div>
-                    <div className="d-lg-flex d-sm-grid align-items-end pb-3 mb-lg-3 mb-sm-0 mx-lg-4 mx-sm-0">
-                      <div className="contact-map ">
-                        <img src="" alt="" />
+                    <div className="d-lg-flex d-md-flex d-sm-grid justify-content-md-around align-items-end pb-3 mb-lg-3 mb-sm-0 mx-lg-4 mx-sm-0">
+                      <div className="contact-map position-relative d-flex justify-content-end">
+                        <img className="contact-inlarge  position-absolute m-3" src={inlarge} alt="" />
                         <iframe
                           title="unique"
                           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9386.246714403482!2d80.94632178408278!3d26.82813556144555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfcf919137107%3A0xaafc9fdde5fc4bdc!2sRumeno%20Farmotech%20%7C%20Animal%20Feed%20Manufacturer%20in%20Lucknow!5e0!3m2!1sen!2sin!4v1713937138780!5m2!1sen!2sin"
@@ -64,14 +65,14 @@ const ContactUs = () => {
                           referrerPolicy="no-referrer-when-downgrade"
                         ></iframe>
                       </div>
-                      <div className="ms-lg-3 ms-sm-0">
+                      <div className="ms-lg-3 ms-md-2 ms-sm-0 contact-section-details">
                         <div className="py-2">
                           <img
                             src={Email}
                             alt="Loading"
                             className="background-color-white p-2 rounded-circle"
                           />
-                          <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
+                          <span className="inter-font-family-500 text-description font-size-22 text-color-white ms-3">
                             rajlaxmiorganicfoods@gmail.com
                           </span>
                         </div>
@@ -81,7 +82,7 @@ const ContactUs = () => {
                             alt="Loading"
                             className="background-color-white p-2 rounded-circle"
                           />
-                          <span className="inter-font-family-500 text-description font-size-16 text-color-white ms-3">
+                          <span className="inter-font-family-500 text-description font-size-22 text-color-white ms-3">
                             +91-8769115905
                           </span>
                         </div>
@@ -93,7 +94,7 @@ const ContactUs = () => {
                               className="background-color-white p-2 rounded-circle"
                             />
                           </div>
-                          <span className="inter-font-family-500 font-size-16 text-description text-color-white text-capitalize ms-3 contact-address">
+                          <span className="inter-font-family-500 font-size-22 text-description text-color-white text-capitalize ms-3 contact-address">
                             Address: 11, manish bagh colony, Sapna sangeeta
                             road, indore, madhya pradesh, 452001
                           </span>

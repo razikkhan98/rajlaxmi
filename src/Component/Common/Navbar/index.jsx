@@ -100,16 +100,12 @@ const DataNavbar = [
     title: "Contact",
     url: "/contact",
   },
-  
 ];
 
 const Navbar = () => {
-
   const [cartCount, setCartCount] = useState(0);
   const uid = sessionStorage.getItem("uid");
-  const location = useLocation()
-
-  
+  const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -208,18 +204,24 @@ const Navbar = () => {
           <div className="d-flex justify-content-center align-items-center">
             <hr className="nav-location-section-hr d-lg-block d-none" />
             <img className="mx-2" src={mappin} alt="" />
-          <Dropdown className="nav-location-section">
-      <Dropdown.Toggle type="text"  className="inter-font-family-400 font-size-10 text-chinese-black-color text-dark p-0" id="dropdown-basic-nav">
-        Location
-      </Dropdown.Toggle>
-      <p className="inter-font-family-500 font-size-12 m-0 text-color-terracotta w-50 text-truncate">Indore, Madhya Pradesh</p>
+            <Dropdown className="nav-location-section">
+              <Dropdown.Toggle
+                type="text"
+                className="inter-font-family-400 font-size-10 text-chinese-black-color text-dark p-0"
+                id="dropdown-basic-nav"
+              >
+                Location
+              </Dropdown.Toggle>
+              <p className="inter-font-family-500 font-size-12 m-0 text-color-terracotta w-50 text-truncate">
+                Indore, Madhya Pradesh
+              </p>
 
-      <Dropdown.Menu>
-        <Dropdown.Item >Action</Dropdown.Item>
-        <Dropdown.Item >Another action</Dropdown.Item>
-        <Dropdown.Item >Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+              <Dropdown.Menu>
+                <Dropdown.Item>Action</Dropdown.Item>
+                <Dropdown.Item>Another action</Dropdown.Item>
+                <Dropdown.Item>Something else</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
 
           {/* Toggle Button */}
@@ -240,14 +242,28 @@ const Navbar = () => {
             <ul
               className={`navbar-nav nav-section ms-auto mb-2 mb-lg-0 ${
                 mobNav < 992
-                  ? "d-flex justify-content-center align-items-center gap-0"
+                  ? "d-flex justify-content-center align-items-center text-center gap-0"
                   : "gap-4"
               }`}
             >
               {DataNavbar.map((link, i) => (
-                <li className={`nav-item nav-text-deco inter-font-family nav-text-deco-${String(location?.pathname) === String(link.url) ? 'active' :'' } ${inputBar ? "d-none" : ""}`} key={i}>
+                <li
+                  className={`nav-item nav-text-deco inter-font-family nav-text-deco-${
+                    String(location?.pathname) === String(link.url)
+                      ? "active"
+                      : ""
+                  } ${inputBar ? "d-none" : ""}`}
+                  key={i}
+                >
                   {/* <a className="nav-link" href=>{link.title}</a> */}
-                  <Link className={`nav-link nav-text nav-text-${String(location?.pathname) === String(link.url) ? 'active' :'' }`} to={link.url}>
+                  <Link
+                    className={`nav-link nav-text text-center nav-text-${
+                      String(location?.pathname) === String(link.url)
+                        ? "active"
+                        : ""
+                    }`}
+                    to={link.url}
+                  >
                     {link.title}
                   </Link>
                 </li>
@@ -261,7 +277,7 @@ const Navbar = () => {
               }`}
             >
               <button
-                className={`login-btn rounded-pill mx-3 josefin-sans-font-family-500 ${
+                className={`login-btn rounded-pill mx-3 inter-font-family-500 ${
                   inputBar ? "d-none" : ""
                 }`}
                 type="button"

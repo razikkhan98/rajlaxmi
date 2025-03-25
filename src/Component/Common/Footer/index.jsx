@@ -11,7 +11,7 @@ import Map from "../../Assets/img/ourProducts/map.svg";
 import Phone from "../../Assets/img/ourProducts/phone.svg";
 import Email from "../../Assets/img/ourProducts/EnvelopeSimple.svg";
 import Vector from "../../Assets/img/whyChooseUs/Vector.svg";
-import Vector2 from "../../Assets/img/whyChooseUs/vector2.svg";
+import Vector2 from "../../Assets/img/whyChooseUs/footer-vector.svg";
 
 const Footer = () => {
   const navLinks = ["Lab Report", "FAQ's", "Shop Now", "Track Order"];
@@ -39,13 +39,13 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-light position-relative bg-custom-gradient-footer padding-top-100 padding-bottom-60"
+      className="bg-light position-relative bg-custom-gradient-footer padding-top-100 padding-bottom-60 "
       style={{ display: "flex", alignItems: "center" }}
     >
        <div className="vector">
           <img src={Vector} alt="Loading" />
         </div>
-        <div className="vector2">
+        <div className="footer-vector-2 vector2">
           <img src={Vector2} alt="Loading" />
         </div>
       <Container style={{zIndex:"999"}}>
@@ -56,12 +56,12 @@ const Footer = () => {
             <div className="mb-4 text-center">
               <img
                 src={Logo}
-                alt="Rajlaxmi Jaiviks International"
+                alt="Rajlaxmi javiks International"
                 style={{ width: "92px" }}
                 className="ms-3"
               />
               <div className="mt-3 josefin-sans-font-family-500 heading-title text-color-dark-ashy-blue text-center font-size-22">
-                Rajlaxmi Jaiviks International
+                Rajlaxmi javiks International
               </div>
             </div>
           </Col>
@@ -99,7 +99,7 @@ const Footer = () => {
           </Col>
 
           {/* General Links */}
-          <Col xs={4} lg={2} md={6}>
+          <Col xs={4} lg={2} md={4}>
             {/* <h6 className="fw-bold">General</h6> */}
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               General
@@ -116,7 +116,7 @@ const Footer = () => {
           </Col>
 
           {/* Contact Us */}
-          <Col xs={8} lg={3} md={6}>
+          <Col xs={8} lg={3} md={8}>
             {/* <h6 className="fw-bold">Contact Us</h6> */}
             <div className="josefin-sans-font-family-500 font-size-22 text-color-dark-ashy-blue heading-title pt-4 pb-2">
               Contact Us
@@ -181,7 +181,7 @@ const Footer = () => {
           <Col xs={12} lg={3} md={3}>
             <p className="mb-0 ">
               <span className="inter-font-family-400 text-description font-size-12">
-                &copy; 2024 Rajlaxmi Jaiviks International{" "}
+                &copy; 2024 Rajlaxmi javiks International{" "}
               </span>
               <br />
               <span className="inter-font-family-500 text-description font-size-14">
