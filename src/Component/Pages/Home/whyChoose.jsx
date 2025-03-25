@@ -137,7 +137,7 @@ const WhyChoose = () => {
         <div className="vector">
           <img src={Vector} alt="Loading" />
         </div>
-        <div className="vector2">
+        <div className="whychoose-vector-2 vector2">
           <img src={Vector2} alt="Loading" />
         </div>
         <div className="container why-us">
@@ -162,7 +162,7 @@ const WhyChoose = () => {
           </div>
           <div className="testimonial-section">
             <div className="font-size-40 josefin-sans-font-family-600 heading-text text-center text-color-dark-ashy-blue">
-              Why Our Customers Love <span className="text-dark">Rajlaxmi Jaivik</span>
+              Why Our Customers Love <span className="text-dark">Rajlaxmi Javiks</span>
             </div>
             <div className="font-size-18 inter-font-family-400 text-description text-chinese-black-color text-center py-2">
               We provide assurance to consumers about quality and trust with
@@ -171,7 +171,7 @@ const WhyChoose = () => {
             </div>
           </div>
 
-          {/* Start Why Our Customers Love Rajlaxmi Jaivik */}
+          {/* Start Why Our Customers Love Rajlaxmi javiks */}
 
           <div className="row pt-5">
             <div className="col-lg-10 col10 m-auto">
@@ -203,11 +203,11 @@ const WhyChoose = () => {
               </div>
             </div>
           </div>
-          {/* End Why Our Customers Love Rajlaxmi Jaivik */}
+          {/* End Why Our Customers Love Rajlaxmi javiks */}
         </div>
 
         <div className="w-100 grass-img z-3">
-          <img src={Grass} alt="" className="w-100 z-3" />
+          <img src={Grass} alt="" className="width-100vw z-3" />
         </div>
       </section>
     </>
