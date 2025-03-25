@@ -31,7 +31,7 @@ const Home = () => {
           <div className="container-fluid">
             <div className="row py-5 d-flex justify-content-center mx-lg-5 px-lg-3">
               <div className="col-lg-3 col-md-3 col-3 px-0 home-col1">
-                <p className="home-para1 mb-0 pb-1 px-2">Organic Product</p>
+                <p className="home-para1 mb-0 josefin-sans-font-family-500">Organic Product</p>
                 <div className="img1">
                   <img src={Home1} alt="Loading" />
                 </div>
@@ -54,7 +54,7 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="img6">
-                  <p className="home-para2">100% Vegeterian</p>
+                  <p className="home-para2 josefin-sans-font-family-500">100% Vegeterian</p>
                   <img src={Home6} alt="Loading" />
                 </div>
               </div>

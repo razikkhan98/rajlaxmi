@@ -268,7 +268,7 @@ const ProductDescription = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-12 col-md-5">
+            <div className="col-12 col-md-6">
               {/* Full-size Image */}
               <div className="slider-fullsize-image-div">
                 <div className="slider-fullsize-img-inner">

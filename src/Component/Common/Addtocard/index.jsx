@@ -71,11 +71,11 @@ const AddtoCard = ({ product }) => {
 
   // Add to Cart
   const increaseQuantity = () => {
-    if (!isAuthenticated) {
-      navigate("/login");
-      toast.warning("⚠️ Please login to add items!", { position: "top-right", autoClose: 3000 });
-      return;
-    }
+    // if (!isAuthenticated) {
+    //   navigate("/login");
+    //   toast.warning("⚠️ Please login to add items!", { position: "top-right", autoClose: 3000 });
+    //   return;
+    // }
   
     let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
   

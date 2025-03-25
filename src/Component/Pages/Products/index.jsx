@@ -30,6 +30,8 @@ const categories = [
   { name: "Seeds", image: Imge },
   { name: "Spices", image: Imge },
   { name: "Dry Fruits", image: Imge },
+  { name: "Dry Fruits", image: Imge },
+  { name: "Dry Fruits", image: Imge },
 ];
 
 const BestSellers = [
@@ -72,7 +74,8 @@ const BestSellers = [
 ];
 
 const Products = () => {
-  const sliderRef = useRef(null);
+  // const sliderRef = useRef(null);
+  const sliderRefs = useRef([]);
 
   const settings = {
     dots: false,
@@ -140,7 +143,7 @@ const Products = () => {
             <div className="category-container shop-category-slider overflow-hidden mb-5">
               <div className="category-label josefin-sans-font-family-500">Categories</div>
 
-              <Slider className="w-100" {...sliderSettings}>
+              <Slider className="product-header-slider" {...sliderSettings}>
                 {categories.map((item, index) => (
                   <div className="category-card">
                     <img
@@ -154,11 +157,11 @@ const Products = () => {
               </Slider>
             </div>
 
-            <div className="d-flex justify-content-center py-5">
-              <div className="px-3">
+            <div className="d-flex product-page-filter justify-content-center py-5">
+              <div className="px-3 product-page-sort-filter">
                 <SortDropdown />
               </div>
-              <div className="px-3">
+              <div className="px-3 product-page-filter-filter">
                 <FilterDropDown />
                 {/* <img src={Funnel} alt="Filter" className="sort-icon" />
                 <div className="text-center text-color-terracotta">Filter</div> */}
@@ -182,7 +185,7 @@ const Products = () => {
                 </div>
 
                 <div className="slider-container category-page-sliders position-relative text-center">
-                  <Slider ref={sliderRef} {...settings}>
+                  <Slider ref={(el) => (sliderRefs.current[index] = el)} {...settings}>
                     {category.products.map((product) => (
                       <div key={product.id} className="product-card">
                         <AddtoCard product={product} />
@@ -193,13 +196,13 @@ const Products = () => {
                   <div className="d-lg-flex d-none justify-content-center align-items-center position-relative my-4 ">
                     <button
                       className="slider-btn me-3"
-                      onClick={() => sliderRef.current.slickPrev()}
+                      onClick={() => sliderRefs.current[index]?.slickPrev()}
                     >
                       <FaAngleLeft />
                     </button>
                     <button
                       className="slider-btn ms-3"
-                      onClick={() => sliderRef.current.slickNext()}
+                      onClick={() => sliderRefs.current[index]?.slickNext()}
                     >
                       <FaAngleRight />
                     </button>

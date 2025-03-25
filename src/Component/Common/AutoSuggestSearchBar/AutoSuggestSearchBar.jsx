@@ -131,7 +131,7 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
           {/* {filteredOptions?.length >= 0 && ( */}
           <ul
             ref={dropdownRef}
-            className={`position-absolute top-0 start-0 w-100 auto-search-modal  rounded-4 shadow-lg overflow-auto px-0 background-color-light-grayish-yellow ${
+            className={`position-fixed auto-search-modal  rounded-4 shadow-lg auto-search-modal-height px-0 background-color-light-grayish-yellow ${
               showDropdown ? "" : ""
             }`}
             style={{ zIndex: 100 }}
@@ -178,7 +178,7 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
                 </div>
               </div>
             ) : (
-              <div className="d-flex overflow-auto py-2">
+              <div className="d-flex overflow-auto py-2 me-2 ms-1">
               {BestSellers?.map((i) => (
                 <span>
                 <SearchAddToCart
