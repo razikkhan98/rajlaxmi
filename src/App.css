@@ -11,6 +11,9 @@ body {
   width: 100%;
   overflow-x: hidden;
 }
+.modal-open{
+  position: fixed;
+}
 
 /* 
  ========================== 
@@ -164,6 +167,10 @@ body {
   font-style: normal;
 }
 
+.font-family-poppins {
+  /* font-family: ; */
+}
+
 /* 
  ========================== 
 
@@ -247,6 +254,11 @@ body {
 }
 .padding-bottom-100 {
   padding-bottom: 100px;
+}
+
+/* Notifications */
+.Toastify__toast-container {
+  z-index: 99999 !important;
 }
 
 /* 
@@ -430,7 +442,7 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   /* Optional shadow effect */
   transition: all 0.5s;
-  z-index: 9999;
+  z-index: 999;
 }
 .nav-text:hover {
   font-weight: 600;
@@ -736,6 +748,9 @@ body {
   bottom: 0;
   overflow-x: hidden;
   right: -20px;
+}
+.whychoose-vector-2{
+  right: -130px;
 }
 .footer-vector-2 {
   /* bottom: -0px !important; */
@@ -1335,6 +1350,12 @@ body {
   border: 0;
   background: transparent;
 }
+.payment-process-card-height{
+  height: 50vh;
+}
+.overflow-x-class{
+  overflow-x: hidden !important;
+}
 
 /* paymode active black screen  */
 .AddToCartModal .payModeBlackScreenActive {
@@ -1491,6 +1512,28 @@ body {
     width: 200px !important;
     height: 150px !important;
   }
+  .slider-fullsize-image-div {
+    width: 100% !important;
+  }
+  .contact-section-mobile {
+    display: flex;
+    justify-content: center;
+  }
+  .shop-by-category-mob {
+    height: 20%;
+  }
+
+  .shop-by-category-mob .shop-by-category-heading-mob {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 50%;
+  }
+  .pay-mob-view{
+    display: none !important;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -1526,6 +1569,7 @@ body {
   }
   .contact-section-details {
     width: 50%;
+    height: 167px;
   }
   .contact-section-row,
   .contact-section {
@@ -1537,6 +1581,30 @@ body {
   }
   .whychoose-vector-2 {
     right: -120px !important;
+  }
+  .slider-fullsize-image-div {
+    width: 100% !important;
+  }
+  .AddToCartModal .tick-progress-bar-active {
+    width: 310px !important;
+  }
+  .AddToCartModal .tick-progress-bar {
+    width: 310px !important;
+  }
+  .payment-process-modal .vertical-hr-tab {
+    display: none !important;
+  }
+  .payment-process-modal .AddToCartModal-modal-grid-1 {
+    width: 100% !important;
+  }
+  .payment-process-modal .AddToCartModal-modal-grid-2 {
+    width: 100% !important;
+  }
+  .pay-mob-view{
+    display: none !important;
+  }
+  .payment-process-card-height{
+    height: auto;
   }
 }
 /*======================== Add To Cart Modal CSS ==================== */
@@ -2173,7 +2241,7 @@ height: 40px; */
 }
 
 .slider-fullsize-image-div {
-  width: 100%;
+  width: 543px;
   height: 427px;
   border-radius: 16.27px;
   border: 8px solid rgba(224, 122, 95, 0.3);
@@ -2334,7 +2402,7 @@ height: 40px; */
 .product-quantity {
   display: flex;
   gap: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .product-quantity-link {
@@ -2370,6 +2438,9 @@ height: 40px; */
 
 .Delivery-status-div {
   margin-bottom: 40px;
+}
+.details-Delivery-status-div {
+  margin-bottom: 20px;
 }
 
 .check-delivery-status-text {

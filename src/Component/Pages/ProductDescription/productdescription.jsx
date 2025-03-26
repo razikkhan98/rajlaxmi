@@ -168,8 +168,8 @@ const ProductDescription = () => {
     dots: false,
     infinite: true,
     autoplay: true,
-    speed: 200000,
-    autoplaySpeed: 200000,
+    speed: 2000,
+    autoplaySpeed: 2000,
     slidesToShow: 3, // Show 3 thumbnails
     slidesToScroll: 1,
     focusOnSelect: true,
@@ -268,7 +268,7 @@ const ProductDescription = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-12 col-lg-5">
               {/* Full-size Image */}
               <div className="slider-fullsize-image-div">
                 <div className="slider-fullsize-img-inner">
@@ -310,8 +310,8 @@ const ProductDescription = () => {
             </div>
             {/*------------ slider section End------------ */}
             {/*------------ Product detail start----------- */}
-            <div className="col-12 col-md-6">
-              <h1 className="heading-product-name text-color-dark-grayish-blue inter-font-family-500 mb-3 mt-3 mt-md-0">
+            <div className="col-12 col-md-12 col-lg-7 ps-lg-5 ps-md-0 mt-lg-0 mt-md-4 mt-sm-0">
+              <h1 className="heading-product-name text-color-dark-grayish-blue inter-font-family-500 mb-3 mt-3 mt-md-0 text-truncate lh-sm">
                 {product.name}
               </h1>
               <p className="mb-3 product-description inter-font-family-400 text-color-dark-grayish-blue">
@@ -404,7 +404,7 @@ const ProductDescription = () => {
                 </label>
               </div>
               {/*-------Delivery status based on Pincode------------  */}
-              <div className="Delivery-status-div">
+              <div className="details-Delivery-status-div">
                 <h3 className="heading-h2 check-delivery-status-text inter-font-family-500">
                   Check delivery status
                 </h3>
@@ -426,7 +426,7 @@ const ProductDescription = () => {
                 {status && <div className="status-message">{status}</div>}
               </div>
               {/*----- Buttons------- */}
-              <div className="d-inline-block d-md-flex mb-4 procced-btn">
+              <div className="d-inline-block d-md-flex mb-3 procced-btn">
                 <button className="btn-buy-now inter-font-family-500">
                   Buy Now
                 </button>
