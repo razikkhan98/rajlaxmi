@@ -15,6 +15,10 @@ import WishList from "./Component/Pages/Wishlist/wishlist";
 import Feedback from "./Component/Pages/Feedback/feedback.jsx";
 import ScrollToTop from "./Component/Common/Scroll-to-Top/index.jsx";
 import ContactUs from "./Component/Pages/ContactUs/contactUs.jsx";
+import Refund from "./Component/Pages/Refund/Refund.jsx";
+import PrivacyPolicy from "./Component/Pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import ShippingPolicy from "./Component/Pages/ShippingPolicy/ShippingPolicy.jsx";
+import TermsAndConditionsPolicy from "./Component/Pages/TermsAndConditionsPolicy/TermsAndConditions.jsx";
 
 function App() {
   return (
@@ -35,6 +39,10 @@ function App() {
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/refund" element={<Refund />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/shipping-policy" element={<ShippingPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditionsPolicy />} />
         </Routes>
       </Router>
     </>

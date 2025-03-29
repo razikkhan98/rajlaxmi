@@ -167,14 +167,12 @@ const ProductDescription = () => {
   const settings = {
     dots: false,
     infinite: true,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 2000,
-    slidesToShow: 3, // Show 3 thumbnails
+    speed: 500,
+    slidesToShow: 3,
     slidesToScroll: 1,
-    focusOnSelect: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
     arrows: false,
-
   };
 
   //   Rating Change

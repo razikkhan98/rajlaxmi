@@ -204,7 +204,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                 </div>
               </div>
             </Modal.Header>
-            <Modal.Body className=" background-color-light-grayish-yellow pt-0">
+            <Modal.Body className=" background-color-light-grayish-yellow pt-0 AddToCartModal-body">
               <div className="container-fluid">
                 <div
                   className={`payment-process-modal row ${Paymode ? "" : "justify-content-evenly"}`}
@@ -393,7 +393,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           className="font-size-12 inter-font-family-400"
                           for=""
                         >
-                          Apartment, Region, etc. (optional)
+                          Apartment...
                         </label>
                         <input type="text" className="form-control" />
                       </div>
