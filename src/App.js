@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Login from "./Component/Pages/Login";
-import Registration from "./Component/Pages/Resignation";
+import Login from "./Component/Common/Auth/Login";
+import Registration from "./Component/Common/Auth/Registration";
 import Home from "./Component/Pages/Home";
 import Product from "./Component/Pages/Products/index";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +19,9 @@ import Refund from "./Component/Pages/Refund/Refund.jsx";
 import PrivacyPolicy from "./Component/Pages/PrivacyPolicy/PrivacyPolicy.jsx";
 import ShippingPolicy from "./Component/Pages/ShippingPolicy/ShippingPolicy.jsx";
 import TermsAndConditionsPolicy from "./Component/Pages/TermsAndConditionsPolicy/TermsAndConditions.jsx";
+import Forgot from "./Component/Common/Auth/ForgotPass/forgot.jsx";
+import Error from "./Component/Pages/Error/error.jsx";
+import TrackOrder from "./Component/Pages/TrackOrder/trackorder.jsx";
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/forgot" element={<Forgot />} />
+
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Product />} />
           <Route path="/products-inner" element={<ProductInner />} />
@@ -43,6 +48,10 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/shipping-policy" element={<ShippingPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditionsPolicy />} />
+          <Route path="/error" element={<Error />} />
+          <Route path="/track" element={<TrackOrder />} />
+
+
         </Routes>
       </Router>
     </>

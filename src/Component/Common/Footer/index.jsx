@@ -15,7 +15,15 @@ import Vector2 from "../../Assets/img/whyChooseUs/footer-vector.svg";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
-  const navLinks = ["Lab Report", "FAQ's", "Shop Now", "Track Order"];
+  const navLinks = [
+    { text: "Lab Report" },
+    { text: "FAQ's" },
+    { text: "Shop Now" },
+    {
+      text: "Track Order",
+      to: "/track",
+    }
+  ];
 
   const categories = [
     "Ghee & Oil",
@@ -74,12 +82,12 @@ const Footer = () => {
             <ul className="list-unstyled">
               {navLinks.map((link, index) => (
                 <li key={index} className="pb-2">
-                  <a
-                    href="/#"
+                  <NavLink
+                    to={link.to}
                     className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16"
                   >
-                    {link}
-                  </a>
+                    {link.text}
+                  </NavLink>
                 </li>
               ))}
             </ul>
