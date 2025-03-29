@@ -96,8 +96,8 @@ const SearchAddToCart = ({ product }) => {
 
         {/* Product Name & Ratings */}
 
-        <div className="d-flex justify-content-between px-2 pt-2">
-          <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
+        <div className="shop-by-category-mob d-flex justify-content-between px-2 pt-2">
+          <div className="shop-by-category-heading-mob inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
             {product.name}
           </div>
           <div className="w-50 d-flex justify-content-center rating-height" style={{height:"59px"}}>

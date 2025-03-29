@@ -43,11 +43,11 @@ const ContactUs = () => {
         <div className="bg-custom-gradient-product">
           <Navbar />
           <div className=" padding-bottom-100 padding-top-100">
-            <div className="padding-bottom-100 mb-5">
+            <div className="padding-bottom-100 mb-5 mx-2">
               <div className="container contact-section Delivery-status-div">
                 <div className="row contact-section-row">
                   <div className="col-lg-7 d-lg-grid">
-                    <div className="mt-3 pt-lg-3 pt-sm-0 mx-1 mb-3 d-lg-block d-md-flex justify-content-md-center">
+                    <div className="mt-3 pt-lg-3 pt-sm-0 mx-1 mb-3 d-lg-block d-md-flex justify-content-md-center contact-section-mobile">
                       <img className="mx-3" src={facebook} alt="" />
                       <img className="mx-3" src={instagram} alt="" />
                       <img className="mx-3" src={youtube} alt="" />
@@ -58,7 +58,7 @@ const ContactUs = () => {
                         <img className="contact-inlarge  position-absolute m-3" src={inlarge} alt="" />
                         <iframe
                           title="unique"
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9386.246714403482!2d80.94632178408278!3d26.82813556144555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfcf919137107%3A0xaafc9fdde5fc4bdc!2sRumeno%20Farmotech%20%7C%20Animal%20Feed%20Manufacturer%20in%20Lucknow!5e0!3m2!1sen!2sin!4v1713937138780!5m2!1sen!2sin"
+                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d538.4281137561103!2d75.87052130787646!3d22.700205790427145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd772fbc5701%3A0x66545420c2f8ef1c!2sRajlakshmi%20Javiks%20International!5e1!3m2!1sen!2sin!4v1742892247728!5m2!1sen!2sin"
                           className="w-100 h-100"
                           allowFullScreen="false"
                           loading="lazy"

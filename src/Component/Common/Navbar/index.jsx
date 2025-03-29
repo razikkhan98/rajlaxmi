@@ -186,6 +186,21 @@ const Navbar = () => {
     };
   }, [uid]);
 
+
+  // ==================
+  // to prevent background scrolling
+  // ==================
+    useEffect(() => {
+      if (inputBar) {
+          document.body.classList.add('position-fixed');
+      } else {
+          document.body.classList.remove('position-fixed'); 
+      }
+      return () => {
+          document.body.classList.remove('position-fixed');
+      };
+  }, [inputBar]);
+
   return (
     <>
       <nav
@@ -362,7 +377,7 @@ const Navbar = () => {
           }`}
         >
           <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
-          <span className="cart-quantity translate-middle rounded-pill">0</span>
+          <span className="cart-quantity translate-middle rounded-pill">{cartCount}</span>
         </button>
       </div>
       {/* ----------------- */}

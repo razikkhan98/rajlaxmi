@@ -120,6 +120,8 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
     };
   }, [dropdownRef, showDropdown]);
 
+
+
   return (
     <>
       <div
