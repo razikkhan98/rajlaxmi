@@ -97,6 +97,10 @@ const DataNavbar = [
     url: "/wishlist",
   },
   {
+    title: "Track",
+    url: "/track",
+  },
+  {
     title: "Contact",
     url: "/contact",
   },
