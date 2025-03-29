@@ -10,11 +10,11 @@ const TermsAndConditionsPolicy = () => {
       <div className="bg-custom-gradient-product">
         <Navbar />
         <div className="container pt-5 text-light-gray-color font-size-40 josefin-sans-font-family-500 ">
-          <span className="text-dark">Terms And conditions</span>
+          <span className="text-dark">Terms And Conditions</span>
         </div>
       </div>
       <div className="background-color-light-grayish-yellow py-3">
-        <div className="container">
+        <div className="container mb-5 pb-5">
           <div className="refund-head my-4">
             <h2 className="font-size-16 inter-font-family-600">
               This document is an electronic record in terms of Information
