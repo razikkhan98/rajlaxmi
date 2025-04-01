@@ -12,9 +12,18 @@ import Phone from "../../Assets/img/ourProducts/phone.svg";
 import Email from "../../Assets/img/ourProducts/EnvelopeSimple.svg";
 import Vector from "../../Assets/img/whyChooseUs/Vector.svg";
 import Vector2 from "../../Assets/img/whyChooseUs/footer-vector.svg";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
-  const navLinks = ["Lab Report", "FAQ's", "Shop Now", "Track Order"];
+  const navLinks = [
+    { text: "Lab Report" },
+    { text: "FAQ's" },
+    { text: "Shop Now" },
+    {
+      text: "Track Order",
+      to: "/track",
+    }
+  ];
 
   const categories = [
     "Ghee & Oil",
@@ -24,10 +33,10 @@ const Footer = () => {
   ];
 
   const generalLinks = [
-    "Refund Policy",
-    "Privacy Policy",
-    "Shipping & Delivery Policy",
-    "Terms And Conditions",
+    { text: "Refund Policy", to: "/refund" },
+    { text: "Privacy Policy", to: "/privacy-policy" },
+    { text: "Shipping & Delivery Policy", to: "/shipping-policy" },
+    { text: "Terms And Conditions", to: "/terms-and-conditions" },
   ];
 
   const socialIcons = [
@@ -42,14 +51,13 @@ const Footer = () => {
       className="bg-light position-relative bg-custom-gradient-footer padding-top-100 padding-bottom-60 "
       style={{ display: "flex", alignItems: "center" }}
     >
-       <div className="vector">
-          <img src={Vector} alt="Loading" />
-        </div>
-        <div className="footer-vector-2 vector2">
-          <img src={Vector2} alt="Loading" />
-        </div>
-      <Container style={{zIndex:"999"}}>
-       
+      <div className="vector">
+        <img src={Vector} alt="Loading" />
+      </div>
+      <div className="footer-vector-2 vector2">
+        <img src={Vector2} alt="Loading" />
+      </div>
+      <Container style={{ zIndex: "999" }}>
         <Row className="pt-5 mt-5 pt-lg-0 mt-lg-0 mx-2 mx-lg-0">
           {/* Logo and Company Name */}
           <Col xs={12} lg={2} md={4} className="ps-2">
@@ -74,9 +82,12 @@ const Footer = () => {
             <ul className="list-unstyled">
               {navLinks.map((link, index) => (
                 <li key={index} className="pb-2">
-                  <a href="/#" className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16">
-                    {link}
-                  </a>
+                  <NavLink
+                    to={link.to}
+                    className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16"
+                  >
+                    {link.text}
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -90,7 +101,10 @@ const Footer = () => {
             <ul className="list-unstyled">
               {categories.map((category, index) => (
                 <li key={index} className="pb-2">
-                  <a href="/#" className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16">
+                  <a
+                    href="/#"
+                    className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16"
+                  >
                     {category}
                   </a>
                 </li>
@@ -107,9 +121,12 @@ const Footer = () => {
             <ul className="list-unstyled">
               {generalLinks.map((item, index) => (
                 <li key={index} className="pb-2">
-                  <a href="/#" className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16">
-                    {item}
-                  </a>
+                  <NavLink
+                    to={item?.to}
+                    className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16"
+                  >
+                    {item?.text}
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -136,9 +153,8 @@ const Footer = () => {
                   </div>
                   <div className="ms-3">
                     <span className="inter-font-family-400 text-color-dark-ashy-blue text-description font-size-16">
-                       11, Manish Bagh Colony,
-                       Sapna Sangeeta Road, Indore,
-                       Madhya Pradesh, 452001
+                      11, Manish Bagh Colony, Sapna Sangeeta Road, Indore,
+                      Madhya Pradesh, 452001
                     </span>
                   </div>
                 </div>
