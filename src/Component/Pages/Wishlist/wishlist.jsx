@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../Common/Navbar";
 import Sort from "../../Assets/img/Product/SlidersHorizontal.svg";
 import Funnel from "../../Assets/img/Product/Funnel.svg";
@@ -11,11 +11,41 @@ import AddtoCard from "../../Common/Addtocard";
 import Footer from "../../Common/Footer";
 
 import { CartContext } from "../../Context/UserContext";
-
+import { getData } from "../../../services/apiService";
+import axios from "axios";
 
 const WishList = () => {
   // useState for Add to Cart Button
-  const { WishListItems } = useContext(CartContext);
+  const { WishListItems, setWishListItems } = useContext(CartContext);
+  console.log('WishListItems: ', WishListItems);
+
+  const [getWishData, setgetWishData] = useState([])
+
+  // Functions
+  const FetchWishListData = async () => {
+    // const response = await getData("getAllWishlist");
+    const response = await axios.get(
+      "https://bd1f-2401-4900-8822-8a8-2003-e26b-42cc-f05.ngrok-free.app/rajlaxmi/getAllWishlist",
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
+      }
+    );
+    const transformedProducts = response?.data?.wishlist?.map(product => ({
+      id: product?.id,
+      name: product?.product_name, 
+      price: product?.product_price, 
+      qty: `${product?.product_quantity} gm`,
+      image: product?.product_image, 
+    }));
+    setgetWishData(transformedProducts);
+  };
+
+  // get Wishlist Data
+  useEffect(() => {
+    FetchWishListData();
+  }, []);
 
   return (
     <React.Fragment>
@@ -33,9 +63,9 @@ const WishList = () => {
         </div>
         <div className="background-color-light-grayish-yellow padding-bottom-60">
           <div className="container">
-            {WishListItems?.length > 0 ? (
+            {getWishData?.length > 0 ? (
               <div className="row">
-                {WishListItems?.map((product, index) => (
+                {getWishData?.map((product, index) => (
                   <>
                     <div key={index} className="col-md-3 col-sm-12  py-3">
                       <AddtoCard key={product.id} product={product} />

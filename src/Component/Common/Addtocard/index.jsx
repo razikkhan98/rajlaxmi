@@ -31,8 +31,9 @@ const AddtoCard = ({ product }) => {
 
   // useState for Add to Cart Button
   const { addToCart, removeFromCart, AddToWishList, WishListItems } =
-    useContext(CartContext);
-
+  useContext(CartContext);
+  
+  console.log('WishListItems: ', WishListItems);
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [selectedWeight, setSelectedWeight] = useState("500gm");
@@ -45,7 +46,18 @@ const AddtoCard = ({ product }) => {
   const isAuthenticated = !!sessionStorage.getItem("token"); // Check if user is logged in
 
   // Function
-
+  // product_id
+  // : 
+  // 1
+  // product_name
+  // : 
+  // "Organic Kabuli Chana"
+  // product_price
+  // : 
+  // "180.00"
+  // product_quantity
+  // : 
+  // "500 gm"
   useEffect(() => {
     const fetchCartData = () => {
       const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
@@ -167,7 +179,7 @@ const AddtoCard = ({ product }) => {
           <div>
             {/* Icons (Heart & Share) */}
             <div className="heart" onClick={() => AddToWishList(product)}>
-              {!WishListItems.some((item) => item?.id === product?.id) ? (
+              {!WishListItems?.some((item) => item?.id === product?.product_id||product?.id) ? (
                 <FaRegHeart className="text-color-terracotta" />
               ) : (
                 <img src={FillHeart} alt="" />
@@ -233,7 +245,7 @@ const AddtoCard = ({ product }) => {
 
         <div className="d-flex justify-content-between shop-by-category-detail px-2 pt-2">
           <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
-            {product.name}
+            {product.name|| product?.product_name}
           </div>
           <div
             className="w-50 d-flex justify-content-center rating-height"
@@ -258,7 +270,7 @@ const AddtoCard = ({ product }) => {
           <div className="ms-4 d-flex align-items-center">
             <MdCurrencyRupee className="" />
             <span className="inter-font-family-500 font-size-16 text-color-black">
-              {product.price}
+              {product.price||product?.product_price}
             </span>
           </div>
           {/* Add to Cart / Quantity Controls */}

@@ -1399,8 +1399,11 @@ Forgot Password
 .payment-process-card-height {
   height: 40vh;
 }
-
-.overflow-x-class {
+.pay-process-bill-summary{
+  height: 70px;
+  overflow-y: scroll;
+}
+.overflow-x-class{
   overflow-x: hidden !important;
 }
 
