@@ -14,6 +14,7 @@ import dashLine from "../../Assets/img/slickimg/dashline.svg";
 import second from "../../Assets/img/ourProducts/expl.png";
 import slid from "../../Assets/img/ProductDescription/image 10.png";
 import { Carousel } from "react-bootstrap";
+import { postData } from "../../../services/apiService";
 
 const CardData = [
   {
@@ -62,6 +63,7 @@ const loction = [
   },
 ];
 const OurProducts = () => {
+  let uid = sessionStorage.getItem("uid");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -77,10 +79,28 @@ const OurProducts = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    try {
+    const payload = {
+      uid:uid,
+      user_name : formData?.name,
+      user_email : formData?.email,
+      user_number : formData?.phone,
+      message:  formData?.message,
+      title : formData?.message,
+    }
     // You can make your POST API request here
+      const response = await postData("contact",payload)
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      })
+    } catch (error) {
+      console.log('error: ', error);
+    }
   };
 
   return (

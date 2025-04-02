@@ -310,7 +310,7 @@ const ProductDescription = () => {
             {/*------------ Product detail start----------- */}
             <div className="col-12 col-md-12 col-lg-7 ps-lg-5 ps-md-0 mt-lg-0 mt-md-4 mt-sm-0">
               <h1 className="heading-product-name text-color-dark-grayish-blue inter-font-family-500 mb-3 mt-3 mt-md-0 text-truncate lh-sm">
-                {product.name}
+                {product?.name}
               </h1>
               <p className="mb-3 product-description inter-font-family-400 text-color-dark-grayish-blue">
                 Organic Lorem Ipsum cia doer la fansco anjeer la bela
@@ -319,10 +319,10 @@ const ProductDescription = () => {
               <div className="rating-container">
                 <div className="rating-text inter-font-family-500">
                   <div className="start-gleeful">
-                    {renderStars(product.rating)}
+                    {renderStars(product?.rating)}
                   </div>
                   <div className="inter-font-family-500 font-size-14 mx-2 font-sm-8 text-color-terracotta pt-2">
-                    {product.rating} ({product.reviews} Reviews)
+                    {product?.rating} ({product?.reviews} Reviews)
                   </div>
                 </div>
               </div>

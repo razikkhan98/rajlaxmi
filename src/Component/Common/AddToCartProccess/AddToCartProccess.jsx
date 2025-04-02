@@ -10,8 +10,25 @@ import CardEmpty from "../../Assets/img/Product/cart.png";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import { postData } from "../../../services/apiService";
 const AddToCartProccess = ({ showModal, handleClose }) => {
+  const { register, handleSubmit } = useForm();
   // const {  clearCart } = useContext(CartContext);
+  // uid,
+  //       user_name,
+  //       user_number,
+  //       user_email,
+  //       user_state,
+  //       user_city,
+  //       user_pincode,
+  //       user_coupon,
+  //       user_country,
+  //       user_landmark,
+  //       user_house_number,
+  //       user_total_amount,
+  //       purchase_price,
+  //       product_quantity
 
   const [cartItems, setCartItems] = useState([]);
   const uid = sessionStorage.getItem("uid");
@@ -21,7 +38,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
   const [mobView, setmobView] = useState(false);
 
   // Functions
-  const handleTapSteps = async  () => {
+  const handleTapSteps = async () => {
     setStep(step + 1);
     if (step >= 2) {
       return setPaymode(!Paymode);
@@ -29,7 +46,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
 
     const uid = sessionStorage.getItem("uid");
     const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
-  
+
     if (Object.keys(storedCart).length === 0) {
       toast.warning("Your cart is empty!", { position: "top-right" });
       return;
@@ -46,24 +63,28 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
       })),
     };
     console.log(payload);
-  
+
     try {
-      const response = await axios.post("https://your-backend-api.com/checkout", payload, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
+      const response = await axios.post(
+        "https://e339-2409-40c4-150-d729-115a-d01-4db0-181.ngrok-free.app/checkout",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       if (response.status === 200) {
         toast.success("Order placed successfully!", { position: "top-right" });
         clearCart(); // Clear cart after order
       }
     } catch (error) {
-      toast.error("Failed to place order. Try again.", { position: "top-right" });
+      toast.error("Failed to place order. Try again.", {
+        position: "top-right",
+      });
       console.error("Order Error:", error);
     }
-  
-  
   };
 
   const fetchCartItems = () => {
@@ -83,7 +104,6 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
 
     setCartItems(itemsArray);
   };
-
 
   useEffect(() => {
     fetchCartItems(); // Fetch on initial render
@@ -124,16 +144,38 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
     }
   };
 
-
   const clearCart = () => {
     const uid = sessionStorage.getItem("uid");
     sessionStorage.removeItem(`cart_${uid}`);
-    
+
     fetchCartItems(); // 🔄 Update UI immediately
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
- 
+  const totalPrice = cartItems?.reduce((total, product) => {
+    return total + Number(product?.productDetails?.price);
+  }, 0);
+
+  const onSubmit = async (data) => {
+    try {
+      const payload = {
+        uid,
+        user_name: data?.fullName,
+        user_mobile_num: data?.contactNo,
+        user_email: data?.email,
+        user_state: data?.state,
+        user_city: data?.city,
+        user_country: data?.country,
+        user_house_number: data?.apartment,
+        user_landmark: data?.address,
+        user_pincode: data?.pincode,
+        user_total_amount: totalPrice,
+        purchase_price: "00",
+        user_coupon: "",
+      };
+      const response = await postData("create-order", payload);
+    } catch (error) {}
+  };
 
   return (
     <div>
@@ -166,7 +208,9 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                   >
                     {step >= 1 && <img src={rightTick} alt="Loading" />}
                   </div>
-                  <span className="josefin-sans-font-family-500 font-size-18">Cart</span>
+                  <span className="josefin-sans-font-family-500 font-size-18">
+                    Cart
+                  </span>
                 </div>
 
                 <div className="text-center">
@@ -189,7 +233,9 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       }`}
                     />
                   </div>
-                  <span className="josefin-sans-font-family-500 font-size-18">Address</span>
+                  <span className="josefin-sans-font-family-500 font-size-18">
+                    Address
+                  </span>
                 </div>
 
                 <div>
@@ -200,14 +246,18 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                   >
                     {step >= 4 && <img src={rightTick} alt="Loading" />}
                   </div>
-                  <span className="josefin-sans-font-family-500 font-size-18">Payment</span>
+                  <span className="josefin-sans-font-family-500 font-size-18">
+                    Payment
+                  </span>
                 </div>
               </div>
             </Modal.Header>
             <Modal.Body className=" background-color-light-grayish-yellow pt-0 AddToCartModal-body">
               <div className="container-fluid">
                 <div
-                  className={`payment-process-modal row ${Paymode ? "" : "justify-content-evenly"}`}
+                  className={`payment-process-modal row ${
+                    Paymode ? "" : "justify-content-evenly"
+                  }`}
                 >
                   {/* items Add */}
                   <div
@@ -226,75 +276,79 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     <hr />
 
                     <div className="row payment-process-card-height overflow-auto">
-                    {cartItems?.map((i, index) => (
-                      <div className="d-flex col-md-6 col-lg-12 mx-md-1 mx-lg-0 px-0  align-items-center product-cards my-3">
-                        <div className=" p-0">
-                          <img src={i.productDetails.image} className="rounded m-2" alt="" />
-                        </div>
-                        <div className="ms-2 product-cards-center p-0">
-                          <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-16 pt-1">
-                            {i.productDetails.name}
+                      {cartItems?.map((i, index) => (
+                        <div className="d-flex col-md-6 col-lg-12 mx-md-1 mx-lg-0 px-0  align-items-center product-cards my-3">
+                          <div className=" p-0">
+                            <img
+                              src={i.productDetails.image}
+                              className="rounded m-2"
+                              alt=""
+                            />
                           </div>
-                          <div className="text-color-dark-grayish-blue inter-font-family-400 font-size-14 pt-1">
-                            Qty: {i.weight}
+                          <div className="ms-2 product-cards-center p-0">
+                            <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-16 pt-1">
+                              {i.productDetails.name}
+                            </div>
+                            <div className="text-color-dark-grayish-blue inter-font-family-400 font-size-14 pt-1">
+                              Qty: {i.weight}
+                            </div>
+                            <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-24 pt-2">
+                              ₹ {i.productDetails.price}
+                            </div>
                           </div>
-                          <div className="text-color-dark-grayish-blue inter-font-family-500 font-size-24 pt-2">
-                            ₹ {i.productDetails.price}
-                          </div>
-                        </div>
-                        <div className=" product-cards-end p-0 background-color-gleeful d-flex justify-content-center align-items-center">
-                          <div>
-                            <div className=" button-addtocard d-grid justify-content-center">
-                              <div>
-                                <button
-                                  className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                                  onClick={() =>
-                                    updateQuantity(
-                                      i.id,
-                                      i.weight,
-                                      i.quantity - 1
-                                    )
-                                  }
-                                >
-                                  -
-                                </button>
-                              </div>
-                              <div className="text-center">
-                                <span className="font-size-24">
-                                  {i.quantity}
-                                </span>
-                              </div>
-                              <div>
-                                <button
-                                  className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                                  onClick={() =>
-                                    updateQuantity(
-                                      i.id,
-                                      i.weight,
-                                      i.quantity + 1
-                                    )
-                                  }
-                                >
-                                  +
-                                </button>
+                          <div className=" product-cards-end p-0 background-color-gleeful d-flex justify-content-center align-items-center">
+                            <div>
+                              <div className=" button-addtocard d-grid justify-content-center">
+                                <div>
+                                  <button
+                                    className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
+                                    onClick={() =>
+                                      updateQuantity(
+                                        i.id,
+                                        i.weight,
+                                        i.quantity - 1
+                                      )
+                                    }
+                                  >
+                                    -
+                                  </button>
+                                </div>
+                                <div className="text-center">
+                                  <span className="font-size-24">
+                                    {i.quantity}
+                                  </span>
+                                </div>
+                                <div>
+                                  <button
+                                    className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
+                                    onClick={() =>
+                                      updateQuantity(
+                                        i.id,
+                                        i.weight,
+                                        i.quantity + 1
+                                      )
+                                    }
+                                  >
+                                    +
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div
-                          className=" product-cards-end p-0 background-color-terracotta AddToCartModal-delete-button d-flex justify-content-center align-items-center"
-                          style={{ cursor: "pointer" }}
-                        >
-                          <span
-                            className="text-white inter-font-family-600 font-size-16"
-                            onClick={() => removeFromCart(i.id, i.weight)}
+                          <div
+                            className=" product-cards-end p-0 background-color-terracotta AddToCartModal-delete-button d-flex justify-content-center align-items-center"
+                            style={{ cursor: "pointer" }}
                           >
-                            Delete
-                          </span>
+                            <span
+                              className="text-white inter-font-family-600 font-size-16"
+                              onClick={() => removeFromCart(i.id, i.weight)}
+                            >
+                              Delete
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                      </div>
+                      ))}
+                    </div>
                     <div className="d-flex justify-content-between mt-5">
                       <Link to="/products">
                         <button
@@ -312,14 +366,17 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       </button>
                     </div>
                   </div>
-                  <hr className={` vertical-hr vertical-hr-tab ${Paymode ? "d-none" : ""}`} />
+                  <hr
+                    className={` vertical-hr vertical-hr-tab ${
+                      Paymode ? "d-none" : ""
+                    }`}
+                  />
                   {/* Detail Form */}
                   <div
                     className={`col-lg-4 AddToCartModal-modal-grid-2 pt-3 ${
                       Paymode ? "payModeBlackScreenActive" : ""
                     } ${mobView ? "pay-mob-view" : ""}`}
                   >
-                    
                     <div className="">
                       <span className="address-heading font-size-14 inter-font-family-500">
                         Address Details
@@ -327,123 +384,162 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       <hr />
                     </div>
                     <div className="payment-process-card-height overflow-auto overflow-x-class">
-                    <div className={`row ${step >= 1 ? "" : "d-none"}`}>
-                      {[1, 2, 3]?.map((i, index) => (
-                        <div className="col-lg-3 ps-2 ms-3 me-4 mb-3 address-section p-0 rounded-3">
-                          <div className="d-flex justify-content-end align-items-center">
-                            <div className="address-box-section background-color-gleeful-opacity rounded-circle d-flex justify-content-center align-items-center mt-2 mx-2">
-                              <img className="" src={trash} alt="" />
+                      <div className={`row ${step >= 1 ? "" : "d-none"}`}>
+                        {[1, 2, 3]?.map((i, index) => (
+                          <div className="col-lg-3 ps-2 ms-3 me-4 mb-3 address-section p-0 rounded-3">
+                            <div className="d-flex justify-content-end align-items-center">
+                              <div className="address-box-section background-color-gleeful-opacity rounded-circle d-flex justify-content-center align-items-center mt-2 mx-2">
+                                <img className="" src={trash} alt="" />
+                              </div>
+                            </div>
+                            <div className="font-size-14 inter-font-family-500">
+                              Admin Panel
+                            </div>
+                            <div className="font-size-12 inter-font-family-300 text-trunc-class">
+                              AAA, Nagar sapna sangita road tower indore
+                            </div>
+                            <div className="font-size-12 inter-font-family-300">
+                              987654321
                             </div>
                           </div>
-                          <div className="font-size-14 inter-font-family-500">
-                            Admin Panel
-                          </div>
-                          <div className="font-size-12 inter-font-family-300 text-trunc-class">
-                            AAA, Nagar sapna sangita road tower indore
-                          </div>
-                          <div className="font-size-12 inter-font-family-300">
-                            987654321
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <hr
-                      className={`address-sect-hr ${step >= 1 ? "" : "d-none"}`}
-                    />
-                    <div
-                      className={`login-text font-size-14 inter-font-family-500 ${
-                        step >= 1 ? "" : "d-none"
-                      }`}
-                    >
-                      Add New Address
-                    </div>
-                    <form
-                      className={`row ${step >= 1 ? "" : "d-none"}`}
-                      action=""
-                    >
-                      <div className="col-lg-6 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          First Name
-                        </label>
-                        <input type="text" className="form-control" />
+                        ))}
                       </div>
-                      <div className="col-lg-6 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          Last Name
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="col-lg-6 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          Address
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="col-lg-6 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          Apartment...
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="col-lg-4 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          Country
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="col-lg-8 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          Contact No
-                        </label>
-                        <input type="text" className="form-control" />
+                      <hr
+                        className={`address-sect-hr ${
+                          step >= 1 ? "" : "d-none"
+                        }`}
+                      />
+                      <div
+                        className={`login-text font-size-14 inter-font-family-500 ${
+                          step >= 1 ? "" : "d-none"
+                        }`}
+                      >
+                        Add New Address
                       </div>
 
-                      <div className="col-lg-4 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          State
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="col-lg-4 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          City
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="col-lg-4 address-section-form form-group pt-3">
-                        <label
-                          className="font-size-12 inter-font-family-400"
-                          for=""
-                        >
-                          Pincode
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                    </form>
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className={`row ${step >= 1 ? "" : "d-none"}`}
+                      >
+                        <div className="col-lg-6 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="fullName"
+                          >
+                            Full Name
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("fullName")}
+                          />
+                        </div>
+                        <div className="col-lg-6 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="email"
+                          >
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            className="form-control"
+                            {...register("email")}
+                          />
+                        </div>
+                        <div className="col-lg-6 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="address"
+                          >
+                            Address
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("address")}
+                          />
+                        </div>
+                        <div className="col-lg-6 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="apartment"
+                          >
+                            Apartment...
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("apartment")}
+                          />
+                        </div>
+                        <div className="col-lg-4 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="country"
+                          >
+                            Country
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("country")}
+                          />
+                        </div>
+                        <div className="col-lg-8 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="contactNo"
+                          >
+                            Contact No
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("contactNo")}
+                          />
+                        </div>
+                        <div className="col-lg-4 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="state"
+                          >
+                            State
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("state")}
+                          />
+                        </div>
+                        <div className="col-lg-4 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="city"
+                          >
+                            City
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("city")}
+                          />
+                        </div>
+                        <div className="col-lg-4 address-section-form form-group pt-3">
+                          <label
+                            className="font-size-12 inter-font-family-400"
+                            htmlFor="pincode"
+                          >
+                            Pincode
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            {...register("pincode")}
+                          />
+                        </div>
+                        {/* <button type="submit" className="btn btn-primary mt-3">Submit</button> */}
+                      </form>
                     </div>
                     <div className={`mt-5 ${step >= 1 ? "" : "d-none"}`}>
                       <button
@@ -453,7 +549,6 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                         Proceed with this address
                       </button>
                     </div>
-                 
                   </div>
                   <hr
                     className={`vertical-hr vertical-hr-tab ${
@@ -473,23 +568,17 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       <hr />
                     </div>
                     <div className={`${step >= 2 ? "" : "d-none"}`}>
-                      <ul>
-                        <li className="d-flex justify-content-between py-2">
-                          <span className="login-text font-size-14 inter-font-family-500">
-                            x1 Hing Powder
-                          </span>
-                          <span className="font-size-16 inter-font-family-500">
-                            ₹ 1200
-                          </span>
-                        </li>
-                        <li className="d-flex justify-content-between py-2">
-                          <span className="login-text font-size-14 inter-font-family-500">
-                            x1 Hing Powder
-                          </span>
-                          <span className="font-size-16 inter-font-family-500">
-                            ₹ 1200
-                          </span>
-                        </li>
+                      <ul className="pay-process-bill-summary">
+                        {cartItems?.map((i, index) => (
+                          <li className="d-flex justify-content-between py-2">
+                            <span className="login-text font-size-14 inter-font-family-500">
+                              {i?.productDetails.name}
+                            </span>
+                            <span className="font-size-16 inter-font-family-500">
+                              ₹ {i.productDetails.price}
+                            </span>
+                          </li>
+                        ))}
                       </ul>
                       <hr className="address-sect-hr" />
                       <ul>
@@ -523,7 +612,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                             Sub Total:
                           </span>
                           <span className="font-size-16 inter-font-family-500">
-                            ₹ 1200
+                            ₹ {totalPrice}
                           </span>
                         </li>
                         <li className="d-flex justify-content-between py-2">
@@ -531,17 +620,22 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                             Tax:
                           </span>
                           <span className="font-size-16 inter-font-family-500">
-                            ₹ 1200
+                            ₹ 00.00
                           </span>
                         </li>
                       </ul>
                       <hr />
                       <div className=" d-flex justify-content-around align-item-center">
                         <span className="font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center">
-                          ₹1200
+                          ₹ {totalPrice}
                         </span>
                         <button
-                          onClick={() => {handleTapSteps(); setmobView(true)}}
+                          // onClick={() => {
+                          //   // handleTapSteps();
+                          //   // setmobView(true);
+                          //   handleSubmit(onSubmit);
+                          // }}
+                          onClick={handleSubmit(onSubmit)}
                           className="btn payment-section-button text-white font-size-16 inter-font-family-500 px-5"
                         >
                           Checkout
@@ -549,7 +643,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       </div>
                     </div>
                   </div>
-                  <hr className={`vertical-hr-tab vertical-hr ${Paymode ? "" : "d-none"}`} />
+                  <hr
+                    className={`vertical-hr-tab vertical-hr ${
+                      Paymode ? "" : "d-none"
+                    }`}
+                  />
                   {/* Paymode section */}
                   <div
                     className={`col-lg-4 ${
@@ -600,7 +698,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                         </label>
                       </div>
                       <button className="btn payment-section-button-active text-white font-size-16 inter-font-family-500 px-5 mt-3">
-                      Pay Now
+                        Pay Now
                       </button>
                     </form>
                   </div>
