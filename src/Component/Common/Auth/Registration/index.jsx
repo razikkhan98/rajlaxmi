@@ -3,11 +3,11 @@
 import React from "react";
 
 // Images
-import Logi from "../../Assets/img/Login/Frame 1261158478.png";
-import Arro from "../../Assets/img/Login/Vector (1).svg";
+import Logi from "../../../Assets/img/Login/Frame 1261158478.png";
+import Arro from "../../../Assets/img/Login/Vector (1).svg";
 
 // Common
-import { postData } from "../../../services/apiService";
+import { postData } from "../../../../services/apiService";
 
 
 // Third party libraries
@@ -156,7 +156,7 @@ const Resignation = () => {
                   <span className="inter-font-family-400 font-size-14 ps-4">
                     Already a user?
                   </span>
-                  <Link to="/" className="px-2 text-decoration-none inter-font-family-500 font-size-14 text-color-terracotta hover-button">
+                  <Link to="/login" className="px-2 text-decoration-none inter-font-family-500 font-size-14 text-color-terracotta hover-button">
                     Login
                   </Link>
                 </div>

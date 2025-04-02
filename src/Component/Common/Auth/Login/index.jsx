@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 
 // Images
-import Logi from "../../Assets/img/Login/Frame 1261158478.png";
-import Arro from "../../Assets/img/Login/Vector (1).svg";
+import Logi from "../../../Assets/img/Login/Frame 1261158478.png";
+import Arro from "../../../Assets/img/Login/Vector (1).svg";
 
 // Common
-import { postData } from "../../../services/apiService";
+import { postData } from "../../../../services/apiService";
 
 // Third party libraries
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
-import { CartContext } from "../../Context/UserContext";
+import { CartContext } from "../../../Context/UserContext";
 
 const Login = () => {
   const { setuid } = useContext(CartContext);
@@ -91,10 +91,10 @@ const Login = () => {
                 <div>
                   <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="form-login"
+                    className="form-login row"
                   >
                     {/* Email/Mobile Field */}
-                    <div className="pt-4">
+                    <div className="pt-4 col-lg-10">
                       <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
                         Email/Contact
                       </label>
@@ -113,7 +113,7 @@ const Login = () => {
                     </div>
 
                     {/* Password Field */}
-                    <div className="py-2">
+                    <div className="py-2 col-lg-9">
                       <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
                         Password
                       </label>
@@ -129,8 +129,20 @@ const Login = () => {
                           {errors.password.message}
                         </p>
                       )}
-                    </div>
 
+                     <div className="d-flex justify-content-between">
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                          <label class="form-check-label inter-font-family-400 font-size-12  text-color-terracotta text-end" for="flexCheckDefault">
+                            Remember me
+                          </label>
+                      </div>
+
+                      <NavLink to={"/forgot"} className="text-decoration-none">
+                        <p className="inter-font-family-400 font-size-12  text-color-terracotta mt-1">Forgot Password?</p>
+                      </NavLink>
+                     </div>
+                    </div>
                     {/* Submit Button */}
                     <div className="py-3">
                       <button
