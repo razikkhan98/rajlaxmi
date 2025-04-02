@@ -44,10 +44,9 @@
 //   const AddToWishList = (product) => {
 //     const isProductInWishList = WishListItems.some(item => item?.id === product?.id);
 //     if (!isProductInWishList) {
-//       setWishListItems([...WishListItems, product]); 
+//       setWishListItems([...WishListItems, product]);
 //     }
 //   };
-
 
 //   return (
 //     <CartContext.Provider
@@ -64,9 +63,10 @@
 //   );
 // };
 
-
-
 import React, { createContext, useState } from "react";
+import { API_BASE_URL, deleteData, postData } from "../../services/apiService";
+import { Bounce, toast } from "react-toastify";
+import axios from "axios";
 
 // Create Context
 export const CartContext = createContext();
@@ -75,7 +75,8 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]); // Cart state
   const [WishListItems, setWishListItems] = useState([]); // Wishlist state
-  const [uid , setuid] = useState([]); // User Id
+  const [uid, setuid] = useState([]); // User Id
+  const getUid = sessionStorage.getItem("uid");
 
   // Add to Cart function
   const addToCart = (product, quantity, weight) => {
@@ -126,15 +127,84 @@ export const CartProvider = ({ children }) => {
   };
 
   // Add to wishlist
-  const AddToWishList = (product) => {
-    const isProductInWishList = WishListItems.some(item => item?.id === product?.id);
-    if (isProductInWishList) {
-      // Remove product from WishList
-      const updatedWishList = WishListItems.filter(item => item?.id !== product?.id);
-      setWishListItems(updatedWishList);
-    } else {
-      // Add product to WishList
-      setWishListItems([...WishListItems, product]);
+  const AddToWishList = async (product) => {
+    const payload = {
+      uid: getUid,
+      product_name: product?.name,
+      product_image: product?.image,
+      product_id: product?.id,
+      product_price: product?.price,
+      product_quantity: product?.qty,
+    };
+    const isProductInWishList = WishListItems.some(
+      (item) => item?.id === product?.id
+    );
+    try {
+      if (isProductInWishList) {
+        // Remove product from WishList
+        const updatedWishList = WishListItems.filter(
+          (item) => item?.id !== product?.id
+        );
+        const removePay = {
+          uid: getUid,
+          product_id: product?.id,
+        };
+
+        // Sending removePay as part of the config
+        const removeres = await axios.delete(
+          `${API_BASE_URL}/removeFromWishlist`,
+          { data: removePay } // This is crucial. Axios requires the data for DELETE requests to be included in an object.
+        );
+        // setWishListItems(updatedWishList);
+        toast.success(removeres?.data?.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else {
+        // Add product to WishList
+        // setWishListItems([...WishListItems, product]);
+
+        const response = await postData("wishlist", payload);
+        toast.success(response?.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+      const responseWish = await axios.get(
+        "https://bd1f-2401-4900-8822-8a8-2003-e26b-42cc-f05.ngrok-free.app/rajlaxmi/getAllWishlist",
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        }
+      );
+      setWishListItems((prev)=>[...prev,responseWish?.data?.wishlist]);
+    } catch (error) {
+      toast.error(error?.message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
@@ -149,7 +219,7 @@ export const CartProvider = ({ children }) => {
         clearCart,
         AddToWishList,
         uid,
-        setuid, 
+        setuid,
       }}
     >
       {children}

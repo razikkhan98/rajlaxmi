@@ -19,8 +19,33 @@ import Refund from "./Component/Pages/Refund/Refund.jsx";
 import PrivacyPolicy from "./Component/Pages/PrivacyPolicy/PrivacyPolicy.jsx";
 import ShippingPolicy from "./Component/Pages/ShippingPolicy/ShippingPolicy.jsx";
 import TermsAndConditionsPolicy from "./Component/Pages/TermsAndConditionsPolicy/TermsAndConditions.jsx";
+import { useContext, useEffect } from "react";
+import axios from "axios";
+import { CartContext } from "./Component/Context/UserContext.jsx";
 
 function App() {
+  //   const { setWishListItems } = useContext(CartContext);
+  // const FectchAPIs = async () => {
+  //   try {
+  //     const responseWish = await axios.get(
+  //       "https://bd1f-2401-4900-8822-8a8-2003-e26b-42cc-f05.ngrok-free.app/rajlaxmi/getAllWishlist",
+  //       {
+  //         headers: {
+  //           "ngrok-skip-browser-warning": "69420",
+  //         },
+  //       }
+  //     );
+  //     setWishListItems(responseWish?.data?.wishlist);
+  //     console.log('responseWish?.data?.wishlist: ', responseWish?.data?.wishlist);
+  //   } catch (error) {}
+  // };
+
+  // useEffect(() => {
+  //   // FectchAPIs()
+  //   console.log(WishListItems)
+  // }, [set])
+  
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={2000} />
@@ -42,7 +67,10 @@ function App() {
           <Route path="/refund" element={<Refund />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/shipping-policy" element={<ShippingPolicy />} />
-          <Route path="/terms-and-conditions" element={<TermsAndConditionsPolicy />} />
+          <Route
+            path="/terms-and-conditions"
+            element={<TermsAndConditionsPolicy />}
+          />
         </Routes>
       </Router>
     </>

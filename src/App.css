@@ -1365,6 +1365,10 @@ font-size: 25px;
 .payment-process-card-height{
   height: 50vh;
 }
+.pay-process-bill-summary{
+  height: 70px;
+  overflow-y: scroll;
+}
 .overflow-x-class{
   overflow-x: hidden !important;
 }

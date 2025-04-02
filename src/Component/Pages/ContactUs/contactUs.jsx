@@ -10,9 +10,11 @@ import facebook from "../../Assets/img/Contact/icons8-facebook.svg";
 import instagram from "../../Assets/img/Contact/icons8-instagram.svg";
 import linkedin from "../../Assets/img/Contact/icons8-linkedin.svg";
 import youtube from "../../Assets/img/Contact/icons8-youtube.svg";
-import inlarge from '../../Assets/img/Contact/inlarge.svg'
+import inlarge from "../../Assets/img/Contact/inlarge.svg";
+import { postData } from "../../../services/apiService";
 
 const ContactUs = () => {
+  let uid = sessionStorage.getItem("uid");
   // State
   const [formData, setFormData] = useState({
     name: "",
@@ -31,10 +33,27 @@ const ContactUs = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    // You can make your POST API request here
+    try {
+      const payload = {
+        uid: uid,
+        user_name: formData?.name,
+        user_email: formData?.email,
+        user_number: formData?.phone,
+        message: formData?.message,
+        title: formData?.message,
+      };
+      const response = await postData("contact", payload);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      })
+    } catch (error) {
+      console.log("error: ", error);
+    }
   };
 
   return (
@@ -55,7 +74,11 @@ const ContactUs = () => {
                     </div>
                     <div className="d-lg-flex d-md-flex d-sm-grid justify-content-md-around align-items-end pb-3 mb-lg-3 mb-sm-0 mx-lg-4 mx-sm-0">
                       <div className="contact-map position-relative d-flex justify-content-end">
-                        <img className="contact-inlarge  position-absolute m-3" src={inlarge} alt="" />
+                        <img
+                          className="contact-inlarge  position-absolute m-3"
+                          src={inlarge}
+                          alt=""
+                        />
                         <iframe
                           title="unique"
                           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d538.4281137561103!2d75.87052130787646!3d22.700205790427145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd772fbc5701%3A0x66545420c2f8ef1c!2sRajlakshmi%20Javiks%20International!5e1!3m2!1sen!2sin!4v1742892247728!5m2!1sen!2sin"
