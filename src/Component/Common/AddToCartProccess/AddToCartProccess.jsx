@@ -174,7 +174,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
         user_coupon: "",
       };
       const response = await postData("create-order", payload);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -199,12 +199,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
               </div>
             </div>
             <Modal.Header className="modal-header AddToCartModal-header justify-content-center">
-              <div className="d-flex">
+              <div className="d-flex justify-content-center">
                 <div>
                   <div
-                    className={`tick-box${
-                      step >= 1 ? "-active" : ""
-                    } d-flex justify-content-center align-items-center`}
+                    className={`tick-box${step >= 1 ? "-active" : ""
+                      } d-flex justify-content-center align-items-center`}
                   >
                     {step >= 1 && <img src={rightTick} alt="Loading" />}
                   </div>
@@ -216,21 +215,18 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                 <div className="text-center">
                   <div className="d-flex">
                     <hr
-                      className={`tick-progress-bar${
-                        step >= 1 ? "-active" : ""
-                      }`}
+                      className={`tick-progress-bar${step >= 1 ? "-active" : ""
+                        }`}
                     />
                     <div
-                      className={`tick-box${
-                        step >= 1 ? "-active" : ""
-                      } d-flex justify-content-center align-items-center`}
+                      className={`tick-box${step >= 1 ? "-active" : ""
+                        } d-flex justify-content-center align-items-center`}
                     >
                       {step >= 2 && <img src={rightTick} alt="Loading" />}
                     </div>
                     <hr
-                      className={`tick-progress-bar${
-                        step >= 2 ? "-active" : ""
-                      }`}
+                      className={`tick-progress-bar${step >= 2 ? "-active" : ""
+                        }`}
                     />
                   </div>
                   <span className="josefin-sans-font-family-500 font-size-18">
@@ -238,11 +234,10 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                   </span>
                 </div>
 
-                <div>
+                <div className="text-center">
                   <div
-                    className={`tick-box${
-                      step >= 2 ? "-active" : ""
-                    } d-flex justify-content-center align-items-center`}
+                    className={`tick-box${step >= 2 ? "-active" : ""
+                      } d-flex justify-content-center align-items-center`}
                   >
                     {step >= 4 && <img src={rightTick} alt="Loading" />}
                   </div>
@@ -255,15 +250,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
             <Modal.Body className=" background-color-light-grayish-yellow pt-0 AddToCartModal-body">
               <div className="container-fluid">
                 <div
-                  className={`payment-process-modal row ${
-                    Paymode ? "" : "justify-content-evenly"
-                  }`}
+                  className={`payment-process-modal row ${Paymode ? "" : "justify-content-evenly"
+                    }`}
                 >
                   {/* items Add */}
                   <div
-                    className={`col-lg-4 AddToCartModal-modal-grid-1 pt-3 ${
-                      Paymode ? "d-none" : ""
-                    } ${mobView ? "pay-mob-view" : ""} `}
+                    className={`col-lg-4 AddToCartModal-modal-grid-1 pt-3 ${Paymode ? "d-none" : ""
+                      } ${mobView ? "pay-mob-view" : ""} `}
                   >
                     <div className="d-flex justify-content-between">
                       <span className="text-color-terracotta font-size-14 inter-font-family-500">
@@ -367,15 +360,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     </div>
                   </div>
                   <hr
-                    className={` vertical-hr vertical-hr-tab ${
-                      Paymode ? "d-none" : ""
-                    }`}
+                    className={` vertical-hr vertical-hr-tab ${Paymode ? "d-none" : ""
+                      }`}
                   />
                   {/* Detail Form */}
                   <div
-                    className={`col-lg-4 AddToCartModal-modal-grid-2 pt-3 ${
-                      Paymode ? "payModeBlackScreenActive" : ""
-                    } ${mobView ? "pay-mob-view" : ""}`}
+                    className={`col-lg-4 AddToCartModal-modal-grid-2 pt-3 ${Paymode ? "payModeBlackScreenActive" : ""
+                      } ${mobView ? "pay-mob-view" : ""}`}
                   >
                     <div className="">
                       <span className="address-heading font-size-14 inter-font-family-500">
@@ -405,14 +396,12 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                         ))}
                       </div>
                       <hr
-                        className={`address-sect-hr ${
-                          step >= 1 ? "" : "d-none"
-                        }`}
+                        className={`address-sect-hr ${step >= 1 ? "" : "d-none"
+                          }`}
                       />
                       <div
-                        className={`login-text font-size-14 inter-font-family-500 ${
-                          step >= 1 ? "" : "d-none"
-                        }`}
+                        className={`login-text font-size-14 inter-font-family-500 ${step >= 1 ? "" : "d-none"
+                          }`}
                       >
                         Add New Address
                       </div>
@@ -465,7 +454,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                             className="font-size-12 inter-font-family-400"
                             htmlFor="apartment"
                           >
-                            Apartment...
+                            House No.
                           </label>
                           <input
                             type="text"
@@ -551,15 +540,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     </div>
                   </div>
                   <hr
-                    className={`vertical-hr vertical-hr-tab ${
-                      Paymode ? "payModeBlackScreenLineActive" : ""
-                    }`}
+                    className={`vertical-hr vertical-hr-tab ${Paymode ? "payModeBlackScreenLineActive" : ""
+                      }`}
                   />
                   {/* payment details */}
                   <div
-                    className={`col-lg-4 payment-section AddToCartModal-modal-grid-1 pt-3 ${
-                      Paymode ? "payModeBlackScreenActive" : ""
-                    } ${mobView ? "pay-mob-view" : ""}`}
+                    className={`col-lg-4 payment-section AddToCartModal-modal-grid-1 pt-3 ${Paymode ? "payModeBlackScreenActive" : ""
+                      } ${mobView ? "pay-mob-view" : ""}`}
                   >
                     <div className="">
                       <span className="address-heading font-size-14 inter-font-family-500">
@@ -644,15 +631,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     </div>
                   </div>
                   <hr
-                    className={`vertical-hr-tab vertical-hr ${
-                      Paymode ? "" : "d-none"
-                    }`}
+                    className={`vertical-hr-tab vertical-hr ${Paymode ? "" : "d-none"
+                      }`}
                   />
                   {/* Paymode section */}
                   <div
-                    className={`col-lg-4 ${
-                      Paymode ? "" : "d-none"
-                    } payment-section AddToCartModal-modal-grid-1 pt-3`}
+                    className={`col-lg-4 ${Paymode ? "" : "d-none"
+                      } payment-section AddToCartModal-modal-grid-1 pt-3`}
                   >
                     <div className="font-size-24 inter-font-family-500 text-color-dark-grayish-blue">
                       Payment

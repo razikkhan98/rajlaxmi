@@ -25,6 +25,7 @@ import TrackOrder from "./Component/Pages/TrackOrder/trackorder.jsx";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import { CartContext } from "./Component/Context/UserContext.jsx";
+import Faq from "./Component/Pages/Faq/faq.jsx";
 
 function App() {
   //   const { setWishListItems } = useContext(CartContext);
@@ -78,7 +79,7 @@ function App() {
           />
           <Route path="/error" element={<Error />} />
           <Route path="/track" element={<TrackOrder />} />
-
+          <Route path="/faq" element={<Faq />} />
 
         </Routes>
       </Router>
