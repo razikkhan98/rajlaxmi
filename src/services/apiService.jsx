@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE_URL = "https://bd1f-2401-4900-8822-8a8-2003-e26b-42cc-f05.ngrok-free.app/rajlaxmi"; // Replace with your actual base URL
+export const API_BASE_URL = "https://4f0d-2401-4900-8822-8a8-b920-166f-7e25-7131.ngrok-free.app/rajlaxmi"; // Replace with your actual base URL
 
 // 🔹 GET: Fetch data from a dynamic endpoint
 export const getData = async (endpoint) => {

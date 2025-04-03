@@ -17,7 +17,6 @@ import axios from "axios";
 const WishList = () => {
   // useState for Add to Cart Button
   const { WishListItems, setWishListItems } = useContext(CartContext);
-  console.log('WishListItems: ', WishListItems);
 
   const [getWishData, setgetWishData] = useState([])
 

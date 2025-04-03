@@ -27,7 +27,7 @@ import axios from "axios";
 import { CartContext } from "./Component/Context/UserContext.jsx";
 
 function App() {
-  //   const { setWishListItems } = useContext(CartContext);
+  //   const { WishListItems,setWishListItems } = useContext(CartContext);
   // const FectchAPIs = async () => {
   //   try {
   //     const responseWish = await axios.get(
@@ -38,15 +38,23 @@ function App() {
   //         },
   //       }
   //     );
-  //     setWishListItems(responseWish?.data?.wishlist);
   //     console.log('responseWish?.data?.wishlist: ', responseWish?.data?.wishlist);
+  //     const transformedProducts = responseWish?.data?.wishlist?.map(product => ({
+  //       id: product?.id,
+  //       name: product?.product_name, 
+  //       price: product?.product_price, 
+  //       qty: `${product?.product_quantity} gm`,
+  //       image: product?.product_image, 
+  //     }));
+  //     // setgetWishData(transformedProducts);
+  //     setWishListItems(transformedProducts);
   //   } catch (error) {}
   // };
 
   // useEffect(() => {
-  //   // FectchAPIs()
-  //   console.log(WishListItems)
-  // }, [set])
+  //   FectchAPIs()
+  // }, [])
+  // console.log(WishListItems)
   
 
   return (
@@ -67,7 +75,7 @@ function App() {
             element={<ProductDescription />}
           />
           <Route path="/wishlist" element={<WishList />} />
-          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/feedback/:id" element={<Feedback />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/refund" element={<Refund />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

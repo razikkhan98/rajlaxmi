@@ -2968,3 +2968,11 @@ Error Page Css
 .track p{
   color: #2F3E46;
 }
+
+/* customer-review */
+.customer-review .prog{
+  height: 10px;
+}
+.customer-review .prog-bar{
+  background-color: var(--gleeful) !important;
+}

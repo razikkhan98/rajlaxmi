@@ -34,7 +34,7 @@ const Login = () => {
 
       if (response?.uid) {
         setuid(response.uid);
-        sessionStorage.setItem("userId", response.uid);
+        sessionStorage.setItem("uid", response.uid);
       }
 
       if (response?.token) {

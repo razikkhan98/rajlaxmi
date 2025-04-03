@@ -15,23 +15,11 @@ import { postData } from "../../../services/apiService";
 const AddToCartProccess = ({ showModal, handleClose }) => {
   const { register, handleSubmit } = useForm();
   // const {  clearCart } = useContext(CartContext);
-  // uid,
-  //       user_name,
-  //       user_number,
-  //       user_email,
-  //       user_state,
-  //       user_city,
-  //       user_pincode,
-  //       user_coupon,
-  //       user_country,
-  //       user_landmark,
-  //       user_house_number,
-  //       user_total_amount,
-  //       purchase_price,
-  //       product_quantity
 
   const [cartItems, setCartItems] = useState([]);
   const uid = sessionStorage.getItem("uid");
+  // const AddToCartPayload = JSON?.parse(sessionStorage.getItem(`cart_${uid}`)||{});
+
   // States
   const [step, setStep] = useState(0);
   const [Paymode, setPaymode] = useState(false);
@@ -45,6 +33,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
     }
 
     const uid = sessionStorage.getItem("uid");
+
     const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
 
     if (Object.keys(storedCart).length === 0) {
@@ -156,6 +145,27 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
     return total + Number(product?.productDetails?.price);
   }, 0);
 
+  // Add to Cart API
+  const handleAddToCartApi = async () => {
+    try {
+      const payload = cartItems?.map((product) => ({
+        uid,
+        product_id: product?.id,
+        product_name: product?.productDetails?.name,
+        product_price: product?.productDetails?.price,
+        product_quantity: product?.quantity,
+        product_weight: product?.weight,
+      }));
+
+      const response = await postData("addtocart", payload);
+      console.log("response: ", response);
+      setStep(1);
+      if (step >= 2) {
+        return setPaymode(!Paymode);
+      }
+    } catch (error) {}
+  };
+  // Payment API
   const onSubmit = async (data) => {
     try {
       const payload = {
@@ -174,6 +184,9 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
         user_coupon: "",
       };
       const response = await postData("create-order", payload);
+      if (response?.status === 200 || response?.status === 201) {
+        window?.open(response?.url);
+      }
     } catch (error) {}
   };
 
@@ -359,7 +372,10 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       </Link>
 
                       <button
-                        onClick={() => handleTapSteps()}
+                        onClick={() => {
+                          // handleTapSteps();
+                          handleAddToCartApi();
+                        }}
                         className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}
                       >
                         Proceed

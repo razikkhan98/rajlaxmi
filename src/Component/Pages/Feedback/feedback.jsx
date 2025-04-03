@@ -7,6 +7,7 @@ import ArrowDark from "../../Assets/img/ProductDescription/arror-dark.png";
 import { FaRegStar } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { postData } from "../../../services/apiService";
+import { useLocation, useParams } from "react-router-dom";
 
 const Feedback = () => {
   let uid = sessionStorage.getItem("uid");
@@ -14,7 +15,9 @@ const Feedback = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
+  const params = useParams();
 
   const onSubmit = async (data) => {
     try {
@@ -24,9 +27,11 @@ const Feedback = () => {
         user_email: data?.email,
         rating: "7",
         feedback: data?.message,
+        product_id: params?.id,
+
       };
       const response = await postData("feedback", payload);
-      console.log("response: ", response);
+      reset()
     } catch (error) {
       console.log("error: ", error);
     }

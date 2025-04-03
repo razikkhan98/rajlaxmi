@@ -15,13 +15,14 @@ import { useNavigate } from "react-router-dom";
 
 import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
 import { Bounce, toast } from "react-toastify";
+import { postData } from "../../../services/apiService";
 
 // Generate or Retrieve Unique User ID for session
 const getSessionUID = () => {
   let uid = sessionStorage.getItem("uid");
   if (!uid) {
-    uid = `user_${Math.random().toString(36).substr(2, 9)}`;
-    sessionStorage.setItem("uid", uid);
+    // uid = `user_${Math.random().toString(36).substr(2, 9)}`;
+    // sessionStorage.setItem("uid", uid);
   }
   return uid;
 };
@@ -31,9 +32,8 @@ const AddtoCard = ({ product }) => {
 
   // useState for Add to Cart Button
   const { addToCart, removeFromCart, AddToWishList, WishListItems } =
-  useContext(CartContext);
-  
-  console.log('WishListItems: ', WishListItems);
+    useContext(CartContext);
+
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [selectedWeight, setSelectedWeight] = useState("500gm");
@@ -47,20 +47,21 @@ const AddtoCard = ({ product }) => {
 
   // Function
   // product_id
-  // : 
+  // :
   // 1
   // product_name
-  // : 
+  // :
   // "Organic Kabuli Chana"
   // product_price
-  // : 
+  // :
   // "180.00"
   // product_quantity
-  // : 
+  // :
   // "500 gm"
   useEffect(() => {
     const fetchCartData = () => {
-      const storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+      const storedCart =
+        JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
       if (storedCart[product.id] && storedCart[product.id][selectedWeight]) {
         setIsAdded(true);
         setQuantity(storedCart[product.id][selectedWeight].quantity);
@@ -69,87 +70,135 @@ const AddtoCard = ({ product }) => {
         setQuantity(0);
       }
     };
-  
+
     fetchCartData();
-  
+
     // 🔥 Listen for cart updates globally
     window.addEventListener("cartUpdated", fetchCartData);
-  
+
     return () => {
       window.removeEventListener("cartUpdated", fetchCartData);
     };
   }, [product.id, selectedWeight, uid]);
-  
 
   // Add to Cart
-  const increaseQuantity = () => {
-    // if (!isAuthenticated) {
-    //   navigate("/login");
-    //   toast.warning("⚠️ Please login to add items!", { position: "top-right", autoClose: 3000 });
-    //   return;
-    // }
-  
+  const increaseQuantity = async () => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      toast.warning("⚠️ Please login to add items!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
     let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
-  
+
     if (!storedCart[product.id]) {
       storedCart[product.id] = {};
     }
-  
+
     if (!storedCart[product.id][selectedWeight]) {
       storedCart[product.id][selectedWeight] = {
         productDetails: product,
         quantity: 1,
       };
-      toast.success(`${product.name} added to cart!`, { position: "top-right", autoClose: 2000 });
+      // ==========================
+      // Add Item API
+      // ========================
+      try {
+        const itemsArray = [];
+        Object.keys(storedCart).forEach((productId) => {
+          Object.keys(storedCart[productId]).forEach((weight) => {
+            itemsArray.push({
+              id: productId,
+              weight,
+              quantity: storedCart[productId][weight].quantity,
+              productDetails: storedCart[productId][weight].productDetails,
+            });
+          });
+        });
+        const totalPrice = itemsArray?.reduce((total, product) => {
+          return total + Number(product?.productDetails?.price);
+        }, 0);
+        // console.log("totalPrice: ", totalPrice);
+        const payload = itemsArray?.map((product) => ({
+          uid,
+          product_id: product?.id,
+          product_name: product?.productDetails?.name,
+          product_price: product?.productDetails?.price,
+          product_quantity: product?.quantity,
+          product_weight: product?.weight,
+        }));
+        console.log('itemsArray: ', payload);
+        // const response = await postData("addtocart", payload);
+        // console.log("response: ", response);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+
+      // =================
+      // =================
+
+      toast.success(`${product.name} added to cart!`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
     } else {
       storedCart[product.id][selectedWeight].quantity += 1;
-      toast.info(`Increased quantity of ${product.name}`, { position: "top-right", autoClose: 2000 });
-
+      toast.info(`Increased quantity of ${product.name}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
     }
-  
+
     sessionStorage.setItem(`cart_${uid}`, JSON.stringify(storedCart));
-  
+
     // 🔄 Update UI immediately
     setIsAdded(true);
     setQuantity(storedCart[product.id][selectedWeight].quantity);
-  
+
     // 🔥 Notify all components
     window.dispatchEvent(new Event("cartUpdated"));
   };
-  
 
   // Remove from Cart
   const decreaseQuantity = () => {
     let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
-  
+
     if (
       storedCart[product.id] &&
       storedCart[product.id][selectedWeight]?.quantity > 1
     ) {
       storedCart[product.id][selectedWeight].quantity -= 1;
-      toast.info(`Decreased quantity of ${product.name}`, { position: "top-right", autoClose: 2000 });
+      toast.info(`Decreased quantity of ${product.name}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
     } else {
       delete storedCart[product.id][selectedWeight];
-  
+
       if (Object.keys(storedCart[product.id]).length === 0) {
         delete storedCart[product.id]; // Remove entire product if no sizes left
       }
-      toast.error(`Removed ${product.name} from cart!`, { position: "top-right", autoClose: 2000 });
+      toast.error(`Removed ${product.name} from cart!`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
       setIsAdded(false);
     }
-  
+
     sessionStorage.setItem(`cart_${uid}`, JSON.stringify(storedCart));
-  
+
     // 🔄 Update UI immediately
     setQuantity(storedCart[product.id]?.[selectedWeight]?.quantity || 0);
     // setIsAdded(
     //   storedCart[product.id] && Object.keys(storedCart[product.id]).length > 0
     // );
-  
+
     // 🔥 Notify all components
     window.dispatchEvent(new Event("cartUpdated"));
   };
-  
 
   //   Rating Change
   const renderStars = (rating) => {
@@ -179,7 +228,9 @@ const AddtoCard = ({ product }) => {
           <div>
             {/* Icons (Heart & Share) */}
             <div className="heart" onClick={() => AddToWishList(product)}>
-              {!WishListItems?.some((item) => item?.id === product?.product_id||product?.id) ? (
+              {!WishListItems?.some(
+                (item) => item?.id === product?.product_id || product?.id
+              ) ? (
                 <FaRegHeart className="text-color-terracotta" />
               ) : (
                 <img src={FillHeart} alt="" />
@@ -225,19 +276,18 @@ const AddtoCard = ({ product }) => {
               )}
             </div>
             <div>
-            <img
-              src={product.image}
-              alt="Loading"
-              className="img-fluid"
-              style={{cursor: "pointer"}}
-              onClick={() =>
-                navigate(`/productdescription/${product.id}`, {
-                  state: { product },
-                })
-              }
-            />
+              <img
+                src={product.image}
+                alt="Loading"
+                className="img-fluid"
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  navigate(`/productdescription/${product.id}`, {
+                    state: { product },
+                  })
+                }
+              />
             </div>
-           
           </div>
         </div>
 
@@ -245,7 +295,7 @@ const AddtoCard = ({ product }) => {
 
         <div className="d-flex justify-content-between shop-by-category-detail px-2 pt-2">
           <div className="inter-font-family-500 card-heading font-size-16 pt-2 text-color-dark-grayish-blue">
-            {product.name|| product?.product_name}
+            {product.name || product?.product_name}
           </div>
           <div
             className="w-50 d-flex justify-content-center rating-height"
@@ -270,7 +320,7 @@ const AddtoCard = ({ product }) => {
           <div className="ms-4 d-flex align-items-center">
             <MdCurrencyRupee className="" />
             <span className="inter-font-family-500 font-size-16 text-color-black">
-              {product.price||product?.product_price}
+              {product.price || product?.product_price}
             </span>
           </div>
           {/* Add to Cart / Quantity Controls */}
