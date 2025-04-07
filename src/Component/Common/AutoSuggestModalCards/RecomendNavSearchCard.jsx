@@ -155,9 +155,9 @@ const RecommendNavSearchCard = ({ product }) => {
             product?.product_id == productId &&
             product?.product_weight == selectedWeight
         );
-        const response = await updateData(
+        const response = await postData(
           "updateCart",
-          UpdateData?.product_id,
+          // UpdateData?.product_id,
           UpdateData
         );
         console.log("response: ", response);
@@ -223,9 +223,9 @@ const RecommendNavSearchCard = ({ product }) => {
             product?.product_id == productId &&
             product?.product_weight == selectedWeight
         );
-        const response = await updateData(
+        const response = await postData(
           "updateCart",
-          UpdateData?.product_id,
+          // UpdateData?.product_id,
           UpdateData
         );
         console.log("response: ", response);
