@@ -255,7 +255,7 @@ const SearchAddToCart = ({ product }) => {
         };
         const response = await deleteProductAPI(
           "removecart",
-          productId,
+          '',
           payload
         );
         console.log("response: ", response);
