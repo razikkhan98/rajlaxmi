@@ -196,11 +196,11 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
               Recommendations For you
             </h3>
             <div className="d-flex  ms-3">
-              {/* {BestSellers?.map((i) => ( */}
-                {/* <span> */}
-                <RecommendNavSearchCard  />
-                {/* </span> */}
-              {/* ))} */}
+              {/* <span> */}
+              {BestSellers?.map((i) => 
+                <RecommendNavSearchCard  product={i} />
+              )}
+              {/* </span> */}
             </div>
             <li className="h-1"></li>
             {/* {filteredOptions?.map((option, index) => (

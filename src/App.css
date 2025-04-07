@@ -2708,6 +2708,16 @@ height: 40px; */
   color: #2f3e46;
 }
 
+@media (max-width: 1366px) {
+  .slider-fullsize-img-inner img {
+    width: 100% !important;
+  }
+  .slider-fullsize-image-div {
+    width: 475px;
+    height: 427px;
+}
+}
+
 @media (max-width: 768px) {
 
   .btn-add-to-cart,
@@ -2800,6 +2810,9 @@ height: 40px; */
     height: 2px;
     margin: 0px auto;
     right: 0;
+  }
+  .slider-fullsize-img-inner img {
+    width: 100% !important;
   }
 }
 
@@ -2967,4 +2980,29 @@ Error Page Css
 }
 .track p{
   color: #2F3E46;
+}
+
+
+/* FAQ Css  */
+.accordion-item .faq-header{
+  background-color: rgba(164, 190, 123, 0.2) !important;
+  color: #2F3E46 !important;
+}
+.accordion-item .faq-body{
+  background-color: rgba(164, 190, 123, 0.2) !important;
+  color: #2F3E46 !important;
+}
+
+.accordion-button{
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  background-color: rgba(164, 190, 123, 0.2) !important;
+}
+
+/* customer-review */
+.customer-review .prog{
+  height: 10px;
+}
+.customer-review .prog-bar{
+  background-color: var(--gleeful) !important;
 }

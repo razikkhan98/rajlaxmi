@@ -17,7 +17,9 @@ import { NavLink } from "react-router-dom";
 const Footer = () => {
   const navLinks = [
     { text: "Lab Report" },
-    { text: "FAQ's" },
+    { text: "FAQ's",
+      to: "/faq",
+     },
     { text: "Shop Now" },
     {
       text: "Track Order",

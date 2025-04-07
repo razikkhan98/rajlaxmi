@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,11 +12,6 @@ import Footer from "../../Common/Footer";
 import ProductCard from "../../Common/ProductDescriptionCard/ProductCard";
 import ArrowLight from "../../Assets/img/ProductDescription/arrow-light.png";
 import ArrowDark from "../../Assets/img/ProductDescription/arror-dark.png";
-import {
-  TiStarFullOutline,
-  TiStarHalfOutline,
-  TiStarOutline,
-} from "react-icons/ti";
 import { FaRegHeart } from "react-icons/fa";
 import { PiShareFatBold } from "react-icons/pi";
 import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
@@ -24,10 +19,12 @@ import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
 import CheckMark from "../../Assets/img/ProductDescription/check-mark_5290058 1.svg";
 import { NavLink } from "react-router-dom";
 import { CartContext } from "../../Context/UserContext";
-
+import { renderStars } from "../../Common/RatingFunctionality/RatingFunctionality";
+import axios from "axios";
+import { postData } from "../../../services/apiService";
+import { toast } from "react-toastify";
 
 const Tab = ({ label, isActive, onClick, className }) => {
-
   return (
     <button
       className={`${className} ${
@@ -45,7 +42,9 @@ const TabPanel = ({ children, isActive, className }) => {
     <div
       className={`${className} ${
         isActive
-          ? "active-tabPanel tab-content d-block inter-font-family-400"
+          ? `active-tabPanel tab-content d-block inter-font-family-400 ${
+              children?.type?.name == "CustomerReviews" ? "mt-3" : ""
+            }`
           : "tab-content d-none inter-font-family-400"
       }`}
     >
@@ -80,6 +79,36 @@ const BenefitsCards = () => {
   );
 };
 
+// Tab Customer Reviews UI
+const CustomerReviews = () => {
+  const location = useLocation();
+  const product = location.state?.product;
+  return (
+    <div className="customer-review ms-3">
+      {[5, 4, 3, 2, 1]?.map((rating) => (
+        <div className="row rating-text inter-font-family-500 pb-2">
+          <div className="col-2 col-sm-3 start-gleeful px-0">
+            {renderStars(product?.id, rating, product)}
+          </div>
+          <div className="col-3 col-sm-3 progress prog px-0">
+            <div
+              class="progress-bar prog-bar"
+              role="progressbar"
+              style={{ width: "25%" }}
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <div className="col-7 col-sm-4 inter-font-family-500 font-size-12  font-sm-8 text-color-gleeful  text-decoration-underline">
+            {product?.rating} ({product?.reviews} Reviews)
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const TabComponent = () => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -90,7 +119,7 @@ const TabComponent = () => {
         "Savor the richness of 100% Organic Anjeer (Dried Figs)—pure, natural, and free from additives or preservatives. Handpicked from the finest farms, our Anjeer is sun-dried to perfection, retaining its natural sweetness and essential nutrients. Soft, chewy, and delicious, it makes for a guilt-free snack or a versatile ingredient in your favorite recipes.",
     },
     { label: "Benefits", content: <BenefitsCards /> },
-    { label: "Customer Reviews", content:'' },
+    { label: "Customer Reviews", content: <CustomerReviews /> },
   ];
 
   return (
@@ -120,14 +149,15 @@ const ProductDescription = () => {
   // States
   // ==========
   const location = useLocation();
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("100 gm");
+  const [FetchRatingData, setFetchRatingData] = useState();
   const [activeImage, setActiveImage] = useState(productFullNew); // Main Image State
   // const smallImages = [product.image, product.smallImage1, product.smallImage2, product.smallImage3];
   const smallImages = [productSmall1, productSmall2, productSmall3];
-    const {AddToWishList,  WishListItems } = useContext(CartContext);
+  const { AddToWishList, WishListItems } = useContext(CartContext);
 
-  const product = location.state?.product;
-
+  const GetproductUrlId = location.state?.product;
+  let uid = sessionStorage.getItem("uid");
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -175,38 +205,74 @@ const ProductDescription = () => {
     arrows: false,
   };
 
-  //   Rating Change
-  const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i <= Math.floor(rating)) {
-        stars.push(
-          <TiStarFullOutline
-            key={i}
-            className="text-color-terracotta"
-            fontSize={20}
-          />
-        );
-      } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
-        stars.push(
-          <TiStarHalfOutline
-            key={i}
-            className="text-color-terracotta"
-            fontSize={20}
-          />
-        );
-      } else {
-        stars.push(
-          <TiStarOutline
-            key={i}
-            className="text-color-terracotta"
-            fontSize={20}
-          />
-        );
-      }
+  // ====================================
+  // Check Product already added or not
+  // ==================-=================
+  let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+  const itemsArray = [];
+  Object.keys(storedCart).forEach((productId) => {
+    Object.keys(storedCart[productId]).forEach((weight) => {
+      itemsArray.push({
+        id: productId,
+        weight,
+        quantity: storedCart[productId][weight].quantity,
+        productDetails: storedCart[productId][weight].productDetails,
+      });
+    });
+  });
+  const isAlreadyAdd = itemsArray?.some(
+    (product) =>
+      Number(product?.productDetails?.id) === Number(GetproductUrlId?.id) &&
+      product?.productDetails?.qty === selectedOption
+  );
+
+  // =================
+  // Handle Add To Cart Functionality
+  // =================
+  const HandleAddToCart = async () => {
+    try {
+      const payload = {
+        uid,
+        product_id: GetproductUrlId?.id,
+        product_name: GetproductUrlId?.name,
+        product_price: GetproductUrlId?.price,
+        product_quantity: 1,
+        product_weight: selectedOption,
+      };
+      console.log('payload: ', payload);
+      // const response = await postData("addtocart", payload);
+      // if (response?.message == "Added to cart successfully") {
+      //   toast.success(`${GetproductUrlId?.name} added to cart!`, {
+      //     position: "top-right",
+      //     autoClose: 2000,
+      //   });
+      // }
+    } catch (error) {
+      console.log("error: ", error);
+      toast.error(`${error?.message}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
     }
-    return stars;
   };
+
+  const FetchRating = async () => {
+    try {
+      const response = await axios.get(
+        `https://7839-106-222-215-159.ngrok-free.app/rajlaxmi/getAllFeedback/${GetproductUrlId?.id}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        }
+      );
+      console.log("response: ", response?.data?.review);
+      setFetchRatingData();
+    } catch (error) {}
+  };
+  useEffect(() => {
+    FetchRating();
+  }, []);
 
   return (
     <>
@@ -217,7 +283,9 @@ const ProductDescription = () => {
           <img src={ArrowLight} className="mx-2" alt="Loading" />{" "}
           <span className=" inter-font-family-400">Dry Fruits</span>{" "}
           <img src={ArrowDark} className="mx-2" alt="Loading" />{" "}
-          <span className="text-color-dark-grayish-blue font-size-14 inter-font-family-400">Anjeer</span>
+          <span className="text-color-dark-grayish-blue font-size-14 inter-font-family-400">
+            Anjeer
+          </span>
         </div>
       </div>
 
@@ -271,16 +339,22 @@ const ProductDescription = () => {
               <div className="slider-fullsize-image-div">
                 <div className="slider-fullsize-img-inner">
                   {/* Icons (Heart & Share) */}
-                              <div className="heart" onClick={() => AddToWishList(product)}>
-                                {!WishListItems.some((item) => item?.id === product?.id) ? (
-                                  <FaRegHeart className="text-color-terracotta" />
-                                ) : (
-                                  <img className="h-auto" src={FillHeart} alt="" />
-                                )}
-                              </div>
-                              <div className="share">
-                                <PiShareFatBold className="text-color-terracotta" />
-                              </div>
+                  <div
+                    className="heart"
+                    onClick={() => AddToWishList(GetproductUrlId)}
+                  >
+                    {!WishListItems?.some(
+                      (item) =>
+                        Number(item?.product_id) === Number(GetproductUrlId?.id)
+                    ) ? (
+                      <FaRegHeart className="text-color-terracotta" />
+                    ) : (
+                      <img className="h-auto" src={FillHeart} alt="" />
+                    )}
+                  </div>
+                  <div className="share">
+                    <PiShareFatBold className="text-color-terracotta" />
+                  </div>
                   <img
                     className="w-100 slider-fullimage"
                     src={activeImage}
@@ -310,7 +384,7 @@ const ProductDescription = () => {
             {/*------------ Product detail start----------- */}
             <div className="col-12 col-md-12 col-lg-7 ps-lg-5 ps-md-0 mt-lg-0 mt-md-4 mt-sm-0">
               <h1 className="heading-product-name text-color-dark-grayish-blue inter-font-family-500 mb-3 mt-3 mt-md-0 text-truncate lh-sm">
-                {product?.name}
+                {GetproductUrlId?.name}
               </h1>
               <p className="mb-3 product-description inter-font-family-400 text-color-dark-grayish-blue">
                 Organic Lorem Ipsum cia doer la fansco anjeer la bela
@@ -319,10 +393,15 @@ const ProductDescription = () => {
               <div className="rating-container">
                 <div className="rating-text inter-font-family-500">
                   <div className="start-gleeful">
-                    {renderStars(product?.rating)}
+                    {renderStars(
+                      GetproductUrlId?.id,
+                      GetproductUrlId?.rating,
+                      GetproductUrlId
+                    )}
                   </div>
                   <div className="inter-font-family-500 font-size-14 mx-2 font-sm-8 text-color-terracotta pt-2">
-                    {product?.rating} ({product?.reviews} Reviews)
+                    {GetproductUrlId?.rating} ({GetproductUrlId?.reviews}{" "}
+                    Reviews)
                   </div>
                 </div>
               </div>
@@ -337,69 +416,24 @@ const ProductDescription = () => {
               </div>
               {/*--------------Product Quantity------------  */}
               <div className="product-quantity">
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option1" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option1"
-                    checked={selectedOption === "option1"}
-                    onChange={handleRadioChange}
-                  />
-                  100 gm
-                </label>
-
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option2" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option2"
-                    checked={selectedOption === "option2"}
-                    onChange={handleRadioChange}
-                  />
-                  500 gm
-                </label>
-
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option3" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option3"
-                    checked={selectedOption === "option3"}
-                    onChange={handleRadioChange}
-                  />
-                  1 kg
-                </label>
-
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option4" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option4"
-                    checked={selectedOption === "option4"}
-                    onChange={handleRadioChange}
-                  />
-                  5 kg
-                </label>
+                {["100 gm", "500 gm", "1 kg", "5 kg"].map((weight, index) => (
+                  <label
+                    key={index}
+                    className={`radio-button ${
+                      selectedOption === weight ? "selected" : ""
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      className="product-quantity-link inter-font-family-400"
+                      name="option"
+                      value={weight} // Use the actual weight value
+                      checked={selectedOption === weight} // Check if this weight is selected
+                      onChange={handleRadioChange}
+                    />
+                    {weight}
+                  </label>
+                ))}
               </div>
               {/*-------Delivery status based on Pincode------------  */}
               <div className="details-Delivery-status-div">
@@ -428,7 +462,11 @@ const ProductDescription = () => {
                 <button className="btn-buy-now inter-font-family-500">
                   Buy Now
                 </button>
-                <button className="btn-add-to-cart inter-font-family-500 mt-3 mt-md-0">
+                <button
+                  onClick={() => HandleAddToCart()}
+                  className={`btn-add-to-cart inter-font-family-500 mt-3 mt-md-0 ${!isAlreadyAdd ? "":"btn btn-outline-secondary "}`}
+                  disabled={isAlreadyAdd}
+                >
                   Add To Cart
                 </button>
               </div>
@@ -439,7 +477,9 @@ const ProductDescription = () => {
           </div>
 
           <div className="pt-5">
-            <p className="font-size-24 josefin-sans-font-family-600 text-color-dark-grayish-blue text-lg-start text-center">Recommendations For you</p>
+            <p className="font-size-24 josefin-sans-font-family-600 text-color-dark-grayish-blue text-lg-start text-center">
+              Recommendations For you
+            </p>
             <ProductCard />
           </div>
         </div>
@@ -451,10 +491,10 @@ const ProductDescription = () => {
               <p className="font-size-24 feedback-text font-sm-size-18 text-center">
                 Want to share your Product or Delivery experience with us?
               </p>
-              <NavLink to={"/feedback"}>
-              <button className="text-white feedbak-btn px-4 py-2 mt-2 font-size-16 inter-font-family-400 rounded-3 border-0">
-                Submit Feedback
-              </button>
+              <NavLink to={`/feedback/${GetproductUrlId?.id}`}>
+                <button className="text-white feedbak-btn px-4 py-2 mt-2 font-size-16 inter-font-family-400 rounded-3 border-0">
+                  Submit Feedback
+                </button>
               </NavLink>
             </div>
           </div>

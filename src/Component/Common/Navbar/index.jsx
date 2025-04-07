@@ -77,7 +77,7 @@ import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { RiSearch2Line } from "react-icons/ri";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import AddToCartProccess from "../AddToCartProccess/AddToCartProccess";
 import AutoSuggestSearch from "../AutoSuggestSearchBar/AutoSuggestSearchBar";
 import { CartContext } from "../../Context/UserContext";
@@ -190,19 +190,18 @@ const Navbar = () => {
     };
   }, [uid]);
 
-
   // ==================
   // to prevent background scrolling
   // ==================
-    useEffect(() => {
-      if (inputBar) {
-          document.body.classList.add('position-fixed');
-      } else {
-          document.body.classList.remove('position-fixed'); 
-      }
-      return () => {
-          document.body.classList.remove('position-fixed');
-      };
+  useEffect(() => {
+    if (inputBar) {
+      document.body.classList.add("position-fixed");
+    } else {
+      document.body.classList.remove("position-fixed");
+    }
+    return () => {
+      document.body.classList.remove("position-fixed");
+    };
   }, [inputBar]);
 
   return (
@@ -295,14 +294,33 @@ const Navbar = () => {
                   : ""
               }`}
             >
-              <button
-                className={`login-btn rounded-pill mx-3 inter-font-family-500 ${
-                  inputBar ? "d-none" : ""
-                }`}
-                type="button"
-              >
-                Login
-              </button>
+              {uid ? (
+                <NavLink to={"/"}>
+                <button
+                  className={`login-btn rounded-pill mx-3 inter-font-family-500 ${
+                    inputBar ? "d-none" : ""
+                  }`}
+                  type="button"
+                  onClick={() => {
+                    sessionStorage?.removeItem("uid");
+                    sessionStorage?.removeItem("token");
+                  }}
+                  >
+                  Log Out
+                </button>
+                  </NavLink>
+              ) : (
+                <NavLink to={"/login"}>
+                  <button
+                    className={`login-btn rounded-pill mx-3 inter-font-family-500 ${
+                      inputBar ? "d-none" : ""
+                    }`}
+                    type="button"
+                  >
+                    Login
+                  </button>
+                </NavLink>
+              )}
 
               {/* -------- nav search section ---------- */}
               <div
@@ -381,7 +399,9 @@ const Navbar = () => {
           }`}
         >
           <PiShoppingCartSimpleFill className="mt-2 cart-icon" />
-          <span className="cart-quantity translate-middle rounded-pill">{cartCount}</span>
+          <span className="cart-quantity translate-middle rounded-pill">
+            {cartCount}
+          </span>
         </button>
       </div>
       {/* ----------------- */}
