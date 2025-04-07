@@ -21,6 +21,8 @@ import { NavLink } from "react-router-dom";
 import { CartContext } from "../../Context/UserContext";
 import { renderStars } from "../../Common/RatingFunctionality/RatingFunctionality";
 import axios from "axios";
+import { postData } from "../../../services/apiService";
+import { toast } from "react-toastify";
 
 const Tab = ({ label, isActive, onClick, className }) => {
   return (
@@ -40,7 +42,9 @@ const TabPanel = ({ children, isActive, className }) => {
     <div
       className={`${className} ${
         isActive
-          ? `active-tabPanel tab-content d-block inter-font-family-400 ${children?.type?.name == "CustomerReviews"? "mt-3" :""}`
+          ? `active-tabPanel tab-content d-block inter-font-family-400 ${
+              children?.type?.name == "CustomerReviews" ? "mt-3" : ""
+            }`
           : "tab-content d-none inter-font-family-400"
       }`}
     >
@@ -81,28 +85,26 @@ const CustomerReviews = () => {
   const product = location.state?.product;
   return (
     <div className="customer-review ms-3">
-        {[5, 4, 3, 2, 1]?.map((rating) => (
-      <div className="row rating-text inter-font-family-500 pb-2">
-            
+      {[5, 4, 3, 2, 1]?.map((rating) => (
+        <div className="row rating-text inter-font-family-500 pb-2">
           <div className="col-2 col-sm-3 start-gleeful px-0">
             {renderStars(product?.id, rating, product)}
           </div>
-        <div className="col-3 col-sm-3 progress prog px-0">
-          <div 
-            class="progress-bar prog-bar"
-            role="progressbar"
-            style={{ width: "25%" }}
-            aria-valuenow="0"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
+          <div className="col-3 col-sm-3 progress prog px-0">
+            <div
+              class="progress-bar prog-bar"
+              role="progressbar"
+              style={{ width: "25%" }}
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <div className="col-7 col-sm-4 inter-font-family-500 font-size-12  font-sm-8 text-color-gleeful  text-decoration-underline">
+            {product?.rating} ({product?.reviews} Reviews)
+          </div>
         </div>
-        <div className="col-7 col-sm-4 inter-font-family-500 font-size-12  font-sm-8 text-color-gleeful  text-decoration-underline">
-          {product?.rating} ({product?.reviews} Reviews)
-        </div>
-        
-      </div>
-        ))}
+      ))}
     </div>
   );
 };
@@ -147,7 +149,7 @@ const ProductDescription = () => {
   // States
   // ==========
   const location = useLocation();
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("100 gm");
   const [FetchRatingData, setFetchRatingData] = useState();
   const [activeImage, setActiveImage] = useState(productFullNew); // Main Image State
   // const smallImages = [product.image, product.smallImage1, product.smallImage2, product.smallImage3];
@@ -203,10 +205,61 @@ const ProductDescription = () => {
     arrows: false,
   };
 
+  // ====================================
+  // Check Product already added or not
+  // ==================-=================
+  let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
+  const itemsArray = [];
+  Object.keys(storedCart).forEach((productId) => {
+    Object.keys(storedCart[productId]).forEach((weight) => {
+      itemsArray.push({
+        id: productId,
+        weight,
+        quantity: storedCart[productId][weight].quantity,
+        productDetails: storedCart[productId][weight].productDetails,
+      });
+    });
+  });
+  const isAlreadyAdd = itemsArray?.some(
+    (product) =>
+      Number(product?.productDetails?.id) === Number(GetproductUrlId?.id) &&
+      product?.productDetails?.qty === selectedOption
+  );
+
+  // =================
+  // Handle Add To Cart Functionality
+  // =================
+  const HandleAddToCart = async () => {
+    try {
+      const payload = {
+        uid,
+        product_id: GetproductUrlId?.id,
+        product_name: GetproductUrlId?.name,
+        product_price: GetproductUrlId?.price,
+        product_quantity: 1,
+        product_weight: selectedOption,
+      };
+      console.log('payload: ', payload);
+      // const response = await postData("addtocart", payload);
+      // if (response?.message == "Added to cart successfully") {
+      //   toast.success(`${GetproductUrlId?.name} added to cart!`, {
+      //     position: "top-right",
+      //     autoClose: 2000,
+      //   });
+      // }
+    } catch (error) {
+      console.log("error: ", error);
+      toast.error(`${error?.message}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+  };
+
   const FetchRating = async () => {
     try {
       const response = await axios.get(
-        `https://9b64-2401-4900-8822-8a8-2d45-68ac-a185-2b63.ngrok-free.app/rajlaxmi/getAllFeedback/${GetproductUrlId?.id}`,
+        `https://7839-106-222-215-159.ngrok-free.app/rajlaxmi/getAllFeedback/${GetproductUrlId?.id}`,
         {
           headers: {
             "ngrok-skip-browser-warning": "69420",
@@ -290,8 +343,9 @@ const ProductDescription = () => {
                     className="heart"
                     onClick={() => AddToWishList(GetproductUrlId)}
                   >
-                    {!WishListItems.some(
-                      (item) => item?.id === GetproductUrlId?.id
+                    {!WishListItems?.some(
+                      (item) =>
+                        Number(item?.product_id) === Number(GetproductUrlId?.id)
                     ) ? (
                       <FaRegHeart className="text-color-terracotta" />
                     ) : (
@@ -362,69 +416,24 @@ const ProductDescription = () => {
               </div>
               {/*--------------Product Quantity------------  */}
               <div className="product-quantity">
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option1" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option1"
-                    checked={selectedOption === "option1"}
-                    onChange={handleRadioChange}
-                  />
-                  100 gm
-                </label>
-
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option2" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option2"
-                    checked={selectedOption === "option2"}
-                    onChange={handleRadioChange}
-                  />
-                  500 gm
-                </label>
-
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option3" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option3"
-                    checked={selectedOption === "option3"}
-                    onChange={handleRadioChange}
-                  />
-                  1 kg
-                </label>
-
-                <label
-                  className={`radio-button ${
-                    selectedOption === "option4" ? "selected" : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    className="product-quantity-link inter-font-family-400"
-                    name="option"
-                    value="option4"
-                    checked={selectedOption === "option4"}
-                    onChange={handleRadioChange}
-                  />
-                  5 kg
-                </label>
+                {["100 gm", "500 gm", "1 kg", "5 kg"].map((weight, index) => (
+                  <label
+                    key={index}
+                    className={`radio-button ${
+                      selectedOption === weight ? "selected" : ""
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      className="product-quantity-link inter-font-family-400"
+                      name="option"
+                      value={weight} // Use the actual weight value
+                      checked={selectedOption === weight} // Check if this weight is selected
+                      onChange={handleRadioChange}
+                    />
+                    {weight}
+                  </label>
+                ))}
               </div>
               {/*-------Delivery status based on Pincode------------  */}
               <div className="details-Delivery-status-div">
@@ -453,7 +462,11 @@ const ProductDescription = () => {
                 <button className="btn-buy-now inter-font-family-500">
                   Buy Now
                 </button>
-                <button className="btn-add-to-cart inter-font-family-500 mt-3 mt-md-0">
+                <button
+                  onClick={() => HandleAddToCart()}
+                  className={`btn-add-to-cart inter-font-family-500 mt-3 mt-md-0 ${!isAlreadyAdd ? "":"btn btn-outline-secondary "}`}
+                  disabled={isAlreadyAdd}
+                >
                   Add To Cart
                 </button>
               </div>

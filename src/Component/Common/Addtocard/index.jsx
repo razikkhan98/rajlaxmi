@@ -15,7 +15,12 @@ import { useNavigate } from "react-router-dom";
 
 import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
 import { Bounce, toast } from "react-toastify";
-import { postData } from "../../../services/apiService";
+import {
+  deleteProductAPI,
+  postData,
+  updateData,
+} from "../../../services/apiService";
+import Images2 from "../../Assets/img/Shopcategory/Soyabean chunk small size.png";
 
 // Generate or Retrieve Unique User ID for session
 const getSessionUID = () => {
@@ -28,11 +33,12 @@ const getSessionUID = () => {
 };
 
 const AddtoCard = ({ product }) => {
+  
   // UseState
 
   // useState for Add to Cart Button
-  const { addToCart, removeFromCart, AddToWishList, WishListItems } =
-    useContext(CartContext);
+  const { addToCart, removeFromCart, AddToWishList, WishListItems, cartItems } =
+  useContext(CartContext);
 
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -45,19 +51,6 @@ const AddtoCard = ({ product }) => {
   const uid = getSessionUID(); // Get UID for session
   const isAuthenticated = !!sessionStorage.getItem("token"); // Check if user is logged in
 
-  // Function
-  // product_id
-  // :
-  // 1
-  // product_name
-  // :
-  // "Organic Kabuli Chana"
-  // product_price
-  // :
-  // "180.00"
-  // product_quantity
-  // :
-  // "500 gm"
   useEffect(() => {
     const fetchCartData = () => {
       const storedCart =
@@ -82,15 +75,16 @@ const AddtoCard = ({ product }) => {
   }, [product.id, selectedWeight, uid]);
 
   // Add to Cart
-  const increaseQuantity = async () => {
-    if (!isAuthenticated) {
-      navigate("/login");
-      toast.warning("⚠️ Please login to add items!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      return;
-    }
+  const increaseQuantity = async (productId) => {
+    console.log('productId: ', productId);
+    // if (!isAuthenticated) {
+    //   navigate("/login");
+    //   toast.warning("⚠️ Please login to add items!", {
+    //     position: "top-right",
+    //     autoClose: 3000,
+    //   });
+    //   return;
+    // }
 
     let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
 
@@ -104,7 +98,7 @@ const AddtoCard = ({ product }) => {
         quantity: 1,
       };
       // ==========================
-      // Add Item API
+      // Add Item  POST API
       // ========================
       try {
         const itemsArray = [];
@@ -118,10 +112,7 @@ const AddtoCard = ({ product }) => {
             });
           });
         });
-        const totalPrice = itemsArray?.reduce((total, product) => {
-          return total + Number(product?.productDetails?.price);
-        }, 0);
-        // console.log("totalPrice: ", totalPrice);
+
         const payload = itemsArray?.map((product) => ({
           uid,
           product_id: product?.id,
@@ -130,15 +121,15 @@ const AddtoCard = ({ product }) => {
           product_quantity: product?.quantity,
           product_weight: product?.weight,
         }));
-        console.log('itemsArray: ', payload);
-        // const response = await postData("addtocart", payload);
-        // console.log("response: ", response);
+        const AddToCartData = payload?.find(
+          (product) =>
+             product?.product_id == productId && product?.product_weight == selectedWeight
+        );
+        const response = await postData("addtocart", AddToCartData);
+        console.log("response: ", response);
       } catch (error) {
         console.log("error: ", error);
       }
-
-      // =================
-      // =================
 
       toast.success(`${product.name} added to cart!`, {
         position: "top-right",
@@ -146,6 +137,44 @@ const AddtoCard = ({ product }) => {
       });
     } else {
       storedCart[product.id][selectedWeight].quantity += 1;
+
+      // ==========================
+      // Update Item Quantity Put API
+      // ========================
+      try {
+        const itemsArray = [];
+        Object.keys(storedCart).forEach((productId) => {
+          Object.keys(storedCart[productId]).forEach((weight) => {
+            itemsArray.push({
+              id: productId,
+              weight,
+              quantity: storedCart[productId][weight].quantity,
+              productDetails: storedCart[productId][weight].productDetails,
+            });
+          });
+        });
+
+        const payload = itemsArray?.map((product) => ({
+          uid,
+          product_id: product?.id,
+          product_name: product?.productDetails?.name,
+          product_price: product?.productDetails?.price,
+          product_quantity: product?.quantity,
+          product_weight: product?.weight,
+        }));
+
+        const UpdateData = payload?.find(
+          (product) => product?.product_id == productId && product?.product_weight == selectedWeight
+        );
+        const response = await postData(
+          "updateCart",
+          // UpdateData?.product_id,
+          UpdateData
+        );
+        console.log("response: ", response);
+      } catch (error) {
+        console.log("error: ", error);
+      }
       toast.info(`Increased quantity of ${product.name}`, {
         position: "top-right",
         autoClose: 2000,
@@ -163,7 +192,7 @@ const AddtoCard = ({ product }) => {
   };
 
   // Remove from Cart
-  const decreaseQuantity = () => {
+  const decreaseQuantity = async (productId) => {
     let storedCart = JSON.parse(sessionStorage.getItem(`cart_${uid}`)) || {};
 
     if (
@@ -172,6 +201,47 @@ const AddtoCard = ({ product }) => {
     ) {
       storedCart[product.id][selectedWeight].quantity -= 1;
       toast.info(`Decreased quantity of ${product.name}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      // ==========================
+      // Decrease Item Quantity  API
+      // ========================
+      try {
+        const itemsArray = [];
+        Object.keys(storedCart).forEach((productId) => {
+          Object.keys(storedCart[productId]).forEach((weight) => {
+            itemsArray.push({
+              id: productId,
+              weight,
+              quantity: storedCart[productId][weight].quantity,
+              productDetails: storedCart[productId][weight].productDetails,
+            });
+          });
+        });
+
+        const payload = itemsArray?.map((product) => ({
+          uid,
+          product_id: product?.id,
+          product_name: product?.productDetails?.name,
+          product_price: product?.productDetails?.price,
+          product_quantity: product?.quantity,
+          product_weight: product?.weight,
+        }));
+
+        const UpdateData = payload?.find(
+          (product) => product?.product_id == productId && product?.product_weight == selectedWeight
+        );
+        const response = await postData(
+          "updateCart",
+          // UpdateData?.product_id,
+          UpdateData
+        );
+        console.log("response: ", response);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+      toast.info(`Increased quantity of ${product.name}`, {
         position: "top-right",
         autoClose: 2000,
       });
@@ -186,6 +256,18 @@ const AddtoCard = ({ product }) => {
         autoClose: 2000,
       });
       setIsAdded(false);
+      try {
+        const payload = {
+          uid,
+          product_id: productId,
+        };
+        const response = await deleteProductAPI(
+          "removecart",
+          productId,
+          payload
+        );
+        console.log("response: ", response);
+      } catch (error) {}
     }
 
     sessionStorage.setItem(`cart_${uid}`, JSON.stringify(storedCart));
@@ -229,7 +311,8 @@ const AddtoCard = ({ product }) => {
             {/* Icons (Heart & Share) */}
             <div className="heart" onClick={() => AddToWishList(product)}>
               {!WishListItems?.some(
-                (item) => item?.id === product?.product_id || product?.id
+                (item) => Number(item?.product_id) === Number(product?.id) ||Number(product?.product_id)
+                
               ) ? (
                 <FaRegHeart className="text-color-terracotta" />
               ) : (
@@ -277,7 +360,7 @@ const AddtoCard = ({ product }) => {
             </div>
             <div>
               <img
-                src={product.image}
+                src={product.image || product?.product_image}
                 alt="Loading"
                 className="img-fluid"
                 style={{ cursor: "pointer" }}
@@ -338,7 +421,7 @@ const AddtoCard = ({ product }) => {
               </button> */}
               <button
                 className="background-color-terracotta button-addtocard inter-font-family-500 font-size-16"
-                onClick={increaseQuantity}
+                onClick={() => increaseQuantity(product?.product_id || product.id )}
               >
                 Add
               </button>
@@ -349,7 +432,7 @@ const AddtoCard = ({ product }) => {
                 <div>
                   <button
                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                    onClick={decreaseQuantity}
+                    onClick={() => decreaseQuantity(product?.product_id || product.id )}
                   >
                     -
                   </button>
@@ -360,7 +443,7 @@ const AddtoCard = ({ product }) => {
                 <div>
                   <button
                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                    onClick={increaseQuantity}
+                    onClick={() => increaseQuantity(product?.product_id || product.id )}
                   >
                     +
                   </button>

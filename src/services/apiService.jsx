@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const API_BASE_URL = "https://4f0d-2401-4900-8822-8a8-b920-166f-7e25-7131.ngrok-free.app/rajlaxmi"; // Replace with your actual base URL
+
+export const API_BASE_URL =
+  "https://7839-106-222-215-159.ngrok-free.app/rajlaxmi"; // Replace with your actual base URL
 
 // 🔹 GET: Fetch data from a dynamic endpoint
 export const getData = async (endpoint) => {
@@ -37,6 +39,33 @@ export const deleteData = async (endpoint, id) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}/${endpoint}/${id}`);
     return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+};
+
+// 🔹 DELETE: Remove data from a dynamic endpoint
+export const deleteProductAPI = async (endpoint, id, data) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/${endpoint}/${id}`, {
+      data: data, // Pass the data as a property of an object
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+};
+
+// 🔹 GET: Fetch data for all wishlist 
+export const getWishListData = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/getAllWishlist`,{
+      headers: {
+        "ngrok-skip-browser-warning": "69420",
+      },
+    });
+    return response.data?.wishlist;
+
   } catch (error) {
     throw error.response?.data || error.message;
   }

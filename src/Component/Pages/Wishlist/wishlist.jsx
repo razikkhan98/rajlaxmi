@@ -18,28 +18,38 @@ const WishList = () => {
   // useState for Add to Cart Button
   const { WishListItems, setWishListItems } = useContext(CartContext);
 
-  const [getWishData, setgetWishData] = useState([])
-
   // Functions
   const FetchWishListData = async () => {
-    // const response = await getData("getAllWishlist");
-    const response = await axios.get(
-      "https://bd1f-2401-4900-8822-8a8-2003-e26b-42cc-f05.ngrok-free.app/rajlaxmi/getAllWishlist",
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "69420",
-        },
-      }
-    );
-    const transformedProducts = response?.data?.wishlist?.map(product => ({
-      id: product?.id,
-      name: product?.product_name, 
-      price: product?.product_price, 
-      qty: `${product?.product_quantity} gm`,
-      image: product?.product_image, 
-    }));
-    setgetWishData(transformedProducts);
+    try {
+      // const response = await getData("getAllWishlist");
+      const response = await axios.get(
+        "https://7839-106-222-215-159.ngrok-free.app/rajlaxmi/getAllWishlist",
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        }
+      );
+      const transformedProducts = response?.data?.wishlist?.map((product) => ({
+        id: product?.id,
+        name: product?.product_name,
+        price: product?.product_price,
+        qty: `${product?.product_quantity} gm`,
+        image: product?.product_image,
+      }));
+      setWishListItems(response?.data?.wishlist);
+    } catch (error) {}
   };
+
+  const transformedArray = WishListItems?.map((obj) => ({
+    backId: obj?.id,
+    uid: obj?.uid,
+    name: obj?.product_name,
+    price: obj?.product_price,
+    quantity: obj?.product_quantity,
+    id: obj?.product_id,
+    image: obj?.product_image,
+  }));
 
   // get Wishlist Data
   useEffect(() => {
@@ -51,20 +61,12 @@ const WishList = () => {
       <section>
         <div className="bg-custom-gradient-product">
           <Navbar />
-          {/* <div className="d-flex justify-content-center py-5">
-            <div className="px-3">
-              <SortDropdown />
-            </div>
-            <div className="px-3">
-              <FilterDropDown />
-            </div>
-          </div> */}
         </div>
         <div className="background-color-light-grayish-yellow padding-bottom-60">
           <div className="container">
-            {getWishData?.length > 0 ? (
+            {WishListItems?.length > 0 ? (
               <div className="row">
-                {getWishData?.map((product, index) => (
+                {transformedArray?.map((product, index) => (
                   <>
                     <div key={index} className="col-md-3 col-sm-12  py-3">
                       <AddtoCard key={product.id} product={product} />

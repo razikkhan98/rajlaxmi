@@ -22,39 +22,12 @@ import TermsAndConditionsPolicy from "./Component/Pages/TermsAndConditionsPolicy
 import Forgot from "./Component/Common/Auth/ForgotPass/forgot.jsx";
 import Error from "./Component/Pages/Error/error.jsx";
 import TrackOrder from "./Component/Pages/TrackOrder/trackorder.jsx";
-import { useContext, useEffect } from "react";
-import axios from "axios";
-import { CartContext } from "./Component/Context/UserContext.jsx";
+import Faq from "./Component/Pages/Faq/faq.jsx";
+
 
 function App() {
-  //   const { WishListItems,setWishListItems } = useContext(CartContext);
-  // const FectchAPIs = async () => {
-  //   try {
-  //     const responseWish = await axios.get(
-  //       "https://bd1f-2401-4900-8822-8a8-2003-e26b-42cc-f05.ngrok-free.app/rajlaxmi/getAllWishlist",
-  //       {
-  //         headers: {
-  //           "ngrok-skip-browser-warning": "69420",
-  //         },
-  //       }
-  //     );
-  //     console.log('responseWish?.data?.wishlist: ', responseWish?.data?.wishlist);
-  //     const transformedProducts = responseWish?.data?.wishlist?.map(product => ({
-  //       id: product?.id,
-  //       name: product?.product_name, 
-  //       price: product?.product_price, 
-  //       qty: `${product?.product_quantity} gm`,
-  //       image: product?.product_image, 
-  //     }));
-  //     // setgetWishData(transformedProducts);
-  //     setWishListItems(transformedProducts);
-  //   } catch (error) {}
-  // };
 
-  // useEffect(() => {
-  //   FectchAPIs()
-  // }, [])
-  // console.log(WishListItems)
+
   
 
   return (
@@ -86,7 +59,7 @@ function App() {
           />
           <Route path="/error" element={<Error />} />
           <Route path="/track" element={<TrackOrder />} />
-
+          <Route path="/faq" element={<Faq />} />
 
         </Routes>
       </Router>
