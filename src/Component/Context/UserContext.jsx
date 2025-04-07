@@ -63,8 +63,13 @@
 //   );
 // };
 
-import React, { createContext, useState } from "react";
-import { API_BASE_URL, deleteData, postData } from "../../services/apiService";
+import React, { createContext, useEffect, useState } from "react";
+import {
+  API_BASE_URL,
+  deleteData,
+  getWishListData,
+  postData,
+} from "../../services/apiService";
 import { Bounce, toast } from "react-toastify";
 import axios from "axios";
 
@@ -74,7 +79,7 @@ export const CartContext = createContext();
 // Provider Component
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]); // Cart state
-  const [WishListItems, setWishListItems] = useState([]); // Wishlist state
+  const [WishListItems, setWishListItems] = useState(); // Wishlist state
   const [uid, setuid] = useState([]); // User Id
   const getUid = sessionStorage.getItem("uid");
 
@@ -134,10 +139,10 @@ export const CartProvider = ({ children }) => {
       product_image: product?.image,
       product_id: product?.id,
       product_price: product?.price,
-      product_quantity: product?.qty,
+      product_quantity: 1,
     };
-    const isProductInWishList = WishListItems.some(
-      (item) => item?.id === product?.id
+    const isProductInWishList = WishListItems?.some(
+      (item) => Number(item?.product_id) === Number(product?.id)
     );
     try {
       if (isProductInWishList) {
@@ -185,14 +190,14 @@ export const CartProvider = ({ children }) => {
         });
       }
       const responseWish = await axios.get(
-        "https://bd1f-2401-4900-8822-8a8-2003-e26b-42cc-f05.ngrok-free.app/rajlaxmi/getAllWishlist",
+        "https://7839-106-222-215-159.ngrok-free.app/rajlaxmi/getAllWishlist",
         {
           headers: {
             "ngrok-skip-browser-warning": "69420",
           },
         }
       );
-      setWishListItems((prev)=>[...prev,responseWish?.data?.wishlist]);
+      setWishListItems(responseWish?.data?.wishlist);
     } catch (error) {
       toast.error(error?.message, {
         position: "top-right",
@@ -207,6 +212,20 @@ export const CartProvider = ({ children }) => {
       });
     }
   };
+
+  const FetchWishData = async () => {
+    try {
+      const resp = await getWishListData();
+      setWishListItems(resp);
+    } catch (error) {}
+  };
+
+  // ===========
+  // useeffect
+  // =========
+  useEffect(() => {
+    FetchWishData();
+  }, []);
 
   return (
     <CartContext.Provider
