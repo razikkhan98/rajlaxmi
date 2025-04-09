@@ -113,8 +113,14 @@ const Resignation = () => {
                         Mobile Number
                       </label>
                       <input
-                        type="tel"
-                        {...register("mobileNumber", { required: "Mobile number is required" })}
+                        type="number"
+                        {...register("mobileNumber", {
+                          required: "Mobile number is required",
+                          pattern: {
+                            value: /^\d{10}$/, // Regex pattern to allow exactly 10 digits
+                            message: "Please enter a valid 10-digit mobile number" // Custom error message
+                          }
+                        })}
                         className="input-style"
                       />
                       {errors.mobileNumber && <p className="text-danger">{errors.mobileNumber.message}</p>}

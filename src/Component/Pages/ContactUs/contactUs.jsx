@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
+
+// Import Common Components
 import Navbar from "../../Common/Navbar";
 import Footer from "../../Common/Footer";
+import { postData } from "../../../services/apiService";
 
 // images
 import Email from "../../Assets/img/ourProducts/EnvelopeSimple.svg";
@@ -11,8 +14,9 @@ import instagram from "../../Assets/img/Contact/icons8-instagram.svg";
 import linkedin from "../../Assets/img/Contact/icons8-linkedin.svg";
 import youtube from "../../Assets/img/Contact/icons8-youtube.svg";
 import inlarge from "../../Assets/img/Contact/inlarge.svg";
-import { postData } from "../../../services/apiService";
 
+// Import Third Party Components
+import { toast } from "react-toastify";
 const ContactUs = () => {
   let uid = sessionStorage.getItem("uid");
   // State
@@ -45,6 +49,8 @@ const ContactUs = () => {
         title: formData?.message,
       };
       const response = await postData("contact", payload);
+      console.log('response: ', response);
+      toast.success(response?.message);
       setFormData({
         name: "",
         email: "",
@@ -53,6 +59,7 @@ const ContactUs = () => {
       })
     } catch (error) {
       console.log("error: ", error);
+      toast.error(error.message);
     }
   };
 

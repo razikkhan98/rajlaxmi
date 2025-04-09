@@ -25,6 +25,7 @@ import { FetchRatingDataAPI, postData } from "../../../services/apiService";
 import { toast } from "react-toastify";
 import RecommendNavSearchCard from "../../Common/AutoSuggestModalCards/RecomendNavSearchCard";
 import Product1 from "../../Assets/img/ProductDescription/Rectangle 55.png";
+import AddToCartProccess from "../../Common/AddToCartProccess/AddToCartProccess";
 
 // json
 const ProductCardData = [
@@ -231,7 +232,7 @@ const ProductDescription = () => {
   const smallImages = [productSmall1, productSmall2, productSmall3];
   const { AddToWishList, WishListItems } = useContext(CartContext);
 
-
+ const [showModal, setShowModal] = useState(false);
 
   const GetproductUrlId = location.state?.product;
   let uid = sessionStorage.getItem("uid");
@@ -333,7 +334,8 @@ const ProductDescription = () => {
     }
   };
 
-
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
   return (
     <>
@@ -520,9 +522,11 @@ const ProductDescription = () => {
               </div>
               {/*----- Buttons------- */}
               <div className="d-inline-block d-md-flex mb-3 procced-btn">
-                <button className="btn-buy-now inter-font-family-500">
+               <NavLink to="">
+               <button   onClick={() => handleShow()} className="btn-buy-now inter-font-family-500">
                   Buy Now
                 </button>
+               </NavLink>
                 <button
                   onClick={() => HandleAddToCart()}
                   className={`btn-add-to-cart inter-font-family-500 mt-3 mt-md-0 ${!isAlreadyAdd ? "":"btn btn-outline-secondary "}`}
@@ -568,6 +572,8 @@ const ProductDescription = () => {
         {/*------------ Product detail End----------- */}
         <Footer />
       </section>
+
+      <AddToCartProccess showModal={showModal} handleClose={handleClose} />
     </>
   );
 };
