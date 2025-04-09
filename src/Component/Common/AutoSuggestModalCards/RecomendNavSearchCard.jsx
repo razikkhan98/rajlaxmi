@@ -277,20 +277,20 @@ const RecommendNavSearchCard = ({ product }) => {
 
   return (
     <React.Fragment>
-      <div className="d-flex overflow-auto me-4">
+      <div className="d-flex me-4">
         <div className="col-lg-2 mx-2">
           <div className="product-recommedation-cards  nav-Recommend-card background-color-white my-2 pb-0">
             {/* <div className="d-flex  justify-content-center pt-2"> */}
             <div className="d-flex justify-content-center pt-2">
               {/* Product Image & Qty Selector */}
-              <img src={product.image} alt="Loading" className="img-fluid" />
+              <img src={product?.image} alt="Loading" className="img-fluid" />
             </div>
             <div className="pt-2 pb-1 d-flex flex-column">
               <span className="font-size-14 inter-font-family-600 text-color-dark-grayish-blue ms-2">
-                {product.name}
+                {product?.name}
               </span>
               <span className="inter-font-family-400 product-qty font-size-14 ms-2 my-1">
-                ({product.qty})
+                ({product?.qty})
               </span>
             </div>
             {/* </div> */}
@@ -301,7 +301,7 @@ const RecommendNavSearchCard = ({ product }) => {
               <div className="ms-2 d-flex align-items-center">
                 <MdCurrencyRupee className="" />
                 <span className="inter-font-family-500 font-size-14 text-color-black">
-                  {product.price}
+                  {product?.price}
                 </span>
               </div>
 
@@ -314,7 +314,7 @@ const RecommendNavSearchCard = ({ product }) => {
                     onClick={() => {
                       setIsAdded(true);
                       setQuantity(1); // Set initial quantity to 1
-                      increaseQuantity(product.id);
+                      increaseQuantity(product?.id);
                     }}
                   >
                     Add
@@ -326,7 +326,7 @@ const RecommendNavSearchCard = ({ product }) => {
                     <div>
                       <button
                         className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                        onClick={() => decreaseQuantity(product.id)}
+                        onClick={() => decreaseQuantity(product?.id)}
                       >
                         -
                       </button>
@@ -337,7 +337,7 @@ const RecommendNavSearchCard = ({ product }) => {
                     <div>
                       <button
                         className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                        onClick={() => increaseQuantity(product.id)}
+                        onClick={() => increaseQuantity(product?.id)}
                       >
                         +
                       </button>

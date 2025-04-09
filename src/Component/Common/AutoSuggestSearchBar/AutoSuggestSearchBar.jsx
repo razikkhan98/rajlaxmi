@@ -195,7 +195,7 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
             <h3 className="font-size-24 josefin-sans-font-family-600 text-color-dark-grayish-blue mt-3 ms-4">
               Recommendations For you
             </h3>
-            <div className="d-flex  ms-3">
+            <div className="d-flex  overflow-auto ms-3">
               {/* <span> */}
               {BestSellers?.map((i) => 
                 <RecommendNavSearchCard  product={i} />

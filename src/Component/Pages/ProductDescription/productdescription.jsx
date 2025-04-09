@@ -21,8 +21,50 @@ import { NavLink } from "react-router-dom";
 import { CartContext } from "../../Context/UserContext";
 import { renderStars } from "../../Common/RatingFunctionality/RatingFunctionality";
 import axios from "axios";
-import { postData } from "../../../services/apiService";
+import { FetchRatingDataAPI, postData } from "../../../services/apiService";
 import { toast } from "react-toastify";
+import RecommendNavSearchCard from "../../Common/AutoSuggestModalCards/RecomendNavSearchCard";
+import Product1 from "../../Assets/img/ProductDescription/Rectangle 55.png";
+
+// json
+const ProductCardData = [
+  {
+    id: 1,
+    name: "Organic Kabuli Chana",
+    price: "180.00",
+    qty: "500 gm",
+    image: Product1,
+    rating: 3.5,
+    reviews: 312,
+  },
+  {
+    id: 2,
+    name: "Soyabean Chunk Small Size",
+    price: "58.00",
+    qty: "500 gm",
+    image: Product1,
+    rating: 4.0,
+    reviews: 210,
+  },
+  {
+    id: 3,
+    name: "Organic Jaggery Powder",
+    price: "54.00",
+    qty: "500 gm",
+    image: Product1,
+    rating: 5,
+    reviews: 210,
+  },
+  {
+    id: 4,
+    name: "Hing Powder",
+    price: "1200.00",
+    qty: "500 gm",
+    image: Product1,
+    rating: 5,
+    reviews: 210,
+  },
+];
 
 const Tab = ({ label, isActive, onClick, className }) => {
   return (
@@ -83,24 +125,57 @@ const BenefitsCards = () => {
 const CustomerReviews = () => {
   const location = useLocation();
   const product = location.state?.product;
+  // Rating States
+const [reviews, setReviews] = useState([]); 
+const [averageRating, setAverageRating] = useState(0);
+const [totalReviews, setTotalReviews] = useState(0);
+const [ratingsBreakdown, setRatingsBreakdown] = useState({
+  5: 0,
+  4: 0,
+  3: 0,
+  2: 0,
+  1: 0,
+});
+
+  // ==========
+  // Fetch rating 
+  // ===========
+  const FetchRating = async () => {
+    try {
+      const response = await FetchRatingDataAPI(product?.id)
+      console.log('response: ', response);
+      // setFetchRatingData(response);
+      setAverageRating(response?.averageRating || 0);
+      setTotalReviews(response?.totalReviews || 0);
+      setRatingsBreakdown(
+        response?.ratingsBreakdown || { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
+      );
+      setReviews(response?.reviews || []);
+
+      setReviews(response?.reviews);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    FetchRating();
+  }, []);
   return (
     <div className="customer-review ms-3">
       {[5, 4, 3, 2, 1]?.map((rating) => (
         <div className="row rating-text inter-font-family-500 pb-2">
-          <div className="col-2 col-sm-3 start-gleeful px-0">
+          <div className="col-4 col-md-2 col-lg-2 start-gleeful px-0">
             {renderStars(product?.id, rating, product)}
           </div>
-          <div className="col-3 col-sm-3 progress prog px-0">
+          <div className="col-3 progress prog px-0">
             <div
               class="progress-bar prog-bar"
               role="progressbar"
-              style={{ width: "25%" }}
+              style={{ width: `${ratingsBreakdown[rating]}%` }}
               aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="100"
             ></div>
           </div>
-          <div className="col-7 col-sm-4 inter-font-family-500 font-size-12  font-sm-8 text-color-gleeful  text-decoration-underline">
+          <div className="col-4 col-lg-7 col-md-7 inter-font-family-500 font-size-12  font-sm-8 text-color-gleeful  text-decoration-underline">
             {product?.rating} ({product?.reviews} Reviews)
           </div>
         </div>
@@ -155,6 +230,8 @@ const ProductDescription = () => {
   // const smallImages = [product.image, product.smallImage1, product.smallImage2, product.smallImage3];
   const smallImages = [productSmall1, productSmall2, productSmall3];
   const { AddToWishList, WishListItems } = useContext(CartContext);
+
+
 
   const GetproductUrlId = location.state?.product;
   let uid = sessionStorage.getItem("uid");
@@ -256,23 +333,7 @@ const ProductDescription = () => {
     }
   };
 
-  const FetchRating = async () => {
-    try {
-      const response = await axios.get(
-        `https://7839-106-222-215-159.ngrok-free.app/rajlaxmi/getAllFeedback/${GetproductUrlId?.id}`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
-      );
-      console.log("response: ", response?.data?.review);
-      setFetchRatingData();
-    } catch (error) {}
-  };
-  useEffect(() => {
-    FetchRating();
-  }, []);
+
 
   return (
     <>
@@ -480,7 +541,12 @@ const ProductDescription = () => {
             <p className="font-size-24 josefin-sans-font-family-600 text-color-dark-grayish-blue text-lg-start text-center">
               Recommendations For you
             </p>
-            <ProductCard />
+            {/* <ProductCard /> */}
+            <div className="d-flex  overflow-auto">
+            {ProductCardData?.map((i)=>
+            <RecommendNavSearchCard product={i}/>
+            )}
+            </div>
           </div>
         </div>
         <div className="row d-flex justify-content-center align-items-center padding-top-100 position-relative">

@@ -11,7 +11,7 @@ import AddtoCard from "../../Common/Addtocard";
 import Footer from "../../Common/Footer";
 
 import { CartContext } from "../../Context/UserContext";
-import { getData } from "../../../services/apiService";
+import { getData, getWishListData } from "../../../services/apiService";
 import axios from "axios";
 
 const WishList = () => {
@@ -21,23 +21,16 @@ const WishList = () => {
   // Functions
   const FetchWishListData = async () => {
     try {
-      // const response = await getData("getAllWishlist");
-      const response = await axios.get(
-        "https://7839-106-222-215-159.ngrok-free.app/rajlaxmi/getAllWishlist",
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
-      );
-      const transformedProducts = response?.data?.wishlist?.map((product) => ({
+      const response = await getWishListData();
+  
+      const transformedProducts = response?.map((product) => ({
         id: product?.id,
         name: product?.product_name,
         price: product?.product_price,
         qty: `${product?.product_quantity} gm`,
         image: product?.product_image,
       }));
-      setWishListItems(response?.data?.wishlist);
+      setWishListItems(response);
     } catch (error) {}
   };
 
@@ -68,7 +61,7 @@ const WishList = () => {
               <div className="row">
                 {transformedArray?.map((product, index) => (
                   <>
-                    <div key={index} className="col-md-3 col-sm-12  py-3">
+                    <div key={index} className="col-md-5 col-lg-3 col-sm-12  py-3">
                       <AddtoCard key={product.id} product={product} />
                     </div>
                   </>

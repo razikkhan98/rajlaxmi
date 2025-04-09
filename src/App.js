@@ -23,11 +23,16 @@ import Forgot from "./Component/Common/Auth/ForgotPass/forgot.jsx";
 import Error from "./Component/Pages/Error/error.jsx";
 import TrackOrder from "./Component/Pages/TrackOrder/trackorder.jsx";
 import Faq from "./Component/Pages/Faq/faq.jsx";
+import { useEffect } from "react";
+import {GetAllProductsAPI} from '../src/Component/Assets/Json/AllProducts.jsx'
 
 
 function App() {
 
 
+  useEffect(() => {
+    GetAllProductsAPI()
+  }, [])
   
 
   return (

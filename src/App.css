@@ -465,7 +465,7 @@ Forgot Password
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   /* Optional shadow effect */
   transition: all 0.5s;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .nav-text:hover {
@@ -958,6 +958,10 @@ Forgot Password
   width: 257px;
   height: 54px;
   font-size: 20px;
+}
+
+.explore-link-tag{
+  width: fit-content;
 }
 
 .circle-cut {
@@ -1623,6 +1627,9 @@ Forgot Password
   .payment-process-card-height {
     height: 30vh;
   }
+  .feedback-inp-tag{
+    width: 100% !important;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -1716,6 +1723,9 @@ Forgot Password
 
   .AddToCartModal-body {
     overflow-y: auto !important;
+  }
+  .feedback-inp-tag{
+    width: 75% !important;
   }
 }
 
@@ -2280,6 +2290,9 @@ Forgot Password
 .feedback-text {
   color: #2f3e46;
   font-weight: 400;
+}
+.feedback-inp-tag{
+  width: 25%;
 }
 
 /* ===================== Auto Suggest Search Bar Start ====================== */

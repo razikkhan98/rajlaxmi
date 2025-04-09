@@ -49,8 +49,8 @@ const Feedback = () => {
             <span className="text-dark">Submit Feedback</span>
           </div>
         </div>
-        <div className="background-color-light-grayish-yellow py-3">
-          <div className="container">
+        <div className="background-color-light-grayish-yellow py-3 pb-5">
+          <div className="container pb-5 mb-5">
             <p className="font-size-32 feedback-heading josefin-sans-font-family padding-top-100">
               Rate Us
             </p>
@@ -68,7 +68,7 @@ const Feedback = () => {
             </div>
             <hr />
 
-            <form onSubmit={handleSubmit(onSubmit)} className="feedback-bg-img">
+            <form onSubmit={handleSubmit(onSubmit)} className="feedback-bg-img ">
               <div className="mt-4">
                 <label className="inter-font-family-500 font-size-12 product-qty d-block">
                   Title for your review
@@ -79,7 +79,7 @@ const Feedback = () => {
                   {...register("title", {
                     required: "Title is required",
                   })}
-                  className="feedback-input border-0 rounded-3 pb-3 pt-2 mt-1 px-3 w-25"
+                  className="feedback-input border-0 rounded-3 pb-3 pt-2 mt-1 px-3 feedback-inp-tag"
                 />
                 {errors.title && (
                   <p className="text-danger">{errors.title.message}</p>
@@ -94,7 +94,7 @@ const Feedback = () => {
                   Your Review
                 </label>
                 <textarea
-                  class="feedback-input border-0 rounded-3 p-2 w-25 mt-1"
+                  class="feedback-input border-0 rounded-3 p-2 mt-1 feedback-inp-tag"
                   placeholder="Enter your comment here"
                   id="exampleFormControlTextarea1"
                   rows="5"
@@ -119,7 +119,7 @@ const Feedback = () => {
                   {...register("firstName", {
                     required: "First name is required",
                   })}
-                  className="feedback-input border-0 rounded-3 pb-3 pt-2 mt-1 px-3 w-25"
+                  className="feedback-input border-0 rounded-3 pb-3 pt-2 mt-1 px-3 feedback-inp-tag"
                 />
                 {errors.firstName && (
                   <p className="text-danger">{errors.firstName.message}</p>
@@ -135,13 +135,13 @@ const Feedback = () => {
                   {...register("email", {
                     required: "First name is required",
                   })}
-                  className="feedback-input border-0 rounded-3 pb-3 pt-2 mt-1 px-3 w-25"
+                  className="feedback-input border-0 rounded-3 pb-3 pt-2 mt-1 px-3 feedback-inp-tag"
                 />
                 {errors.email && (
                   <p className="text-danger">{errors.email.message}</p>
                 )}
               </div>
-              <div>
+              <div className="pb-5">
                 <button
                   type="submit"
                   className="background-color-terracotta w-25 mt-5 text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0"
