@@ -32,28 +32,43 @@ const Login = () => {
     try {
       const response = await postData(userEndpoint, data);
 
-      if (response?.uid) {
-        setuid(response.uid);
-        sessionStorage.setItem("uid", response.uid);
-      }
+      if (response?.success) {
+        if (response?.uid) {
+          setuid(response.uid);
+          sessionStorage.setItem("uid", response.uid);
+        }
 
-      if (response?.token) {
-        sessionStorage.setItem("token", response.token);
-      }
+        if (response?.token) {
+          sessionStorage.setItem("token", response.token);
+        }
 
-      // store data in session for  later use
-      toast.success("Login successful!", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      setTimeout(() => navigate("/"), 1000);
+        // store data in session for  later use
+        toast.success("Login successful!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        setTimeout(() => navigate("/"), 1000);
+      }
+      else{
+        toast.error(response?.message || "Login failed!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });     
+      }
     } catch (error) {
       toast.error(error?.message || "Login failed!", {
         position: "top-right",
@@ -130,18 +145,31 @@ const Login = () => {
                         </p>
                       )}
 
-                     <div className="d-flex justify-content-between">
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                          <label class="form-check-label inter-font-family-400 font-size-12  text-color-terracotta text-end" for="flexCheckDefault">
+                      <div className="d-flex justify-content-between">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                          />
+                          <label
+                            class="form-check-label inter-font-family-400 font-size-12  text-color-terracotta text-end"
+                            for="flexCheckDefault"
+                          >
                             Remember me
                           </label>
-                      </div>
+                        </div>
 
-                      <NavLink to={"/forgot"} className="text-decoration-none">
-                        <p className="inter-font-family-400 font-size-12  text-color-terracotta mt-1">Forgot Password?</p>
-                      </NavLink>
-                     </div>
+                        <NavLink
+                          to={"/forgot"}
+                          className="text-decoration-none"
+                        >
+                          <p className="inter-font-family-400 font-size-12  text-color-terracotta mt-1">
+                            Forgot Password?
+                          </p>
+                        </NavLink>
+                      </div>
                     </div>
                     {/* Submit Button */}
                     <div className="py-3">
