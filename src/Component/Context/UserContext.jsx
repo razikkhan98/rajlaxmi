@@ -189,15 +189,9 @@ export const CartProvider = ({ children }) => {
           transition: Bounce,
         });
       }
-      const responseWish = await axios.get(
-        "https://7839-106-222-215-159.ngrok-free.app/rajlaxmi/getAllWishlist",
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
-      );
-      setWishListItems(responseWish?.data?.wishlist);
+      
+      const responseWish = await getWishListData()
+      setWishListItems(responseWish);
     } catch (error) {
       toast.error(error?.message, {
         position: "top-right",

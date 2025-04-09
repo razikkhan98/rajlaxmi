@@ -15,6 +15,7 @@ import second from "../../Assets/img/ourProducts/expl.png";
 import slid from "../../Assets/img/ProductDescription/image 10.png";
 import { Carousel } from "react-bootstrap";
 import { postData } from "../../../services/apiService";
+import { NavLink } from "react-router-dom";
 
 const CardData = [
   {
@@ -170,12 +171,15 @@ const OurProducts = () => {
                 felis, nisi viverra nisl. quis placerat.
               </div>
               <div className="py-4">
+                <NavLink className="explore-link-tag d-block text-decoration-none" to={"/products"}>
                 <button className="background-color-terracotta explore-button d-flex align-items-center inter-font-family-500 rounded-pill text-color-white py-2 px-4 border-0">
                   Explore Product
                   <span className="d-flex">
                     <img className="ms-2" src={threerightarrow} alt="Loading" />
                   </span>
                 </button>
+                </NavLink>
+                  
               </div>
             </div>
             {CardData.map((item, index) => (
