@@ -5,15 +5,18 @@ import rightTick from "../../Assets/img/ourProducts/rightTick.svg";
 import trash from "../../Assets/img/ourProducts/TrashSimple.svg";
 import cross from "../../Assets/img/Product/cross.svg";
 import { Modal } from "react-bootstrap";
-import { CartContext } from "../../Context/UserContext";
+// import { CartContext } from "../../Context/UserContext";
 import CardEmpty from "../../Assets/img/Product/cart.png";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { postData } from "../../../services/apiService";
+import { useLocation, useNavigate } from "react-router-dom";
+
+
 const AddToCartProccess = ({ showModal, handleClose }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors }, } = useForm();
   // const {  clearCart } = useContext(CartContext);
 
   const [cartItems, setCartItems] = useState([]);
@@ -25,6 +28,9 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
   const [Paymode, setPaymode] = useState(false);
   const [mobView, setmobView] = useState(false);
 
+
+  const location = useLocation();
+  const navigate = useNavigate();
   // Functions
   const handleTapSteps = async () => {
     setStep(step + 1);
@@ -163,7 +169,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
       if (step >= 2) {
         return setPaymode(!Paymode);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   // Payment API
   const onSubmit = async (data) => {
@@ -187,7 +193,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
       if (response?.status === 200 || response?.status === 201) {
         window?.open(response?.url);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -356,13 +362,16 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       ))}
                     </div>
                     <div className="d-flex justify-content-between mt-5">
-                      <Link to="/products">
-                        <button
-                          className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}
-                        >
-                          Add more item
-                        </button>
-                      </Link>
+                      {/* <Link to="/products"> */}
+                      <button
+                        onClick={() => {
+                          location.pathname === "/products" ? handleClose() : navigate("/products");
+                        }}
+                        className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}
+                      >
+                        Add more item
+                      </button>
+                      {/* </Link> */}
 
                       <button
                         onClick={() => {
@@ -436,8 +445,15 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("fullName")}
+                            {...register("fullName",
+                              { required: "Full Name is required", })
+                            }
                           />
+                           {errors.fullName && (
+                            <p className="text-danger font-size-12">
+                              {errors.fullName.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-6 address-section-form form-group pt-3">
                           <label
@@ -449,8 +465,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="email"
                             className="form-control"
-                            {...register("email")}
+                            {...register("email", { required: "Email is required", })}
                           />
+                           {errors.email && (
+                            <p className="text-danger font-size-12">
+                              {errors.email.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-6 address-section-form form-group pt-3">
                           <label
@@ -462,8 +483,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("address")}
+                            {...register("address", { required: "Address is required", })}
                           />
+                           {errors.address && (
+                            <p className="text-danger font-size-12">
+                              {errors.address.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-6 address-section-form form-group pt-3">
                           <label
@@ -475,8 +501,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("apartment")}
+                            {...register("apartment", { required: "Apartment is required", })}
                           />
+                           {errors.apartment && (
+                            <p className="text-danger font-size-12">
+                              {errors.apartment.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-4 address-section-form form-group pt-3">
                           <label
@@ -488,8 +519,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("country")}
+                            {...register("country", { required: "Country is required", })}
                           />
+                           {errors.country && (
+                            <p className="text-danger font-size-12">
+                              {errors.country.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-8 address-section-form form-group pt-3">
                           <label
@@ -501,8 +537,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("contactNo")}
+                            {...register("contactNo", { required: "Contact No. is required", })}
                           />
+                           {errors.contactNo && (
+                            <p className="text-danger font-size-12">
+                              {errors.contactNo.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-4 address-section-form form-group pt-3">
                           <label
@@ -514,8 +555,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("state")}
+                            {...register("state", { required: "State is required", })}
                           />
+                           {errors.state && (
+                            <p className="text-danger font-size-12">
+                              {errors.state.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-4 address-section-form form-group pt-3">
                           <label
@@ -527,8 +573,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("city")}
+                            {...register("city", { required: "City is required", })}
                           />
+                          {errors.city && (
+                            <p className="text-danger font-size-12">
+                              {errors.city.message}
+                            </p>
+                          )}
                         </div>
                         <div className="col-lg-4 address-section-form form-group pt-3">
                           <label
@@ -540,8 +591,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("pincode")}
+                            {...register("pincode", { required: "Pincode is required", })}
                           />
+                          {errors.pincode && (
+                            <p className="text-danger font-size-12">
+                              {errors.pincode.message}
+                            </p>
+                          )}
                         </div>
                         {/* <button type="submit" className="btn btn-primary mt-3">Submit</button> */}
                       </form>
