@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import productFullNew from "../../Assets/img/ProductDescription/productFullNew.png";
 import productSmall1 from "../../Assets/img/ProductDescription/productSmall1.png";
 import productSmall2 from "../../Assets/img/ProductDescription/productSmall2.png";
@@ -12,14 +12,20 @@ import Footer from "../../Common/Footer";
 import ProductCard from "../../Common/ProductDescriptionCard/ProductCard";
 import ArrowLight from "../../Assets/img/ProductDescription/arrow-light.png";
 import ArrowDark from "../../Assets/img/ProductDescription/arror-dark.png";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaStarHalfAlt } from "react-icons/fa";
 import { PiShareFatBold } from "react-icons/pi";
 import FillHeart from "../../Assets/img/slickimg/fillheart.svg";
+import { useForm } from "react-hook-form";
+// import { useLocation, useParams } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
 
 import CheckMark from "../../Assets/img/ProductDescription/check-mark_5290058 1.svg";
 import { NavLink } from "react-router-dom";
 import { CartContext } from "../../Context/UserContext";
-import { renderStars } from "../../Common/RatingFunctionality/RatingFunctionality";
+import {
+  renderStars,
+  StarRating,
+} from "../../Common/RatingFunctionality/RatingFunctionality";
 import axios from "axios";
 import { FetchRatingDataAPI, postData } from "../../../services/apiService";
 import { toast } from "react-toastify";
@@ -126,24 +132,24 @@ const CustomerReviews = () => {
   const location = useLocation();
   const product = location.state?.product;
   // Rating States
-const [reviews, setReviews] = useState([]); 
-const [averageRating, setAverageRating] = useState(0);
-const [totalReviews, setTotalReviews] = useState(0);
-const [ratingsBreakdown, setRatingsBreakdown] = useState({
-  5: 0,
-  4: 0,
-  3: 0,
-  2: 0,
-  1: 0,
-});
+  const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+  const [ratingsBreakdown, setRatingsBreakdown] = useState({
+    5: 0,
+    4: 0,
+    3: 0,
+    2: 0,
+    1: 0,
+  });
 
   // ==========
-  // Fetch rating 
+  // Fetch rating
   // ===========
   const FetchRating = async () => {
     try {
-      const response = await FetchRatingDataAPI(product?.id)
-      console.log('response: ', response);
+      const response = await FetchRatingDataAPI(product?.id);
+      console.log("response: ", response);
       // setFetchRatingData(response);
       setAverageRating(response?.averageRating || 0);
       setTotalReviews(response?.totalReviews || 0);
@@ -220,6 +226,13 @@ const TabComponent = () => {
 };
 
 const ProductDescription = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const params = useParams();
   // ============
   // States
   // ==========
@@ -231,10 +244,10 @@ const ProductDescription = () => {
   const smallImages = [productSmall1, productSmall2, productSmall3];
   const { AddToWishList, WishListItems } = useContext(CartContext);
 
-
-
   const GetproductUrlId = location.state?.product;
   let uid = sessionStorage.getItem("uid");
+
+  let UserDetail = JSON?.parse(sessionStorage.getItem("userDetail") || "{}");
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -316,7 +329,7 @@ const ProductDescription = () => {
         product_quantity: 1,
         product_weight: selectedOption,
       };
-      console.log('payload: ', payload);
+      console.log("payload: ", payload);
       // const response = await postData("addtocart", payload);
       // if (response?.message == "Added to cart successfully") {
       //   toast.success(`${GetproductUrlId?.name} added to cart!`, {
@@ -333,7 +346,44 @@ const ProductDescription = () => {
     }
   };
 
+  // Get Rating
+  const [GetRating, setGetRating] = useState();
+  // Feedback submit
+  const onSubmit = async (data) => {
+    if (!GetRating) {
+      toast.error(`Please Rate Product`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
+    }
+    try {
+      const payload = {
+        uid,
+        user_name: UserDetail?.name,
+        user_email: UserDetail?.email,
+        title: data?.title,
+        rating: GetRating,
+        feedback: data?.message,
+        product_id: params?.id,
+      };
+      const response = await postData("feedback", payload);
+      if (response?.success) {
+        toast.success(`${response?.message}`, {
+          position: "top-right",
+          autoClose: 2000,
+        });
+      }
+      reset();
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+  };
 
+  const FilterWish = WishListItems?.filter((check) => check?.uid == uid);
 
   return (
     <>
@@ -404,18 +454,18 @@ const ProductDescription = () => {
                     className="heart"
                     onClick={() => AddToWishList(GetproductUrlId)}
                   >
-                    {!WishListItems?.some(
+                    {!FilterWish?.some(
                       (item) =>
                         Number(item?.product_id) === Number(GetproductUrlId?.id)
                     ) ? (
                       <FaRegHeart className="text-color-terracotta" />
                     ) : (
-                      <img className="h-auto" src={FillHeart} alt="" />
+                      <img className="h-auto object-fit-none" src={FillHeart} alt="" />
                     )}
                   </div>
-                  <div className="share">
+                  {/* <div className="share">
                     <PiShareFatBold className="text-color-terracotta" />
-                  </div>
+                  </div> */}
                   <img
                     className="w-100 slider-fullimage"
                     src={activeImage}
@@ -525,7 +575,9 @@ const ProductDescription = () => {
                 </button>
                 <button
                   onClick={() => HandleAddToCart()}
-                  className={`btn-add-to-cart inter-font-family-500 mt-3 mt-md-0 ${!isAlreadyAdd ? "":"btn btn-outline-secondary "}`}
+                  className={`btn-add-to-cart inter-font-family-500 mt-3 mt-md-0 ${
+                    !isAlreadyAdd ? "" : "btn btn-outline-secondary "
+                  }`}
                   disabled={isAlreadyAdd}
                 >
                   Add To Cart
@@ -543,28 +595,89 @@ const ProductDescription = () => {
             </p>
             {/* <ProductCard /> */}
             <div className="d-flex  overflow-auto">
-            {ProductCardData?.map((i)=>
-            <RecommendNavSearchCard product={i}/>
-            )}
+              {ProductCardData?.map((i) => (
+                <RecommendNavSearchCard product={i} />
+              ))}
             </div>
           </div>
         </div>
         <div className="row d-flex justify-content-center align-items-center padding-top-100 position-relative">
-          <div className="col-lg-5 col-md-5">
-            <div className="product-description-img ms-5"></div>
-
-            <div className="position-absolute top-50 start-50 translate-middle text-center z-3 mt-5">
+          {!uid ? (
+            <></>
+          ) : (
+            <div className="col-lg-10 col-md-10 px-4">
               <p className="font-size-24 feedback-text font-sm-size-18 text-center">
                 Want to share your Product or Delivery experience with us?
               </p>
-              <NavLink to={`/feedback/${GetproductUrlId?.id}`}>
-                <button className="text-white feedbak-btn px-4 py-2 mt-2 font-size-16 inter-font-family-400 rounded-3 border-0">
-                  Submit Feedback
-                </button>
-              </NavLink>
+
+              <div className="">
+                <p className="font-size-32 feedback-heading josefin-sans-font-family">
+                  Rate Us
+                </p>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="feedback-bg-img row"
+                >
+                  <div className="d-flex align-items-center mb-3">
+                    <div className="font-size-18 product-qty inter-font-family-500">
+                      Tap To Rate
+                    </div>
+                    <div className="ms-5 feedback-rating mb-0">
+                      <StarRating SetRating={setGetRating} />
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div className="mt-4 col-lg-5">
+                    <label className="inter-font-family-500 font-size-12 product-qty d-block">
+                      Title for your review
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter Title here"
+                      {...register("title", {
+                        required: "Title is required",
+                      })}
+                      className="feedback-input border-0 rounded-3 pb-3 pt-2 mt-1 px-3 feedback-inp-tag w-100"
+                    />
+                    {errors.title && (
+                      <p className="text-danger">{errors.title.message}</p>
+                    )}
+                  </div>
+
+                  <div className="my-4 col-lg-5">
+                    <label
+                      for="exampleFormControlTextarea1"
+                      class="inter-font-family-500 product-qty font-size-12 d-block"
+                    >
+                      Your Review
+                    </label>
+                    <textarea
+                      class="feedback-input border-0 rounded-3 p-2 mt-1 feedback-inp-tag w-100"
+                      placeholder="Enter your comment here"
+                      id="exampleFormControlTextarea1"
+                      rows="5"
+                      {...register("message", {
+                        required: "First name is required",
+                      })}
+                    ></textarea>
+                  </div>
+                  <hr />
+                  <div className="pb-5 mb-5 d-flex d-lg-block justify-content-center justify-content-lg-start ">
+                    <button
+                      type="submit"
+                      className="background-color-terracotta w-25 mb-5 mt-5 text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0 w-auto px-1"
+                    >
+                      Submit Feedback
+                    </button>
+                  </div>
+                </form>
+              </div>
+              {/* </div> */}
             </div>
-          </div>
+          )}
         </div>
+        {/* </div> */}
         {/*------------ Product detail End----------- */}
         <Footer />
       </section>

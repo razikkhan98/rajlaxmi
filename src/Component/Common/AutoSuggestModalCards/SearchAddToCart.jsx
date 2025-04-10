@@ -310,9 +310,9 @@ const SearchAddToCart = ({ product }) => {
                 <img src={FillHeart} alt="" />
               }
             </div>
-            <div className="share">
+            {/* <div className="share">
               <PiShareFatBold className="text-color-terracotta" />
-            </div>
+            </div> */}
 
             {/* Product Image & Qty Selector */}
 

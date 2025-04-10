@@ -3019,3 +3019,6 @@ Error Page Css
 .customer-review .prog-bar{
   background-color: var(--gleeful) !important;
 }
+.fogot-coupon-input:focus-visible{
+  outline: 0px;
+}

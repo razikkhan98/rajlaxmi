@@ -110,6 +110,7 @@ const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
   const uid = sessionStorage.getItem("uid");
   const location = useLocation();
+    const { setWishListItems } = useContext(CartContext);
 
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
