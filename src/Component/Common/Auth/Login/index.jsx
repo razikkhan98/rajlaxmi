@@ -36,6 +36,11 @@ const Login = () => {
         if (response?.uid) {
           setuid(response.uid);
           sessionStorage.setItem("uid", response.uid);
+          const payload = {
+            name : response?.name,
+            email:response.email
+          }
+          sessionStorage.setItem("userDetail", JSON?.stringify(payload) || {});
         }
 
         if (response?.token) {
@@ -118,7 +123,7 @@ const Login = () => {
                         {...register("emailmobile", {
                           required: "Email or Mobile is required",
                         })}
-                        className="input-style"
+                        className="input-style  w-100"
                       />
                       {errors.emailmobile && (
                         <p className="text-danger font-size-12">
@@ -128,7 +133,7 @@ const Login = () => {
                     </div>
 
                     {/* Password Field */}
-                    <div className="py-2 col-lg-9">
+                    <div className="py-2 col-lg-10">
                       <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
                         Password
                       </label>
@@ -137,7 +142,7 @@ const Login = () => {
                         {...register("password", {
                           required: "Password is required",
                         })}
-                        className="input-style"
+                        className="input-style w-100"
                       />
                       {errors.password && (
                         <p className="text-danger font-size-12">
@@ -172,7 +177,7 @@ const Login = () => {
                       </div>
                     </div>
                     {/* Submit Button */}
-                    <div className="py-3">
+                    <div className="py-3 col-lg-10 d-flex justify-content-center">
                       <button
                         type="submit"
                         className="background-color-terracotta text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0"
@@ -184,7 +189,7 @@ const Login = () => {
                 </div>
 
                 {/* Registration Link */}
-                <div className="py-4 w-75 text-center">
+                <div className="py-4 col-sm-12 col-md-12 col-lg-10 text-center ">
                   <span className="inter-font-family-400 font-size-14 ps-4">
                     Don’t have an account?
                   </span>

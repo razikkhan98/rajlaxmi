@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "../../Common/Navbar";
 import Love from "../../Assets/img/Product/love.svg";
 import Binoculars from "../../Assets/img/Product/binoculars.svg";
@@ -118,6 +118,50 @@ const Products = () => {
     ],
   };
 
+  // =======================
+  // Sort Functionality
+  // =======================
+
+  const [sortedProducts, setSortedProducts] = useState(BestSellers);
+
+  const handleSortChange = (optionId) => {
+    let sortedArray = [...BestSellers];
+
+    switch (optionId) {
+      case 1:
+        break;
+      case 2:
+        sortedArray = sortedArray.sort((a, b) => b.reviews - a.reviews);
+        break;
+      case 3:
+        sortedArray = sortedArray.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 4:
+        sortedArray = sortedArray.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 5:
+        sortedArray = sortedArray.sort(
+          (a, b) => parseFloat(a.price) - parseFloat(b.price)
+        );
+        break;
+      case 6:
+        sortedArray = sortedArray.sort(
+          (a, b) => parseFloat(b.price) - parseFloat(a.price)
+        );
+        break;
+      case 7:
+        break;
+      case 8:
+        break;
+      default:
+        break;
+    }
+
+    setSortedProducts(sortedArray);
+    console.log(sortedArray); // Log sorted data to console
+  };
+  // -========== Sort Functionality End =============
+
   return (
     <React.Fragment>
       <section>
@@ -141,7 +185,9 @@ const Products = () => {
         <div className="background-color-light-grayish-yellow py-5">
           <div className="container mb-5 pb-5">
             <div className="category-container shop-category-slider overflow-hidden mb-5">
-              <div className="category-label josefin-sans-font-family-500">Categories</div>
+              <div className="category-label josefin-sans-font-family-500">
+                Categories
+              </div>
 
               <Slider className="product-header-slider" {...sliderSettings}>
                 {categories.map((item, index) => (
@@ -159,10 +205,10 @@ const Products = () => {
 
             <div className="d-flex product-page-filter justify-content-center py-5">
               <div className="px-3 product-page-sort-filter">
-                <SortDropdown />
+                <SortDropdown onSortChange={handleSortChange} />
               </div>
               <div className="px-3 product-page-filter-filter">
-                <FilterDropDown />
+                <FilterDropDown  BestSellers={BestSellers} />
                 {/* <img src={Funnel} alt="Filter" className="sort-icon" />
                 <div className="text-center text-color-terracotta">Filter</div> */}
               </div>
@@ -179,14 +225,20 @@ const Products = () => {
                       to="/products-inner"
                       className="text-color-dark-grayish-blue text-decoration-none d-flex align-items-center"
                     >
-                      <span className="font-size-16 inter-font-family-400">View all</span> <FiChevronRight fontSize={18} />
+                      <span className="font-size-16 inter-font-family-400">
+                        View all
+                      </span>{" "}
+                      <FiChevronRight fontSize={18} />
                     </Link>
                   </div>
                 </div>
 
                 <div className="slider-container category-page-sliders position-relative text-center">
-                  <Slider ref={(el) => (sliderRefs.current[index] = el)} {...settings}>
-                    {category.products.map((product) => (
+                  <Slider
+                    ref={(el) => (sliderRefs.current[index] = el)}
+                    {...settings}
+                  >
+                    {sortedProducts?.map((product) => (
                       <div key={product.id} className="product-card">
                         <AddtoCard product={product} />
                       </div>

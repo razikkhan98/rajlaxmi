@@ -34,18 +34,34 @@ const Resignation = () => {
   const onSubmit = async (data) => {
     try {
       const response = await postData(userEndpoint, data);
-      toast.success(response.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      setTimeout(() => navigate("/login"), 1000);
+      if(response?.success){
+        toast.success(response.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        setTimeout(() => navigate("/login"), 1000);
+      }
+      else{
+        toast.error(response?.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+    
     } catch (error) {
       toast.error(error || "Failed to create account!", {
         position: "top-right",
@@ -70,8 +86,8 @@ const Resignation = () => {
               <img src={Arro} alt="Loading" className="img-fluid" />
             </div>
             <div className="row">
-              <div className="col-lg-6 col-sm-12 d-flex">
-                <img src={Logi} alt="Loading" className="img-fluid" />
+              <div className="col-lg-6 col-sm-12 d-flex ">
+                <img src={Logi} alt="Loading" className="img-fluid object-fit-cover" />
               </div>
               <div className="col-lg-6 col-sm-12 px-5">
                 <div className="text-start josefin-sans-font-family-600 font-size-30 py-3 heading-text text-color-dark-grayish-blue pt-4">
@@ -113,8 +129,14 @@ const Resignation = () => {
                         Mobile Number
                       </label>
                       <input
-                        type="tel"
-                        {...register("mobileNumber", { required: "Mobile number is required" })}
+                        type="number"
+                        {...register("mobileNumber", {
+                          required: "Mobile number is required",
+                          pattern: {
+                            value: /^\d{10}$/, // Regex pattern to allow exactly 10 digits
+                            message: "Please enter a valid 10-digit mobile number" // Custom error message
+                          }
+                        })}
                         className="input-style"
                       />
                       {errors.mobileNumber && <p className="text-danger">{errors.mobileNumber.message}</p>}
@@ -152,7 +174,7 @@ const Resignation = () => {
                   </div>
                 </form>
 
-                <div className="py-3 w-75 text-center">
+                <div className="py-3 col-sm-12 col-md-12 col-lg-10 text-center">
                   <span className="inter-font-family-400 font-size-14 ps-4">
                     Already a user?
                   </span>
