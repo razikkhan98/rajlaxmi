@@ -71,7 +71,7 @@ const Footer = () => {
                 className="ms-3"
               />
               <div className="mt-3 josefin-sans-font-family-500 heading-title text-color-dark-ashy-blue text-center font-size-22">
-                Rajlaxmi javiks International
+                Rajlaxmi Javiks International
               </div>
             </div>
           </Col>
@@ -199,7 +199,7 @@ const Footer = () => {
           <Col xs={12} lg={3} md={3}>
             <p className="mb-0 ">
               <span className="inter-font-family-400 text-description font-size-12">
-                &copy; 2024 Rajlaxmi javiks International{" "}
+                &copy; 2024 Rajlaxmi Javiks International{" "}
               </span>
               <br />
               <span className="inter-font-family-500 text-description font-size-14">

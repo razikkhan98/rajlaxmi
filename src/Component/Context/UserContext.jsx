@@ -82,6 +82,8 @@ export const CartProvider = ({ children }) => {
   const [WishListItems, setWishListItems] = useState(); // Wishlist state
   const [uid, setuid] = useState([]); // User Id
   const getUid = sessionStorage.getItem("uid");
+  const [cartCount, setCartCount] = useState(0);
+
 
   // Add to Cart function
   const addToCart = (product, quantity, weight) => {
@@ -133,6 +135,20 @@ export const CartProvider = ({ children }) => {
 
   // Add to wishlist
   const AddToWishList = async (product) => {
+    if (!getUid) {
+      toast.error("Please Login", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return;
+    }
     const payload = {
       uid: getUid,
       product_name: product?.name,
@@ -174,7 +190,7 @@ export const CartProvider = ({ children }) => {
         });
       } else {
         // Add product to WishList
-        // setWishListItems([...WishListItems, product]);
+        
 
         const response = await postData("wishlist", payload);
         toast.success(response?.message, {
@@ -189,8 +205,9 @@ export const CartProvider = ({ children }) => {
           transition: Bounce,
         });
       }
-      
-      const responseWish = await getWishListData()
+
+      const responseWish = await getWishListData();
+
       setWishListItems(responseWish);
     } catch (error) {
       toast.error(error?.message, {
@@ -233,6 +250,7 @@ export const CartProvider = ({ children }) => {
         AddToWishList,
         uid,
         setuid,
+        cartCount, setCartCount
       }}
     >
       {children}

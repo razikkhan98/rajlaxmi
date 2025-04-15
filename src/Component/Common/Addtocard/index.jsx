@@ -38,7 +38,7 @@ const AddtoCard = ({ product }) => {
 
   // useState for Add to Cart Button
   const { addToCart, removeFromCart, AddToWishList, WishListItems, cartItems } =
-  useContext(CartContext);
+    useContext(CartContext);
 
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -76,10 +76,9 @@ const AddtoCard = ({ product }) => {
 
   // Add to Cart
   const increaseQuantity = async (productId) => {
-    console.log('productId: ', productId);
     if (!isAuthenticated) {
       navigate("/login");
-      toast.warning("⚠️ Please login to add items!", {
+      toast.warning(" Please login to add items!", {
         position: "top-right",
         autoClose: 3000,
       });
@@ -123,10 +122,10 @@ const AddtoCard = ({ product }) => {
         }));
         const AddToCartData = payload?.find(
           (product) =>
-             product?.product_id == productId && product?.product_weight == selectedWeight
+            product?.product_id == productId &&
+            product?.product_weight == selectedWeight
         );
         const response = await postData("addtocart", AddToCartData);
-        console.log("response: ", response);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -164,14 +163,15 @@ const AddtoCard = ({ product }) => {
         }));
 
         const UpdateData = payload?.find(
-          (product) => product?.product_id == productId && product?.product_weight == selectedWeight
+          (product) =>
+            product?.product_id == productId &&
+            product?.product_weight == selectedWeight
         );
         const response = await postData(
           "updateCart",
           // UpdateData?.product_id,
           UpdateData
         );
-        console.log("response: ", response);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -230,14 +230,15 @@ const AddtoCard = ({ product }) => {
         }));
 
         const UpdateData = payload?.find(
-          (product) => product?.product_id == productId && product?.product_weight == selectedWeight
+          (product) =>
+            product?.product_id == productId &&
+            product?.product_weight == selectedWeight
         );
         const response = await postData(
           "updateCart",
           // UpdateData?.product_id,
           UpdateData
         );
-        console.log("response: ", response);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -261,12 +262,7 @@ const AddtoCard = ({ product }) => {
           uid,
           product_id: productId,
         };
-        const response = await deleteProductAPI(
-          "removecart",
-          '',
-          payload
-        );
-        console.log("response: ", response);
+        const response = await deleteProductAPI("removecart", "", payload);
       } catch (error) {}
     }
 
@@ -303,6 +299,8 @@ const AddtoCard = ({ product }) => {
     return stars;
   };
 
+  const FilterWish = WishListItems?.filter((check) => check?.uid == uid);
+
   return (
     <React.Fragment>
       <div className="shop-by-category background-color-white m-auto md:m-auto position-relative my-2 ">
@@ -310,18 +308,19 @@ const AddtoCard = ({ product }) => {
           <div>
             {/* Icons (Heart & Share) */}
             <div className="heart" onClick={() => AddToWishList(product)}>
-              {!WishListItems?.some(
-                (item) => Number(item?.product_id) === Number(product?.id) ||Number(product?.product_id)
-                
+              {!FilterWish?.some(
+                (item) =>
+                  Number(item?.product_id) === Number(product?.id) ||
+                  Number(product?.product_id)
               ) ? (
                 <FaRegHeart className="text-color-terracotta" />
               ) : (
                 <img src={FillHeart} alt="" />
               )}
             </div>
-            <div className="share">
+            {/* <div className="share">
               <PiShareFatBold className="text-color-terracotta" />
-            </div>
+            </div> */}
 
             {/* Product Image & Qty Selector */}
 
@@ -421,7 +420,9 @@ const AddtoCard = ({ product }) => {
               </button> */}
               <button
                 className="background-color-terracotta button-addtocard inter-font-family-500 font-size-16"
-                onClick={() => increaseQuantity(product?.product_id || product.id )}
+                onClick={() =>
+                  increaseQuantity(product?.product_id || product.id)
+                }
               >
                 Add
               </button>
@@ -432,7 +433,9 @@ const AddtoCard = ({ product }) => {
                 <div>
                   <button
                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                    onClick={() => decreaseQuantity(product?.product_id || product.id )}
+                    onClick={() =>
+                      decreaseQuantity(product?.product_id || product.id)
+                    }
                   >
                     -
                   </button>
@@ -443,7 +446,9 @@ const AddtoCard = ({ product }) => {
                 <div>
                   <button
                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                    onClick={() => increaseQuantity(product?.product_id || product.id )}
+                    onClick={() =>
+                      increaseQuantity(product?.product_id || product.id)
+                    }
                   >
                     +
                   </button>

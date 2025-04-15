@@ -24,40 +24,56 @@ const Forgot = () => {
   } = useForm(); // Initialize react-hook-form
 
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [GetOpt, setGetOpt] = useState(false);
+
 
   // API endpoint
   const userEndpoint = "forgot";
 
+  // Check Email
+  const HandleEmailCheck = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(inputValue)) {
+      setErrorMessage(true);
+    } else {
+      setErrorMessage(false);
+      setGetOpt(true)
+      // Proceed with email check or any other logic you want to implement.
+    }
+  };
+
   // Handle form submission
   const onSubmit = async (data) => {
-    try {
-      const response = await postData(userEndpoint, data);
-      toast.success(response.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      setTimeout(() => navigate("/login"), 1000);
-    } catch (error) {
-      toast.error(error || "Failed to set new password!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    }
-    setIsOtpVerified(true);
+    // try {
+    //   const response = await postData(userEndpoint, data);
+    //   toast.success(response.message, {
+    //     position: "top-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: false,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "light",
+    //     transition: Bounce,
+    //   });
+    //   setTimeout(() => navigate("/login"), 1000);
+    // } catch (error) {
+    //   toast.error(error || "Failed to set new password!", {
+    //     position: "top-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: false,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "light",
+    //     transition: Bounce,
+    //   });
+    // }
+    // setIsOtpVerified(true);
   };
 
   return (
@@ -82,16 +98,12 @@ const Forgot = () => {
                   send you a verification code
                 </p>
 
-                <span
-                  className="form-resignation"
-                >
+                <span className="form-resignation">
                   <div className="row gap-2">
                     {!isOtpVerified && (
                       <>
-                      <form action="">
-                        
-                      </form>
-                        <div className="pt-3 col-lg-8 col-sm-12">
+                        <form onSubmit={handleSubmit(onSubmit)}></form>
+                        {/* <div className="pt-3 col-lg-8 col-sm-12">
                           <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
                             E-mail/Contact No
                           </label>
@@ -111,6 +123,28 @@ const Forgot = () => {
                               {errors.email.message}
                             </p>
                           )}
+                        </div> */}
+                        <div className="pt-3 col-lg-8 col-sm-12">
+                          <label className="inter-font-family-400 font-size-14 login-text py-2 d-block">
+                            E-mail/Contact No
+                          </label>
+                          <div className="background-color-add-modal apply-coupon p-2  rounded d-flex justify-content-between">
+                            <input
+                              className="coupon-input fogot-coupon-input px-1 w-100"
+                              type="email"
+                              name=""
+                              value={inputValue}
+                              id=""
+                              onChange={(e) => setInputValue(e.target.value)}
+                            />{" "}
+                            <button
+                              onClick={HandleEmailCheck}
+                              className=" background-color-terracotta text-white border-0 rounded py-1 font-size-12 inter-font-family-500 px-3 w-25"
+                            >
+                              Apply
+                            </button>
+                          </div>
+                          {errorMessage && <div className="text-danger py-2">{errorMessage ? "Please enter a valid email address." :""}</div>}
                         </div>
 
                         {/* <div className="py-2 col-lg-10">
@@ -201,7 +235,7 @@ const Forgot = () => {
                     <div className="py-3 col-lg-8">
                       <button
                         type="submit"
-                        className="background-color-terracotta text-color-white py-2 inter-font-family-500 font-size-16 rounded border-0"
+                        className={`${GetOpt ? "background-color-terracotta border-0" : "disabled btn btn-outline-secondary"}  text-color-white py-2 inter-font-family-500 font-size-16 rounded `}
                       >
                         {isOtpVerified ? "Set New Password" : "Submit"}
                       </button>

@@ -17,6 +17,7 @@ import axios from "axios";
 const WishList = () => {
   // useState for Add to Cart Button
   const { WishListItems, setWishListItems } = useContext(CartContext);
+  let uid = sessionStorage.getItem("uid");
 
   // Functions
   const FetchWishListData = async () => {
@@ -49,6 +50,8 @@ const WishList = () => {
     FetchWishListData();
   }, []);
 
+  const FilterWish = transformedArray?.filter((check) => check?.uid == uid);
+
   return (
     <React.Fragment>
       <section>
@@ -57,9 +60,9 @@ const WishList = () => {
         </div>
         <div className="background-color-light-grayish-yellow padding-bottom-60">
           <div className="container">
-            {WishListItems?.length > 0 ? (
+            {FilterWish?.length > 0 ? (
               <div className="row">
-                {transformedArray?.map((product, index) => (
+                {FilterWish?.map((product, index) => (
                   <>
                     <div key={index} className="col-md-5 col-lg-3 col-sm-12  py-3">
                       <AddtoCard key={product.id} product={product} />

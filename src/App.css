@@ -81,6 +81,10 @@ body {
   background-color: var(--add-modal);
 }
 
+.background-color-terracotta-imp {
+  background-color: var(--terracotta) !important;
+}
+
 /* 
  ========================== 
 
@@ -1401,7 +1405,7 @@ Forgot Password
 }
 
 .payment-process-card-height {
-  height: 40vh;
+  height: 350px;
 }
 .pay-process-bill-summary{
   height: 70px;
@@ -3018,4 +3022,7 @@ Error Page Css
 }
 .customer-review .prog-bar{
   background-color: var(--gleeful) !important;
+}
+.fogot-coupon-input:focus-visible{
+  outline: 0px;
 }

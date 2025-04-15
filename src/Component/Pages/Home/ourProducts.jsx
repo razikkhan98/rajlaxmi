@@ -16,6 +16,7 @@ import slid from "../../Assets/img/ProductDescription/image 10.png";
 import { Carousel } from "react-bootstrap";
 import { postData } from "../../../services/apiService";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CardData = [
   {
@@ -80,27 +81,30 @@ const OurProducts = () => {
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    const payload = {
-      uid:uid,
-      user_name : formData?.name,
-      user_email : formData?.email,
-      user_number : formData?.phone,
-      message:  formData?.message,
-      title : formData?.message,
-    }
-    // You can make your POST API request here
-      const response = await postData("contact",payload)
+      const payload = {
+        uid: uid,
+        user_name: formData?.name,
+        user_email: formData?.email,
+        user_number: formData?.phone,
+        message: formData?.message,
+        title: formData?.message,
+      };
+      // You can make your POST API request here
+      const response = await postData("contact", payload);
+      if (response?.success) {
+        toast.success(response?.message);
+      }
       setFormData({
         name: "",
         email: "",
         phone: "",
         message: "",
-      })
+      });
     } catch (error) {
-      console.log('error: ', error);
+      toast.error(error?.message);
     }
   };
 
@@ -171,15 +175,21 @@ const OurProducts = () => {
                 felis, nisi viverra nisl. quis placerat.
               </div>
               <div className="py-4">
-                <NavLink className="explore-link-tag d-block text-decoration-none" to={"/products"}>
-                <button className="background-color-terracotta explore-button d-flex align-items-center inter-font-family-500 rounded-pill text-color-white py-2 px-4 border-0">
-                  Explore Product
-                  <span className="d-flex">
-                    <img className="ms-2" src={threerightarrow} alt="Loading" />
-                  </span>
-                </button>
+                <NavLink
+                  className="explore-link-tag d-block text-decoration-none"
+                  to={"/products"}
+                >
+                  <button className="background-color-terracotta explore-button d-flex align-items-center inter-font-family-500 rounded-pill text-color-white py-2 px-4 border-0">
+                    Explore Product
+                    <span className="d-flex">
+                      <img
+                        className="ms-2"
+                        src={threerightarrow}
+                        alt="Loading"
+                      />
+                    </span>
+                  </button>
                 </NavLink>
-                  
               </div>
             </div>
             {CardData.map((item, index) => (
@@ -206,35 +216,38 @@ const OurProducts = () => {
                 ) : (
                   <div className="natural-cards d-flex justify-content-center circle-section col-lg-3 col-md-6 col-sm-6 col-6 my-2">
                     <div className="explore-section position-relative">
+                      <span className="inter-font-family-500 font-size-16 background-color-gleeful d-flex justify-content-center text-white align-items-center circle-section-off">
+                        15% Off
+                      </span>
+                      <Carousel
+                        className="explore-slider "
+                        fade
+                        controls={false}
+                        indicators={false}
+                        interval={3000}
+                      >
+                        <Carousel.Item className="redem-slider">
+                          <img className="w-100 redem-img" src={Mask} alt="" />
+                        </Carousel.Item>
+                        <Carousel.Item className="redem-slider">
+                          <img className="w-100 redem-img" src={slid} alt="" />
+                        </Carousel.Item>
+                      </Carousel>
 
-                    <span className="inter-font-family-500 font-size-16 background-color-gleeful d-flex justify-content-center text-white align-items-center circle-section-off">
-                      15% Off
-                    </span>
-                    <Carousel
-                      className="explore-slider "
-                      fade
-                      controls={false}
-                      indicators={false}
-                      interval={3000}
-                    >
-                      <Carousel.Item className="redem-slider">
-                      <img className="w-100 redem-img" src={Mask} alt="" />
-                      </Carousel.Item>
-                      <Carousel.Item className="redem-slider">
-                        <img className="w-100 redem-img" src={slid} alt="" />
-                      </Carousel.Item>
-                    </Carousel>
-                    
-                    <img className="circle-section-hr" src={dashLine} alt="" />
-                    <span className="redem-cirlce-left"></span>
-                    <span className="redem-cirlce-right"></span>
-                    <button
-                      type="submit"
-                      class="background-color-terracotta circle-section-btn text-color-white  w-75 inter-font-family-500 font-size-16 rounded border-0"
-                    >
-                      REDEEM
-                    </button>
-                  </div>
+                      <img
+                        className="circle-section-hr"
+                        src={dashLine}
+                        alt=""
+                      />
+                      <span className="redem-cirlce-left"></span>
+                      <span className="redem-cirlce-right"></span>
+                      <button
+                        type="submit"
+                        class="background-color-terracotta circle-section-btn text-color-white  w-75 inter-font-family-500 font-size-16 rounded border-0"
+                      >
+                        REDEEM
+                      </button>
+                    </div>
                   </div>
                 )}
               </>
@@ -333,6 +346,9 @@ const OurProducts = () => {
                           onChange={handleChange}
                           placeholder="Contact No"
                           required
+                          maxLength="10"
+                          pattern="^\d{10}$"
+                          title="Please enter a 10-digit phone number"
                         />
                       </div>
                     </div>

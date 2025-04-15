@@ -176,7 +176,7 @@ const ShopCategory = () => {
           </div>
           {/*Start Best Sellers */}
           <div className="row px-1">
-            {BestSellers.map((category, index) => (
+            {BestSellers?.map((category, index) => (
               <>
                 <div
                   className="col-lg-1 col-md-1 col-sm-2 col-2 d-flex align-items-center text-rotate pb-4 pt-lg-0 pt-4"
