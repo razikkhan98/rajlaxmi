@@ -49,7 +49,7 @@ const ContactUs = () => {
         title: formData?.message,
       };
       const response = await postData("contact", payload);
-      console.log('response: ', response);
+
       toast.success(response?.message);
       setFormData({
         name: "",
@@ -58,7 +58,7 @@ const ContactUs = () => {
         message: "",
       })
     } catch (error) {
-      console.log("error: ", error);
+
       toast.error(error.message);
     }
   };

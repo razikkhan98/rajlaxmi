@@ -81,6 +81,10 @@ body {
   background-color: var(--add-modal);
 }
 
+.background-color-terracotta-imp {
+  background-color: var(--terracotta) !important;
+}
+
 /* 
  ========================== 
 

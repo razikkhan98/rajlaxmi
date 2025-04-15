@@ -50,7 +50,6 @@ import { getData } from "../../../services/apiService";
 export const GetAllProductsAPI = async () => {
   try {
     const response = await getData("getAllProduct");
-    console.log("response: ", response);
   } catch (error) {}
 };
 

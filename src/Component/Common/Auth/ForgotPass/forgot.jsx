@@ -41,13 +41,11 @@ const Forgot = () => {
       setErrorMessage(false);
       setGetOpt(true)
       // Proceed with email check or any other logic you want to implement.
-      console.log('Valid email:', inputValue);
     }
   };
 
   // Handle form submission
   const onSubmit = async (data) => {
-    console.log('data: ', data);
     // try {
     //   const response = await postData(userEndpoint, data);
     //   toast.success(response.message, {

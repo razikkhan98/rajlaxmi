@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import productFullNew from "../../Assets/img/ProductDescription/productFullNew.png";
 import productSmall1 from "../../Assets/img/ProductDescription/productSmall1.png";
 import productSmall2 from "../../Assets/img/ProductDescription/productSmall2.png";
@@ -150,7 +150,7 @@ const CustomerReviews = () => {
   const FetchRating = async () => {
     try {
       const response = await FetchRatingDataAPI(product?.id);
-      console.log("response: ", response);
+      
       // setFetchRatingData(response);
       setAverageRating(response?.averageRating || 0);
       setTotalReviews(response?.totalReviews || 0);
@@ -245,7 +245,7 @@ const ProductDescription = () => {
   const smallImages = [productSmall1, productSmall2, productSmall3];
   const { AddToWishList, WishListItems } = useContext(CartContext);
 
- const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const GetproductUrlId = location.state?.product;
   let uid = sessionStorage.getItem("uid");
@@ -322,7 +322,19 @@ const ProductDescription = () => {
   // =================
   // Handle Add To Cart Functionality
   // =================
+
+  const navigate = useNavigate();
+  const isAuthenticated = !!sessionStorage.getItem("token"); 
+
   const HandleAddToCart = async () => {
+        if (!isAuthenticated) {
+          navigate("/login");
+          toast.warning(" Please login to add items!", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+          return;
+        }
     try {
       const payload = {
         uid,
@@ -332,14 +344,13 @@ const ProductDescription = () => {
         product_quantity: 1,
         product_weight: selectedOption,
       };
-      console.log("payload: ", payload);
-      // const response = await postData("addtocart", payload);
-      // if (response?.message == "Added to cart successfully") {
-      //   toast.success(`${GetproductUrlId?.name} added to cart!`, {
-      //     position: "top-right",
-      //     autoClose: 2000,
-      //   });
-      // }
+      const response = await postData("addtocart", payload);
+      if (response?.message == "Added to cart successfully") {
+        toast.success(`${GetproductUrlId?.name} added to cart!`, {
+          position: "top-right",
+          autoClose: 2000,
+        });
+      }
     } catch (error) {
       console.log("error: ", error);
       toast.error(`${error?.message}`, {
@@ -350,7 +361,7 @@ const ProductDescription = () => {
   };
 
   const handleShow = () => setShowModal(true);
-  const handleClose = () => setShowModal(false);  // Get Rating
+  const handleClose = () => setShowModal(false); // Get Rating
   const [GetRating, setGetRating] = useState();
   // Feedback submit
   const onSubmit = async (data) => {
@@ -407,48 +418,7 @@ const ProductDescription = () => {
       <section className="background-color-light-grayish-yellow">
         <div className="container">
           <div className="row justify-content-between">
-            {/*------------ slider section start------------ */}
-            {/* <div className="col-12 col-md-5">
-           
-              <div className="slider-fullsize-image-div">
-                <img
-                  className="wishlist-icon"
-                  src={wishlistHeart}
-                  alt="wishlist"
-                />
-                <img className="share-icon" src={share} alt="share" />
-                <div className="slider-fullsize-img-inner">
-                  <img
-                    className="w-100 slider-fullimage"
-                    src={product.image}
-                    alt="activeslide"
-                  />
-                </div>
-              </div>
-              <div className="slider-slide-image-div">
-                <div className="slider-slide-image-inner">
-                  <img
-                    className="h-100 w-100 slider-slide-image"
-                    src={productSmall2}
-                    alt="product1"
-                  />
-                </div>
-                <div className="slider-slide-image-inner">
-                  <img
-                    className="h-100 w-100 slider-slide-image"
-                    src={productSmall1}
-                    alt="slideone"
-                  />
-                </div>
-                <div className="slider-slide-image-inner">
-                  <img
-                    className="h-100 w-100 slider-slide-image"
-                    src={productSmall3}
-                    alt="slidethree"
-                  />
-                </div>
-              </div>
-            </div> */}
+            
             <div className="col-12 col-md-12 col-lg-5">
               {/* Full-size Image */}
               <div className="slider-fullsize-image-div">
@@ -464,7 +434,11 @@ const ProductDescription = () => {
                     ) ? (
                       <FaRegHeart className="text-color-terracotta" />
                     ) : (
-                      <img className="h-auto object-fit-none" src={FillHeart} alt="" />
+                      <img
+                        className="h-auto object-fit-none"
+                        src={FillHeart}
+                        alt=""
+                      />
                     )}
                   </div>
                   {/* <div className="share">
@@ -526,8 +500,9 @@ const ProductDescription = () => {
                   <del>₹ 1080.00</del>
                 </span>
                 <span className="product-discount-value inter-font-family-500 text-color-black">
-                  ₹ 980.00
+                  ₹ 980.00 
                 </span>
+                <span className="d-block">(Incl. of all taxes)</span>
               </div>
               {/*--------------Product Quantity------------  */}
               <div className="product-quantity">
@@ -574,11 +549,14 @@ const ProductDescription = () => {
               </div>
               {/*----- Buttons------- */}
               <div className="d-inline-block d-md-flex mb-3 procced-btn">
-               <NavLink to="">
-               <button   onClick={() => handleShow()} className="btn-buy-now inter-font-family-500">
-                  Buy Now
-                </button>
-               </NavLink>
+                <NavLink to="">
+                  <button
+                    onClick={() => handleShow()}
+                    className="btn-buy-now inter-font-family-500"
+                  >
+                    Buy Now
+                  </button>
+                </NavLink>
                 <button
                   onClick={() => HandleAddToCart()}
                   className={`btn-add-to-cart inter-font-family-500 mt-3 mt-md-0 ${

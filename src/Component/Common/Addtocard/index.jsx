@@ -33,6 +33,7 @@ const getSessionUID = () => {
 };
 
 const AddtoCard = ({ product }) => {
+  
   // UseState
 
   // useState for Add to Cart Button
@@ -75,10 +76,9 @@ const AddtoCard = ({ product }) => {
 
   // Add to Cart
   const increaseQuantity = async (productId) => {
-    console.log("productId: ", productId);
     if (!isAuthenticated) {
       navigate("/login");
-      toast.warning("⚠️ Please login to add items!", {
+      toast.warning(" Please login to add items!", {
         position: "top-right",
         autoClose: 3000,
       });
@@ -126,7 +126,6 @@ const AddtoCard = ({ product }) => {
             product?.product_weight == selectedWeight
         );
         const response = await postData("addtocart", AddToCartData);
-        console.log("response: ", response);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -173,7 +172,6 @@ const AddtoCard = ({ product }) => {
           // UpdateData?.product_id,
           UpdateData
         );
-        console.log("response: ", response);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -241,7 +239,6 @@ const AddtoCard = ({ product }) => {
           // UpdateData?.product_id,
           UpdateData
         );
-        console.log("response: ", response);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -266,7 +263,6 @@ const AddtoCard = ({ product }) => {
           product_id: productId,
         };
         const response = await deleteProductAPI("removecart", "", payload);
-        console.log("response: ", response);
       } catch (error) {}
     }
 

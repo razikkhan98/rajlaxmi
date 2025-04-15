@@ -2,12 +2,16 @@ import axios from "axios";
 
 
 export const API_BASE_URL =
-  "https://6dd8-106-222-215-163.ngrok-free.app/rajlaxmi"; // Replace with your actual base URL
+  "https://93ac-2401-4900-8820-6324-b693-cbf0-3684-f264.ngrok-free.app/rajlaxmi"; // Replace with your actual base URL
 
 // 🔹 GET: Fetch data from a dynamic endpoint
 export const getData = async (endpoint) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/${endpoint}`);
+    const response = await axios.get(`${API_BASE_URL}/${endpoint}`,{
+      headers: {
+        "ngrok-skip-browser-warning": "69420",
+      },
+    });
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
@@ -90,3 +94,5 @@ export const FetchRatingDataAPI = async (id) => {
     throw error.response?.data || error.message;
   }
 };
+
+// =====================

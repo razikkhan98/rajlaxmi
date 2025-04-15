@@ -34,7 +34,6 @@ const Resignation = () => {
   const onSubmit = async (data) => {
     try {
       const response = await postData(userEndpoint, data);
-      console.log('response: ', response);
       if(response?.success){
         toast.success(response.message, {
           position: "top-right",

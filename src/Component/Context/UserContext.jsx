@@ -82,6 +82,8 @@ export const CartProvider = ({ children }) => {
   const [WishListItems, setWishListItems] = useState(); // Wishlist state
   const [uid, setuid] = useState([]); // User Id
   const getUid = sessionStorage.getItem("uid");
+  const [cartCount, setCartCount] = useState(0);
+
 
   // Add to Cart function
   const addToCart = (product, quantity, weight) => {
@@ -248,6 +250,7 @@ export const CartProvider = ({ children }) => {
         AddToWishList,
         uid,
         setuid,
+        cartCount, setCartCount
       }}
     >
       {children}

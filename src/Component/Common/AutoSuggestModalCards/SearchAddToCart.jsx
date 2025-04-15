@@ -66,7 +66,7 @@ const SearchAddToCart = ({ product }) => {
   const increaseQuantity = async (productId) => {
     if (!isAuthenticated) {
       navigate("/login");
-      toast.warning("⚠️ Please login to add items!", {
+      toast.warning(" Please login to add items!", {
         position: "top-right",
         autoClose: 3000,
       });
@@ -114,7 +114,7 @@ const SearchAddToCart = ({ product }) => {
             product?.product_weight == selectedWeight
         );
         const response = await postData("addtocart", AddToCartData);
-        console.log("response: ", response);
+        
       } catch (error) {
         console.log("error: ", error);
       }
@@ -161,7 +161,7 @@ const SearchAddToCart = ({ product }) => {
           // UpdateData?.product_id,
           UpdateData
         );
-        console.log("response: ", response);
+        
       } catch (error) {
         console.log("error: ", error);
       }
@@ -229,7 +229,7 @@ const SearchAddToCart = ({ product }) => {
           // UpdateData?.product_id,
           UpdateData
         );
-        console.log("response: ", response);
+        
       } catch (error) {
         console.log("error: ", error);
       }
@@ -258,7 +258,7 @@ const SearchAddToCart = ({ product }) => {
           '',
           payload
         );
-        console.log("response: ", response);
+        
       } catch (error) {}
     }
 

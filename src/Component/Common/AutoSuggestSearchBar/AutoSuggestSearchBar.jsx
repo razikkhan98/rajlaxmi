@@ -104,11 +104,9 @@ const AutoSuggestSearch = ({ inputValue, modalClass, handleClose }) => {
   // Function to handle outside clicks
   useEffect(() => {
     function handleClickOutside(event) {
-      // console.log('event: ', event);
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setFilteredOptions(null); // Close the dropdown
         // setshowDropdown(false)
-        // console.log('showDropdown: ', showDropdown);
       }
     }
 

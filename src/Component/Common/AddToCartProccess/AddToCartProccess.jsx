@@ -10,13 +10,17 @@ import CardEmpty from "../../Assets/img/Product/cart.png";
 // import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useForm } from "react-hook-form";
-import { postData } from "../../../services/apiService";
+import { set, useForm } from "react-hook-form";
+import { getData, postData } from "../../../services/apiService";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { CartContext } from "../../Context/UserContext";
 
 const AddToCartProccess = ({ showModal, handleClose }) => {
-  const { register, handleSubmit, formState: { errors }, } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   // const {  clearCart } = useContext(CartContext);
 
   const [cartItems, setCartItems] = useState([]);
@@ -27,16 +31,20 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
   const [step, setStep] = useState(0);
   const [Paymode, setPaymode] = useState(false);
   const [mobView, setmobView] = useState(false);
-
+  const [GetDefaultAddress, setGetDefaultAddress] = useState();
+  const [SelectdAddress, setSelectdAddress] = useState();
+  const [DeliveryAdd, setDeliveryAdd] = useState();
+  const [IsShowAddForm, setIsShowAddForm] = useState(false);
+  const { setCartCount } = useContext(CartContext);
 
   const location = useLocation();
   const navigate = useNavigate();
   // Functions
   const handleTapSteps = async () => {
-    setStep(step + 1);
-    if (step >= 2) {
-      return setPaymode(!Paymode);
-    }
+    // setStep(1);
+    // if (step >= 2) {
+    //   return setPaymode(!Paymode);
+    // }
 
     const uid = sessionStorage.getItem("uid");
 
@@ -57,7 +65,6 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
         })),
       })),
     };
-    console.log(payload);
 
     try {
       const response = await axios.post(
@@ -99,10 +106,45 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
 
     setCartItems(itemsArray);
   };
+  /*
+ ======================
+ Get Selected Address
+ ======================
+  */
+
+  const FetchSelectedAdd = async () => {
+    try {
+      setStep(1);
+      const response = await getData(`getAddressDetails?user_id=${uid}`);
+      if (response) {
+        setGetDefaultAddress(response);
+        setSelectdAddress(response[0]);
+      }
+      if (response?.length <= 0) {
+        setIsShowAddForm(true);
+      }
+    } catch (error) {}
+  };
+  // Handle Remove Default Address
+  const HandleRemoveAddress = async (id) => {
+    const payload = {
+      user_id: uid,
+      id,
+    };
+    try {
+      const response = await postData("deleteAddressDetails", payload);
+      if (response?.success) {
+        FetchSelectedAdd();
+        toast.success(response?.message, { position: "top-right" });
+      }
+      if (!response?.success) {
+        toast.error(response?.message, { position: "top-right" });
+      }
+    } catch (error) {}
+  };
 
   useEffect(() => {
     fetchCartItems(); // Fetch on initial render
-
     // 🔥 Listen for cart updates
     window.addEventListener("cartUpdated", fetchCartItems);
 
@@ -148,7 +190,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
   };
 
   const totalPrice = cartItems?.reduce((total, product) => {
-    return total + Number(product?.productDetails?.price);
+    return total + Number(product?.productDetails?.price * product?.quantity);
   }, 0);
 
   // Add to Cart API
@@ -164,36 +206,77 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
       }));
 
       const response = await postData("addtocart", payload);
-      console.log("response: ", response);
-      setStep(1);
-      if (step >= 2) {
-        return setPaymode(!Paymode);
-      }
-    } catch (error) { }
+      // setStep(1);
+      // if (step >= 2) {
+      //   return setPaymode(!Paymode);
+      // }
+    } catch (error) {}
   };
+
+  // Handle Address
+  const onAdrressSubmit = (data) => {
+    if (SelectdAddress) {
+    }
+    setStep(3);
+    setDeliveryAdd(SelectdAddress?.address || data?.address);
+  };
+
   // Payment API
   const onSubmit = async (data) => {
     try {
-      const payload = {
-        uid,
-        user_name: data?.fullName,
-        user_mobile_num: data?.contactNo,
-        user_email: data?.email,
-        user_state: data?.state,
-        user_city: data?.city,
-        user_country: data?.country,
-        user_house_number: data?.apartment,
-        user_landmark: data?.address,
-        user_pincode: data?.pincode,
-        user_total_amount: totalPrice,
-        purchase_price: "00",
-        user_coupon: "",
-      };
-      const response = await postData("create-order", payload);
-      if (response?.status === 200 || response?.status === 201) {
-        window?.open(response?.url);
+      if (SelectdAddress) {
+        const payload = {
+          uid,
+          user_name: SelectdAddress?.full_name,
+          user_mobile_num: SelectdAddress?.contact_no,
+          user_email: SelectdAddress?.email,
+          user_state: SelectdAddress?.state,
+          user_city: SelectdAddress?.city,
+          user_country: SelectdAddress?.country,
+          user_house_number: SelectdAddress?.house_no,
+          user_landmark: SelectdAddress?.address,
+          user_pincode: SelectdAddress?.pincode,
+          user_total_amount: totalPrice,
+          purchase_price: "00",
+          user_coupon: "",
+        };
+        const response = await postData("create-order", payload);
+        if (response?.status === 200 || response?.status === 201) {
+          setCartItems([]);
+          setStep(0);
+          setCartCount(0);
+          sessionStorage.removeItem(`cart_${uid}`);
+          navigate("/");
+          window?.open(response?.url);
+        }
+      } else {
+        const payload = {
+          uid,
+          user_name: data?.fullName,
+          user_mobile_num: data?.contactNo,
+          user_email: data?.email,
+          user_state: data?.state,
+          user_city: data?.city,
+          user_country: data?.country,
+          user_house_number: data?.apartment,
+          user_landmark: data?.address,
+          user_pincode: data?.pincode,
+          user_total_amount: totalPrice,
+          purchase_price: "00",
+          user_coupon: "",
+        };
+        const response = await postData("create-order", payload);
+        if (response?.status === 200 || response?.status === 201) {
+          await postData("createAddressDetails", payload);
+          setCartItems([]);
+          setStep(0);
+          setCartCount(0);
+          sessionStorage.removeItem(`cart_${uid}`);
+          navigate("/");
+          window?.open(response?.url);
+        }
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (
@@ -221,8 +304,9 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
               <div className="d-flex justify-content-center">
                 <div>
                   <div
-                    className={`tick-box${step >= 1 ? "-active" : ""
-                      } d-flex justify-content-center align-items-center`}
+                    className={`tick-box${
+                      step >= 1 ? "-active" : ""
+                    } d-flex justify-content-center align-items-center`}
                   >
                     {step >= 1 && <img src={rightTick} alt="Loading" />}
                   </div>
@@ -234,18 +318,21 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                 <div className="text-center">
                   <div className="d-flex">
                     <hr
-                      className={`tick-progress-bar${step >= 1 ? "-active" : ""
-                        }`}
+                      className={`tick-progress-bar${
+                        step >= 1 ? "-active" : ""
+                      }`}
                     />
                     <div
-                      className={`tick-box${step >= 1 ? "-active" : ""
-                        } d-flex justify-content-center align-items-center`}
+                      className={`tick-box${
+                        step >= 1 ? "-active" : ""
+                      } d-flex justify-content-center align-items-center`}
                     >
                       {step >= 2 && <img src={rightTick} alt="Loading" />}
                     </div>
                     <hr
-                      className={`tick-progress-bar${step >= 2 ? "-active" : ""
-                        }`}
+                      className={`tick-progress-bar${
+                        step >= 2 ? "-active" : ""
+                      }`}
                     />
                   </div>
                   <span className="josefin-sans-font-family-500 font-size-18">
@@ -255,8 +342,9 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
 
                 <div className="text-center">
                   <div
-                    className={`tick-box${step >= 2 ? "-active" : ""
-                      } d-flex justify-content-center align-items-center`}
+                    className={`tick-box${
+                      step >= 2 ? "-active" : ""
+                    } d-flex justify-content-center align-items-center`}
                   >
                     {step >= 4 && <img src={rightTick} alt="Loading" />}
                   </div>
@@ -269,13 +357,15 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
             <Modal.Body className=" background-color-light-grayish-yellow pt-0 AddToCartModal-body">
               <div className="container-fluid">
                 <div
-                  className={`payment-process-modal row ${Paymode ? "" : "justify-content-evenly"
-                    }`}
+                  className={`payment-process-modal row ${
+                    Paymode ? "" : "justify-content-evenly"
+                  }`}
                 >
                   {/* items Add */}
                   <div
-                    className={`col-lg-4 AddToCartModal-modal-grid-1 pt-3 ${Paymode ? "d-none" : ""
-                      } ${mobView ? "pay-mob-view" : ""} `}
+                    className={`col-lg-4 AddToCartModal-modal-grid-1 pt-3 ${
+                      Paymode ? "d-none" : ""
+                    } ${mobView ? "pay-mob-view" : ""} `}
                   >
                     <div className="d-flex justify-content-between">
                       <span className="text-color-terracotta font-size-14 inter-font-family-500">
@@ -314,12 +404,16 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                                 <div>
                                   <button
                                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                                    onClick={() =>
-                                      updateQuantity(
-                                        i.id,
-                                        i.weight,
-                                        i.quantity - 1
-                                      )
+                                    onClick={
+                                      step < 1
+                                        ? () => {
+                                            updateQuantity(
+                                              i.id,
+                                              i.weight,
+                                              i.quantity - 1
+                                            );
+                                          }
+                                        : null
                                     }
                                   >
                                     -
@@ -333,12 +427,16 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                                 <div>
                                   <button
                                     className="background-color-terracotta font-size-24 inter-font-family-500 d-flex justify-content-around align-items-center"
-                                    onClick={() =>
-                                      updateQuantity(
-                                        i.id,
-                                        i.weight,
-                                        i.quantity + 1
-                                      )
+                                    onClick={
+                                      step < 1
+                                        ? () => {
+                                            updateQuantity(
+                                              i.id,
+                                              i.weight,
+                                              i.quantity + 1
+                                            );
+                                          }
+                                        : null
                                     }
                                   >
                                     +
@@ -353,7 +451,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           >
                             <span
                               className="text-white inter-font-family-600 font-size-16"
-                              onClick={() => removeFromCart(i.id, i.weight)}
+                              onClick={
+                                step < 1
+                                  ? () => removeFromCart(i.id, i.weight)
+                                  : null
+                              }
                             >
                               Delete
                             </span>
@@ -365,9 +467,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       {/* <Link to="/products"> */}
                       <button
                         onClick={() => {
-                          location.pathname === "/products" ? handleClose() : navigate("/products");
+                          location.pathname === "/products"
+                            ? handleClose()
+                            : navigate("/products");
                         }}
-                        className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}
+                        className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded ${
+                          step >= 2 ? "btn disabled" : ""
+                        }`}
                       >
                         Add more item
                       </button>
@@ -375,23 +481,28 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
 
                       <button
                         onClick={() => {
-                          handleTapSteps();
+                          FetchSelectedAdd();
+                          // handleTapSteps();
                           handleAddToCartApi();
                         }}
-                        className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}
+                        className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded ${
+                          step >= 2 ? "btn disabled" : ""
+                        }`}
                       >
                         Proceed
                       </button>
                     </div>
                   </div>
                   <hr
-                    className={` vertical-hr vertical-hr-tab ${Paymode ? "d-none" : ""
-                      }`}
+                    className={` vertical-hr vertical-hr-tab ${
+                      Paymode ? "d-none" : ""
+                    }`}
                   />
                   {/* Detail Form */}
                   <div
-                    className={`col-lg-4 AddToCartModal-modal-grid-2 pt-3 ${Paymode ? "payModeBlackScreenActive" : ""
-                      } ${mobView ? "pay-mob-view" : ""}`}
+                    className={`col-lg-4 AddToCartModal-modal-grid-2 pt-3 ${
+                      Paymode ? "payModeBlackScreenActive" : ""
+                    } ${mobView ? "pay-mob-view" : ""}`}
                   >
                     <div className="">
                       <span className="address-heading font-size-14 inter-font-family-500">
@@ -399,41 +510,77 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                       </span>
                       <hr />
                     </div>
-                    <div className="payment-process-card-height overflow-auto overflow-x-class">
-                      <div className={`row ${step >= 1 ? "" : "d-none"}`}>
-                        {[1, 2, 3]?.map((i, index) => (
-                          <div className="col-lg-3 ps-2 ms-3 me-4 mb-3 address-section p-0 rounded-3">
+                    <div className="payment-process-card-height overflow-y-auto overflow-x-hidden overflow-x-class">
+                      <div
+                        className={`row ${step >= 1 ? "" : "d-none"} ${
+                          GetDefaultAddress ? "" : "d-none"
+                        } `}
+                      >
+                        {GetDefaultAddress?.map((i, index) => (
+                          <div
+                            onClick={
+                              step < 3
+                                ? () => {
+                                    setSelectdAddress(i);
+                                    setIsShowAddForm(false);
+                                  }
+                                : null
+                            }
+                            key={index}
+                            className={`col-lg-3 ps-2 ms-3 me-4 mb-3 address-section p-0 rounded-3 mt-1
+                          ${SelectdAddress?.id == i?.id ? "" : "shadow-none"}`}
+                          >
                             <div className="d-flex justify-content-end align-items-center">
                               <div className="address-box-section background-color-gleeful-opacity rounded-circle d-flex justify-content-center align-items-center mt-2 mx-2">
-                                <img className="" src={trash} alt="" />
+                                <img
+                                  onClick={() => HandleRemoveAddress(i?.id)}
+                                  className=""
+                                  src={trash}
+                                  alt=""
+                                />
                               </div>
                             </div>
-                            <div className="font-size-14 inter-font-family-500">
-                              Admin Panel
+                            <div className="font-size-14 inter-font-family-500 text-truncate">
+                              {i?.full_name}
                             </div>
-                            <div className="font-size-12 inter-font-family-300 text-trunc-class">
-                              AAA, Nagar sapna sangita road tower indore
+                            <div className="font-size-12 inter-font-family-300 mx-1 text-trunc-class">
+                              {i?.address}
                             </div>
                             <div className="font-size-12 inter-font-family-300">
-                              987654321
+                              {i?.contact_no}
                             </div>
                           </div>
                         ))}
                       </div>
                       <hr
-                        className={`address-sect-hr ${step >= 1 ? "" : "d-none"
-                          }`}
+                        className={`address-sect-hr ${
+                          step >= 1 ? "" : "d-none"
+                        }`}
                       />
                       <div
-                        className={`login-text font-size-14 inter-font-family-500 ${step >= 1 ? "" : "d-none"
-                          }`}
+                        className={`login-text font-size-14 inter-font-family-500 d-flex justify-content-between mx-2 ${
+                          step >= 1 ? "" : "d-none"
+                        }`}
                       >
                         Add New Address
+                        <button
+                          onClick={() => {
+                            setIsShowAddForm(true);
+                            setSelectdAddress("");
+                          }}
+                          className={`btn background-color-terracotta-imp text-white py-1 ${
+                            step >= 3 ? "btn disabled" : ""
+                          }`}
+                        >
+                          Add New Address
+                        </button>
                       </div>
 
                       <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        className={`row ${step >= 1 ? "" : "d-none"}`}
+                        className={`row ${
+                          step >= 1 && IsShowAddForm ? "" : "d-none"
+                        }`}
+                        onSubmit={handleSubmit(onAdrressSubmit)}
                       >
                         <div className="col-lg-6 address-section-form form-group pt-3">
                           <label
@@ -445,11 +592,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("fullName",
-                              { required: "Full Name is required", })
-                            }
+                            {...register("fullName", {
+                              required: "Full Name is required",
+                            })}
                           />
-                           {errors.fullName && (
+                          {errors.fullName && (
                             <p className="text-danger font-size-12">
                               {errors.fullName.message}
                             </p>
@@ -465,9 +612,15 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="email"
                             className="form-control"
-                            {...register("email", { required: "Email is required", })}
+                            {...register("email", {
+                              required: "Email is required",
+                              pattern: {
+                                value: /^\S+@\S+$/i,
+                                message: "Enter a valid email",
+                              },
+                            })}
                           />
-                           {errors.email && (
+                          {errors.email && (
                             <p className="text-danger font-size-12">
                               {errors.email.message}
                             </p>
@@ -483,9 +636,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("address", { required: "Address is required", })}
+                            {...register("address", {
+                              required: "Address is required",
+                            })}
                           />
-                           {errors.address && (
+                          {errors.address && (
                             <p className="text-danger font-size-12">
                               {errors.address.message}
                             </p>
@@ -501,9 +656,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("apartment", { required: "Apartment is required", })}
+                            {...register("apartment", {
+                              required: "Apartment is required",
+                            })}
                           />
-                           {errors.apartment && (
+                          {errors.apartment && (
                             <p className="text-danger font-size-12">
                               {errors.apartment.message}
                             </p>
@@ -519,9 +676,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("country", { required: "Country is required", })}
+                            {...register("country", {
+                              required: "Country is required",
+                            })}
                           />
-                           {errors.country && (
+                          {errors.country && (
                             <p className="text-danger font-size-12">
                               {errors.country.message}
                             </p>
@@ -537,9 +696,15 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("contactNo", { required: "Contact No. is required", })}
+                            {...register("contactNo", {
+                              required: "Contact No. is required",
+                              minLength: {
+                                value: 10,
+                                message: "Please Enter 10 Digit Mobile Number",
+                              },
+                            })}
                           />
-                           {errors.contactNo && (
+                          {errors.contactNo && (
                             <p className="text-danger font-size-12">
                               {errors.contactNo.message}
                             </p>
@@ -555,9 +720,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("state", { required: "State is required", })}
+                            {...register("state", {
+                              required: "State is required",
+                            })}
                           />
-                           {errors.state && (
+                          {errors.state && (
                             <p className="text-danger font-size-12">
                               {errors.state.message}
                             </p>
@@ -573,7 +740,9 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("city", { required: "City is required", })}
+                            {...register("city", {
+                              required: "City is required",
+                            })}
                           />
                           {errors.city && (
                             <p className="text-danger font-size-12">
@@ -591,7 +760,17 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           <input
                             type="text"
                             className="form-control"
-                            {...register("pincode", { required: "Pincode is required", })}
+                            {...register("pincode", {
+                              required: "Pincode is required",
+                              minLength: {
+                                value: 6,
+                                message: "Please Fill 6 Digit PinCode",
+                              },
+                              maxLength: {
+                                value: 6,
+                                message: "Please Fill 6 Digit PinCode",
+                              },
+                            })}
                           />
                           {errors.pincode && (
                             <p className="text-danger font-size-12">
@@ -599,26 +778,34 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                             </p>
                           )}
                         </div>
-                        {/* <button type="submit" className="btn btn-primary mt-3">Submit</button> */}
                       </form>
                     </div>
                     <div className={`mt-5 ${step >= 1 ? "" : "d-none"}`}>
                       <button
-                        onClick={() => handleTapSteps()}
-                        className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded`}
+                        type="button"
+                        onClick={
+                          IsShowAddForm
+                            ? handleSubmit(onAdrressSubmit)
+                            : () => onAdrressSubmit()
+                        }
+                        className={`addToCartModalButton font-size-16 px-5 inter-font-family-500 rounded ${
+                          step >= 3 ? "btn disabled" : ""
+                        }`}
                       >
                         Proceed with this address
                       </button>
                     </div>
                   </div>
                   <hr
-                    className={`vertical-hr vertical-hr-tab ${Paymode ? "payModeBlackScreenLineActive" : ""
-                      }`}
+                    className={`vertical-hr vertical-hr-tab ${
+                      Paymode ? "payModeBlackScreenLineActive" : ""
+                    }`}
                   />
                   {/* payment details */}
                   <div
-                    className={`col-lg-4 payment-section AddToCartModal-modal-grid-1 pt-3 ${Paymode ? "payModeBlackScreenActive" : ""
-                      } ${mobView ? "pay-mob-view" : ""}`}
+                    className={`col-lg-4 payment-section AddToCartModal-modal-grid-1 pt-3 ${
+                      Paymode ? "payModeBlackScreenActive" : ""
+                    } ${mobView ? "pay-mob-view" : ""}`}
                   >
                     <div className="">
                       <span className="address-heading font-size-14 inter-font-family-500">
@@ -631,10 +818,10 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                         {cartItems?.map((i, index) => (
                           <li className="d-flex justify-content-between py-2">
                             <span className="login-text font-size-14 inter-font-family-500">
-                              {i?.productDetails.name}
+                              {i?.productDetails?.name}
                             </span>
                             <span className="font-size-16 inter-font-family-500">
-                              ₹ {i.productDetails.price}
+                              ₹ {i?.productDetails?.price} X {i?.quantity}
                             </span>
                           </li>
                         ))}
@@ -646,7 +833,7 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                             Deliver To:
                           </span>
                           <span className="font-size-16 inter-font-family-500 text-truncate w-75">
-                            abc Road, XYZ Nagar, Madhya Pr...
+                            {DeliveryAdd}
                           </span>
                         </li>
                         <li className="d-flex justify-content-between  py-3">
@@ -694,8 +881,13 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                           //   // setmobView(true);
                           //   handleSubmit(onSubmit);
                           // }}
-                          onClick={handleSubmit(onSubmit)}
-                          className="btn payment-section-button text-white font-size-16 inter-font-family-500 px-5"
+                          // onClick={handleSubmit(onSubmit)}
+                          onClick={
+                            IsShowAddForm
+                              ? handleSubmit(onSubmit)
+                              : () => onSubmit()
+                          }
+                          className="btn payment-section-button-active text-white font-size-16 inter-font-family-500 px-5"
                         >
                           Checkout
                         </button>
@@ -703,13 +895,15 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
                     </div>
                   </div>
                   <hr
-                    className={`vertical-hr-tab vertical-hr ${Paymode ? "" : "d-none"
-                      }`}
+                    className={`vertical-hr-tab vertical-hr ${
+                      Paymode ? "" : "d-none"
+                    }`}
                   />
                   {/* Paymode section */}
                   <div
-                    className={`col-lg-4 ${Paymode ? "" : "d-none"
-                      } payment-section AddToCartModal-modal-grid-1 pt-3`}
+                    className={`col-lg-4 ${
+                      Paymode ? "" : "d-none"
+                    } payment-section AddToCartModal-modal-grid-1 pt-3`}
                   >
                     <div className="font-size-24 inter-font-family-500 text-color-dark-grayish-blue">
                       Payment
@@ -767,7 +961,11 @@ const AddToCartProccess = ({ showModal, handleClose }) => {
       ) : (
         <Modal
           show={showModal}
-          onHide={handleClose}
+          onHide={() => {
+            handleClose();
+            window.dispatchEvent(new Event("cartUpdated"));
+            sessionStorage.setItem(`cart_${uid}`, JSON.stringify({}));
+          }}
           backdrop="static"
           keyboard={false}
           dialogClassName="custom-modal-width "
